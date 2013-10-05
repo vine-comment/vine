@@ -8,8 +8,9 @@ wellaway
 1. 简易B/S交互，流程打通
 
 ####TODO-前端:
-1. ie/firefox/chrome插件开发
-2. android app开发
+1. ie/firefox/chrome当前页面测试
+2. ie/firefox/chrome插件开发
+3. android app开发
 
 ####TODO-后端
 1. mongodb存储
