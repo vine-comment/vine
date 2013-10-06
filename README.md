@@ -9,8 +9,9 @@ wellaway
 
 ####TODO-前端:
 1. ie/firefox/chrome当前页面测试
-2. ie/firefox/chrome插件开发
-3. android app开发
+2. ie(还没有好思路)
+3. firefox(try greasemonkey)/chrome插件开发
+4. android app开发
 
 ####TODO-后端
 1. mongodb存储
