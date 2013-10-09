@@ -1,4 +1,5 @@
 # Django settings for d1 project.
+import os
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -111,6 +112,7 @@ TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
+    os.path.join( os.path.dirname( __file__ ) ,  'templates' ).replace( '\\'  ,  '/' ) ,
 )
 
 INSTALLED_APPS = (
@@ -123,11 +125,15 @@ INSTALLED_APPS = (
     'threadedcomments',
     'django.contrib.comments',
     # Uncomment the next line to enable the admin:
-    # 'django.contrib.admin',
+    'django.contrib.admin',
+    'registration',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
 )
-
+ACCOUNT_ACTIVATION_DAYS = 7
+EMAIL_HOST = 'localhost'
+EMAIL_PORT = 8025
+DEFAULT_FROM_EMAIL = 'webmaster@localhost'
 COMMENTS_APP = 'threadedcomments'
 
 # A sample logging configuration. The only tangible logging
@@ -158,3 +164,12 @@ LOGGING = {
         },
     }
 }
+
+TEMPLATE_CONTEXT_PROCESSORS = (
+    "django.contrib.auth.context_processors.auth",
+    "django.core.context_processors.debug",
+    "django.core.context_processors.i18n",
+    "django.core.context_processors.media",
+    "django.core.context_processors.request",
+)
+

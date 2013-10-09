@@ -123,6 +123,21 @@ def comment_board(request, comment_in_url = None):
     res['Access-Control-Allow-Origin'] = '*'
     return res
 
+def test_func(request, comment_in_url):
+    if comment_in_url:
+        leave_comment(comment_in_url)
+    if request.method == 'POST':
+        write_comment_board(request)
+    elif request.method == 'GET':
+        pass
+    res = HttpResponse(get_comment_board(request))
+    res['Access-Control-Allow-Origin'] = '*'
+    return res
+
+def home(request):
+    html = ''
+    return HttpResponse(html)
+
 #init
 messageBoard = list()
 cursor = 0
