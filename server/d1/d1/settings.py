@@ -130,9 +130,11 @@ INSTALLED_APPS = (
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
 )
+
 ACCOUNT_ACTIVATION_DAYS = 7
 EMAIL_HOST = 'localhost'
 EMAIL_PORT = 8025
+LOGIN_REDIRECT_URL = 'index'
 DEFAULT_FROM_EMAIL = 'webmaster@localhost'
 COMMENTS_APP = 'threadedcomments'
 
