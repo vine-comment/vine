@@ -1,7 +1,7 @@
 wellaway
 ========
 
-一个第三方评论系统，使用JavaScript与Python做B/S语言，前台主要使用jquery，后台暂用django。
+一个第三方评论系统，使用JavaScript与Python做为主要语言，前台使用jquery，后台使用django。
 
 ####DONE:
 
