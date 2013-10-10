@@ -96,14 +96,18 @@ position:absolute;top:40%;left:-31px;width:30px;border:0px solid #e0e0e0;backgro
 
 	<script type="text/javascript">
 	$(document).ready(function(){
-	  $("#boardButton").toggle(function(){
-		$("#commentBoard").animate({right:'0px'});
-		$(this).html(">");
-	  },function(){
-		$("#commentBoard").animate({right:'-500px'});
-		$(this).html("<");
+	  $("#boardButton").on('click', function(){
+	    if (!$(this).attr('data-toggled') || $(this).attr('data-toggled') == 'off') {
+		  $("#commentBoard").animate({right:'0px'});
+		  $(this).attr('data-toggled','on');
+		  $(this).html(">");
+	    } else {
+		  $("#commentBoard").animate({right:'-500px'});
+		  $(this).attr('data-toggled','off');
+		  $(this).html("<");
+		}
 	  });
-	  $("#submitComment").click(function(){
+	  $("#submitComment").on('click', function(){
 		var posting = $.post("http://127.0.0.1:8000/comment/", {'comment': $('#comment').val() });
 		posting.done(function(data) {
 		  $('#showMsg').html(data);
