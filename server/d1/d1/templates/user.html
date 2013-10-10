@@ -1,0 +1,9 @@
+<div class="userinfo">
+				{% if user.is_authenticated %}
+					»¶Ó­Äú:{{user.username}}
+				{% else %}
+					<a href="/account/login">µÇÂ¼</a>
+					<a href="/account/register">×¢²á</a>
+				{% endif %}
+				<a href="/account/logout">×¢Ïú</a>
+</div>
