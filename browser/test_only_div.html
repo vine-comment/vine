@@ -11,8 +11,6 @@
 	<div id="showMsg"></div>
 	<form id="commentForm">
 		«Î ‰»Î¡Ù—‘:<input type="comment" id="comment" name="comment" placeholder="ø… ‰»Î10-140∏ˆ◊÷">
-		<input type="button" id="send" name="send" value="∑¢ÀÕ">
-		<input type="button" id="remove" name="remove" value="…æ≥˝">
 		<input type="button" id="submitComment" value="submitComment">
 	</form>
 	<form id="loginForm">
@@ -30,24 +28,6 @@
 </div></div>
 
 <script type="text/javascript">
-function showMsg(){
-var oText = document.getElementById("comment");
-
-var pNode  = document.createElement("p");
-var tNode  = document.createTextNode(oText.value);
-  pNode.appendChild(tNode);
-var dContent = document.getElementById("showMsg");
-dContent.insertBefore(pNode,dContent.firstChild);
-oText.value='';
-}
-
-function removeMsg(){
-   var oDiv = document.getElementById("showMsg");
- var oP = document.getElementsByTagName("p");
- oDiv.removeChild(oP[0]);
-}
-document.getElementById("send").onclick=showMsg;
-document.getElementById("remove").onclick=removeMsg;
 
 $(document).ready(function(){
   $("#boardButton").on('click', function(){
