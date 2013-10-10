@@ -1,0 +1,33 @@
+body,h1,h2,h3,h4,h5,h6,hr,p,blockquote,dl,dt,dd,ul,ol,li,pre,form,fieldset,legend,button,input,textarea,table,th,td,section,article,aside,header,footer,nav,dialog,figure{margin:0;padding:0}
+body,button,input,select,textarea{font:12px/1.5 "Microsoft YaHei", "\5B8B\4F53",Tahoma, Geneva, sans-serif;color:#333}
+html{zoom:expression(function(ele){ele.style.zoom = "1";document.execCommand("BackgroundImageCache", false, true);})(this);}
+body{ background:#FFF;}
+section,article,aside,header,footer,nav,dialog,figure{display:block}
+table{border-collapse:collapse;border-spacing:0}
+fieldset,img{border:0} 
+address,caption,cite,code,dfn,em,b,th,var,i{font-weight:normal;font-style:normal}
+code,kbd,pre,samp{font-family:courier new,courier,monospace}
+ol,ul,li{list-style:none} 
+.clear{overflow:hidden;clear:both}
+.clearfix:after{clear:both;overflow:hidden;content:"."}
+.cf:before, .cf:after {content:"";display:table;}
+.cf:after {clear:both;}
+.cf {zoom:1;}
+
+#showMsg{
+  background: #FFFFFF;
+  height: 500px;
+  width: inherit;
+  text-align: justify;
+}
+
+/*aSlide_tools*/
+#right_float{position: fixed; right: 0; top: 50px; z-index:999; _overflow-x:hidden;}
+#commentBoard{width: 500px; position: relative; height: 550px; right: -500px; line-height: 25px;border:1px solid #000000; border-right:0px;margin-top:-1px; background:#fff;}
+
+#boardLeft{
+position:absolute;top:40%;left:-31px;width:30px;border:0px solid #e0e0e0;background:#FFF000;font-size:20px;line-height:50px;text-align:center;
+}
+
+#boardDesc{height:100px;}
+#boardButton{height:50px;background:#AAAAAA;}
