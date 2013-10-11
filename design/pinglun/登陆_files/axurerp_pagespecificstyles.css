@@ -1,0 +1,304 @@
+﻿body {
+    margin: 0px;
+}
+
+div {
+    background-repeat: no-repeat;
+}
+
+.raw_image {
+    width: 100%;
+    height: 100%;
+}
+
+.preload {
+    display: none;
+}
+#main_container {
+}
+
+.form_sketch {
+    border-color: transparent;
+    background-color: transparent;
+}
+
+.u0_normal {
+    background-image: url('../登陆_files/u0_normal.png');
+}
+
+.u0_container {
+    position:absolute;
+    left:0px;
+    top:0px;
+    width:1330px;
+    height:709px;
+}
+
+#u0_img {
+    position:absolute;
+    left:0px;
+    top:0px;
+    width:1330px;
+    height:709px;
+}
+
+.u1 {
+    position:absolute;
+    left:2px;
+    top:346px;
+    width:1326px;
+    height:16px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u2_normal {
+    background-image: url('../登陆_files/u2_normal.png');
+}
+
+.u2_container {
+    position:absolute;
+    left:913px;
+    top:394px;
+    width:35px;
+    height:111px;
+}
+
+#u2_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:41px;
+    height:117px;
+}
+
+.u3 {
+    position:absolute;
+    left:2px;
+    top:48px;
+    width:31px;
+    height:16px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u4 {
+    position:absolute;
+    left:917px;
+    top:472px;
+    width:25px;
+    height:22px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u5 {
+    position:absolute;
+    left:922px;
+    top:406px;
+    width:15px;
+    height:57px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u6_normal {
+    background-image: url('../登陆_files/u6_normal.png');
+}
+
+.u6_container {
+    position:absolute;
+    left:948px;
+    top:214px;
+    width:383px;
+    height:495px;
+}
+
+#u6_img {
+    position:absolute;
+    left:-3px;
+    top:-3px;
+    width:389px;
+    height:501px;
+}
+
+.u7 {
+    position:absolute;
+    left:2px;
+    top:240px;
+    width:379px;
+    height:16px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u8 {
+    position:absolute;
+    left:978px;
+    top:228px;
+    width:150px;
+    height:16px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u9_line {
+    background-image: url('../登陆_files/u9_line.png');
+}
+
+.u9_line {
+    position:absolute;
+    left:0px;
+    top:4px;
+    width:355px;
+    height:3px;
+}
+
+.u9 {
+    position:absolute;
+    left:961px;
+    top:246px;
+    width:355px;
+    height:10px;
+    
+}
+
+.u10_line {
+    background-image: url('../登陆_files/u10_line.png');
+}
+
+.u10_line {
+    position:absolute;
+    left:0px;
+    top:3px;
+    width:76px;
+    height:5px;
+}
+
+.u10 {
+    position:absolute;
+    left:961px;
+    top:246px;
+    width:76px;
+    height:10px;
+    
+}
+
+.u11 {
+    position:absolute;
+    left:989px;
+    top:299px;
+    width:291px;
+    height:25px;
+    ;
+    ;
+    text-align: left;;
+    font-family:'Arial';
+    font-size: 13px;
+    color:#999999;
+    font-style:normal;
+    font-weight:normal;
+    text-decoration:none;
+    
+}
+
+.u11_text_sketch {
+    font-family: 'Applied Font';
+}
+
+.u12 {
+    position:absolute;
+    left:989px;
+    top:343px;
+    width:291px;
+    height:25px;
+    ;
+    ;
+    text-align: left;;
+    font-family:'Arial';
+    font-size: 13px;
+    color:#999999;
+    font-style:normal;
+    font-weight:normal;
+    text-decoration:none;
+    
+}
+
+.u12_text_sketch {
+    font-family: 'Applied Font';
+}
+
+.u14 {
+    position:absolute;
+    left:16px;
+    top:0px;
+    width:82px;
+    height:16px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
+.u15 {
+    position:absolute;
+    left:990px;
+    top:438px;
+    width:100px;
+    height:25px;
+    ;
+    ;
+    text-align: center;;
+    font-family:'Arial';
+    font-size: 13px;
+    color:#000000;
+    font-style:normal;
+    font-weight:normal;
+    text-decoration:none;
+    
+}
+
+.u15_text_sketch {
+    font-family: 'Applied Font';
+}
+
+.u16 {
+    position:absolute;
+    left:1258px;
+    top:230px;
+    width:58px;
+    height:16px;
+    ;
+    ;
+    ;
+    font-family:Arial;
+    text-align:left;
+    word-wrap:break-word;
+}
+
