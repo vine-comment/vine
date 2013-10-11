@@ -112,16 +112,19 @@ def get_comment_board(request):
     #如果多余COMMENT_PER_PAGE条，翻页
     page_count = len(messageBoard) / COMMENT_PER_PAGE + 1
     
-    html = "<html><body>"
+    html = ''
+    #html = "<html><body>"
     for message in to_show_messages:
         html += '<strong>Anonymous</strong> <br>'
         for ele in message:
             html += str(ele) + ' '
         html += '<br><hr/>'
     for i in range(1, page_count + 1):
-        html += str(i) + ' '
+        #onclick page load
+        html += str(i)
+        html += ' '
     html += '<br>'
-    html += "</body></html>"
+    #html += "</body></html>"
     return html
 
 @csrf_exempt 
