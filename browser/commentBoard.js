@@ -24,19 +24,19 @@ function loadjQuery(url, callback) {
 }
 
 function main() {
+  $('#showMsg').load('http://127.0.0.1:8000/comment/');
   $("#boardButton").on('click', function(){
 	if (!$(this).attr('data-toggled') || $(this).attr('data-toggled') == 'off') {
-	  $("#commentBoard").animate({right:'0px'});
+	  $("#commentBoard").animate({right:'0'});
 	  $(this).attr('data-toggled','on');
 	  $(this).html(">");
 	} else {
-	  $("#commentBoard").animate({right:'-500px'});
+	  $("#commentBoard").animate({right:'-40%'});
 	  $(this).attr('data-toggled','off');
 	  $(this).html("<");
 	}
   });
-  $("#submitComment").on('click', function(){ 
-    //FIXME to anwcl
+  $("#submitComment").on('click', function(){
 	var posting = $.post("http://127.0.0.1:8000/comment/", {'comment': $('#comment').val() });
 	posting.done(function(data) {
 	  $('#showMsg').html(data);

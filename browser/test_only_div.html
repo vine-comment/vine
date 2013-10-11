@@ -2,10 +2,10 @@
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
 <link rel="stylesheet" href="http://www.anwcl.com/css/comment_styles.css" type="text/css" media="all" />
 
-<div id="right_float">
+
 <div id="commentBoard">
 	<div id="boardLeft">
-		<div id="boardDesc">神吐槽</div>
+		<div id="boardDesc"><p>神 吐 槽</p></div>
 		<div id="boardButton"><</div>
 	</div>
 	<div id="showMsg"></div>
@@ -16,29 +16,7 @@
 	
 	<script type="text/javascript">
 	</script>
-</div></div>
+</div>
 
-<script type="text/javascript">
-
-$('#showMsg').load('http://127.0.0.1:8000/comment/');
-$(document).ready(function(){
-  $("#boardButton").on('click', function(){
-	if (!$(this).attr('data-toggled') || $(this).attr('data-toggled') == 'off') {
-	  $("#commentBoard").animate({right:'0px'});
-	  $(this).attr('data-toggled','on');
-	  $(this).html(">");
-	} else {
-	  $("#commentBoard").animate({right:'-500px'});
-	  $(this).attr('data-toggled','off');
-	  $(this).html("<");
-	}
-  });
-  $("#submitComment").on('click', function(){
-	var posting = $.post("http://127.0.0.1:8000/comment/", {'comment': $('#comment').val() });
-	posting.done(function(data) {
-	  $('#showMsg').html(data);
-	});
-  });
-});
-</script>
+<script type="text/javascript" src="commentBoard.js"></script>
 
