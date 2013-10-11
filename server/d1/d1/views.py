@@ -77,7 +77,8 @@ class Comment(object):
 
 
 def leave_comment(comment):
-    comment_tuple = [strftime("%Y-%m-%d %H:%M:%S", gmtime()), len(messageBoard), comment]
+    #len(messageBoard), 
+    comment_tuple = [strftime("%Y-%m-%d %H:%M:%S", gmtime()), comment]
     messageBoard.append(comment_tuple)
     
 def write_comment_board(request):
@@ -95,13 +96,15 @@ def length_not_enough(request):
     return html
 
 def get_comment_board(request):
-    #获得最后15条
-    last_messages = reversed(messageBoard[-15:])
-    #如果多余15条，翻页
-    page_count = len(messageBoard) / 15 + 1
+    COMMENT_PER_PAGE = 10
+    #获得最后COMMENT_PER_PAGE条
+    last_messages = reversed(messageBoard[-COMMENT_PER_PAGE:])
+    #如果多余COMMENT_PER_PAGE条，翻页
+    page_count = len(messageBoard) / COMMENT_PER_PAGE + 1
     
     html = "<html><body>"
     for message in last_messages:
+        html += 'Anonymous <br>'
         for ele in message:
             html += str(ele) + ' '
         html += '<br>'
