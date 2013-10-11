@@ -96,18 +96,28 @@ def length_not_enough(request):
     return html
 
 def get_comment_board(request):
-    COMMENT_PER_PAGE = 10
+    #if specified page
+    req_page = request.GET.get('page', None)
+    if req_page is None or req_page is '':
+        req_page = 1
+
+    COMMENT_PER_PAGE = 6
+    end_comment = (-req_page)*COMMENT_PER_PAGE
+    start_comment = (1-req_page)*COMMENT_PER_PAGE
+    if start_comment is 0:
+        start_comment = None
+    
     #获得最后COMMENT_PER_PAGE条
-    last_messages = reversed(messageBoard[-COMMENT_PER_PAGE:])
+    to_show_messages = reversed(messageBoard[end_comment:start_comment])
     #如果多余COMMENT_PER_PAGE条，翻页
     page_count = len(messageBoard) / COMMENT_PER_PAGE + 1
     
     html = "<html><body>"
-    for message in last_messages:
-        html += 'Anonymous <br>'
+    for message in to_show_messages:
+        html += '<strong>Anonymous</strong> <br>'
         for ele in message:
             html += str(ele) + ' '
-        html += '<br>'
+        html += '<br><hr/>'
     for i in range(1, page_count + 1):
         html += str(i) + ' '
     html += '<br>'
