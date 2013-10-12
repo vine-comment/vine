@@ -1,4 +1,4 @@
-#coding:gbk
+#coding:utf-8
 from django.http import *
 #from django.core.context_processors import csrf
 from django.views.decorators.csrf import csrf_exempt 
@@ -101,29 +101,38 @@ def get_comment_board(request):
     if req_page is None or req_page is '':
         req_page = 1
 
-    COMMENT_PER_PAGE = 6
+    COMMENT_PER_PAGE = 5
     end_comment = (-req_page)*COMMENT_PER_PAGE
     start_comment = (1-req_page)*COMMENT_PER_PAGE
     if start_comment is 0:
         start_comment = None
     
-    #»ñµÃ×îºóCOMMENT_PER_PAGEÌõ
+    #è·å¾—æœ€åCOMMENT_PER_PAGEæ¡
     to_show_messages = reversed(messageBoard[end_comment:start_comment])
-    #Èç¹û¶àÓàCOMMENT_PER_PAGEÌõ£¬·­Ò³
+    #å¦‚æœå¤šä½™COMMENT_PER_PAGEæ¡ï¼Œç¿»é¡µ
     page_count = len(messageBoard) / COMMENT_PER_PAGE + 1
     
-    html = ''
+    html = '<ul class="list-group">'
     #html = "<html><body>"
     for message in to_show_messages:
+        html += '<li class="list-group-item">'
         html += '<strong>Anonymous</strong> <br>'
         for ele in message:
             html += str(ele) + ' '
-        html += '<br><hr/>'
+        html += '<br>'#<hr/>
+        html += '</li>'
+    html += '</ul>'
+    
+    html += '<div><ul class="pagination">'
+    html += '<li><a href="#">Â«</a></li>'
     for i in range(1, page_count + 1):
         #onclick page load
+        html += '<li><a href="#">'
         html += str(i)
-        html += ' '
-    html += '<br>'
+        html += '</a></li>'
+    html += '<li><a href="#">Â»</a></li>'
+    html += '</ul></div>'
+
     #html += "</body></html>"
     return html
 
