@@ -1,0 +1,252 @@
+html, body {
+	margin:0; padding:0;
+	height:100%;
+}
+ 
+body {
+	font-family:Georgia, Times, serifs;
+}
+
+
+#background {
+    width: 130%; 
+    height: 130%; 
+    position: fixed; 
+    left: -20%; 
+    top: -20%; 
+    z-index: -1; /* Ensure div tag stays behind content; -999 might work, too. */
+}
+
+.stretch {
+    width:100%;
+    height:100%;
+}
+ 
+
+/************************************************************************************
+ center
+*************************************************************************************/
+ 
+#floater {
+	position:relative; float:left;
+	height:50%;	margin-bottom:-200px;
+	width:1px;
+}
+ 
+#centered {
+	background: #FFF;
+}
+
+
+/************************************************************************************
+ bottom
+*************************************************************************************/
+ 
+#bottom {
+	position:absolute;
+	right:10%;
+}
+
+
+/************************************************************************************
+ top
+*************************************************************************************/
+
+#top {
+	/* float:left; */
+	/* width:20%; */
+	padding:20px; 
+	/* margin:10px; */
+	background: #BCEE71;
+	text-align: center;
+}
+
+#button {
+	position: relative;
+	text-align: left;
+	float: right;
+	left: -50%;
+}
+
+ 
+#content {
+	position: relative;
+	width: 70%;
+	margin: 0 auto;
+}
+
+#footer {
+	clear: both;
+}
+
+/************************************************************************************
+ menu
+*************************************************************************************/
+
+ul {
+	list-style-type: none;
+	margin: auto; 
+	text-indent:0;
+}
+/* this ul not works */
+#nav ul {
+	list-style-type: none;
+}
+
+#nav li {
+	display: inline;
+	margin: 20px;
+}
+ 
+#nav li a {
+	font-size:2em;
+	background-color:#e8e8e8;
+	padding: 10px;
+	text-decoration:none; 
+	color:#000;
+	text-align: center;
+}
+ 
+#nav li a::after {
+	content:'>'; 
+	color:#aaa;
+	display:inline; 
+	/* margin: 0 120px 0 5px; */
+}
+ 
+#nav li a:hover, #nav li a:focus {
+	background:#f8f8f8;
+	border-bottom-color:#777;
+}
+ 
+#nav li a:hover::after {
+	color:#f93;
+}
+ 
+#nav li a:active {
+	padding:8px 7px 6px 7px;
+}
+
+#centered {
+	/* -webkit-border-radius:8px; */ -moz-border-radius:8px; 
+	/* border-radius:8px; */
+}
+ 
+h1, h2, h3, h4, h5, h6 {
+	font-family:Helvetica, Arial, sans-serif;
+	font-weight:normal; color:#666666;
+}
+ 
+h1 {
+	color:#990000; 
+	/* border-bottom:1px solid #ddd; */
+	/* letter-spacing:-0.05em; */ 
+	font-weight:bold;
+	margin-top:0; padding-top:0;
+}
+ 
+ 
+#bottom {
+	padding:10px;
+	font-size:0.7em;
+	color:#ff;
+}
+ 
+ 
+#logo {
+	font-size:4em; text-align:center;
+	color:#999;
+	margin:20px;
+}
+ 
+#logo strong {
+	font-weight:normal;
+}
+ 
+#logo span {
+	display:block;
+	font-size:3em; line-height:0.7em;
+	color:#666;
+}
+ 
+p, h2, h3 {
+	font-size:1.6em;
+	line-height:2em;
+}
+
+body
+	a { color: #6609ff; text-decoration: none;} 
+	a:hover { color: #ff58b0; text-decoration: underline;} 
+
+
+
+/************************************************************************************
+MEDIA QUERIES
+*************************************************************************************/
+/* for 980px or less */
+@media screen and (max-width: 980px) {
+	
+	#pagewrap {
+		width: 94%;
+	}
+	#content {
+		width: 55%;
+	}
+	#sidebar {
+		width: 30%;
+	}
+	#logo {
+		width: 65%;
+	}
+
+}
+
+/* for 700px or less */
+@media screen and (max-width: 700px) {
+
+	#content {
+		width: auto;
+		float: none;
+	}
+	#sidebar {
+		width: auto;
+		float: none;
+	}
+	#logo {
+		width: auto;
+		float: none;
+	}
+	#centered {
+		width: auto;
+		float: none;
+	}
+	#top {
+		width: auto;
+		float: none;
+	}
+	#floater {
+		height: 0;
+	}
+	#nav li {
+		display: block;
+		padding: 6px;
+	}
+
+}
+
+/* for 480px or less */
+@media screen and (max-width: 480px) {
+
+	#header {
+		height: auto;
+	}
+	h1 {
+		font-size: 24px;
+	}
+	#sidebar {
+		display: none;
+	}
+	#logo {
+		font-size: 16px;
+	}
+}

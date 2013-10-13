@@ -121,6 +121,14 @@ def get_comment_board(request):
             html += str(ele) + ' '
         html += '<br>'#<hr/>
         html += '</li>'
+    
+    #如果不足 COMMENT_PER_PAGE ，则补齐
+    if len(messageBoard) < COMMENT_PER_PAGE:
+        for i in range(COMMENT_PER_PAGE - len(messageBoard)):
+            html += '<li class="list-group-item">'
+            html += '<br><br>'
+            html += '</li>'
+        
     html += '</ul>'
     
     html += '<div><ul class="pagination">'

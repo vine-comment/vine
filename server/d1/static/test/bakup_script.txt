@@ -1,0 +1,56 @@
+// ==UserScript==
+// @name       try-to-comment
+// @namespace  http://use.i.E.your.homepage/
+// @version    0.1
+// @description  enter something useful
+// @match      http://www.anwcl.com
+// @copyright  2012+, You
+// @require    http://code.jquery.com/jquery-1.8.2.min.js
+// ==/UserScript==
+
+$('body').append('<div id="test"></div>');
+$('#test').load("http://www.anwcl.com/test/test_only_div.html");
+
+$.getScript( "http://code.jquery.com/jquery-1.8.2.min.js", function( data, textStatus, jqxhr ) {
+  console.log( data ); // Data returned
+  console.log( textStatus ); // Success
+  console.log( jqxhr.status ); // 200
+  console.log( "Load1 was performed." );
+});
+$.getScript( "http://www.anwcl.com/test/commentBoard.js", function( data, textStatus, jqxhr ) {
+  console.log( data ); // Data returned
+  console.log( textStatus ); // Success
+  console.log( jqxhr.status ); // 200
+  console.log( "Load2 was performed." );
+});
+
+// Use any event to append the code
+$(document).ready(function() 
+{
+    var s = document.createElement("script");
+    s.type = "text/javascript";
+    s.src = "http://www.anwcl.com/test/commentBoard.js";
+    // Use any selector
+    $("head").append(s);
+});
+
+$(document).ready(function(){
+
+  $("#boardButton").on('click', function(){
+	if (!$(this).attr('data-toggled') || $(this).attr('data-toggled') == 'off') {
+	  $("#commentBoard").animate({right:'0px'});
+	  $(this).attr('data-toggled','on');
+	  $(this).html(">");
+	} else {
+	  $("#commentBoard").animate({right:'-500px'});
+	  $(this).attr('data-toggled','off');
+	  $(this).html("<");
+	}
+  });
+  $("#submitComment").on('click', function(){
+	var posting = $.post("http://127.0.0.1:8000/comment/", {'comment': $('#comment').val() });
+	posting.done(function(data) {
+	  $('#showMsg').html(data);
+	});
+  });
+});
