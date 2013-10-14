@@ -4,21 +4,21 @@
 
 /* #right_float{position: fixed; right: 0; top: 50px; z-index:999; _overflow-x:hidden;} */
 
-#commentBoard{ position: fixed; z-index:999; _overflow-x:hidden;
-width: 40%; height: 550px; line-height: 20px; background: #ffffff;
-top:50px; right: -40%; text-align:left;
-border:3px solid #d3d3d3; border-right:0px;padding:15px;
-border-top-left-radius:0.5em;border-bottom-left-radius:0.5em;
-font-family: '微软雅黑', arial, sans-serif;}
+#commentBoard{text-align:left;
+font-family: '微软雅黑', arial, sans-serif; 
+padding: 10px;}
+
+#special_div_for_anwcl_comment_board {position: fixed; z-index:999; _overflow-x:hidden; width: 40%; height: 550px; background: #ffffff; right: -40%; border-top-left-radius:0.5em;border-bottom-left-radius:0.5em; border:3px solid #d3d3d3; border-right:0px; top:50px;}
 
 #boardLeft{
-position:absolute;top:40%;left:-40px;width:40px;border:2px solid #aaaaaa;
+position:absolute;top:40%;left:-40px;width:35px;border:2px solid #aaaaaa;
 font-size:20px;text-align:center; background:#ffffff;
 border-top-left-radius:0.3em;border-bottom-left-radius:0.3em;
+font-family: '微软雅黑', arial, sans-serif; 
 }
 
 #boardDesc{height:100px;}
-#boardDesc p{width: 1em;font-size: 20px;letter-spacing: 40px;line-height:25px;margin:10px auto 0 auto;}
+#boardDesc p{width: 1em;font-size: 20px;letter-spacing: 40px;line-height:25px;margin:10px auto 0 auto;font-family: '微软雅黑', arial, sans-serif; }
 #boardButton{height:30px;}
 
 #commentForm{font-size:14px;height:10px;}

@@ -25,17 +25,7 @@ function loadjQuery(url, callback) {
 
 function main() {
   $('#showMsg').load('http://www.anwcl.com:8000/comment/');
-  $("#boardButton").on('click', function(){
-	if (!$(this).attr('data-toggled') || $(this).attr('data-toggled') == 'off') {
-	  $("#commentBoard").animate({right:'0'});
-	  $(this).attr('data-toggled','on');
-	  $(this).html(">");
-	} else {
-	  $("#commentBoard").animate({right:'-40%'});
-	  $(this).attr('data-toggled','off');
-	  $(this).html("<");
-	}
-  });
+
   $("#submitComment").on('click', function(){
 	var posting = $.post("http://www.anwcl.com:8000/comment/", {'comment': $('#comment').val() });
 	posting.done(function(data) {

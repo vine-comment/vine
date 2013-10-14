@@ -115,10 +115,11 @@ def get_comment_board(request):
     html = '<ul class="list-group">'
     #html = "<html><body>"
     for message in to_show_messages:
+        #TODO 账户控制
         html += '<li class="list-group-item">'
-        html += '<strong>Anonymous</strong> <br>'
+        html += '<strong>路人甲</strong> <br>'
         for ele in message:
-            html += str(ele) + ' '
+            html += ele.encode('utf8') + ' '
         html += '<br>'#<hr/>
         html += '</li>'
     
