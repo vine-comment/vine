@@ -1,10 +1,10 @@
 wellaway
 ========
 
-a 3rd party comment system
+###a 3rd party comment system
 
-main languages: JavaScript, Python
-main framework: jquery, django
+* main languages: JavaScript, Python
+* main framework: jquery, django
 
 ####DONE:
 
