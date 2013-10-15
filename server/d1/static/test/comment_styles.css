@@ -18,7 +18,8 @@ font-family: '微软雅黑', arial, sans-serif;
 }
 
 #boardDesc{height:100px;}
-#boardDesc p{width: 1em;font-size: 20px;letter-spacing: 40px;line-height:25px;margin:10px auto 0 auto;font-family: '微软雅黑', arial, sans-serif; }
+#boardDesc p{width: 1em;font-size: 20px;letter-spacing: 40px;line-height:25px;
+margin:10px auto 0 auto;font-family: '微软雅黑', arial, sans-serif; font-weight: bold;}
 #boardButton{height:30px;}
 
 #commentForm{font-size:14px;height:10px;}

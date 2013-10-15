@@ -1,12 +1,13 @@
 if (typeof jQuery === "undefined") {
-  loadjQuery("//code.jquery.com/jquery-1.8.2.min.js", verifyJQueryCdnLoaded);
+  // if the version is below 1.8 then we couldn't use "on" method
+  loadjQuery("http://code.jquery.com/jquery-1.8.2.min.js", verifyJQueryCdnLoaded);
 } else {
   main();
 }
 
 function verifyJQueryCdnLoaded() {
   if (typeof jQuery === "undefined") {
-    loadjQuery("//ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js", main);
+    loadjQuery("http://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js", main);
   } else {
     main();
   }
@@ -26,7 +27,7 @@ function loadjQuery(url, callback) {
 }
 
 function main() {
-  $("#special_div_for_anwcl_comment_board #boardButton").on('click', function(){
+  $("#special_div_for_anwcl_comment_board #boardButton").bind('click', function(){
 	if (!$(this).attr('data-toggled') || $(this).attr('data-toggled') == 'off') {
 	  $("#special_div_for_anwcl_comment_board").animate({right:'0'});
 	  $(this).attr('data-toggled','on');
