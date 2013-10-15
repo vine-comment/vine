@@ -26,6 +26,7 @@ wellaway
 1. simple B/S demo
 2. use iframe to avoid css collision
 3. firefox/chrome basic testing
+4. chrome extension
 
 ####TODO-FRONT:
 1. ie(haven't got a good idea)
