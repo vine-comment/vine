@@ -6,6 +6,14 @@ wellaway
 * main languages: JavaScript, Python
 * main framework: jquery, django
 
+####BUG-TRACKING
+
+* http://www.iciba.com/ zindex not working
+
+####BUG-FIX
+
+* http://www.douban.com/ on method has no response | need to specify jquery version. if it's below 1.8, then we should use bind instead. Maybe we should use multiply iframe to avoid jquery collision.
+
 ####DONE:
 
 1. simple B/S demo
