@@ -17,6 +17,7 @@ wellaway
 
 * http://www.iciba.com/ zindex not working
 * https://github.com/ bugs... the script couldn't work via https. maybe we need a https scripts
+* iframe will load this plugin, it may be unwanted action
 
 ####BUG-FIXED
 
