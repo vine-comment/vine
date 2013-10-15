@@ -8,8 +8,8 @@
    "content_scripts": [ {
       "all_frames": true,
       "js": [ "jquery.min.js","shentucao.js" ],
-      "matches": [ "http://*/*", "https://*/*" ],
-	  "exclude_matches": [ "http://www.anwcl.com:8000/*" ]
+      "matches": [ "http://*/*" ],
+	  "exclude_matches": [ "https://*/*", "http://www.anwcl.com:8000/*" ]
    } ],
 
   "browser_action": {

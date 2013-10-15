@@ -16,8 +16,9 @@ wellaway
 ####BUG-TRACKING
 
 * http://www.iciba.com/ zindex not working
+* https://github.com/ bugs... the script couldn't work via https. maybe we need a https scripts
 
-####BUG-FIX
+####BUG-FIXED
 
 * http://www.douban.com/ on method has no response | need to specify jquery version. if it's below 1.8, then we should use bind instead. Maybe we should use multiply iframe to avoid jquery collision.
 
