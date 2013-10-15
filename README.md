@@ -6,6 +6,13 @@ wellaway
 * main languages: JavaScript, Python
 * main framework: jquery, django
 
+####DOING
+
+* solve bugs
+* ie8-10 compatiable (any good way to do it?)
+* accounts
+* android front
+
 ####BUG-TRACKING
 
 * http://www.iciba.com/ zindex not working
@@ -17,7 +24,7 @@ wellaway
 ####DONE:
 
 1. simple B/S demo
-2. use iframe to avoid from css collision
+2. use iframe to avoid css collision
 3. firefox/chrome basic testing
 
 ####TODO-FRONT:
