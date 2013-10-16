@@ -37,6 +37,7 @@ wellaway
 2. firefox(try greasemonkey)/chrome plugins
 3. android app development
 4. ie basic testing
+5. 3 directions to display the plugin
 
 ####TODO-END
 1. mongodb storage
