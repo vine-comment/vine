@@ -18,7 +18,7 @@ wellaway
 * https://github.com/ bugs... the script couldn't work via https. maybe we need a https scripts
 * iframe will load this plugin, it may be an unwanted action
 * timezone is not correct.. now it's utc. we should display it as viewers' time. Or it should be showed like youtube?
-* some plugin(js) doesn't work when loading wellaway
+* some plugin(js) doesn't work when loading wellaway. Solution(?): http://api.jquery.com/jQuery.noConflict/
 
 ####BUG-FIXED
 
