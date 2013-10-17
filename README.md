@@ -38,6 +38,7 @@ wellaway
 3. android app development
 4. ie basic testing
 5. 3 directions to display the plugin
+6. IOS front
 
 ####TODO-END
 1. mongodb storage
