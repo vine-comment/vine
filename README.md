@@ -31,7 +31,7 @@ wellaway
 1. simple B/S demo
 2. use iframe to avoid css collision
 3. firefox/chrome basic testing
-4. chrome extension
+4. basic chrome extension
 
 ####TODO-FRONT:
 1. ie(haven't got a good idea)
@@ -40,6 +40,7 @@ wellaway
 4. ie basic testing
 5. 3 directions to display the plugin
 6. IOS front
+7. improve chrome extension, and publish it
 
 ####TODO-END
 1. mongodb storage
