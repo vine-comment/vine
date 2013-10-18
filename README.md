@@ -12,6 +12,7 @@ wellaway
 * ie8-10 compatiable (any good way to do it?)
 * accounts
 * android front
+* use redis
 
 ####BUG-TRACKING
 
