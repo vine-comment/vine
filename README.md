@@ -34,7 +34,7 @@ wellaway
 4. basic chrome extension
 
 ####TODO-FRONT:
-1. ie(haven't got a good idea)
+1. ie(haven't got a good idea) plugin
 2. firefox(try greasemonkey)/chrome plugins
 3. android app development
 4. ie basic testing
