@@ -27,15 +27,16 @@ function loadjQuery(url, callback) {
 }
 
 function main() {
-  $("#special_div_for_anwcl_comment_board #boardButton").bind('click', function(){
-	if (!$(this).attr('data-toggled') || $(this).attr('data-toggled') == 'off') {
-	  $("#special_div_for_anwcl_comment_board").animate({right:'0'});
-	  $(this).attr('data-toggled','on');
-	  $(this).html(">");
+  var jQuery_anwcl = jQuery.noConflict();
+  jQuery_anwcl("#special_div_for_anwcl_comment_board #boardButton").bind('click', function(){
+	if (!jQuery_anwcl(this).attr('data-toggled') || jQuery_anwcl(this).attr('data-toggled') == 'off') {
+	  jQuery_anwcl("#special_div_for_anwcl_comment_board").animate({right:'0'});
+	  jQuery_anwcl(this).attr('data-toggled','on');
+	  jQuery_anwcl(this).html(">");
 	} else {
-	  $("#special_div_for_anwcl_comment_board").animate({right:'-40%'});
-	  $(this).attr('data-toggled','off');
-	  $(this).html("<");
+	  jQuery_anwcl("#special_div_for_anwcl_comment_board").animate({right:'-40%'});
+	  jQuery_anwcl(this).attr('data-toggled','off');
+	  jQuery_anwcl(this).html("<");
 	}
   });
 }
