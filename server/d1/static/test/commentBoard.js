@@ -24,10 +24,12 @@ function loadjQuery(url, callback) {
 }
 
 function main() {
-  $('#showMsg').load('http://www.anwcl.com:8000/comment/');
+  var parent_url = (window.location != window.parent.location) ? document.referrer: document.location;
+  var target_url = 'http://www.anwcl.com:8000/comment/' + btoa(parent_url);
+  $('#showMsg').load(target_url);
 
   $("#submitComment").on('click', function(){
-	var posting = $.post("http://www.anwcl.com:8000/comment/", {'comment': $('#comment').val() });
+	var posting = $.post(target_url, {'comment': $('#comment').val() });
 	posting.done(function(data) {
 	  $('#showMsg').html(data);
 	});

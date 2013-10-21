@@ -8,7 +8,8 @@
 font-family: '微软雅黑', arial, sans-serif; 
 padding: 10px;}
 
-#special_div_for_anwcl_comment_board {position: fixed; z-index:2147483646; _overflow-x:hidden; width: 40%; height: 550px; background: #ffffff; right: -40%; border-top-left-radius:0.5em;border-bottom-left-radius:0.5em; border:3px solid #d3d3d3; border-right:0px; top:8%;}
+#special_div_for_anwcl_comment_board {position: fixed; z-index:2147483646; _overflow-x:hidden; width: 40%; height: 100%; right: -40%; 
+background: #ffffff; border-top-left-radius:0.5em;border-bottom-left-radius:0.5em; border:3px solid #d3d3d3; border-right:0px; top:0%;}
 
 #boardLeft{
 position:absolute;top:40%;left:-40px;width:35px;border:2px solid #aaaaaa;

@@ -23,3 +23,8 @@ class Comment(models.Model):
     content = models.CharField(max_length=1024)
     desc = models.CharField(max_length=64)
     pass
+
+class Url(models.Model):
+    pass
+
+
