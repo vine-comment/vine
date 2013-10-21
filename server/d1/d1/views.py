@@ -80,7 +80,6 @@ class Comment(object):
 import base64
 def leave_comment(comment):
     #len(messageBoard), 
-    comment = base64.b64decode(comment)
     
     comment_tuple = [strftime("%Y-%m-%d %H:%M:%S", gmtime()), comment]
     messageBoard.append(comment_tuple)
@@ -152,7 +151,7 @@ def get_comment_board(request):
 @csrf_exempt 
 def comment_board(request, refer_url_b64 = None):
     if refer_url_b64:
-        leave_comment(refer_url_b64)
+        leave_comment(base64.b64decode(refer_url_b64))
     if request.method == 'POST':
         write_comment_board(request)
     elif request.method == 'GET':
