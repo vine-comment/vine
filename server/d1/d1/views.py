@@ -78,19 +78,19 @@ class Comment(object):
 
 
 import base64
-def leave_comment(comment):
+def leave_comment(comment, refer_url):
     #len(messageBoard), 
     
     comment_tuple = [strftime("%Y-%m-%d %H:%M:%S", gmtime()), comment]
     messageBoard.append(comment_tuple)
     
-def write_comment_board(request):
+def write_comment_board(request, refer_url):
     
     if request.POST.has_key('comment'):
         comment = request.POST['comment']
     else:
         comment = 'None Comment - Invalid'
-    leave_comment(comment)
+    leave_comment(comment, refer_url)
     
     return comment
 
@@ -98,7 +98,7 @@ def length_not_enough(request):
     html = "<html><body>length not enough</body></html>"
     return html
 
-def get_comment_board(request):
+def get_comment_board(request, refer_url):
     #if specified page
     req_page = request.GET.get('page', None)
     if req_page is None or req_page is '':
@@ -151,12 +151,13 @@ def get_comment_board(request):
 @csrf_exempt 
 def comment_board(request, refer_url_b64 = None):
     if refer_url_b64:
-        leave_comment(base64.b64decode(refer_url_b64))
+        refer_url = base64.b64decode(refer_url_b64)
+        leave_comment(refer_url)
     if request.method == 'POST':
-        write_comment_board(request)
+        write_comment_board(request, refer_url)
     elif request.method == 'GET':
         pass
-    res = HttpResponse(get_comment_board(request))
+    res = HttpResponse(get_comment_board(request, refer_url))
     res['Access-Control-Allow-Origin'] = '*'
     return res
 
