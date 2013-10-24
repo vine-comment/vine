@@ -42,7 +42,7 @@ def write(request, words):
 
 class Comment(object):
     id_count = 0
-    messageBoard = {}
+    msgboard = list()
     
     def write(self, request):
         if request.POST.has_key('comment'):
@@ -51,12 +51,12 @@ class Comment(object):
             comment = 'None Comment - Invalid'
         self.id_count += 1
         comment_tuple = [datetime.date.today(), cursor, comment]
-        messageBoard.append(comment_tuple)
+        self.msgboard.append(comment_tuple)
         return comment
 
     def get(self, request):
         html = "<html><body>"
-        for message in messageBoard:
+        for message in self.msgboard:
             for ele in message:
                 html += str(ele) + ' '
             html += '<br>'
@@ -84,12 +84,16 @@ def leave_comment(comment, refer_url):
     comment_tuple = [strftime("%Y-%m-%d %H:%M:%S", gmtime()), comment]
     messageBoard.append(comment_tuple)
     
+    if not msgboards.has_key(refer_url):
+        msgboards[refer_url] = list()
+    msgboards[refer_url].append(comment_tuple)
+    
 def write_comment_board(request, refer_url):
     
     if request.POST.has_key('comment'):
         comment = request.POST['comment']
     else:
-        comment = 'None Comment - Invalid'
+        comment = 'Empty Comment'
     leave_comment(comment, refer_url)
     
     return comment
@@ -110,10 +114,18 @@ def get_comment_board(request, refer_url):
     if start_comment is 0:
         start_comment = None
     
+    if refer_url is None:
+        msgboard = messageBoard
+    else:
+        msgboard = msgboards.get(refer_url)
+        if msgboard is None:
+            #FIXME invalid case
+            pass
+    
     #获得最后COMMENT_PER_PAGE条
-    to_show_messages = reversed(messageBoard[end_comment:start_comment])
+    to_show_messages = reversed(msgboard[end_comment:start_comment])
     #如果多余COMMENT_PER_PAGE条，翻页
-    page_count = len(messageBoard) / COMMENT_PER_PAGE + 1
+    page_count = len(msgboard) / COMMENT_PER_PAGE + 1
     
     html = '<ul class="list-group">'
     #html = "<html><body>"
@@ -127,8 +139,8 @@ def get_comment_board(request, refer_url):
         html += '</li>'
     
     #如果不足 COMMENT_PER_PAGE ，则补齐
-    if len(messageBoard) < COMMENT_PER_PAGE:
-        for i in range(COMMENT_PER_PAGE - len(messageBoard)):
+    if len(msgboard) < COMMENT_PER_PAGE:
+        for i in range(COMMENT_PER_PAGE - len(msgboard)):
             html += '<li class="list-group-item">'
             html += '<br><br>'
             html += '</li>'
@@ -152,7 +164,7 @@ def get_comment_board(request, refer_url):
 def comment_board(request, refer_url_b64 = None):
     if refer_url_b64:
         refer_url = base64.b64decode(refer_url_b64)
-        leave_comment(refer_url)
+        leave_comment(refer_url, refer_url)
     if request.method == 'POST':
         write_comment_board(request, refer_url)
     elif request.method == 'GET':
@@ -177,5 +189,7 @@ def home(request):
     return HttpResponse(html)
 
 #init
+msgboards = dict()
+
 messageBoard = list()
 cursor = 0
