@@ -7,6 +7,8 @@ import datetime
 from d1.database import *
 #from django.shortcuts import render
 
+from urlparse import urlparse
+
 def hello(request):
     return HttpResponse("Hello world")
 
@@ -132,7 +134,7 @@ def get_comment_board(request, refer_url):
     for message in to_show_messages:
         #TODO 账户控制
         html += '<li class="list-group-item">'
-        html += '<strong>路人甲</strong> <br>'
+        html += '<strong>路人甲</strong> '
         for ele in message:
             html += ele.encode('utf8') + ' '
         html += '<br>'#<hr/>
@@ -164,12 +166,13 @@ def get_comment_board(request, refer_url):
 def comment_board(request, refer_url_b64 = None):
     if refer_url_b64:
         refer_url = base64.b64decode(refer_url_b64)
-        leave_comment(refer_url, refer_url)
+        netloc = urlparse(refer_url).netloc
+        leave_comment(netloc, netloc)
     if request.method == 'POST':
-        write_comment_board(request, refer_url)
+        write_comment_board(request, netloc)
     elif request.method == 'GET':
         pass
-    res = HttpResponse(get_comment_board(request, refer_url))
+    res = HttpResponse(get_comment_board(request, netloc))
     res['Access-Control-Allow-Origin'] = '*'
     return res
 
