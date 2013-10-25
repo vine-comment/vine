@@ -43,6 +43,18 @@ urlpatterns += patterns('',
 )
 
 
+from django.conf.urls.defaults import *
+from django.views.generic.list import ListView
+from books.models import Publisher
+publisher_info = {
+    'queryset': Publisher.objects.all(),
+    'template_name': 'publisher_list.html',
+}
+urlpatterns += patterns('',
+    (r'^publishers/$', ListView.as_view(model=Publisher))
+)
+
+
 from functools import wraps
 from django.conf import settings
 from django.contrib.staticfiles.views import serve as serve_static
@@ -66,3 +78,4 @@ if settings.DEBUG:
     urlpatterns += patterns('',
         url(r'^static/(?P<path>.*)$', custom_headers(serve_static)),
     )
+    
