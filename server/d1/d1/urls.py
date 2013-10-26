@@ -43,15 +43,11 @@ urlpatterns += patterns('',
 )
 
 
-from django.conf.urls.defaults import *
-from django.views.generic.list import ListView
-from books.models import Publisher
-publisher_info = {
-    'queryset': Publisher.objects.all(),
-    'template_name': 'publisher_list.html',
-}
-urlpatterns += patterns('',
-    (r'^publishers/$', ListView.as_view(model=Publisher))
+from django.conf.urls import patterns
+from django.views.generic import TemplateView
+
+urlpatterns = patterns('',
+    (r'^about/', TemplateView.as_view(template_name="about.html")),
 )
 
 
