@@ -5,6 +5,7 @@ from django.views.decorators.csrf import csrf_exempt
 from time import gmtime, strftime
 import datetime
 from d1.database import *
+from d1.models import *
 #from django.shortcuts import render
 
 from urlparse import urlparse

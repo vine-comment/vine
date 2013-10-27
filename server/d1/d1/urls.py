@@ -50,6 +50,12 @@ urlpatterns = patterns('',
     (r'^about/', TemplateView.as_view(template_name="about.html")),
 )
 
+urlpatterns += patterns('',
+    (r'^articles/(\d{4})/$', 'news.views.year_archive'),
+    (r'^articles/(\d{4})/(\d{2})/$', 'news.views.month_archive'),
+    (r'^articles/(\d{4})/(\d{2})/(\d+)/$', 'news.views.article_detail'),
+)
+
 
 from functools import wraps
 from django.conf import settings
