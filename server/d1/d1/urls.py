@@ -42,11 +42,7 @@ urlpatterns += patterns('',
     url(r'^$', TemplateView.as_view(template_name='index.html'), name="index"),
 )
 
-
-from django.conf.urls import patterns
-from django.views.generic import TemplateView
-
-urlpatterns = patterns('',
+urlpatterns += patterns('',
     (r'^about/', TemplateView.as_view(template_name="about.html")),
 )
 
