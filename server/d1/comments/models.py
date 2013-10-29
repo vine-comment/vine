@@ -3,7 +3,6 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 class Author(models.Model):
-    id = models.CharField(max_length=64)
     email = models.EmailField()
     password = models.CharField(max_length=64)
     name = models.CharField(max_length=30)
