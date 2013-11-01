@@ -6,7 +6,7 @@ from time import gmtime, strftime
 import datetime
 from d1.database import *
 from d1.models import *
-#from django.shortcuts import render
+from django.shortcuts import render
 
 from urlparse import urlparse
 
@@ -104,6 +104,42 @@ def write_comment_board(request, refer_url):
 def length_not_enough(request):
     html = "<html><body>length not enough</body></html>"
     return html
+
+def get_comment_board_template(request, refer_url):
+    leave_comment(refer_url, refer_url)
+    #if specified page
+    req_page = request.GET.get('page', None)
+    if req_page is None or req_page is '':
+        req_page = 1
+
+    COMMENT_PER_PAGE = 5
+    end_comment = (-req_page)*COMMENT_PER_PAGE
+    start_comment = (1-req_page)*COMMENT_PER_PAGE
+    if start_comment is 0:
+        start_comment = None
+    
+    if refer_url is None:
+        msgboard = messageBoard
+    else:
+        msgboard = msgboards.get(refer_url)
+        if msgboard is None:
+            #FIXME invalid case
+            pass
+    
+    #获得最后COMMENT_PER_PAGE条
+    to_show_messages = reversed(msgboard[end_comment:start_comment])
+    #如果多余COMMENT_PER_PAGE条，翻页
+    page_count = len(msgboard) / COMMENT_PER_PAGE + 1
+    
+    #render html here
+    template_name = "comments/comment_board_get.html"
+    return render(request, template_name, {
+        'messages': to_show_messages,
+        'n_messages': len(msgboard),
+        'message_per_page': COMMENT_PER_PAGE,
+        'refer_url': refer_url,
+        'n_page': page_count,
+    })
 
 def get_comment_board(request, refer_url):
     #if specified page
