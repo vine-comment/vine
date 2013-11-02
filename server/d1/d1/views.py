@@ -202,7 +202,7 @@ def comment_board(request, refer_url_b64 = None):
     if refer_url_b64:
         refer_url = base64.b64decode(refer_url_b64)
         netloc = urlparse(refer_url).netloc
-        leave_comment(netloc, netloc)
+        leave_comment(refer_url, netloc)
     if request.method == 'POST':
         write_comment_board(request, netloc)
     elif request.method == 'GET':
