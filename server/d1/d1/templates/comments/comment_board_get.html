@@ -1,4 +1,4 @@
-{% block content %}
+{% load range %}
 <ul class="list-group">
 
 {% for message in messages %}
@@ -12,7 +12,7 @@
 {% endfor %}
 
 {% if n_messages < message_per_page %}
-    {% range 2 as i %}
+    {% range n_messages:message_per_page as i %}
         <li class="list-group-item">
         <br><br>
         </li>
@@ -23,11 +23,10 @@
 <div><ul class="pagination">
 <li><a href="#">«</a></li>
 
-{% range 1:page_count + 1 as i %}
+{% range 1:n_page as i %}
     <li><a href="#">
     {{ i }}
     </a></li>
+{% endrange %}
 <li><a href="#">»</a></li>
 </ul></div>
-{% endrange %}
-{% endblock %}

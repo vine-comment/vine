@@ -106,8 +106,6 @@ def length_not_enough(request):
     return html
 
 def get_comment_board_template(request, refer_url):
-    leave_comment(refer_url, refer_url)
-    #if specified page
     req_page = request.GET.get('page', None)
     if req_page is None or req_page is '':
         req_page = 1
@@ -138,7 +136,7 @@ def get_comment_board_template(request, refer_url):
         'n_messages': len(msgboard),
         'message_per_page': COMMENT_PER_PAGE,
         'refer_url': refer_url,
-        'n_page': page_count,
+        'n_page': page_count + 1,
     })
 
 def get_comment_board(request, refer_url):
@@ -209,7 +207,7 @@ def comment_board(request, refer_url_b64 = None):
         write_comment_board(request, netloc)
     elif request.method == 'GET':
         pass
-    res = HttpResponse(get_comment_board(request, netloc))
+    res = HttpResponse(get_comment_board_template(request, netloc))
     res['Access-Control-Allow-Origin'] = '*'
     return res
 
