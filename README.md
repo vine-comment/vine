@@ -1,4 +1,4 @@
-wellaway
+vine
 ========
 
 ###a 3rd party comment system
@@ -25,7 +25,7 @@ wellaway
 
 * http://www.douban.com/ on method has no response | need to specify jquery version. if it's below 1.8, then we should use bind instead. Maybe we should use multiply iframe to avoid jquery collision.
 * http://www.iciba.com/ zindex not working | set zindex to 2147483646 (MAX-1) because some framework may be error on MAX.
-* some plugin(js) doesn't work when loading wellaway. Solution(?): http://api.jquery.com/jQuery.noConflict/ | using noConflict and load jquery locally solved this problem!
+* some plugin(js) doesn't work when loading vine. Solution(?): http://api.jquery.com/jQuery.noConflict/ | using noConflict and load jquery locally solved this problem!
 
 ####DONE:
 
