@@ -20,6 +20,7 @@ vine
 * https://github.com/ bugs... the script couldn't work via https. maybe we need a https scripts
 * iframe in page will load this plugin, it may be an unwanted action
 * timezone is not correct.. now it's utc. we should display it as viewers' time. Or it should be showed like youtube?
+* jquery confict again.
 
 ####BUG-FIXED
 
