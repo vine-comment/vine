@@ -1,5 +1,8 @@
 from django.conf.urls import patterns, include, url
+
 from d1.views import *
+from comments.views import *
+
 from django.conf.urls import *
 from django.views.generic import TemplateView
 from django.conf import settings

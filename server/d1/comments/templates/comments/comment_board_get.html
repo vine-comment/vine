@@ -1,0 +1,32 @@
+{% load range %}
+<ul class="list-group">
+
+{% for message in messages %}
+    <li class="list-group-item">
+    <strong>路人甲</strong>
+    {% for ele in message %}
+        {{ ele }} 
+	{% endfor %}
+    <br>
+    </li>
+{% endfor %}
+
+{% if n_messages < message_per_page %}
+    {% range n_messages:message_per_page as i %}
+        <li class="list-group-item">
+        <br><br>
+        </li>
+    {% endrange %}
+{% endif %}
+</ul>
+
+<div><ul class="pagination">
+<li><a href="#">«</a></li>
+
+{% range 1:n_page as i %}
+    <li><a href="#">
+    {{ i }}
+    </a></li>
+{% endrange %}
+<li><a href="#">»</a></li>
+</ul></div>
