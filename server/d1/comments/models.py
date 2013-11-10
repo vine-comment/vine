@@ -1,5 +1,14 @@
 from django.db import models
 from django.contrib.auth.models import User
+import datetime
+
+class TimeMixin(models.Model):
+    time_modified = models.DateTimeField()
+    time_added = models.DateTimeField()
+
+    def save(self):
+        self.time_modified = datetime.datetime.now()
+        super(TimeMixin, self).save()
 
 # Create your models here.
 class Author(models.Model):
@@ -17,13 +26,17 @@ class Author(models.Model):
     user = models.OneToOneField(User)
 
 class Comment(models.Model):
-    date = models.DateField()
+    time = models.DateTimeField() #datetime.datetime
     title = models.CharField(max_length=64)
     content = models.CharField(max_length=1024)
     desc = models.CharField(max_length=64)
+    
+
     pass
 
 class Url(models.Model):
     pass
 
-
+class CommentBoard(models.Model):
+    url = models.ForeignKey(Url)
+    comments = models.ForeignKey(Comment)
