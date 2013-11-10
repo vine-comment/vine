@@ -43,9 +43,35 @@ def write(request, words):
     html += "</body></html>"
     return HttpResponse(html)
 
+#每个URL单独一个CommentBoard
+class CommentBoard(object):
+    count = 0
+    def __init__(self, url):
+        pass
+    def insert(self, comment):
+        pass
+    def delete(self, comment):
+        pass
+    def get(self, comment):
+        pass
+    def mod(self, comment):
+        pass
+
 class Comment(object):
     id_count = 0
     msgboard = list()
+    
+    def __init__(self, comment_str):
+        if comment_str is None:
+            return
+        
+        #genr time
+        
+        #genr id
+        
+        #genr url
+        
+        pass
     
     def write(self, request):
         if request.POST.has_key('comment'):
@@ -75,10 +101,6 @@ class Comment(object):
         res = HttpResponse(self.get(request))
         res['Access-Control-Allow-Origin'] = '*'
         return res
-    
-    def __init__(self):
-        pass
-
 
 import base64
 def leave_comment(comment, refer_url):
