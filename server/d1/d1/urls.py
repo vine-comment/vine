@@ -56,11 +56,15 @@ urlpatterns += patterns('',
     (r'^articles/(\d{4})/(\d{2})/(\d+)/$', 'news.views.article_detail'),
 )
 
+from testapp.views import MyView
+urlpatterns += patterns('',
+    url(r'^mine/$', MyView.as_view(), name='my-view'),
+)
+
 from functools import wraps
 from django.conf import settings
 from django.contrib.staticfiles.views import serve as serve_static
 from django.conf.urls import patterns, url
-
 
 if settings.DEBUG:
 
