@@ -61,6 +61,13 @@ urlpatterns += patterns('',
     url(r'^mine/$', MyView.as_view(), name='my-view'),
 )
 
+from feeds.views import LatestEntriesFeed
+urlpatterns += patterns('',
+    # ...
+    (r'^latest/feed/$', LatestEntriesFeed()),
+    # ...
+)
+
 from functools import wraps
 from django.conf import settings
 from django.contrib.staticfiles.views import serve as serve_static

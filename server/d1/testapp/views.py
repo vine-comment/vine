@@ -10,7 +10,7 @@ from django.core.urlresolvers import reverse
 from django.shortcuts import get_object_or_404
 from django.views.generic.base import RedirectView
 
-from articles.models import Article
+from news.models import Article
 
 class ArticleCounterRedirectView(RedirectView):
 

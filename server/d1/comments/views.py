@@ -8,6 +8,7 @@ from d1.database import *
 from d1.models import *
 from django.shortcuts import render
 
+from django.views.generic import TemplateView
 from urlparse import urlparse
 
 def hello(request):
@@ -44,7 +45,7 @@ def write(request, words):
     return HttpResponse(html)
 
 #每个URL单独一个CommentBoard
-class CommentBoard(object):
+class CommentBoard(TemplateView):
     count = 0
     def __init__(self, url):
         pass
@@ -248,7 +249,6 @@ def home(request):
     html = ''
     return HttpResponse(html)
 
-from django.views.generic import TemplateView
 from django.http import HttpResponse
 from django.views.generic import ListView
 from books.models import Book
