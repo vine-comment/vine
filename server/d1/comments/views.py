@@ -8,7 +8,7 @@ from d1.database import *
 from d1.models import *
 from django.shortcuts import render
 
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, DetailView
 from urlparse import urlparse
 
 def hello(request):
@@ -44,27 +44,53 @@ def write(request, words):
     html += "</body></html>"
     return HttpResponse(html)
 
+from models import *
 #每个URL单独一个CommentBoard
-class CommentBoard(TemplateView):
+class CommentBoardView(TemplateView):
     count = 0
     def __init__(self, url):
         pass
-    def insert(self, comment):
+    def get(self, request, *args, **kwargs):
         pass
-    def delete(self, comment):
+    def post(self, request, *args, **kwargs):
+        c = Comment(title="test-title", content="test-content")
+        c.save()
         pass
-    def get(self, comment):
+    def delete(self, request, *args, **kwargs):
         pass
-    def mod(self, comment):
+    def put(self, request, *args, **kwargs):
         pass
+    def get_context_data(self, **kwargs):
+        context = super(CommentBoardView, self).get_context_data(**kwargs)
+        context['latest_articles'] = Comment.objects.all()[:5]
+        return context
 
-class Comment(object):
+from django.utils import timezone
+
+#DetailView: design to display data
+class CommentDetailView(DetailView):
+    model = Comment
+
+    def get_context_data(self, **kwargs):
+        context = super(CommentDetailView, self).get_context_data(**kwargs)
+        context['now'] = timezone.now()
+        return context
+
+#ListView: Represent a list of objects
+class CommentListView(DetailView):
+    model = Comment
+
+    def get_context_data(self, **kwargs):
+        context = super(CommentListView, self).get_context_data(**kwargs)
+        context['now'] = timezone.now()
+        return context
+
+class CommentView(TemplateView):
     id_count = 0
-    msgboard = list()
-    
-    def __init__(self, comment_str):
-        if comment_str is None:
-            return
+    template_name = ""
+    comment = ""
+
+    def __init__(self, comment_str = None):
         
         #genr time
         
@@ -74,7 +100,7 @@ class Comment(object):
         
         pass
     
-    def write(self, request):
+    def post(self, request):
         if request.POST.has_key('comment'):
             comment = request.POST['comment']
         else:
@@ -102,6 +128,9 @@ class Comment(object):
         res = HttpResponse(self.get(request))
         res['Access-Control-Allow-Origin'] = '*'
         return res
+    
+    def __unicode__(self):
+        return self.comment
 
 import base64
 def leave_comment(comment, refer_url):
