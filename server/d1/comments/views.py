@@ -7,6 +7,7 @@ import datetime
 from d1.database import *
 from d1.models import *
 from django.shortcuts import render
+from django.shortcuts import render_to_response
 
 from django.views.generic import TemplateView, DetailView
 from urlparse import urlparse
@@ -70,6 +71,7 @@ from django.utils import timezone
 #DetailView: design to display data
 class CommentDetailView(DetailView):
     model = Comment
+    template_name = 'comments/comment_detail_view.html'
 
     def get_context_data(self, **kwargs):
         context = super(CommentDetailView, self).get_context_data(**kwargs)
@@ -79,11 +81,13 @@ class CommentDetailView(DetailView):
 #ListView: Represent a list of objects
 class CommentListView(DetailView):
     model = Comment
+    context_object_name = 'latest_comment_list'
+    template_name = 'comments/comment_list_view.html'
 
-    def get_context_data(self, **kwargs):
-        context = super(CommentListView, self).get_context_data(**kwargs)
-        context['now'] = timezone.now()
-        return context
+#     def get_context_data(self, **kwargs):
+#         context = super(CommentListView, self).get_context_data(**kwargs)
+#         context['now'] = timezone.now()
+#         return context
 
 class CommentView(TemplateView):
     id_count = 0

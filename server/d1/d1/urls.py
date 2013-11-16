@@ -59,6 +59,7 @@ urlpatterns += patterns('',
 from testapp.views import MyView
 urlpatterns += patterns('',
     url(r'^mine/$', MyView.as_view(), name='my-view'),
+    url(r'^comment_list_view/$', CommentListView.as_view(), name='comment-list-view'),
 )
 
 from feeds.views import LatestEntriesFeed
