@@ -9,7 +9,7 @@ from d1.models import *
 from django.shortcuts import render
 from django.shortcuts import render_to_response
 
-from django.views.generic import TemplateView, DetailView
+from django.views.generic import TemplateView, DetailView, CreateView, DeleteView, UpdateView
 from urlparse import urlparse
 
 def hello(request):
@@ -88,6 +88,10 @@ class CommentListView(DetailView):
 #         context = super(CommentListView, self).get_context_data(**kwargs)
 #         context['now'] = timezone.now()
 #         return context
+
+class CommentCreateView(CreateView):
+    model = Comment
+    pass
 
 class CommentView(TemplateView):
     id_count = 0
