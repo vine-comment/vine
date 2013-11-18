@@ -91,7 +91,12 @@ class CommentListView(DetailView):
 
 class CommentCreateView(CreateView):
     model = Comment
-    pass
+
+class CommentUpdateView(UpdateView):
+    model = Comment
+    
+class CommentDeleteView(DeleteView):
+    model = Comment
 
 class CommentView(TemplateView):
     id_count = 0
