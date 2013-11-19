@@ -70,14 +70,18 @@ urlpatterns += patterns('',
 )
 
 urlpatterns += patterns('',
-    url(r"^url_status/$",
+    url(r"^tcomment/$",
+        CommentDetailView.as_view(),
+        name="comment_detail"),
+                        
+    url(r"^tcomment/(?P<pk>\d+)/create/?$",
         CommentCreateView.as_view(),
         name="comment_create"),
 
-    url(r"^url_status/(?P<pk>\d+)/delete/?$",
+    url(r"^tcomment/(?P<pk>\d+)/delete/?$",
         CommentDeleteView.as_view(),
         name="comment_delete"),                        
-                        
+
 )
 
 from functools import wraps

@@ -110,7 +110,7 @@ class CommentDeleteView(DeleteView):
         """
         Redirect to the page listing all of the proxy urls
         """
-        return reverse('comment_list')
+        return reverse('comment_detail')
 
     def get(self, *args, **kwargs):
         """
