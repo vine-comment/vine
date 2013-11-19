@@ -89,15 +89,36 @@ class CommentListView(DetailView):
 #         context['now'] = timezone.now()
 #         return context
 
+from django.core.urlresolvers import reverse
+
 class CommentCreateView(CreateView):
     model = Comment
+    template_name = 'comments/comment_create_view.html'
+    
+    def get_success_url(self):
+        return reverse('comment_list')
+    def get_context_data(self, **kwargs):
+        kwargs["object_list"] = Comment.objects.all()
+        return super(CommentCreateView, self).get_context_data(**kwargs)
 
 class CommentUpdateView(UpdateView):
     model = Comment
     
 class CommentDeleteView(DeleteView):
     model = Comment
+    def get_success_url(self):
+        """
+        Redirect to the page listing all of the proxy urls
+        """
+        return reverse('comment_list')
 
+    def get(self, *args, **kwargs):
+        """
+        This has been overriden because by default
+        DeleteView doesn't work with GET requests
+        """
+        return self.delete(*args, **kwargs)
+    
 class CommentView(TemplateView):
     id_count = 0
     template_name = ""

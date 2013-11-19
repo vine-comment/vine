@@ -69,6 +69,17 @@ urlpatterns += patterns('',
     # ...
 )
 
+urlpatterns += patterns('',
+    url(r"^url_status/$",
+        CommentCreateView.as_view(),
+        name="comment_create"),
+
+    url(r"^url_status/(?P<pk>\d+)/delete/?$",
+        CommentDeleteView.as_view(),
+        name="comment_delete"),                        
+                        
+)
+
 from functools import wraps
 from django.conf import settings
 from django.contrib.staticfiles.views import serve as serve_static
