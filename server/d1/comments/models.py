@@ -53,7 +53,7 @@ class Comment(models.Model):
     desc = models.CharField(max_length=64)
     
     def __unicode__(self):
-        return self.title
+        return self.title + ':' + self.content
 
 class Url(models.Model):
     content = models.CharField(max_length=64)

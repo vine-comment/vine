@@ -1,5 +1,8 @@
-{% for i in latest_comment_list %}
 
-{{i.title}}<br/>
+<h1>Comments</h1>
 
-{% endfor %}
+<ul>
+  {% for comment in latest_comment_list %}
+    <li class="comment">{{ comment }}</li>
+  {% endfor %}
+</ul>

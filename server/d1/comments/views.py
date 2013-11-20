@@ -9,7 +9,7 @@ from d1.models import *
 from django.shortcuts import render
 from django.shortcuts import render_to_response
 
-from django.views.generic import TemplateView, DetailView, CreateView, DeleteView, UpdateView
+from django.views.generic import TemplateView, DetailView, CreateView, DeleteView, UpdateView, ListView
 from urlparse import urlparse
 
 def hello(request):
@@ -79,7 +79,7 @@ class CommentDetailView(DetailView):
         return context
 
 #ListView: Represent a list of objects
-class CommentListView(DetailView):
+class CommentListView(ListView):
     model = Comment
     context_object_name = 'latest_comment_list'
     template_name = 'comments/comment_list_view.html'
