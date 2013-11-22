@@ -73,12 +73,12 @@ urlpatterns += patterns('',
     url(r"^tcomment/$",
         CommentListView.as_view(),
         name="comment_list"),
-                        
-    url(r"^tcomment/(?P<pk>\d+)/detail/?$$",
+
+    url(r"^tcomment/(?P<pk>\d+)/detail/?$",
         CommentDetailView.as_view(),
         name="comment_detail"),
-                        
-    url(r"^tcomment/(?P<pk>\d+)/create/?$",
+
+    url(r"^tcomment/create/?$",
         CommentCreateView.as_view(),
         name="comment_create"),
 
