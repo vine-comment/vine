@@ -3,34 +3,13 @@ from django.http import *
 #from django.core.context_processors import csrf
 from django.views.decorators.csrf import csrf_exempt 
 from time import gmtime, strftime
-import datetime
+
 from d1.database import *
-from d1.models import *
-from django.shortcuts import render
-from django.shortcuts import render_to_response
+from django.shortcuts import render, render_to_response
 
-from django.views.generic import TemplateView, DetailView, CreateView, DeleteView, UpdateView, ListView
+from django.views.generic import *
 from urlparse import urlparse
-
-def hello(request):
-    return HttpResponse("Hello world")
-
-def hi(request):
-    return HttpResponse("Hi!")
-
-def time(request):
-    now = datetime.datetime.now()
-    html = "<html><body>It is now %s.</body></html>" % now
-    return HttpResponse(html)
-
-def hours_ahead(request, offset):
-    try:
-        offset = int(offset)
-    except ValueError:
-        raise Http404()
-    dt = datetime.datetime.now() + datetime.timedelta(hours=offset)
-    html = "<html><body>In %s hour(s), it will be %s.</body></html>" % (offset, dt)
-    return HttpResponse(html)
+from comments.models import *
 
 @csrf_exempt 
 def write(request, words):
@@ -45,7 +24,6 @@ def write(request, words):
     html += "</body></html>"
     return HttpResponse(html)
 
-from models import *
 #每个URL单独一个CommentBoard
 class CommentBoardView(TemplateView):
     count = 0
@@ -66,18 +44,6 @@ class CommentBoardView(TemplateView):
         context['latest_articles'] = Comment.objects.all()[:5]
         return context
 
-from django.utils import timezone
-
-#DetailView: design to display data
-class CommentDetailView(DetailView):
-    model = Comment
-    template_name = 'comments/comment_detail_view.html'
-
-    def get_context_data(self, **kwargs):
-        context = super(CommentDetailView, self).get_context_data(**kwargs)
-        context['now'] = timezone.now()
-        return context
-
 #ListView: Represent a list of objects
 class CommentListView(ListView):
     model = Comment
@@ -86,52 +52,14 @@ class CommentListView(ListView):
 
 #     def get_context_data(self, **kwargs):
 #         context = super(CommentListView, self).get_context_data(**kwargs)
-#         context['now'] = timezone.now()
 #         return context
 
-from django.core.urlresolvers import reverse
-
-class CommentCreateView(CreateView):
-    model = Comment
-    template_name = 'comments/comment_create_view.html'
-    
-    def get_success_url(self):
-        return reverse('comment_list')
-    def get_context_data(self, **kwargs):
-        kwargs["object_list"] = Comment.objects.all()
-        return super(CommentCreateView, self).get_context_data(**kwargs)
-
-class CommentUpdateView(UpdateView):
-    model = Comment
-    
-class CommentDeleteView(DeleteView):
-    model = Comment
-    def get_success_url(self):
-        """
-        Redirect to the page listing all of the proxy urls
-        """
-        return reverse('comment_detail')
-
-    def get(self, *args, **kwargs):
-        """
-        This has been overriden because by default
-        DeleteView doesn't work with GET requests
-        """
-        return self.delete(*args, **kwargs)
-    
 class CommentView(TemplateView):
     id_count = 0
     template_name = ""
     comment = ""
 
     def __init__(self, comment_str = None):
-        
-        #genr time
-        
-        #genr id
-        
-        #genr url
-        
         pass
     
     def post(self, request):
