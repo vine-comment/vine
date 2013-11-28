@@ -1,7 +1,7 @@
 from django.conf.urls import patterns, include, url
 
 from d1.views import *
-from testapp.view import *
+from testapp.views import *
 from comments.views import *
 
 from django.conf.urls import *
