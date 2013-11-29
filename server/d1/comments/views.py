@@ -236,11 +236,6 @@ def test_func(request, comment_in_url):
     res['Access-Control-Allow-Origin'] = '*'
     return res
 
-def home(request):
-    html = ''
-    return HttpResponse(html)
-
-
 class AboutView(TemplateView):
     template_name = "about.html"
 
