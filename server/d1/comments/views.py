@@ -62,17 +62,14 @@ class CommentView(TemplateView):
     def __init__(self, comment_str = None):
         pass
     
-    def post(self, request):
-        if request.POST.has_key('comment'):
-            comment = request.POST['comment']
-        else:
-            comment = 'None Comment - Invalid'
+    def post(self, request, *args, **kwargs):
+        comment = request.POST.get('comment', 'None Comment - Invalid')
         self.id_count += 1
         comment_tuple = [datetime.date.today(), cursor, comment]
         self.msgboard.append(comment_tuple)
         return comment
 
-    def get(self, request):
+    def get(self, request, *args, **kwargs):
         html = "<html><body>"
         for message in self.msgboard:
             for ele in message:
