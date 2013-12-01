@@ -144,18 +144,23 @@ def debug_comment(refer_url, netloc):
 
 @csrf_exempt 
 def comment_board(request, refer_url_b64 = None):
+    '''
+    主要程序入口，读取URL中的BASE64字符串并打印到board上，并解析POST/GET的参数，
+    进行相应的动作。
+    '''
+    #不管是否是post，都先解析字符串，把refer_url打到comment里
     if refer_url_b64:
         refer_url = base64.b64decode(refer_url_b64)
         netloc = urlparse(refer_url).netloc
         debug_comment(refer_url, netloc)
+    #如果是POST，那么写comment_board
     if request.method == 'POST':
         write_comment_board(request, netloc)
-    elif request.method == 'GET':
-        pass
+    #然后返回新的HTML，刷新掉老的。这里用jquery动态加载回复。
     res = HttpResponse(get_comment_board_template(request, netloc))
     res['Access-Control-Allow-Origin'] = '*'
     return res
 
-msgboards = dict()
-messageBoard = list()
+msgboards = dict()    #区分URL的msgboards
+messageBoard = list() #只有一个的全局messageBoard
 cursor = 0
