@@ -1,3 +1,4 @@
+#-*-coding:utf-8-*-
 from django.http import HttpResponse
 
 import datetime
@@ -151,15 +152,20 @@ def length_not_enough(request):
     return html
 
 class TestAppView(TemplateView):
+
+    #用于测试request，args，kwargs
     def get(self, request, *args, **kwargs):
+        print '----------request--------------'
         print request
+        print '----------args--------------'
         print args
+        print '----------kwargs--------------'
         print kwargs
+        return HttpResponse('woca')
 
     def post(self):
         pass
 
-msgboards = dict()
-
-messageBoard = list()
+msgboards = {}    #区分URL的msgboards
+messageBoard = [] #只有一个的全局messageBoard
 cursor = 0

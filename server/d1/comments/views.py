@@ -159,6 +159,6 @@ def comment_board(request, refer_url_b64 = None):
     res['Access-Control-Allow-Origin'] = '*'
     return res
 
-msgboards = dict()    #区分URL的msgboards
-messageBoard = list() #只有一个的全局messageBoard
+msgboards = {}    #区分URL的msgboards
+messageBoard = [] #只有一个的全局messageBoard
 cursor = 0

@@ -89,6 +89,12 @@ urlpatterns += patterns('',
 
 )
 
+urlpatterns += patterns('',
+    url(r'testapp/(?P<para1>.*?)/(?P<para2>.*?)/(?P<comment_id>.*?)/$',
+        TestAppView.as_view(),
+        name='test_app'),
+)
+
 from functools import wraps
 from django.conf import settings
 from django.contrib.staticfiles.views import serve as serve_static
