@@ -88,5 +88,71 @@ class CommentDetailView(DetailView):
         return context
 
 
+def get_comment_board(request, refer_url):
+    #if specified page
+    req_page = request.GET.get('page', None)
+    if req_page is None or req_page is '':
+        req_page = 1
+
+    COMMENT_PER_PAGE = 5
+    end_comment = (-req_page)*COMMENT_PER_PAGE
+    start_comment = (1-req_page)*COMMENT_PER_PAGE
+    if start_comment is 0:
+        start_comment = None
+    
+    if refer_url is None:
+        msgboard = messageBoard
+    else:
+        msgboard = msgboards.get(refer_url)
+        if msgboard is None:
+            #FIXME invalid case
+            pass
+    
+    #获得最后COMMENT_PER_PAGE条
+    to_show_messages = reversed(msgboard[end_comment:start_comment])
+    #如果多余COMMENT_PER_PAGE条，翻页
+    page_count = len(msgboard) / COMMENT_PER_PAGE + 1
+    
+    html = '<ul class="list-group">'
+    #html = "<html><body>"
+    for message in to_show_messages:
+        #TODO 账户控制
+        html += '<li class="list-group-item">'
+        html += '<strong>路人甲</strong> '
+        for ele in message:
+            html += ele.encode('utf8') + ' '
+        html += '<br>'#<hr/>
+        html += '</li>'
+    
+    #如果不足 COMMENT_PER_PAGE ，则补齐
+    if len(msgboard) < COMMENT_PER_PAGE:
+        for i in range(COMMENT_PER_PAGE - len(msgboard)):
+            html += '<li class="list-group-item">'
+            html += '<br><br>'
+            html += '</li>'
+        
+    html += '</ul>'
+    
+    html += '<div><ul class="pagination">'
+    html += '<li><a href="#">«</a></li>'
+    for i in range(1, page_count + 1):
+        #onclick page load
+        html += '<li><a href="#">'
+        html += str(i)
+        html += '</a></li>'
+    html += '<li><a href="#">»</a></li>'
+    html += '</ul></div>'
+
+    #html += "</body></html>"
+    return html
 
 
+
+def length_not_enough(request):
+    html = "<html><body>length not enough</body></html>"
+    return html
+
+msgboards = dict()
+
+messageBoard = list()
+cursor = 0
