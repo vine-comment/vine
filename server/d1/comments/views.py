@@ -60,10 +60,8 @@ class CommentView(TemplateView):
     comment = ""
     
     def post(self, request, *args, **kwargs):
-        comment = request.POST.get('comment', 'None Comment - Invalid')
-        self.id_count += 1
-        comment_tuple = [datetime.date.today(), cursor, comment]
-        self.msgboard.append(comment_tuple)
+        comment = request.POST.get('comment', 'Empty Comment')
+        leave_comment(comment, kwargs.get('refer_url'))
         return comment
 
     def get(self, request, *args, **kwargs):

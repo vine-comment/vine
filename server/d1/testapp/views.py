@@ -146,11 +146,18 @@ def get_comment_board(request, refer_url):
     #html += "</body></html>"
     return html
 
-
-
 def length_not_enough(request):
     html = "<html><body>length not enough</body></html>"
     return html
+
+class TestAppView(TemplateView):
+    def get(self, request, *args, **kwargs):
+        print request
+        print args
+        print kwargs
+
+    def post(self):
+        pass
 
 msgboards = dict()
 
