@@ -85,8 +85,7 @@ urlpatterns += patterns('',
 
     url(r"^tcomment/(?P<pk>\d+)/delete/?$",
         CommentDeleteView.as_view(),
-        name="comment_delete"),                        
-
+        name="comment_delete"),
 )
 
 urlpatterns += patterns('',
