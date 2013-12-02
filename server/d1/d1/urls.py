@@ -77,13 +77,17 @@ urlpatterns += patterns('',
         CommentDetailView.as_view(),
         name="comment_detail"),
 
-    url(r"^tcomment/create/(?P<refer_url_base64>.*?)?$",
-        CommentCreateView.as_view(),
-        name="comment_create"),
+    #url(r"^tcomment/create/(?P<refer_url_base64>.*?)?$",
+    #    CommentCreateView.as_view(),
+    #    name="comment_create"),
 
     url(r"^tcomment/(?P<pk>\d+)/delete/?$",
         CommentDeleteView.as_view(),
         name="comment_delete"),
+
+    url(r"comment_test/(?P<text>.*?)/?$",
+        CommentView.as_view(),
+        name="comment")
 )
 
 urlpatterns += patterns('',

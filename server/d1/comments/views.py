@@ -65,7 +65,7 @@ class CommentView(TemplateView):
         return comment
 
     def get(self, request, *args, **kwargs):
-        return comment_board(request, kwargs.get('refer_url_b64'))
+        return comment_board(request, kwargs.get('text'))
 
     @csrf_exempt 
     def __call__(self, request):
@@ -88,7 +88,7 @@ def leave_comment(comment, refer_url):
     messageBoard.append(comment_tuple)
     
     if not msgboards.has_key(refer_url):
-        msgboards[refer_url] = list()
+        msgboards[refer_url] = []
     msgboards[refer_url].append(comment_tuple)
     
 def write_comment_board(request, refer_url):
