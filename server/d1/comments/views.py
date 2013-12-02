@@ -58,20 +58,14 @@ class CommentView(TemplateView):
     id_count = 0
     template_name = ""
     comment = ""
-    
+
     def post(self, request, *args, **kwargs):
         comment = request.POST.get('comment', 'Empty Comment')
         leave_comment(comment, kwargs.get('refer_url'))
         return comment
 
     def get(self, request, *args, **kwargs):
-        html = "<html><body>"
-        for message in self.msgboard:
-            for ele in message:
-                html += str(ele) + ' '
-            html += '<br>'
-        html += "</body></html>"
-        return html
+        return comment_board(request, kwargs.get('refer_url_b64'))
 
     @csrf_exempt 
     def __call__(self, request):

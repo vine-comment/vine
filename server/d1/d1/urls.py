@@ -18,7 +18,6 @@ admin.autodiscover()
 urlpatterns = patterns('',
     ('^hello/$', hello),
     ('^hi/$', hi),
-    #('^$', hi),
     ('^time/$', time),
     ('^comment/((?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?)$', comment_board),
     (r'^time/plus/(\d{1,2})/$', hours_ahead),
@@ -79,7 +78,7 @@ urlpatterns += patterns('',
         CommentDetailView.as_view(),
         name="comment_detail"),
 
-    url(r"^tcomment/create/?$",
+    url(r"^tcomment/create/(?P<refer_url_base64>.*?)?$",
         CommentCreateView.as_view(),
         name="comment_create"),
 
