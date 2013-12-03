@@ -3,13 +3,12 @@ from django.http import *
 #from django.core.context_processors import csrf
 from django.views.decorators.csrf import csrf_exempt 
 from time import gmtime, strftime
-
-from d1.database import *
 from django.shortcuts import render, render_to_response
-
 from django.views.generic import *
 from urlparse import urlparse
+
 from comments.models import *
+from d1.database import *
 
 @csrf_exempt 
 def write(request, words):
