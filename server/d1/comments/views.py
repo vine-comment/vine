@@ -44,16 +44,6 @@ class CommentBoardView(TemplateView):
         context['latest_articles'] = Comment.objects.all()[:5]
         return context
 
-#ListView: Represent a list of objects
-class CommentListView(ListView):
-    model = Comment
-    context_object_name = 'latest_comment_list'
-    template_name = 'comments/comment_list_view.html'
-
-#     def get_context_data(self, **kwargs):
-#         context = super(CommentListView, self).get_context_data(**kwargs)
-#         return context
-
 class CommentView(TemplateView):
     id_count = 0
     template_name = ""
