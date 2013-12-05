@@ -34,17 +34,39 @@ class CommentView(TemplateView):
         return comment
 
     def get(self, request, *args, **kwargs):
-        return comment_board(request, kwargs.get('text'))
-
-    @csrf_exempt 
-    def __call__(self, request):
-        if request.method == 'POST':
-            self.write(request)
-        elif request.method == 'GET':
-            pass
-        res = HttpResponse(self.get(request))
-        res['Access-Control-Allow-Origin'] = '*'
-        return res
+        refer_url = kwargs.get('text')
+        req_page = request.GET.get('page', None)
+        if req_page is None or req_page is '':
+            req_page = 1
+    
+        COMMENT_PER_PAGE = 5
+        end_comment = (-req_page)*COMMENT_PER_PAGE
+        start_comment = (1-req_page)*COMMENT_PER_PAGE
+        if start_comment is 0:
+            start_comment = None
+        
+        if refer_url is None:
+            msgboard = messageBoard
+        else:
+            msgboard = msgboards.get(refer_url)
+            if msgboard is None:
+                #FIXME invalid case
+                pass
+        
+        #获得最后COMMENT_PER_PAGE条
+        to_show_messages = reversed(msgboard[end_comment:start_comment])
+        #如果多余COMMENT_PER_PAGE条，翻页
+        page_count = len(msgboard) / COMMENT_PER_PAGE + 1
+        
+        #render html here
+        template_name = "comments/comment_board_get.html"
+        return render(request, template_name, {
+            'messages': to_show_messages,
+            'n_messages': len(msgboard),
+            'message_per_page': COMMENT_PER_PAGE,
+            'refer_url': refer_url,
+            'n_page': page_count + 1,
+        })
 
     def __unicode__(self):
         return self.comment
