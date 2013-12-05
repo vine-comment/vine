@@ -23,26 +23,6 @@ def write(request, words):
     html += "</body></html>"
     return HttpResponse(html)
 
-#每个URL单独一个CommentBoard
-class CommentBoardView(TemplateView):
-    count = 0
-    def __init__(self, url):
-        pass
-    def get(self, request, *args, **kwargs):
-        pass
-    def post(self, request, *args, **kwargs):
-        c = Comment(title="test-title", content="test-content")
-        c.save()
-        pass
-    def delete(self, request, *args, **kwargs):
-        pass
-    def put(self, request, *args, **kwargs):
-        pass
-    def get_context_data(self, **kwargs):
-        context = super(CommentBoardView, self).get_context_data(**kwargs)
-        context['latest_articles'] = Comment.objects.all()[:5]
-        return context
-
 class CommentView(TemplateView):
     id_count = 0
     template_name = ""
