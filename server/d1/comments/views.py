@@ -45,6 +45,7 @@ class CommentView(TemplateView):
         if start_comment is 0:
             start_comment = None
         
+        #如果没有refer_url，那么直接用全局版
         if refer_url is None:
             msgboard = messageBoard
         else:
@@ -53,7 +54,7 @@ class CommentView(TemplateView):
                 #FIXME invalid case
                 pass
         
-        #获得最后COMMENT_PER_PAGE条
+        #获得最后COMMENT_PER_PAGE条，FIXME，Paginator
         to_show_messages = reversed(msgboard[end_comment:start_comment])
         #如果多余COMMENT_PER_PAGE条，翻页
         page_count = len(msgboard) / COMMENT_PER_PAGE + 1
