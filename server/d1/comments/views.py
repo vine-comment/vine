@@ -121,7 +121,7 @@ def get_comment_board_template(request, refer_url):
     })
 
 def debug_comment(refer_url, netloc):
-    leave_comment(refer_url, netloc)
+    return leave_comment(refer_url, netloc)
 
 @csrf_exempt 
 def comment_board(request, refer_url_b64 = None):
