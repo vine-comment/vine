@@ -85,7 +85,7 @@ urlpatterns += patterns('',
         CommentDeleteView.as_view(),
         name="comment_delete"),
 
-    url(r"comment_test/(?P<text>.*?)/?$",
+    url(r"comment_test/(?P<url_b64>.*?)/?$",
         CommentView.as_view(),
         name="comment")
 )

@@ -36,28 +36,15 @@ class CommentView(TemplateView):
 
     #TODO: https://github.com/frankban/django-endless-pagination
     def get(self, request, *args, **kwargs):
-        refer_url = kwargs.get('text')
-        req_page = request.GET.get('page', None)
-
-        if req_page is None or req_page is '':
-            req_page = 1
-
-        if refer_url is None:
-            msgboard = messageBoard
-        else:
-            msgboard = msgboards.get(refer_url)
-            if msgboard is None:
-                msgboard = []
-    
+        index_url = kwargs.get('url_b64', 'http://www.null.com/')
+        index_page = request.GET.get('page', 1)
+        msgboard = msgboards.get(index_url, [])
         p = Paginator(msgboard, 5)
-        blanks = 0 if p.num_pages > 1 else range(5 - p.count)
-    
-        #render html here
         template_name = "comments/comment_board_get.html"
         return render(request, template_name, {
-            'messages': p.page(1).object_list,
-            'blanks': blanks,
-            'refer_url': refer_url,
+            'messages': p.page(index_page).object_list,
+            'blanks':  0 if p.num_pages > 1 else range(5 - p.count),
+            'refer_url': index_url,
             'n_page': p.num_pages,
         })
 
