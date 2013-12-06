@@ -28,16 +28,22 @@ class CommentView(TemplateView):
     id_count = 0
     template_name = ""
     comment = ""
+    base64_default_str = 'aHR0cDovL3d3dy5udWxsLmNvbS8='
+    index_default_str = 'http://www.null.com/'
 
     def post(self, request, *args, **kwargs):
         comment = request.POST.get('comment', 'Empty Comment')
-        leave_comment(comment, kwargs.get('refer_url'))
+        index_url = kwargs.get('index_url', self.index_default_str)
+        leave_comment(index_url, index_url)
         return comment
 
     #TODO: https://github.com/frankban/django-endless-pagination
     def get(self, request, *args, **kwargs):
-        index_url = kwargs.get('url_b64', 'http://www.null.com/')
+        self.post(request, *args, **kwargs)
+
         index_page = request.GET.get('page', 1)
+        index_url = kwargs.get('index_url', self.index_default_str)
+
         msgboard = msgboards.get(index_url, [])
         p = Paginator(msgboard, 5)
         template_name = "comments/comment_board_get.html"
@@ -47,20 +53,24 @@ class CommentView(TemplateView):
             'refer_url': index_url,
             'n_page': p.num_pages,
         })
+        
+    def dispatch(self, request, *args, **kwargs):
+        url_b64 = kwargs.get('url_b64', self.base64_default_str)
+        kwargs['index_url'] = base64.b64decode(url_b64)
+        return super(CommentView, self).dispatch(request, *args, **kwargs)
 
     def __unicode__(self):
         return self.comment
 
 import base64
-def leave_comment(comment, refer_url):
+def leave_comment(comment_str, index_url):
     #len(messageBoard), 
     
-    comment_tuple = [strftime("%Y-%m-%d %H:%M:%S", gmtime()), comment]
+    comment_tuple = [strftime("%Y-%m-%d %H:%M:%S", gmtime()), comment_str]
     messageBoard.append(comment_tuple)
-    
-    if not msgboards.has_key(refer_url):
-        msgboards[refer_url] = []
-    msgboards[refer_url].append(comment_tuple)
+
+    msgboards[index_url] = msgboards.get(index_url, [])
+    msgboards[index_url].append(comment_tuple)
     
 def write_comment_board(request, refer_url):
     comment = request.POST.get('comment', 'Empty Comment')
