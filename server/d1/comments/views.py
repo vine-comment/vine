@@ -6,6 +6,7 @@ from time import gmtime, strftime
 from django.shortcuts import render, render_to_response
 from django.views.generic import *
 from urlparse import urlparse
+from django.core.paginator import Paginator
 
 from comments.models import *
 from d1.database import *
@@ -33,40 +34,31 @@ class CommentView(TemplateView):
         leave_comment(comment, kwargs.get('refer_url'))
         return comment
 
+    #TODO: https://github.com/frankban/django-endless-pagination
     def get(self, request, *args, **kwargs):
         refer_url = kwargs.get('text')
         req_page = request.GET.get('page', None)
+
         if req_page is None or req_page is '':
             req_page = 1
-    
-        COMMENT_PER_PAGE = 5
-        end_comment = (-req_page)*COMMENT_PER_PAGE
-        start_comment = (1-req_page)*COMMENT_PER_PAGE
-        if start_comment is 0:
-            start_comment = None
-        
-        #如果没有refer_url，那么直接用全局版
+
         if refer_url is None:
             msgboard = messageBoard
         else:
             msgboard = msgboards.get(refer_url)
             if msgboard is None:
-                #FIXME invalid case
-                pass
-        
-        #获得最后COMMENT_PER_PAGE条，FIXME，Paginator
-        to_show_messages = reversed(msgboard[end_comment:start_comment])
-        #如果多余COMMENT_PER_PAGE条，翻页
-        page_count = len(msgboard) / COMMENT_PER_PAGE + 1
-        
+                msgboard = []
+    
+        p = Paginator(msgboard, 5)
+        blanks = 0 if p.num_pages > 1 else range(5 - p.count)
+    
         #render html here
         template_name = "comments/comment_board_get.html"
         return render(request, template_name, {
-            'messages': to_show_messages,
-            'n_messages': len(msgboard),
-            'message_per_page': COMMENT_PER_PAGE,
+            'messages': p.page(1).object_list,
+            'blanks': blanks,
             'refer_url': refer_url,
-            'n_page': page_count + 1,
+            'n_page': p.num_pages,
         })
 
     def __unicode__(self):
