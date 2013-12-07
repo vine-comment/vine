@@ -1,14 +1,13 @@
 #coding:utf-8
 from django.http import *
-#from django.core.context_processors import csrf
-from django.views.decorators.csrf import csrf_exempt 
-from time import gmtime, strftime
-from django.shortcuts import render, render_to_response
+from django.shortcuts import render
 from django.views.generic import *
-from urlparse import urlparse
 from django.core.paginator import Paginator
-import datetime
 from django.utils.timezone import utc
+#from django.core.context_processors import csrf
+
+from urlparse import urlparse
+import datetime
 import base64
 
 from models import Comment, CommentBoard
@@ -21,7 +20,7 @@ class CommentView(TemplateView):
     def write_global_comment(self, request, *args, **kwargs):
         index_url = kwargs.get('index_url', self.index_default_str)
         comment_str = index_url
-        comment_board, created = CommentBoard.objects.get_or_create(url='', title='')
+        comment_board, created = CommentBoard.objects.get_or_create(url=index_url, title=urlparse(index_url).netloc)
         comment_board.save() if created else None
         comment = Comment(time_added = datetime.datetime.utcnow().replace(tzinfo=utc),
                           comment_str = comment_str,
