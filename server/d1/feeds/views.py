@@ -1,6 +1,6 @@
 from django.contrib.syndication.views import Feed
 from django.core.urlresolvers import reverse
-from comments.models import Comment
+from vine_comment.models import Comment
 
 class LatestEntriesFeed(Feed):
     title = "New Comment"

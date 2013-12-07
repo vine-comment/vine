@@ -46,7 +46,7 @@ class ArticleCounterRedirectView(RedirectView):
         article = get_object_or_404(Article, pk=pk)
         article.update_counter()
         return reverse('product_detail', args=(pk,))
-
+'''
 class CommentCreateView(CreateView):
     model = Comment
     template_name = 'testapp/comment_create_view.html'
@@ -87,7 +87,7 @@ class CommentDetailView(DetailView):
         context = super(CommentDetailView, self).get_context_data(**kwargs)
         context['now'] = timezone.now()
         return context
-
+'''
 
 def get_comment_board(request, refer_url):
     #if specified page
@@ -166,7 +166,7 @@ class TestAppView(TemplateView):
     def post(self):
         pass
 
-
+'''
 #每个URL单独一个CommentBoard
 class CommentBoardView(TemplateView):
     count = 0
@@ -196,7 +196,7 @@ class CommentListView(ListView):
 #     def get_context_data(self, **kwargs):
 #         context = super(CommentListView, self).get_context_data(**kwargs)
 #         return context
-
+'''
 msgboards = {}    #区分URL的msgboards
 messageBoard = [] #只有一个的全局messageBoard
 cursor = 0

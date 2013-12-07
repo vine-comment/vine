@@ -2,7 +2,7 @@ from django.conf.urls import patterns, include, url
 
 from d1.views import *
 from testapp.views import *
-from comments.views import *
+from vine_comment.views import *
 
 from django.conf.urls import *
 from django.views.generic import TemplateView
@@ -69,22 +69,6 @@ urlpatterns += patterns('',
 )
 
 urlpatterns += patterns('',
-    url(r"^tcomment/$",
-        CommentListView.as_view(),
-        name="comment_list"),
-
-    url(r"^tcomment/(?P<pk>\d+)/detail/?$",
-        CommentDetailView.as_view(),
-        name="comment_detail"),
-
-    #url(r"^tcomment/create/(?P<refer_url_base64>.*?)?$",
-    #    CommentCreateView.as_view(),
-    #    name="comment_create"),
-
-    url(r"^tcomment/(?P<pk>\d+)/delete/?$",
-        CommentDeleteView.as_view(),
-        name="comment_delete"),
-
     url(r"comment_test/(?P<url_b64>.*?)/?$",
         CommentView.as_view(),
         name="comment")

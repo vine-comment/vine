@@ -131,7 +131,7 @@ INSTALLED_APPS = (
     'd1',
     'registration',
     'books',
-    'comments',
+    'vine_comment',
     'news',
     'feeds',
     'testapp',
