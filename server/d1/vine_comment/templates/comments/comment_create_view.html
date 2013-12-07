@@ -1,0 +1,11 @@
+<h1>Add Comment</h1>
+
+<form action="{% url 'comment_create' %}" method="POST">
+  {% csrf_token %}
+  <ul>
+    {{ form.as_ul }}
+  </ul>
+  <input id="save_comment" type="submit" value="Save" />
+</form>
+
+<a href="{% url 'comment_list' %}">back to list</a>
