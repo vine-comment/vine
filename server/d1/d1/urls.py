@@ -7,11 +7,10 @@ from d1.views import *
 from vine_comment.views import *
 
 urlpatterns = patterns('',
-    ('^comment/(?P<url_b64>.*?)/?$', CommentView.as_view()),
     (r'^accounts/', include('registration.backends.default.urls')),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^$', TemplateView.as_view(template_name='index.html'), name="index"),
-    url(r"comment_test/(?P<url_b64>.*?)/?$", CommentView.as_view(), name="comment"),
+    url(r"comment/(?P<url_b64>.*?)/?$", CommentView.as_view(), name="comment"),
 )
 
 from functools import wraps

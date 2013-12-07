@@ -17,7 +17,7 @@ class CommentView(TemplateView):
     base64_default_str = 'aHR0cDovL3d3dy5udWxsLmNvbS8='
     index_default_str = 'http://www.null.com/'
 
-    def write_global_comment(self, request, *args, **kwargs):
+    def record_index_url(self, request, *args, **kwargs):
         index_url = kwargs.get('index_url', self.index_default_str)
         comment_str = index_url
         comment_board, created = CommentBoard.objects.get_or_create(url=index_url, title=urlparse(index_url).netloc)
@@ -29,7 +29,7 @@ class CommentView(TemplateView):
         return
 
     def debug(self, request, *args, **kwargs):
-        self.write_global_comment(request, *args, **kwargs)
+        self.record_index_url(request, *args, **kwargs)
 
     def post(self, request, *args, **kwargs):
         comment_str = request.POST.get('comment', 'Empty Comment')
@@ -41,8 +41,7 @@ class CommentView(TemplateView):
                           comment_str = comment_str,
                           comment_board = comment_board)
         comment.save()
-
-        return 
+        return
 
     #TODO: https://github.com/frankban/django-endless-pagination
     def get(self, request, *args, **kwargs):
@@ -52,10 +51,10 @@ class CommentView(TemplateView):
         comments = Comment.objects.filter(comment_board__url__contains=index_url).order_by('-time_added')
         p = Paginator(comments, 5)
 
-        template_name = "comments/comment_board_get.html"
+        template_name = "comments/comment_view.html"
         return render(request, template_name, {
             'messages': p.page(index_page).object_list,
-            'blanks':  [0,] if p.num_pages > 1 else range(5 - p.count),
+            'blanks':  None if p.num_pages > 1 else range(5 - p.count),
             'refer_url': index_url,
             'n_page': p.num_pages,
         })
@@ -66,6 +65,3 @@ class CommentView(TemplateView):
         
         self.debug(request, *args, **kwargs)
         return super(CommentView, self).dispatch(request, *args, **kwargs)
-
-    def __unicode__(self):
-        return self.comment
