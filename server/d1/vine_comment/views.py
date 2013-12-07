@@ -21,7 +21,7 @@ class CommentView(TemplateView):
     def write_global_comment(self, request, *args, **kwargs):
         index_url = kwargs.get('index_url', self.index_default_str)
         comment_str = index_url
-        comment_board, created = CommentBoard.objects.get_or_create(url = '', title = '')
+        comment_board, created = CommentBoard.objects.get_or_create(url='', title='')
         comment_board.save() if created else None
         comment = Comment(time_added = datetime.datetime.utcnow().replace(tzinfo=utc),
                           comment_str = comment_str,
@@ -36,7 +36,7 @@ class CommentView(TemplateView):
         comment_str = request.POST.get('comment', 'Empty Comment')
         index_url = kwargs.get('index_url', self.index_default_str)
 
-        comment_board, created = CommentBoard.objects.get_or_create(url = index_url, title = urlparse(index_url).netloc)
+        comment_board, created = CommentBoard.objects.get_or_create(url=index_url, title=urlparse(index_url).netloc)
         comment_board.save() if created else None
         comment = Comment(time_added = datetime.datetime.utcnow().replace(tzinfo=utc),
                           comment_str = comment_str,
