@@ -9,7 +9,6 @@ from urlparse import urlparse
 from django.core.paginator import Paginator
 
 from comments.models import *
-from d1.database import *
 
 @csrf_exempt 
 def write(request, words):
@@ -25,16 +24,14 @@ def write(request, words):
     return HttpResponse(html)
 
 class CommentView(TemplateView):
-    id_count = 0
     template_name = ""
-    comment = ""
     base64_default_str = 'aHR0cDovL3d3dy5udWxsLmNvbS8='
     index_default_str = 'http://www.null.com/'
 
     def post(self, request, *args, **kwargs):
         comment = request.POST.get('comment', 'Empty Comment')
         index_url = kwargs.get('index_url', self.index_default_str)
-        leave_comment(index_url, index_url)
+        leave_comment(index_url, urlparse(index_url).netloc)
         return comment
 
     #TODO: https://github.com/frankban/django-endless-pagination

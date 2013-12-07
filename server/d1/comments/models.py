@@ -46,18 +46,9 @@ class Author(TimeMixin, models.Model):
     def __unicode__(self):
         return self.name
 
-class Comment(models.Model):
-    time = models.DateTimeField() #datetime.datetime
-    title = models.CharField(max_length=64)
-    content = models.CharField(max_length=1024)
-    desc = models.CharField(max_length=64)
-    
-    def __unicode__(self):
-        return self.title + ':' + self.content
-
 class Url(models.Model):
     content = models.CharField(max_length=64)
-    url = models.CharField(max_length=2048)
+    url = models.URLField(max_length=2048)
     
     def __unicode__(self):
         return self.content
@@ -65,7 +56,16 @@ class Url(models.Model):
 class CommentBoard(models.Model):
     title = models.CharField(max_length=64)
     url = models.ForeignKey(Url)
-    comments = models.ForeignKey(Comment)
     
     def __unicode(self):
         return self.title
+
+class Comment(models.Model):
+    time = models.DateTimeField() #datetime.datetime
+    title = models.CharField(max_length=64)
+    content = models.CharField(max_length=1024)
+    desc = models.CharField(max_length=64)
+    comment_board = models.ForeignKey(CommentBoard)
+    
+    def __unicode__(self):
+        return self.title + ':' + self.content
