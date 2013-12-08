@@ -49,14 +49,12 @@ class CommentView(TemplateView):
         index_url = kwargs.get('index_url', self.index_default_str)
 
         comments = Comment.objects.filter(comment_board__url__contains=index_url).order_by('-time_added')
-        p = Paginator(comments, 5)
+        p = Paginator(comments, 5).page(index_page)
 
-        template_name = "comments/comment_view.html"
+        template_name = "comments/comment_view_raw.html"
         return render(request, template_name, {
-            'messages': p.page(index_page).object_list,
-            'blanks':  None if p.num_pages > 1 else range(5 - p.count),
+            'p_comment': p,
             'refer_url': index_url,
-            'n_page': p.num_pages,
         })
 
     def dispatch(self, request, *args, **kwargs):
