@@ -18,13 +18,16 @@ class CommentView(TemplateView):
     index_default_str = 'http://www.null.com/'
 
     def _post_comment(self, index_url, comment_str):
-        comment_board, created = CommentBoard.objects.get_or_create(url=index_url, title=urlparse(index_url).netloc)
+        comment_board, created = CommentBoard.objects.get_or_create(
+                                    url=index_url,
+                                    title=urlparse(index_url).netloc)
         comment_board.save() if created else None
-        comment = Comment(time_added = datetime.datetime.utcnow().replace(tzinfo=utc),
-                          comment_str = comment_str,
-                          comment_board = comment_board)
+        comment = Comment(
+                    time_added = datetime.datetime.utcnow().replace(
+                                    tzinfo=utc),
+                    comment_str = comment_str,
+                    comment_board = comment_board)
         comment.save()
-        return
 
     def record_index_url(self, request, *args, **kwargs):
         index_url = kwargs.get('index_url', self.index_default_str)
@@ -44,9 +47,11 @@ class CommentView(TemplateView):
         index_page = request.GET.get('page', 1)
         index_url = kwargs.get('index_url', self.index_default_str)
 
-        comments = Comment.objects.filter(comment_board__url__contains=index_url).order_by('-time_added')
-        p = Paginator(comments, 5).page(index_page)
-        return render(request, "comments/comment_view_raw.html", {
+        comments = Comment.objects.filter(
+                        comment_board__title__contains=\
+                        urlparse(index_url).netloc).order_by('-time_added')
+        p = Paginator(comments, 20).page(index_page)
+        return render(request, "comments/comment_view_meta.html", {
             'p_comment': p,
             'refer_url': index_url,
         })

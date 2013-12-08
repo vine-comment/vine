@@ -26,7 +26,8 @@ function loadjQuery(url, callback) {
 function main() {
   var parent_url = (window.location != window.parent.location) ? document.referrer: document.location;
   var target_url = 'http://www.anwcl.com:8000/comment/' + btoa(parent_url);
-  $('#showMsg').load(target_url);
+  //在raw template时启用动态load，在meta template时此load会嵌套加载，所以关闭
+  //$('#showMsg').load(target_url);
 
   $("#submitComment").on('click', function(){
 	var posting = $.post(target_url, {'comment': $('#comment').val() });
