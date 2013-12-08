@@ -17,6 +17,10 @@ class CommentView(TemplateView):
     base64_default_str = 'aHR0cDovL3d3dy5udWxsLmNvbS8='
     index_default_str = 'http://www.null.com/'
 
+    template_inside_cb = "comments/comment_view_inside_comment_board.html"
+    template_raw = "comments/comment_view_raw.html"
+    template_meta = "comments/comment_view_meta.html"
+
     @csrf_exempt
     def _post_comment(self, index_url, comment_str):
         comment_board, created = CommentBoard.objects.get_or_create(
@@ -45,6 +49,8 @@ class CommentView(TemplateView):
         comment_str = request.POST.get('comment', 'Empty Comment')
         index_url = kwargs.get('index_url', self.index_default_str)
         self._post_comment(index_url, comment_str)
+        
+        kwargs['template'] = self.template_raw
         return self.get(request, *args, **kwargs)
 
     #TODO: https://github.com/frankban/django-endless-pagination
@@ -56,7 +62,8 @@ class CommentView(TemplateView):
                         comment_board__title__contains=\
                         urlparse(index_url).netloc).order_by('-time_added')
         p = Paginator(comments, 20).page(index_page)
-        return render(request, "comments/comment_view_meta.html", {
+        template_name = kwargs.get('template', self.template_raw)
+        return render(request, template_name, {
             'p_comment': p,
             'refer_url': index_url,
         })
