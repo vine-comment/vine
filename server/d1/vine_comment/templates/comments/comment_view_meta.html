@@ -1,0 +1,54 @@
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
+
+<link rel="stylesheet" href="http://www.anwcl.com:8000/static/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="http://www.anwcl.com:8000/static/bootstrap/css/bootstrap-theme.min.css">
+
+<link rel="stylesheet" href="http://www.anwcl.com:8000/static/test/comment_styles.css" type="text/css" media="all" />
+<script src="http://www.anwcl.com:8000/static/bootstrap/js/bootstrap.min.js"></script>
+
+<div id="commentBoard">
+	<div id="boardRight" >
+		<ul class="nav nav-pills" class="panel panel-default">
+		  <li class="active"><a href="#"><span class="badge pull-right">42</span> 口水</a> </li>
+		  <li><a href="#"><span class="badge pull-right">2</span> 账户</a></li>
+		  <li><a href="#"><span class="badge pull-right">33</span> 信封</a></li>
+		  <li><a href="#"> 设置</a></li>
+		</ul>
+		<br>
+		<div id="showMsg">
+			<ul class="list-group">
+			{% for message in p_comment.object_list %}
+			    <li class="list-group-item">
+			    <strong>路人甲</strong>
+				{{ message }} 
+			    <br>
+			    </li>
+			{% endfor %}
+			</ul>
+			
+			<ul class='pagination'>
+			<li><a href="#">«</a></li>
+			{% for num in p_comment.paginator.page_range %}
+			  {% ifequal num p_comment.number %}
+			    <li><span class="current"><b>{{ num }}</b></span></li>
+			  {% else %}<!-- ?page={{ num }} -->
+			    <li><a href="?page={{ num }}">{{ num }}</a></li>
+			  {% endifequal %} 
+			{% endfor %}
+			<li><a href="#">»</a></li>
+			</ul>
+		</div>
+		<div class="row">
+		  <div class="col-lg-6">
+			<div class="input-group">
+			  <input type="text" class="form-control" id="comment" name="comment" placeholder="可输入10-140个字">
+			  <span class="input-group-btn">
+				<button class="btn btn-default" id="submitComment" type="button">Go!</button>
+			  </span>
+			</div><!-- /input-group -->
+		  </div><!-- /.col-lg-6 -->
+		</div><!-- /.row -->
+	</div>
+
+</div>
+<script type="text/javascript" src="http://www.anwcl.com:8000/static/test/commentBoard.js"></script>
