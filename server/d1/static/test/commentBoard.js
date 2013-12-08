@@ -32,7 +32,7 @@ function main() {
   $("#submitComment").on('click', function(){
 	var posting = $.post(target_url, {'comment': $('#comment').val() });
 	posting.done(function(data) {
-	  $('#showMsg').html(data);
+	  $('#commentBoard').html(data);
 	});
   });
 }

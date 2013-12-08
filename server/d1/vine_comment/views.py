@@ -4,7 +4,7 @@ from django.shortcuts import render
 from django.views.generic import *
 from django.core.paginator import Paginator
 from django.utils.timezone import utc
-#from django.core.context_processors import csrf
+from django.views.decorators.csrf import csrf_exempt
 
 from urlparse import urlparse
 import datetime
@@ -17,6 +17,7 @@ class CommentView(TemplateView):
     base64_default_str = 'aHR0cDovL3d3dy5udWxsLmNvbS8='
     index_default_str = 'http://www.null.com/'
 
+    @csrf_exempt
     def _post_comment(self, index_url, comment_str):
         comment_board, created = CommentBoard.objects.get_or_create(
                                     url=index_url,
@@ -29,18 +30,22 @@ class CommentView(TemplateView):
                     comment_board = comment_board)
         comment.save()
 
+    @csrf_exempt
     def record_index_url(self, request, *args, **kwargs):
         index_url = kwargs.get('index_url', self.index_default_str)
         comment_str = index_url
         self._post_comment(index_url, comment_str)
 
+    @csrf_exempt
     def debug(self, request, *args, **kwargs):
         self.record_index_url(request, *args, **kwargs)
 
+    @csrf_exempt
     def post(self, request, *args, **kwargs):
         comment_str = request.POST.get('comment', 'Empty Comment')
         index_url = kwargs.get('index_url', self.index_default_str)
         self._post_comment(index_url, comment_str)
+        return self.get(request, *args, **kwargs)
 
     #TODO: https://github.com/frankban/django-endless-pagination
     def get(self, request, *args, **kwargs):
@@ -56,6 +61,7 @@ class CommentView(TemplateView):
             'refer_url': index_url,
         })
 
+    @csrf_exempt
     def dispatch(self, request, *args, **kwargs):
         url_b64 = kwargs.get('url_b64', self.base64_default_str)
         kwargs['index_url'] = base64.b64decode(url_b64)
