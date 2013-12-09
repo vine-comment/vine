@@ -75,3 +75,16 @@ class CommentView(TemplateView):
         
         self.debug(request, *args, **kwargs)
         return super(CommentView, self).dispatch(request, *args, **kwargs)
+
+class UserView(TemplateView):
+    pass
+
+class AccountView(TemplateView):
+    pass
+
+class LetterView(TemplateView):
+    pass
+
+class SettingView(TemplateView):
+    pass
+
