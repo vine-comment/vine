@@ -4,6 +4,9 @@ import os
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
+CURRENT_DIR = os.path.dirname( __file__ ).replace( '\\'  ,  '/' )
+PROJECT_DIR = os.path.dirname(CURRENT_DIR).replace( '\\'  ,  '/' )
+
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
 )
@@ -13,7 +16,7 @@ MANAGERS = ADMINS
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'E:\\eclipse\\workspace\\d1\\sqlite.db',                      # Or path to database file if using sqlite3.
+        'NAME': PROJECT_DIR + '/sqlite.db',                      # Or path to database file if using sqlite3.
         # The following settings are not used with sqlite3:
         'USER': '',
         'PASSWORD': '',
@@ -73,7 +76,7 @@ STATICFILES_DIRS = (
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-    'E:/eclipse/workspace/d1/static/',
+    PROJECT_DIR + STATIC_URL,
 )
 
 # List of finder classes that know how to find static files in
