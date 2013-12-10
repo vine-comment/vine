@@ -24,6 +24,7 @@ function loadjQuery(url, callback) {
 }
 
 function main() {
+  //向server发送请求，url应该要使用iframe外部的，但iframe刷新之后似乎不行
   var parent_url = (window.location != window.parent.location) ? document.referrer: document.location;
   var target_url = 'http://www.anwcl.com:8000/comment/' + btoa(parent_url);
   //在raw template时启用动态load，在meta template时此load会嵌套加载，所以关闭

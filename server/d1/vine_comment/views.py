@@ -12,6 +12,18 @@ import base64
 
 from models import Comment, CommentBoard
 
+class CommentIframeView(TemplateView):
+    
+    def get(self, request, *args, **kwargs):
+        pass
+
+    @csrf_exempt
+    def dispatch(self, request, *args, **kwargs):
+        url_b64 = kwargs.get('url_b64', self.base64_default_str)
+        kwargs['index_url'] = base64.b64decode(url_b64)
+        
+        return super(CommentView, self).dispatch(request, *args, **kwargs)
+
 class CommentView(TemplateView):
     template_name = ""
     base64_default_str = 'aHR0cDovL3d3dy5udWxsLmNvbS8='
@@ -55,6 +67,7 @@ class CommentView(TemplateView):
 
     #TODO: https://github.com/frankban/django-endless-pagination
     def get(self, request, *args, **kwargs):
+        #print request
         index_page = request.GET.get('page', 1)
         index_url = kwargs.get('index_url', self.index_default_str)
 
@@ -62,7 +75,7 @@ class CommentView(TemplateView):
                         comment_board__title__contains=\
                         urlparse(index_url).netloc).order_by('-time_added')
         p = Paginator(comments, 20).page(index_page)
-        template_name = kwargs.get('template', self.template_raw)
+        template_name = kwargs.get('template', self.template_meta)
         return render(request, template_name, {
             'p_comment': p,
             'refer_url': index_url,
