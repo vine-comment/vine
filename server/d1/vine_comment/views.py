@@ -12,26 +12,41 @@ import base64
 
 from models import Comment, CommentBoard
 
-class CommentIframeView(TemplateView):
-    
-    def get(self, request, *args, **kwargs):
-        pass
+########################################################################
+# 核心代码释义
+#
+# Client代码(tamper monkey)：
+#   $('body').append('<div id="vine_comment_iframe"></div>');
+#   $('#vine_comment_iframe').load("http://www.anwcl.com:8000/iframe/"
+#     + btoa(document.location));
+# 意即在body末尾append一个iframe，然后动态调用server流程
+# 注：在extension中机制不同，extension中静态存储资源较多。
+#
+# Server整体流程：
+# 1. 用户某插件(tamper monkey/chrome extension/etc.)访问CommentIframeView
+#    ，返回到Client的html中
+# 2. 浏览器自动根据iframe的信息访问CommentView，获得详细信息。
+########################################################################
 
-    @csrf_exempt
-    def dispatch(self, request, *args, **kwargs):
-        url_b64 = kwargs.get('url_b64', self.base64_default_str)
-        kwargs['index_url'] = base64.b64decode(url_b64)
-        
-        return super(CommentView, self).dispatch(request, *args, **kwargs)
+class CommentIframeView(TemplateView):
+    template_name = 'comments/comment_iframe_view.html'
+    index_default_str = 'http://www.null.com/'
+
+    # 此view是server第一入口，回应iframe信息
+    def get(self, request, *args, **kwargs):
+        url_b64 = kwargs.get('url_b64', self.index_default_str)
+        return render(request, self.template_name, {
+            'url_b64': url_b64,
+        })
 
 class CommentView(TemplateView):
-    template_name = ""
+    template_name = ''
     base64_default_str = 'aHR0cDovL3d3dy5udWxsLmNvbS8='
     index_default_str = 'http://www.null.com/'
 
-    template_inside_cb = "comments/comment_view_inside_comment_board.html"
-    template_raw = "comments/comment_view_raw.html"
-    template_meta = "comments/comment_view_meta.html"
+    template_inside_cb = 'comments/comment_view_inside_comment_board.html'
+    template_raw = 'comments/comment_view_raw.html'
+    template_meta = 'comments/comment_view_meta.html'
 
     @csrf_exempt
     def _post_comment(self, index_url, comment_str):
