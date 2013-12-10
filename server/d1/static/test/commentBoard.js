@@ -24,14 +24,19 @@ function loadjQuery(url, callback) {
 }
 
 function main() {
-  //Ïòserver·¢ËÍÇëÇó£¬urlÓ¦¸ÃÒªÊ¹ÓÃiframeÍâ²¿µÄ£¬µ«iframeË¢ĞÂÖ®ºóËÆºõ²»ĞĞ
   var parent_url = (window.location != window.parent.location) ? document.referrer: document.location;
-  var target_url = 'http://www.anwcl.com:8000/comment/' + btoa(parent_url);
-  //ÔÚraw templateÊ±ÆôÓÃ¶¯Ì¬load£¬ÔÚmeta templateÊ±´Ëload»áÇ¶Ì×¼ÓÔØ£¬ËùÒÔ¹Ø±Õ
-  $('#showMsg').load(target_url);
+  //var target_url = 'http://www.anwcl.com:8000/comment/' + btoa(parent_url);
+  var l = document.location
+  var target_url = l.protocol + l.origin + l.pathname
 
+  // last_urlè¿™é‡Œä½œä¸ºèµ„æºç´¢å¼•ï¼Œä¸ç›´æ¥poståˆ°/commentä¸Šï¼Œè€Œæ˜¯/comment/<last_url>
+  var last_url = target_url.replace(/^.*[\\\/]/, '')
+  // è€æ–¹æ³•ï¼šå…ˆloadä¸€æ¬¡targetã€‚æ–°æ–¹æ³•ï¼šç›´æ¥é€šè¿‡iframeviewæ¥loadã€‚
+  // $('#showMsg').load(target_url);
+
+  //è¿™é‡Œtarget_urlæš‚æœªä½¿ç”¨ï¼Œä»…ç”¨comment
   $("#submitComment").on('click', function(){
-	var posting = $.post(target_url, {'comment': $('#comment').val() });
+	var posting = $.post(last_url, {'comment': $('#comment').val(), 'target_url': target_url });
 	posting.done(function(data) {
 	  $('#showMsg').html(data);
 	});

@@ -92,7 +92,7 @@ class CommentView(TemplateView):
                         comment_board__title__contains=\
                         urlparse(index_url).netloc).order_by('-time_added')
         p = Paginator(comments, 20).page(index_page)
-        template_name = kwargs.get('template', self.template_raw)
+        template_name = kwargs.get('template', self.template_meta)
         return render(request, template_name, {
             'p_comment': p,
             'refer_url': index_url,
