@@ -103,7 +103,7 @@ class CommentView(TemplateView):
         url_b64 = kwargs.get('url_b64', self.base64_default_str)
         kwargs['index_url'] = base64.b64decode(url_b64)
         
-        self.debug(request, *args, **kwargs)
+        #self.debug(request, *args, **kwargs)
         return super(CommentView, self).dispatch(request, *args, **kwargs)
 
 class UserView(TemplateView):
