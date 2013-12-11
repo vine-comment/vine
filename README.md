@@ -8,12 +8,12 @@ vine
 
 ####DOING
 
-* solve bugs
 * ie8-10 compatiable (any good way to do it?)
 * accounts
 * android front
 * use redis
-* per url comment
+* comment as a tree(site->dir1->dir2->last_pathname)
+* ajax pagination(dynamic)
 
 ####BUG-TRACKING
 
@@ -34,6 +34,8 @@ vine
 2. use iframe to avoid css collision
 3. firefox/chrome basic testing
 4. basic chrome extension
+5. pagination
+6. per url comment
 
 ####TODO-FRONT:
 1. ie(haven't got a good idea) plugin
@@ -47,10 +49,10 @@ vine
 ####TODO-END
 1. mongodb storage
 2. hadoop cluster
+3. redis cache
 
 ####TODO-MULTI
 1. accounts
 2. reply to reply
 3. notification
 4. timeline
-5. change page via ajax
