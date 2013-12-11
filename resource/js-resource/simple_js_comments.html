@@ -1,0 +1,82 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<html>
+<head>
+ <!-- Created by TopStyle Pro Trial Version - www.bradsoft.com -->
+ <title></title> 
+
+<style type="text/css">
+#showMsg{
+  background: Silver;
+  height: 100px;
+  width: 350px;
+  text-align: justify;
+}
+#floatPanel{
+  position:absolute;
+  top:4%;
+  right:2%;
+}
+.fixed {   
+    position:fixed;   
+    top:20px;   
+    background-color:#90EE90 /* ø…—° */  
+}
+</style>
+</head>
+
+<body>
+
+<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1<br>1
+
+<aside>
+<div id="floatPanel">
+<div id="showMsg"></div>
+«Î ‰»Î¡Ù—‘:<input type="text" id="text" name="text">
+<input type="button" id="send" name="send" value="∑¢ÀÕ">
+<input type="button" id="remove" name="remove" value="…æ≥˝">
+<script type="text/javascript">
+function showMsg(){
+var oText = document.getElementById("text");
+
+var pNode  = document.createElement("p");
+var tNode  = document.createTextNode(oText.value);
+  pNode.appendChild(tNode);
+var dContent = document.getElementById("showMsg");
+dContent.insertBefore(pNode,dContent.firstChild);
+oText.value='';
+}
+
+function removeMsg(){
+   var oDiv = document.getElementById("showMsg");
+ var oP = document.getElementsByTagName("p");
+ oDiv.removeChild(oP[0]);
+}
+document.getElementById("send").onclick=showMsg;
+document.getElementById("remove").onclick=removeMsg;
+</script>
+</div>
+</aside>
+</body>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="http://no-mans-land.wdimg.com/js/latest-jquery.min.js"><\/script>')</script>
+<script src="http://no-mans-land.wdimg.com/js/prettify/prettify.js"></script>
+<script type="text/javascript">
+/* trigger when page is ready */  
+$(document).ready(function (){   
+
+  // check where the sidebar div is   
+  var offset = $('aside').offset();   
+       
+    $(window).scroll(function () {   
+      var scrollTop = $(window).scrollTop(); // check the visible top of the browser
+        if (offset.top < scrollTop) $('aside').addClass('fixed');   
+        else $('aside').removeClass('fixed');   
+        });   
+
+});
+
+</script>
+
+</html>

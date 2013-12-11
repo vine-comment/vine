@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<title>(jquery)右边折叠菜单点击展开兼容火狐、IE6</title>
+<meta name="keywords" content="jquery特效,JS代码,js特效代码大全,导航菜单代码,焦点幻灯片,企业网页设计欣赏" />
+<meta name="description" content="懒人建站为您提供-基于jquery特效，jquery弹出层效果，js特效代码大全，JS广告代码，导航菜单代码，下拉菜单代码和jquery焦点图片代码。" />
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	
+	$('#righteject strong').toggle(
+	  function () {
+		 $(this).addClass("rightejectthis").next("div").animate({width: '+300px'}, "100");
+	  },
+	  function () {
+		$(this).removeClass("rightejectthis").next("div").animate({width: '-300px'}, "100");
+	  }
+	);
+	/*下面这一句只是为了让标题中的文本垂直居中，如果你使用图片做tit或者你知道span的高度，你可以删除它，在.rightejecttit span写上margin-top:span高度的一半*/
+	$('#righteject strong span').css("margin-top",-$('#righteject strong span').height()*0.5);
+
+});
+</script>
+<style>
+#righteject{ position:fixed; top:200px; right:0px; z-index:900000000;
+_position:absolute;/*兼容IE6*/
+/*_top: expression(offsetParent.scrollTop+document.documentElement.clientHeight-this.offsetHeight);始终位于底部*/
+_top: expression(documentElement.scrollTop+200);}/*兼容IE6*/
+*html{background-image:url(about:blank);background-attachment:fixed;}
+.rightejecttit{ width:30px; height:200px; text-align:center;display:block; float:left; cursor:pointer;
+background-color:#000; color:#FFF; }
+.rightejectcon{ width:0px; height:200px; overflow:hidden; float:left;
+background-color:#CCC; }
+.rightejecttit span{ position:relative; top:50%;display:block;z-index:910000000;}
+.rightejectthis{ background-color:#930;}
+</style>
+</head>
+
+<body>
+<p style="height:2000px;"></p>
+
+<!--右边折叠菜单html代码--->
+<div id="righteject">
+	<strong class="rightejecttit"><span>右边折叠标题</span></strong>
+    <div class="rightejectcon">
+    	右边折叠	
+    </div>
+</div>
+
+
+
+</body>
+</html>
