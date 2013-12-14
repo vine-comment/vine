@@ -17,6 +17,17 @@
 		  <li><a href="#"> 设置</a></li>
 		</ul>
 		<br>
+		<div class="row">
+		  <div class="col-lg-6">
+			<div class="input-group">
+			  <textarea rows="1" class="form-control" id="comment" name="comment" placeholder="可输入10-140个字"></textarea>
+			  <span class="input-group-btn">
+				<button class="btn btn-default" id="submitComment" type="button">评论</button>
+			  </span>
+			</div><!-- /input-group -->
+		  </div><!-- /.col-lg-6 -->
+		</div><!-- /.row -->
+		<br>
 		<div id="showMsg">
 			<ul class="list-group">
 			{% for message in p_comment.object_list %}
@@ -27,8 +38,8 @@
 			    </li>
 			{% endfor %}
 			</ul>
-			
-			<ul class='pagination'>
+
+			<ul class='pagination' style="margin: 0;">
 			<li><a href="#">«</a></li>
 			{% for num in p_comment.paginator.page_range %}
 			  {% ifequal num p_comment.number %}
@@ -43,9 +54,9 @@
 		<div class="row">
 		  <div class="col-lg-6">
 			<div class="input-group">
-			  <input type="text" class="form-control" id="comment" name="comment" placeholder="可输入10-140个字">
+			  <textarea rows="1" class="form-control" id="comment" name="comment" placeholder="可输入10-140个字"></textarea>
 			  <span class="input-group-btn">
-				<button class="btn btn-default" id="submitComment" type="button">Go!</button>
+				<button class="btn btn-default" id="submitComment" type="button">评论</button>
 			  </span>
 			</div><!-- /input-group -->
 		  </div><!-- /.col-lg-6 -->

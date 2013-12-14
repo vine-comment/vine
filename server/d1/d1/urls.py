@@ -8,9 +8,10 @@ from vine_comment.views import *
 
 urlpatterns = patterns('',
     (r'^accounts/', include('registration.backends.default.urls')),
+    url(r'^matrix/?$', TemplateView.as_view(template_name='matrix/matrix.html'), name='matrix'),
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^$', TemplateView.as_view(template_name='matrix/matrix.html'), name='index'),
-    url(r'comment/(?P<url_b64>.*?)/?$', CommentView.as_view(), name='comment'),
+    url(r'^$', TemplateView.as_view(template_name='index.html'), name='index'),
+    url(r'comment/(?P<url_b64>.{,2048}?)/?$', CommentView.as_view(), name='comment'),
 )
 
 from functools import wraps

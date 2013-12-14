@@ -41,8 +41,8 @@ class CommentIframeView(TemplateView):
 
 class CommentView(TemplateView):
     template_name = ''
-    base64_default_str = 'aHR0cDovL3d3dy5udWxsLmNvbS8='
-    index_default_str = 'http://www.null.com/'
+    base64_default_str = '' #aHR0cDovL3d3dy5udWxsLmNvbS8=
+    index_default_str = '' #http://www.null.com/
 
     template_inside_cb = 'comments/comment_view_inside_comment_board.html'
     template_raw = 'comments/comment_view_raw.html'
