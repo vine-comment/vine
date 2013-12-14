@@ -36,9 +36,30 @@ function main() {
 
   //这里target_url暂未使用，仅用comment
   $("#submitComment").on('click', function(){
+	btn = $(this);
+	btn.button('loading');
+    setTimeout(function () {
+        btn.button('reset')
+    }, 2000)
+
 	var posting = $.post(last_url, {'comment': $('#comment').val(), 'target_url': target_url });
 	posting.done(function(data) {
 	  $('#showMsg').html(data);
+	  $('#comment').val('');
+	  btn.button('reset');
+
+      $( ".popUp" ).dialog({
+            dialogClass: "noClose",
+            position: { my: "center top", at: "center top", of: window },
+            autoOpen: true,
+            closeOnEscape: false,
+            modal: true,
+            draggable: false,
+            hide: {
+            effect: "explode",
+            duration: 1000
+              }});
 	});
   });
+  
 }

@@ -1,9 +1,14 @@
 <html>
 
 <head>
-<script type="text/javascript" src="http://www.anwcl.com:8000/static/bootstrap/js/jquery-1.8.2.min.js"></script>
-<link rel="stylesheet" href="http://www.anwcl.com:8000/static/bootstrap/css/bootstrap.min.css">
-<script src="http://www.anwcl.com:8000/static/bootstrap/js/bootstrap.min.js"></script>
+
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
+<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+
 
 <link rel="stylesheet" href="http://www.anwcl.com:8000/static/test/comment_styles.css" type="text/css" media="all" />
 </head>
@@ -12,18 +17,24 @@
 <div id="commentBoard">
 	<div id="boardRight" >
 		<ul class="nav nav-pills" class="panel panel-default">
-		  <li class="active"><a href="#"><span class="badge pull-right">42</span> 口水</a> </li>
+		  <li class="active"><a href="#"><span class="badge pull-right">{{ p_comment.paginator.count }}</span> 口水</a> </li>
 		  <li><a href="#"><span class="badge pull-right">2</span> 账户</a></li>
 		  <li><a href="#"><span class="badge pull-right">33</span> 信封</a></li>
 		  <li><a href="#"> 设置</a></li>
 		</ul>
 		<br>
+
+<!--
+<div class="popUp" title="Please Wait..." style="display:none;">
+    <p>One moment please, the form is processing.</p>
+</div>
+  -->
 		<div class="row">
 		  <div class="col-lg-6">
 			<div class="input-group">
 			  <textarea rows="1" class="form-control" id="comment" name="comment" placeholder="可输入10-140个字"></textarea>
 			  <span class="input-group-btn">
-				<button class="btn btn-default" id="submitComment" type="button">评论</button>
+				<button class="btn btn-default" data-loading-text="评论中" id="submitComment" type="button">评论</button>
 			  </span>
 			</div><!-- /input-group -->
 		  </div><!-- /.col-lg-6 -->
