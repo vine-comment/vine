@@ -1,4 +1,4 @@
-if (typeof jQuery === "undefined") {
+﻿if (typeof jQuery === "undefined") {
   loadjQuery("//code.jquery.com/jquery-1.8.2.min.js", verifyJQueryCdnLoaded);
 } else 
   main();
