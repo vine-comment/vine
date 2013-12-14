@@ -51,7 +51,7 @@ class CommentView(TemplateView):
     @csrf_exempt
     def _post_comment(self, index_url, comment_str):
         title=urlparse(index_url).netloc
-        print title
+        print title if title else 'Empty Title'
         comment_board, created = CommentBoard.objects.get_or_create(
                                     url=index_url,
                                     title=urlparse(index_url).netloc)
@@ -82,7 +82,8 @@ class CommentView(TemplateView):
         kwargs['template'] = self.template_raw
         return self.get(request, *args, **kwargs)
 
-    #TODO: https://github.com/frankban/django-endless-pagination
+    # 注：get方法除了正常request中调用，也会在post之后被调用，但template由post给出
+    # TODO: https://github.com/frankban/django-endless-pagination
     def get(self, request, *args, **kwargs):
         #print request
         index_page = request.GET.get('page', 1)
@@ -91,8 +92,11 @@ class CommentView(TemplateView):
         comments = Comment.objects.filter(
                         comment_board__title__contains=\
                         urlparse(index_url).netloc).order_by('-time_added')
-        p = Paginator(comments, 20).page(index_page)
+        p = Paginator(comments, 10).page(index_page)
         template_name = kwargs.get('template', self.template_meta)
+        
+        # BUG记录：2013/12/14，只有p_comment/refer_url作为入参时，无法返回页面（猜测是TEMPLATE渲染失败），但DEBUG返回200
+        # 在主程中打印也没问题，但在template访问数据就不行。重启后问题消失。
         return render(request, template_name, {
             'p_comment': p,
             'refer_url': index_url,
