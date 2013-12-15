@@ -69,14 +69,15 @@ STATIC_ROOT = ''
 
 # URL prefix for static files.
 # Example: "http://example.com/static/", "http://static.example.com/"
-STATIC_URL = '/static/'
+STATIC_NAME = '/static/'
+STATIC_URL = 'http://www.anwcl.com:8000' + STATIC_NAME
 
 # Additional locations of static files
 STATICFILES_DIRS = (
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-    PROJECT_DIR + STATIC_URL,
+    PROJECT_DIR + STATIC_NAME,
 )
 
 # List of finder classes that know how to find static files in
@@ -98,6 +99,7 @@ TEMPLATE_LOADERS = (
 )
 
 MIDDLEWARE_CLASSES = (
+    'd1.middleware.SpacelessMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -127,8 +129,9 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'threadedcomments',
-    'django.contrib.comments',
+    'django.contrib.humanize',
+    #'threadedcomments',
+    #'django.contrib.comments',
     # Uncomment the next line to enable the admin:
     'django.contrib.admin',
     'd1',
@@ -147,7 +150,7 @@ EMAIL_HOST = 'localhost'
 EMAIL_PORT = 8025
 LOGIN_REDIRECT_URL = 'index'
 DEFAULT_FROM_EMAIL = 'webmaster@localhost'
-COMMENTS_APP = 'threadedcomments'
+#COMMENTS_APP = 'threadedcomments'
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to

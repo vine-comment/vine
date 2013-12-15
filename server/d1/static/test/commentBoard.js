@@ -35,31 +35,35 @@ function main() {
   // $('#showMsg').load(target_url);
 
   //这里target_url暂未使用，仅用comment
-  $("#submitComment").on('click', function(){
+  $("#submitCommentTop").on('click', function(){
 	btn = $(this);
 	btn.button('loading');
     setTimeout(function () {
         btn.button('reset')
     }, 2000)
 
-	var posting = $.post(last_url, {'comment': $('#comment').val(), 'target_url': target_url });
+	comment_input = $('#commentTop');
+	var posting = $.post(last_url, {'comment': comment_input.val(), 'target_url': target_url });
 	posting.done(function(data) {
 	  $('#showMsg').html(data);
-	  $('#comment').val('');
+	  comment_input.val('');
 	  btn.button('reset');
-
-      $( ".popUp" ).dialog({
-            dialogClass: "noClose",
-            position: { my: "center top", at: "center top", of: window },
-            autoOpen: true,
-            closeOnEscape: false,
-            modal: true,
-            draggable: false,
-            hide: {
-            effect: "explode",
-            duration: 1000
-              }});
-	});
+    });
   });
-  
+
+  $("#submitCommentBottom").on('click', function(){
+	btn = $(this);
+	btn.button('loading');
+    setTimeout(function () {
+        btn.button('reset')
+    }, 2000)
+
+	comment_input = $('#commentBottom');
+	var posting = $.post(last_url, {'comment': comment_input.val(), 'target_url': target_url });
+	posting.done(function(data) {
+	  $('#showMsg').html(data);
+	  comment_input.val('');
+	  btn.button('reset');
+    });
+  });
 }

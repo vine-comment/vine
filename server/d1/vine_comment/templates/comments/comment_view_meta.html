@@ -1,14 +1,15 @@
+{% load humanize %}
+
 <html>
 
 <head>
 
-<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
+<!-- <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
+<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script> -->
 <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
-<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
 
 <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
-
 
 <link rel="stylesheet" href="http://www.anwcl.com:8000/static/test/comment_styles.css" type="text/css" media="all" />
 </head>
@@ -32,9 +33,9 @@
 		<div class="row">
 		  <div class="col-lg-6">
 			<div class="input-group">
-			  <textarea rows="1" class="form-control" id="comment" name="comment" placeholder="可输入10-140个字"></textarea>
+			  <textarea rows="1" class="form-control" id="commentTop" name="commentTop" placeholder="可输入10-140个字"></textarea>
 			  <span class="input-group-btn">
-				<button class="btn btn-default" data-loading-text="评论中" id="submitComment" type="button">评论</button>
+				<button class="btn btn-default submitComment" data-loading-text="评论中" id="submitCommentTop" type="button">评论</button>
 			  </span>
 			</div><!-- /input-group -->
 		  </div><!-- /.col-lg-6 -->
@@ -45,9 +46,7 @@
             <ul class="list-group">
             {% for message in p_comment.object_list %}
                 <li class="list-group-item">
-                <strong>路人甲</strong>
-                {{ message }} 
-                <br>
+                <strong>路人甲</strong> {{ message.time_added|naturaltime }} {{message.comment_str}} <br>
                 </li>
             {% endfor %}
             </ul>
@@ -57,7 +56,7 @@
             {% for num in p_comment.paginator.page_range %}
               {% ifequal num p_comment.number %}
                 <li><span class="current"><b>{{ num }}</b></span></li>
-              {% else %}<!-- ?page={{ num }} -->
+              {% else %}
                 <li><a href="?page={{ num }}">{{ num }}</a></li>
               {% endifequal %} 
             {% endfor %}
@@ -68,14 +67,14 @@
 		<div class="row">
 		  <div class="col-lg-6">
 			<div class="input-group">
-			  <textarea rows="1" class="form-control" id="comment" name="comment" placeholder="可输入10-140个字"></textarea>
+			  <textarea rows="1" class="form-control" id="commentBottom" name="commentBottom" placeholder="可输入10-140个字"></textarea>
 			  <span class="input-group-btn">
-				<button class="btn btn-default" id="submitComment" type="button">评论</button>
+				<button class="btn btn-default submitComment" data-loading-text="评论中" id="submitCommentBottom" type="button">评论</button>
 			  </span>
 			</div><!-- /input-group -->
 		  </div><!-- /.col-lg-6 -->
 		</div><!-- /.row -->
-	</div>
+		<br>
 
 </div>
 </body>

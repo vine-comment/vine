@@ -51,7 +51,7 @@ class Author(TimeMixin, models.Model):
 class Url(models.Model):
     content = models.CharField(max_length=64)
     url = models.URLField(max_length=2048)
-    
+
     def __unicode__(self):
         return self.content
 
