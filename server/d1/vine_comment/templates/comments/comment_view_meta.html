@@ -5,8 +5,9 @@
 <head>
 
 <!-- <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
-<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script> -->
-<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+<script src="http://code.jquery.com/jquery-1.9.1.js"></script> -->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 
 <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
@@ -41,9 +42,9 @@
 		  </div><!-- /.col-lg-6 -->
 		</div><!-- /.row -->
 		<br>
-		
-{% include "comments/comment_view_raw.html" %}
-		
+		<div id="showMsg">
+			{% include "comments/comment_view_raw.html" %}
+		</div> <!-- /#showMsg -->
 		<div class="row">
 		  <div class="col-lg-6">
 			<div class="input-group">

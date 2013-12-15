@@ -33,37 +33,26 @@ function main() {
   var last_url = target_url.replace(/^.*[\\\/]/, '')
   // 老方法：先load一次target。新方法：直接通过iframeview来load。
   // $('#showMsg').load(target_url);
+  var buttonCommentRelations = {"submitCommentTop":"commentTop","submitCommentBottom":"commentBottom"};
 
   //这里target_url暂未使用，仅用comment
-  $("#submitCommentTop").on('click', function(){
-	btn = $(this);
-	btn.button('loading');
-    setTimeout(function () {
-        btn.button('reset')
-    }, 2000)
+  for (buttonSubmitComment in buttonCommentRelations) {
+      $("#" + buttonSubmitComment).on('click', function(){
+        var btn = $(this);
+        var comment_input = $("#" + buttonCommentRelations[btn.attr('id')]);
+        btn.button('loading');
+        setTimeout(function () {
+            btn.button('reset')
+        }, 2000)
 
-	comment_input = $('#commentTop');
-	var posting = $.post(last_url, {'comment': comment_input.val(), 'target_url': target_url });
-	posting.done(function(data) {
-	  $('#showMsg').html(data);
-	  comment_input.val('');
-	  btn.button('reset');
-    });
-  });
-
-  $("#submitCommentBottom").on('click', function(){
-	btn = $(this);
-	btn.button('loading');
-    setTimeout(function () {
-        btn.button('reset')
-    }, 2000)
-
-	comment_input = $('#commentBottom');
-	var posting = $.post(last_url, {'comment': comment_input.val(), 'target_url': target_url });
-	posting.done(function(data) {
-	  $('#showMsg').html(data);
-	  comment_input.val('');
-	  btn.button('reset');
-    });
-  });
-}
+        var posting = $.post(last_url, {'comment': comment_input.val(), 'target_url': target_url })
+        .fail(function(data){if ( data.responseCode ) console.log( data.responseCode );});
+        posting.done(function(data) {
+          $('#showMsg').html(data);
+          comment_input.val('');
+          btn.button('reset');
+        });
+      }); 
+  }   
+}     
+      

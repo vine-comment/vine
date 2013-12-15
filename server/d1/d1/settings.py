@@ -160,12 +160,29 @@ DEFAULT_FROM_EMAIL = 'webmaster@localhost'
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': '%(levelname)s %(asctime)s %(name)s %(funcName)s %(message)s'
+        },
+        'simple': {
+            'format': '%(levelname)s %(message)s'
+        },
+    },
     'filters': {
         'require_debug_false': {
             '()': 'django.utils.log.RequireDebugFalse'
-        }
+        },
     },
     'handlers': {
+        'null': {
+            'level': 'DEBUG',
+            'class': 'logging.NullHandler',
+        },
+        'console':{
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+            'formatter': 'verbose'
+        },
         'mail_admins': {
             'level': 'ERROR',
             'filters': ['require_debug_false'],
@@ -178,8 +195,19 @@ LOGGING = {
             'level': 'ERROR',
             'propagate': True,
         },
-    }
+        'django': {
+            'handlers': ['console'],
+            'level': 'WARN',
+            'propagate': True,
+        },
+        'vine_comment': {
+            'handlers': ['console'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+    },
 }
+
 
 TEMPLATE_CONTEXT_PROCESSORS = (
     "django.contrib.auth.context_processors.auth",

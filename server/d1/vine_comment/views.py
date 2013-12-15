@@ -5,6 +5,9 @@ from django.views.generic import *
 from django.core.paginator import Paginator
 from django.utils.timezone import utc
 from django.views.decorators.csrf import csrf_exempt
+import logging
+
+logger = logging.getLogger( __name__ )
 
 from urlparse import urlparse
 import datetime
@@ -51,7 +54,7 @@ class CommentView(TemplateView):
     @csrf_exempt
     def _post_comment(self, index_url, comment_str):
         title=urlparse(index_url).netloc
-        print title if title else 'Empty Title'
+        logger.debug('Title:' + title + ' Index_url:' + index_url + ' Comment_str:' + comment_str)
         comment_board, created = CommentBoard.objects.get_or_create(
                                     url=index_url,
                                     title=urlparse(index_url).netloc)
