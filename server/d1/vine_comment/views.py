@@ -1,19 +1,24 @@
 #coding:utf-8
+
+# python modules
+from urlparse import urlparse
+import datetime
+import base64
+import logging
+
+# django modules
 from django.http import *
 from django.shortcuts import render
 from django.views.generic import *
 from django.core.paginator import Paginator
 from django.utils.timezone import utc
 from django.views.decorators.csrf import csrf_exempt
-import logging
+
+# 3rd party modules
+# private modules
+from models import Comment, CommentBoard
 
 logger = logging.getLogger( __name__ )
-
-from urlparse import urlparse
-import datetime
-import base64
-
-from models import Comment, CommentBoard
 
 ########################################################################
 # 核心代码释义
@@ -81,7 +86,7 @@ class CommentView(TemplateView):
         comment_str = request.POST.get('comment', 'Empty Comment')
         index_url = kwargs.get('index_url', self.index_default_str)
         self._post_comment(index_url, comment_str)
-        
+
         kwargs['template'] = self.template_raw
         return self.get(request, *args, **kwargs)
 
