@@ -8,7 +8,7 @@ vine
 
 ####DOING
 
-* ie8-10 compatiable (any good way to do it?)
+* ie8-9 compatiable (jquery problems)
 * accounts
 * android front
 * use redis
@@ -36,6 +36,7 @@ vine
 4. basic chrome extension
 5. pagination
 6. per url comment
+7. IE10 compability
 
 ####TODO-FRONT:
 1. ie(haven't got a good idea) plugin
@@ -56,3 +57,15 @@ vine
 2. reply to reply
 3. notification
 4. timeline
+5. @
+6. tag
+
+####Research other 3rd party comment system
+1. disqus
+2. juvia
+3. http://www.discourse.org/
+4. http://www.livefyre.com/
+5. jcomment
+6. another Alternatives
+7. http://ralsina.com.ar/stories/twitter-as-a-comment-engine.html 
+8. social media integrate
