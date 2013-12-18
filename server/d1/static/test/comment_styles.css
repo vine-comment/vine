@@ -37,3 +37,35 @@ margin:10px auto 0 auto;font-family: '微软雅黑', arial, sans-serif; font-wei
   position: absolute;
   top: 0; left: 0; bottom: 0; right: 0;
 }
+
+/* for popup */
+.alert-messages {
+position: fixed;
+top: 47px;
+left: 0;
+right: 0;
+z-index: 7000;
+}
+
+.message {
+position: relative;
+width: 500px;
+padding: 10px 12px;
+margin: 0 auto;
+text-shadow: 0 -1px 1px rgba(0,0,0,.5);
+background: #111;
+background: rgba(20,20,20,.9);
+border-radius: 6px;
+-webkit-box-shadow: 0 2px 4px rgba(0,0,0,.25);
+box-shadow: 0 2px 4px rgba(0,0,0,.25);
+}
+
+.message .message-text {
+display: block;
+margin-right: 20px;
+color: #ccc;
+font-size: 12px;
+line-height: 16px;
+text-align: center;
+}
+

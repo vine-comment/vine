@@ -52,6 +52,9 @@ function main() {
                 $('#showMsg').html(data);
                 comment_input.val('');
                 btn.button('reset');
+                $('#message-drawer').css('opacity', 1);
+                // animate is ok, too
+                $('#message-drawer').fadeTo(3500, 0);
                 setTimeout(function () {
                     ;
                 }, 3000);
