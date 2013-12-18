@@ -37,6 +37,8 @@ vine
 5. pagination
 6. per url comment
 7. IE10 compability
+8. ip tracker for comment
+9. tips for done comment.
 
 ####TODO-FRONT:
 1. ie plugin
