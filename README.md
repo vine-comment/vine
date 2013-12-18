@@ -39,12 +39,12 @@ vine
 7. IE10 compability
 
 ####TODO-FRONT:
-1. ie(haven't got a good idea) plugin
-2. firefox(try greasemonkey) plugins
+1. ie plugin
+2. firefox(greasemonkey?) plugins
 3. android app development
-4. ie basic testing
-5. 3 directions to display the plugin
-6. IOS front
+4. IOS app
+5. ie8 basic testing
+6. Any directions to display the plugin(customize)
 7. improve chrome extension, and publish it
 
 ####TODO-END
@@ -58,7 +58,8 @@ vine
 3. notification
 4. timeline
 5. @
-6. tag
+6. tag for comments and sites.
+7. Multilevel comment.
 
 ####Research other 3rd party comment system
 1. disqus
