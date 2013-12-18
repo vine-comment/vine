@@ -102,9 +102,7 @@ class CommentView(TemplateView):
                         urlparse(index_url).netloc).order_by('-time_added')
         p = Paginator(comments, 10).page(index_page)
         template_name = kwargs.get('template', self.template_meta)
-        
-        # BUG记录：2013/12/14，只有p_comment/refer_url作为入参时，无法返回页面（猜测是TEMPLATE渲染失败），但DEBUG返回200
-        # 在主程中打印也没问题，但在template访问数据就不行。重启后问题消失。
+
         return render(request, template_name, {
             'p_comment': p,
             'refer_url': index_url,
