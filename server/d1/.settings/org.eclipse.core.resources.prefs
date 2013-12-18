@@ -1,6 +1,7 @@
 eclipse.preferences.version=1
 encoding//d1/views.py=utf-8
 encoding//testapp/views.py=UTF-8
+encoding//vine_comment/models.py=utf-8
 encoding//vine_comment/templates/comments/comment_view_inside_comment_board.html=UTF-8
 encoding//vine_comment/templates/comments/comment_view_meta.html=UTF-8
 encoding//vine_comment/templates/comments/comment_view_raw.html=UTF-8

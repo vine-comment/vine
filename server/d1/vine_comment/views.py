@@ -57,25 +57,31 @@ class CommentView(TemplateView):
     template_meta = 'comments/comment_view_meta.html'
 
     @csrf_exempt
-    def _post_comment(self, index_url, comment_str):
+    def _post_comment(self, index_url, comment_str, auther_ip):
         title=urlparse(index_url).netloc
-        logger.debug('Title:' + title + ' Index_url:' + index_url + ' Comment_str:' + comment_str)
+        logger.debug('Auther_ip:' + auther_ip
+                     + ' Title:' + title
+                     + ' Index_url:' + index_url
+                     + ' Comment_str:' + comment_str)
+
         comment_board, created = CommentBoard.objects.get_or_create(
                                     url=index_url,
                                     title=urlparse(index_url).netloc)
         comment_board.save() if created else None
         comment = Comment(
-                    time_added = datetime.datetime.utcnow().replace(
+                    time_added=datetime.datetime.utcnow().replace(
                                     tzinfo=utc),
-                    comment_str = comment_str,
-                    comment_board = comment_board)
+                    comment_str=comment_str,
+                    comment_board=comment_board,
+                    auther_ip=auther_ip)
         comment.save()
 
     @csrf_exempt
     def record_index_url(self, request, *args, **kwargs):
         index_url = kwargs.get('index_url', self.index_default_str)
+        auther_ip = request.META.get('REMOTE_ADDR', '0.0.0.0')
         comment_str = index_url
-        self._post_comment(index_url, comment_str)
+        self._post_comment(index_url, comment_str, auther_ip)
 
     @csrf_exempt
     def debug(self, request, *args, **kwargs):
@@ -84,8 +90,9 @@ class CommentView(TemplateView):
     @csrf_exempt
     def post(self, request, *args, **kwargs):
         comment_str = request.POST.get('comment', 'Empty Comment')
+        auther_ip = request.META.get('REMOTE_ADDR', '0.0.0.0')
         index_url = kwargs.get('index_url', self.index_default_str)
-        self._post_comment(index_url, comment_str)
+        self._post_comment(index_url, comment_str, auther_ip)
 
         kwargs['template'] = self.template_raw
         return self.get(request, *args, **kwargs)
@@ -112,7 +119,7 @@ class CommentView(TemplateView):
     def dispatch(self, request, *args, **kwargs):
         url_b64 = kwargs.get('url_b64', self.base64_default_str)
         kwargs['index_url'] = base64.b64decode(url_b64)
-        
+
         #self.debug(request, *args, **kwargs)
         return super(CommentView, self).dispatch(request, *args, **kwargs)
 

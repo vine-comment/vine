@@ -1,3 +1,5 @@
+#coding:utf-8
+
 from django.db import models
 from django.contrib.auth.models import User
 import datetime
@@ -67,6 +69,8 @@ class Comment(TimeMixin, models.Model):
     comment_str = models.CharField(max_length=128)
     desc = models.CharField(max_length=64, blank=True, null=True)
     comment_board = models.ForeignKey(CommentBoard)
+    auther_ip = models.IPAddressField(blank=True, null=True)
+    # 在后面加入auther的详细信息，分为匿名和实名
 
     def __unicode__(self):
         return self.time_added.strftime("%Y-%m-%d %H:%M:%S") + self.title + ' ' + self.comment_str
