@@ -29,12 +29,19 @@ user-select: none;
 
 #boardLeft a{
 text-decoration:none;
+color:#000000;
+}
+
+#boardLeft:hover, #boardLeft:focus, #boardLeft a:focus, #boardLeft a:hover {
+	background:#000011;
+	border-bottom-color:#777;
+    color:#ffffff;
 }
 
 #boardDesc{height:100px;}
 #boardDesc p{width: 1em;font-size: 20px;letter-spacing: 40px;line-height:25px;
-margin:10px auto 0 auto;font-family: '微软雅黑', arial, sans-serif; font-weight: bold; color: #000000}
-#boardButton{height:30px; color: #000000}
+margin:10px auto 0 auto;font-family: '微软雅黑', arial, sans-serif; font-weight: bold;}
+#boardButton{height:30px;}
 
 #commentForm{font-size:14px;height:10px;}
 #loginForm{font-size:14px;height:10px;}
