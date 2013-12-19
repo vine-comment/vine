@@ -8,6 +8,7 @@ vine
 
 ###REQUIREMENT
 
+* current the wysiwyg_editor is useful, but also too big, I'm thinking about using another light editor.
 [django_wysiwyg](https://github.com/pydanny/django-wysiwyg): pip install django-wysiwyg
 
 ####DOING
