@@ -28,15 +28,15 @@ function loadjQuery(url, callback) {
 
 function main() {
   var jQuery_anwcl = jQuery.noConflict();
-  jQuery_anwcl("#special_div_for_anwcl_comment_board #boardButton").bind('click', function(){
+  jQuery_anwcl("#special_div_for_anwcl_comment_board #boardLeft").bind('click', function(){
 	if (!jQuery_anwcl(this).attr('data-toggled') || jQuery_anwcl(this).attr('data-toggled') == 'off') {
 	  jQuery_anwcl("#special_div_for_anwcl_comment_board").animate({right:'0'});
 	  jQuery_anwcl(this).attr('data-toggled','on');
-	  jQuery_anwcl(this).html(">");
+	  jQuery_anwcl("#boardButton").text(">");
 	} else {
 	  jQuery_anwcl("#special_div_for_anwcl_comment_board").animate({right:'-40%'});
 	  jQuery_anwcl(this).attr('data-toggled','off');
-	  jQuery_anwcl(this).html("<");
+	  jQuery_anwcl("#boardButton").text("<");
 	}
   });
 }
