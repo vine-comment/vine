@@ -12,7 +12,8 @@
 <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
 
-<link rel="stylesheet" href="http://www.anwcl.com:8000/static/test/comment_styles.css" type="text/css" media="all" />
+{% load staticfiles %}
+<link rel="stylesheet" href="{% static "test/comment_styles.css" %}" type="text/css" media="all" />
 </head>
 
 <body>
@@ -35,7 +36,6 @@
 		    </div>
 		  </div>
 		</div>
-
 		<div class="row">
 		  <div class="col-lg-6">
 			<div class="input-group">

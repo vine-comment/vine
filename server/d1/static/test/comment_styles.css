@@ -69,3 +69,4 @@ line-height: 16px;
 text-align: center;
 }
 
+#editor {overflow:scroll; max-height:300px}
