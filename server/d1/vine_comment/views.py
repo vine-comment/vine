@@ -127,11 +127,17 @@ class UserView(TemplateView):
     pass
 
 class AccountView(TemplateView):
-    pass
+
+    def get(self, request, *args, **kwargs):
+        return HttpResponse("Not implement yet")
 
 class LetterView(TemplateView):
-    pass
+
+    def get(self, request, *args, **kwargs):
+        return HttpResponse("Not implement yet")
 
 class SettingView(TemplateView):
-    pass
+
+    def get(self, request, *args, **kwargs):
+        return HttpResponse("Not implement yet")
 

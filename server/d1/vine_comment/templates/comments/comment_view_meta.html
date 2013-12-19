@@ -1,33 +1,5 @@
-{% load humanize %}
-
-<html>
-
-<head>
-
-<!-- <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
-<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
-<script src="http://code.jquery.com/jquery-1.9.1.js"></script> -->
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-
-<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
-<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
-
-{% load staticfiles %}
-<link rel="stylesheet" href="{% static "test/comment_styles.css" %}" type="text/css" media="all" />
-</head>
-
-<body>
-
-<div id="commentBoard">
-	<div id="boardRight" >
-		<ul class="nav nav-pills" class="panel panel-default">
-		  <li class="active"><a href="#"><span class="badge pull-right">{{ p_comment.paginator.count }}</span> 口水</a> </li>
-		  <li><a href="#"><span class="badge pull-right">2</span> 账户</a></li>
-		  <li><a href="#"><span class="badge pull-right">33</span> 信封</a></li>
-		  <li><a href="#"> 设置</a></li>
-		</ul>
-		<br>
-
+{% extends "comments/base.html" %}
+{% block content %}
 		<div class="alert-messages" id="message-drawer" style="opacity: 0; top: 60px; display: none;">
 		  <div class="message ">
 		    <div class="message-inside">
@@ -61,9 +33,4 @@
 		  </div><!-- /.col-lg-6 -->
 		</div><!-- /.row -->
 		<br>
-
-</div>
-</body>
-<script type="text/javascript" src="http://www.anwcl.com:8000/static/test/commentBoard.js"></script>
-
-</html>
+{% endblock %}
