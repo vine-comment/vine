@@ -6,6 +6,10 @@ vine
 * main languages: JavaScript, Python
 * main framework: jquery, django
 
+###REQUIREMENT
+
+[django_wysiwyg](https://github.com/pydanny/django-wysiwyg): pip install django-wysiwyg
+
 ####DOING
 
 * ie8-9 compatiable (jquery problems)
