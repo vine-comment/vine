@@ -1,4 +1,5 @@
 {% load humanize %}
+{% load tags %}
 
 <html>
 
@@ -21,7 +22,7 @@
 <div id="commentBoard">
 	<div id="boardRight" >
 		<ul class="nav nav-pills" class="panel panel-default">
-		  <li class="active"><a href="#"><span class="badge pull-right">{{ p_comment.paginator.count }}</span> 口水</a> </li>
+		  <li class="{% active request comment %}"><a href="{% url "comment" x %}"><span class="badge pull-right">{{ p_comment.paginator.count }}</span> 口水</a> </li>
 		  <li><a href="#"><span class="badge pull-right">2</span> 账户</a></li>
 		  <li><a href="#"><span class="badge pull-right">33</span> 信封</a></li>
 		  <li><a href="#"> 设置</a></li>
