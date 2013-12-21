@@ -26,15 +26,23 @@ function loadjQuery(url, callback) {
   document.getElementsByTagName("head")[0].appendChild(script_tag);
 }
 
+function width_percent(jquery_object)
+{
+  return ( 100 * parseFloat(jquery_object.css('width')) / parseFloat(jquery_object.parent().css('width')) ) + '%';
+}
+
 function main() {
   var jQuery_anwcl = jQuery.noConflict();
   jQuery_anwcl("#special_div_for_anwcl_comment_board #boardLeft").bind('click', function(){
+    comment_board = jQuery_anwcl("#special_div_for_anwcl_comment_board");
 	if (!jQuery_anwcl(this).attr('data-toggled') || jQuery_anwcl(this).attr('data-toggled') == 'off') {
-	  jQuery_anwcl("#special_div_for_anwcl_comment_board").animate({right:'0'});
+
+	  comment_board.animate({right:'0'});
 	  jQuery_anwcl(this).attr('data-toggled','on');
 	  jQuery_anwcl("#boardButton").text(">");
 	} else {
-	  jQuery_anwcl("#special_div_for_anwcl_comment_board").animate({right:'-40%'});
+      old_position = '-' + comment_board.width(); //width_percent(comment_board);
+	  comment_board.animate({right:old_position}, function() {comment_board.css('right', '');});
 	  jQuery_anwcl(this).attr('data-toggled','off');
 	  jQuery_anwcl("#boardButton").text("<");
 	}
