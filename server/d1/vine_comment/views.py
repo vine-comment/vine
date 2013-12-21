@@ -112,7 +112,7 @@ class CommentView(TemplateView):
 
         return render(request, template_name, {
             'p_comment': p,
-            'refer_url': index_url,
+            'index_url': index_url,
         })
 
     @csrf_exempt
