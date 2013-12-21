@@ -11,7 +11,13 @@ urlpatterns = patterns('',
     url(r'^matrix/?$', TemplateView.as_view(template_name='matrix/matrix.html'), name='matrix'),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^$', TemplateView.as_view(template_name='index.html'), name='index'),
+)
+
+urlpatterns += patterns('',
     url(r'^comment/(?P<url_b64>.*?)/?$', CommentView.as_view(), name='comment'),
+    url(r'^account/(?P<url_b64>.*?)/?$', AccountView.as_view(), name='account'),
+    url(r'^letter/(?P<url_b64>.*?)/?$', LetterView.as_view(), name='letter'),
+    url(r'^setting/(?P<url_b64>.*?)/?$', SettingView.as_view(), name='setting'),
 )
 
 from functools import wraps
