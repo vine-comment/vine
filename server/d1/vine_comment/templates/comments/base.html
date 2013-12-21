@@ -22,10 +22,10 @@
 <div id="commentBoard">
 	<div id="boardRight" >
 		<ul class="nav nav-pills" class="panel panel-default">
-		  <li class="{% active request comment %}"><a href="{% url "comment" x %}"><span class="badge pull-right">{{ p_comment.paginator.count }}</span> 口水</a> </li>
-		  <li><a href="#"><span class="badge pull-right">2</span> 账户</a></li>
-		  <li><a href="#"><span class="badge pull-right">33</span> 信封</a></li>
-		  <li><a href="#"> 设置</a></li>
+		  <li class="{% active request "comment" %}"><a href="{% url "comment" x %}"><span class="badge pull-right">{{ p_comment.paginator.count }}</span> 口水</a> </li>
+		  <li class="{% active request "account" %}"><a href="{% url "account" x %}"><span class="badge pull-right">2</span> 账户</a></li>
+		  <li class="{% active request "letter" %}"><a href="{% url "letter" x %}"><span class="badge pull-right">33</span> 信封</a></li>
+		  <li class="{% active request "setting" %}"><a href="{% url "setting" x %}"> 设置</a></li>
 		</ul>
 		<br>
 

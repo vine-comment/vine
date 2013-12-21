@@ -6,5 +6,6 @@ register = template.Library()
 def active(request, pattern):
     import re
     if re.search(pattern, request.path):
+        print 1, pattern, 2, request.path
         return 'active'
     return ''
