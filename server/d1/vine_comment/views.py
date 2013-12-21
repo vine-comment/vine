@@ -127,17 +127,19 @@ class UserView(TemplateView):
     pass
 
 class AccountView(TemplateView):
+    template_name = 'comments/account_view.html'
 
     def get(self, request, *args, **kwargs):
-        return HttpResponse("Not implement yet")
+        return render(request, self.template_name)
 
 class LetterView(TemplateView):
+    template_name = 'comments/letter_view.html'
 
     def get(self, request, *args, **kwargs):
-        return HttpResponse("Not implement yet")
+        return render(request, self.template_name)
 
 class SettingView(TemplateView):
+    template_name = 'comments/setting_view.html'
 
     def get(self, request, *args, **kwargs):
-        return HttpResponse("Not implement yet")
-
+        return render(request, self.template_name)
