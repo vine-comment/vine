@@ -206,6 +206,12 @@ LOGGING = {
             'level': 'DEBUG',
             'propagate': True,
         },
+        # this handler control all other logs
+        '': {
+            'handlers': ['console'],
+            'level': 'WARN',
+            'propagate': True,
+        },
     },
 }
 
