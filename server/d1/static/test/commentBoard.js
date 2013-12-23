@@ -56,8 +56,8 @@ function main() {
                 btn.button('reset');
             }, 2000);
 
-            if (comment_input.val().length > 140) {
-                popup_message("输入长度不能超过140哟小伙伴~");
+            if (comment_input.val().length > 140 || comment_input.val().length < 5) {
+                popup_message("输入长度要在5-140之间哟小伙伴~");
                 return;
             }
 
