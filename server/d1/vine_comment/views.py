@@ -103,6 +103,7 @@ class CommentView(TemplateView):
         #print request
         index_page = request.GET.get('page', 1)
         index_url = kwargs.get('index_url', self.index_default_str)
+        url_b64 = kwargs.get('url_b64', self.base64_default_str)
 
         comments = Comment.objects.filter(
                         comment_board__title__contains=\
@@ -113,6 +114,7 @@ class CommentView(TemplateView):
         return render(request, template_name, {
             'p_comment': p,
             'index_url': index_url,
+            'url_b64': url_b64,
         })
 
     @csrf_exempt
