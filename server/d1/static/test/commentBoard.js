@@ -24,6 +24,16 @@ function loadjQuery(url, callback) {
     document.getElementsByTagName("head")[0].appendChild(script_tag);
 }
 
+function popup_message(text)
+{
+    $('#message-drawer .message-text').text(text)
+    $('#message-drawer').show();
+    $('#message-drawer').css('opacity', 1);
+    $('#message-drawer').fadeTo(3500, 0, function(){
+        $(this).hide();
+    });
+}
+
 function main() {
     var parent_url = (window.location != window.parent.location) ? document.referrer: document.location;
     //var target_url = 'http://www.anwcl.com:8000/comment/' + btoa(parent_url);
@@ -46,17 +56,18 @@ function main() {
                 btn.button('reset');
             }, 2000);
 
+            if (comment_input.val().length > 140) {
+                popup_message("输入长度不能超过140哟小伙伴~");
+                return;
+            }
+
             var posting = $.post(last_url, {'comment': comment_input.val(), 'target_url': target_url })
             .fail(function(data){if ( data.responseCode ) console.log( data.responseCode );});
             posting.done(function(data) {
                 $('#showMsg').html(data);
                 comment_input.val('');
                 btn.button('reset');
-                $('#message-drawer').show();
-                $('#message-drawer').css('opacity', 1);
-                $('#message-drawer').fadeTo(3500, 0, function(){
-                    $(this).hide();
-                });
+                popup_message("吐槽成功");
             });
         });
     }
