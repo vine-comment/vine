@@ -13,7 +13,6 @@ vine
 
 ####DOING
 
-* ie8-9 compatiable (jquery problems)
 * accounts
 * android front
 * use redis
@@ -41,7 +40,7 @@ vine
 4. basic chrome extension
 5. pagination
 6. per url comment
-7. IE10 compability
+7. IE8-11 compability(ie8 has some bugs on animation yet)
 8. ip tracker for comment
 9. tips for done comment.
 
