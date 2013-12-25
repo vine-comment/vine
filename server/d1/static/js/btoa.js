@@ -151,8 +151,3 @@ base64.encode = function(s) {
     return x.join('');
 }
 
-
-function main() {
-    if (!window.btoa) window.btoa = base64.encode;
-
-}
