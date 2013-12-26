@@ -1,1 +1,2 @@
-Django
+django
+python-social-auth
