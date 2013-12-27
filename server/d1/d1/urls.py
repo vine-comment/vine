@@ -11,6 +11,8 @@ urlpatterns = patterns('',
     url(r'^matrix/?$', TemplateView.as_view(template_name='matrix/matrix.html'), name='matrix'),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^$', TemplateView.as_view(template_name='index.html'), name='index'),
+    url(r'', include('social_auth.urls')),
+    url(r'^test/$', TemplateView.as_view(template_name='comments/test.html')),
 )
 
 urlpatterns += patterns('',
