@@ -258,6 +258,7 @@ AUTHENTICATION_BACKENDS = (
     'social_auth.backends.contrib.live.LiveBackend',
     'social_auth.backends.contrib.livejournal.LiveJournalBackend',
     'social_auth.backends.contrib.douban.DoubanBackend',
+    'social_auth.backends.contrib.weibo.WeiboBackend',
     'social_auth.backends.contrib.vk.VKOpenAPIBackend',
     'social_auth.backends.contrib.vk.VKOAuth2Backend',
     'social_auth.backends.contrib.odnoklassniki.OdnoklassnikiBackend',
