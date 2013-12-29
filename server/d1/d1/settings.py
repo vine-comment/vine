@@ -239,8 +239,9 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 #####################################################
 
 AUTHENTICATION_BACKENDS = (
+    # twitter has been blocked..
+    #'social.backends.twitter.TwitterOAuth',
     'social.backends.google.GoogleOAuth2',
-    'social.backends.twitter.TwitterOAuth',
     'social.backends.douban.DoubanOAuth2',
     'social.backends.weibo.WeiboOAuth2',
     'django.contrib.auth.backends.ModelBackend',
