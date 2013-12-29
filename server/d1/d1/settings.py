@@ -143,6 +143,7 @@ INSTALLED_APPS = (
     'news',
     'feeds',
     'testapp',
+    'app',
     #'django_wysiwyg',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
