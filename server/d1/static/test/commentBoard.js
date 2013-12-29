@@ -28,8 +28,8 @@ function popup_message(text)
 {
     $('#message-drawer .message-text').text(text)
     $('#message-drawer').show();
-    $('#message-drawer').css('opacity', 1);
-    $('#message-drawer').fadeTo(3500, 0, function(){
+    $('#message-drawer').fadeTo("fast", 1.0);
+    $('#message-drawer').fadeTo(3000, 0, function(){
         $(this).hide();
     });
 }
@@ -54,7 +54,7 @@ function main() {
             btn.button('loading');
             setTimeout(function () {
                 btn.button('reset');
-            }, 2000);
+            }, 3000);
 
             if (comment_input.val().length > 140 || comment_input.val().length < 5) {
                 popup_message("输入长度要在5-140之间哟小伙伴~");
