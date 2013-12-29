@@ -239,17 +239,10 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 #####################################################
 
 AUTHENTICATION_BACKENDS = (
-      'social.backends.open_id.OpenIdAuth',
-      'social.backends.google.GoogleOpenId',
-      'social.backends.google.GoogleOAuth2',
-      'social.backends.google.GoogleOAuth',
-      'social.backends.twitter.TwitterOAuth',
-      'social.backends.yahoo.YahooOpenId',
+    'social.backends.google.GoogleOAuth2',
+    'social.backends.twitter.TwitterOAuth',
     'social.backends.douban.DoubanOAuth2',
     'social.backends.weibo.WeiboOAuth2',
-    #'social_auth.backends.contrib.douban.DoubanBackend',
-    #'social_auth.backends.contrib.douban.Douban2Backend',
-    #'social_auth.backends.contrib.weibo.WeiboBackend',
     'django.contrib.auth.backends.ModelBackend',
 )
 
