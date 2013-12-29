@@ -6,18 +6,27 @@ admin.autodiscover()
 from d1.views import *
 from vine_comment.views import *
 
-from app.views import home, done, logout, error, form, form2, close_login_popup
-from app.facebook import facebook_view
-from app.vkontakte import vkontakte_view
-from app.odnoklassniki import ok_app, ok_app_info
-
+# NORMAL url patterns
 urlpatterns = patterns('',
     (r'^accounts/', include('registration.backends.default.urls')),
     url(r'^matrix/?$', TemplateView.as_view(template_name='matrix/matrix.html'), name='matrix'),
     url(r'^admin/', include(admin.site.urls)),
     #url(r'^$', TemplateView.as_view(template_name='index.html'), name='index'),
-    url(r'', include('social_auth.urls')),
+    url('', include('social.apps.django_app.urls', namespace='social')),
     url(r'^test/$', TemplateView.as_view(template_name='comments/test.html')),
+)
+
+# TEST python-social-auth
+urlpatterns = patterns('',
+    url(r'^$', 'example.app.views.home'),
+    url(r'^admin/', include(admin.site.urls)),
+    url(r'^signup-email/', 'example.app.views.signup_email'),
+    url(r'^email-sent/', 'example.app.views.validation_sent'),
+    url(r'^login/$', 'example.app.views.home'),
+    url(r'^logout/$', 'example.app.views.logout'),
+    url(r'^done/$', 'example.app.views.done', name='done'),
+    url(r'^email/$', 'example.app.views.require_email', name='require_email'),
+    url(r'', include('social.apps.django_app.urls', namespace='social'))
 )
 
 urlpatterns += patterns('',
@@ -25,23 +34,6 @@ urlpatterns += patterns('',
     url(r'^account/(?P<url_b64>.*?)/?$', AccountView.as_view(), name='account'),
     url(r'^letter/(?P<url_b64>.*?)/?$', LetterView.as_view(), name='letter'),
     url(r'^setting/(?P<url_b64>.*?)/?$', SettingView.as_view(), name='setting'),
-)
-
-# django-social-auth
-urlpatterns += patterns('',
-    url(r'^$', home, name='home'),
-    url(r'^done/$', done, name='done'),
-    url(r'^error/$', error, name='error'),
-    url(r'^logout/$', logout, name='logout'),
-    url(r'^form/$', form, name='form'),
-    url(r'^form2/$', form2, name='form2'),
-    url(r'^admin/', include(admin.site.urls)),
-    url(r'^fb/', facebook_view, name='fb_app'),
-    url(r'^vk/', vkontakte_view, name='vk_app'),
-    url(r'^ok/$', ok_app, name='ok_app'),
-    url(r'^ok/info/$', ok_app_info, name='ok_app_info'),
-    url(r'^close_login_popup/$', close_login_popup, name='login_popup_close'),
-    url(r'', include('social_auth.urls')),
 )
 
 from functools import wraps

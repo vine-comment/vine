@@ -106,6 +106,9 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+    # python-social-auth
+    'social.apps.django_app.middleware.SocialAuthExceptionMiddleware',
+    # ACAO
     'd1.acao.ACAO',
     # Uncomment the next line for simple clickjacking protection:
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -133,8 +136,7 @@ INSTALLED_APPS = (
     'django.contrib.humanize',
     #'threadedcomments',
     #'django.contrib.comments',
-    # Uncomment the next line to enable the admin:
-    'social_auth',
+    'social.apps.django_app.default',
     'django.contrib.admin',
     'd1',
     'registration',
@@ -218,13 +220,17 @@ LOGGING = {
     },
 }
 
+SESSION_SERIALIZER = 'django.contrib.sessions.serializers.JSONSerializer'
+
 TEMPLATE_CONTEXT_PROCESSORS = (
     "django.contrib.auth.context_processors.auth",
     "django.core.context_processors.debug",
     "django.core.context_processors.i18n",
     "django.core.context_processors.media",
     "django.core.context_processors.request",
-    "social_auth.context_processors.social_auth_by_type_backends",
+    #'social.apps.django_app.context_processors.backends',
+    #'social.apps.django_app.context_processors.login_redirect',
+    'social.apps.django_app.context_processors.backends',
 )
 
 ##################################################### 
@@ -233,134 +239,59 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 #####################################################
 
 AUTHENTICATION_BACKENDS = (
-    'social_auth.backends.OpenIDBackend',
-    'social_auth.backends.twitter.TwitterBackend',
-    'social_auth.backends.facebook.FacebookBackend',
-    'social_auth.backends.google.GoogleOAuthBackend',
-    'social_auth.backends.google.GoogleOAuth2Backend',
-    'social_auth.backends.google.GoogleBackend',
-    'social_auth.backends.yahoo.YahooBackend',
-    'social_auth.backends.stripe.StripeBackend',
-    'social_auth.backends.steam.SteamBackend',
-    'social_auth.backends.reddit.RedditBackend',
-    'social_auth.backends.amazon.AmazonBackend',
-    'social_auth.backends.browserid.BrowserIDBackend',
-    'social_auth.backends.contrib.linkedin.LinkedinBackend',
-    'social_auth.backends.contrib.skyrock.SkyrockBackend',
-    'social_auth.backends.contrib.flickr.FlickrBackend',
-    'social_auth.backends.contrib.instagram.InstagramBackend',
-    'social_auth.backends.contrib.github.GithubBackend',
-    'social_auth.backends.contrib.yandex.YandexBackend',
-    'social_auth.backends.contrib.yandex.YandexOAuth2Backend',
-    'social_auth.backends.contrib.yandex.YaruBackend',
-    'social_auth.backends.contrib.disqus.DisqusBackend',
-    'social_auth.backends.contrib.yahoo.YahooOAuthBackend',
-    'social_auth.backends.contrib.foursquare.FoursquareBackend',
-    'social_auth.backends.contrib.live.LiveBackend',
-    'social_auth.backends.contrib.livejournal.LiveJournalBackend',
-    'social_auth.backends.contrib.douban.DoubanBackend',
-    'social_auth.backends.contrib.douban.Douban2Backend',
-    'social_auth.backends.contrib.weibo.WeiboBackend',
-    'social_auth.backends.contrib.vk.VKOpenAPIBackend',
-    'social_auth.backends.contrib.vk.VKOAuth2Backend',
-    'social_auth.backends.contrib.odnoklassniki.OdnoklassnikiBackend',
-    'social_auth.backends.contrib.odnoklassniki.OdnoklassnikiAppBackend',
-    'social_auth.backends.contrib.mailru.MailruBackend',
-    'social_auth.backends.contrib.dailymotion.DailymotionBackend',
-    # 'social_auth.backends.contrib.shopify.ShopifyBackend',
-    # 'social_auth.backends.contrib.exacttarget.ExactTargetBackend',
-    'social_auth.backends.contrib.stocktwits.StocktwitsBackend',
-    'social_auth.backends.contrib.behance.BehanceBackend',
-    'social_auth.backends.contrib.readability.ReadabilityBackend',
-    'social_auth.backends.contrib.fedora.FedoraBackend',
+      'social.backends.open_id.OpenIdAuth',
+      'social.backends.google.GoogleOpenId',
+      'social.backends.google.GoogleOAuth2',
+      'social.backends.google.GoogleOAuth',
+      'social.backends.twitter.TwitterOAuth',
+      'social.backends.yahoo.YahooOpenId',
+    'social.backends.douban.DoubanOAuth2',
+    'social.backends.weibo.WeiboOAuth2',
+    #'social_auth.backends.contrib.douban.DoubanBackend',
+    #'social_auth.backends.contrib.douban.Douban2Backend',
+    #'social_auth.backends.contrib.weibo.WeiboBackend',
     'django.contrib.auth.backends.ModelBackend',
 )
 
-SOCIAL_AUTH_PIPELINE = (
-    'social.pipeline.social_auth.social_details',
-    'social.pipeline.social_auth.social_uid',
-    'social.pipeline.social_auth.auth_allowed',
-    'social_auth.backends.pipeline.social.social_auth_user',
-    'social_auth.backends.pipeline.associate.associate_by_email',
-    'social_auth.backends.pipeline.misc.save_status_to_session',
-    'app.pipeline.redirect_to_form',
-    'app.pipeline.username',
-    'social_auth.backends.pipeline.user.create_user',
-    'social_auth.backends.pipeline.social.associate_user',
-    'social_auth.backends.pipeline.social.load_extra_data',
-    'social_auth.backends.pipeline.user.update_user_details',
-    'social_auth.backends.pipeline.misc.save_status_to_session',
-    'app.pipeline.redirect_to_form2',
-    'app.pipeline.first_name',
-)
-
-SOCIAL_AUTH_TWITTER_KEY = ''
-SOCIAL_AUTH_TWITTER_SECRET = ''
-SOCIAL_AUTH_LINKEDIN_KEY = ''
-SOCIAL_AUTH_LINKEDIN_SECRET = ''
-FACEBOOK_APP_ID              = ''
-FACEBOOK_API_SECRET          = ''
-ORKUT_CONSUMER_KEY           = ''
-ORKUT_CONSUMER_SECRET        = ''
-GOOGLE_CONSUMER_KEY          = ''
-GOOGLE_CONSUMER_SECRET       = ''
-GOOGLE_OAUTH2_CLIENT_ID      = ''
-GOOGLE_OAUTH2_CLIENT_SECRET  = ''
-FOURSQUARE_CONSUMER_KEY      = ''
-FOURSQUARE_CONSUMER_SECRET   = ''
-VK_APP_ID                    = ''
-VK_API_SECRET                = ''
-LIVE_CLIENT_ID               = ''
-LIVE_CLIENT_SECRET           = ''
-SKYROCK_CONSUMER_KEY         = ''
-SKYROCK_CONSUMER_SECRET      = ''
-YAHOO_CONSUMER_KEY           = ''
-YAHOO_CONSUMER_SECRET        = ''
-READABILITY_CONSUMER_KEY     = ''
-READABILITY_CONSUMER_SECRET  = ''
-
-SOCIAL_AUTH_DOUBAN_KEY = ''
-SOCIAL_AUTH_DOUBAN_SECRET = ''
+LOGIN_URL = '/login/'
+LOGIN_REDIRECT_URL = '/done/'
+URL_PATH = ''
+SOCIAL_AUTH_STRATEGY = 'social.strategies.django_strategy.DjangoStrategy'
+SOCIAL_AUTH_STORAGE = 'social.apps.django_app.default.models.DjangoStorage'
+SOCIAL_AUTH_GOOGLE_OAUTH_SCOPE = [
+    'https://www.googleapis.com/auth/drive',
+    'https://www.googleapis.com/auth/userinfo.profile'
+]
 
 # testing now, remove it later
 SOCIAL_AUTH_DOUBAN_OAUTH2_KEY = '017053976856b4b80450fac639041e28'
 SOCIAL_AUTH_DOUBAN_OAUTH2_SECRET = '2efd78f59372a1ac'
 
-LOGIN_URL          = '/login-form/'
-LOGIN_REDIRECT_URL = '/logged-in/'
-LOGIN_ERROR_URL    = '/login-error/'
+# SOCIAL_AUTH_EMAIL_FORM_URL = '/signup-email'
+SOCIAL_AUTH_EMAIL_FORM_HTML = 'email_signup.html'
+SOCIAL_AUTH_EMAIL_VALIDATION_FUNCTION = 'example.app.mail.send_validation'
+SOCIAL_AUTH_EMAIL_VALIDATION_URL = '/email-sent/'
+# SOCIAL_AUTH_USERNAME_FORM_URL = '/signup-username'
+SOCIAL_AUTH_USERNAME_FORM_HTML = 'username_signup.html'
 
-SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/another-login-url/'
-SOCIAL_AUTH_NEW_USER_REDIRECT_URL = '/new-users-redirect-url/'
-SOCIAL_AUTH_NEW_ASSOCIATION_REDIRECT_URL = '/new-association-redirect-url/'
-SOCIAL_AUTH_DISCONNECT_REDIRECT_URL = '/account-disconnected-redirect-url/'
-SOCIAL_AUTH_BACKEND_ERROR_URL = '/new-error-url/'
-SOCIAL_AUTH_COMPLETE_URL_NAME  = 'socialauth_complete'
-SOCIAL_AUTH_ASSOCIATE_URL_NAME = 'socialauth_associate_complete'
-#SOCIAL_AUTH_INACTIVE_USER_URL = '...'
+SOCIAL_AUTH_PIPELINE = (
+    'social.pipeline.social_auth.social_details',
+    'social.pipeline.social_auth.social_uid',
+    'social.pipeline.social_auth.auth_allowed',
+    'social.pipeline.social_auth.social_user',
+    'social.pipeline.user.get_username',
+    'example.app.pipeline.require_email',
+    'social.pipeline.mail.mail_validation',
+    'social.pipeline.user.create_user',
+    'social.pipeline.social_auth.associate_user',
+    'social.pipeline.social_auth.load_extra_data',
+    'social.pipeline.user.user_details'
+)
 
-#Custom User Model
-#SOCIAL_AUTH_USER_MODEL = 'myapp.CustomUser'
-#ORMs
-#SOCIAL_AUTH_MODELS = 'social_auth.db.mongoengine_models'
-#Tweaking Some Fields Length
-#Username Generation
-#Extra Arguments on Auth Processes
-#Processing Redirects and urlopen
-#Per-backend Settings
-#Exceptions
-#Exceptions Middleware
-#Template Context Processors
-#Miscellaneous Settings
-
-#Linking in your templates
-#{% url "socialauth_begin" "backend-name" %}
-#{% url "socialauth_disconnect" "backend-name" %}
-#{% url "socialauth_disconnect_individual" "backend-name" association_id %}
-#<a href="{% url "socialauth_disconnect_individual" social.provider social.id %}">Disconnect {{ social.provider }}</a>
-#<a href="{% url "socialauth_disconnect" social.provider %}">Disconnect {{ social.provider }}</a>
-
-
+try:
+    from example.local_settings import *
+except ImportError:
+    pass
 ##################################################### 
 # end django-social-auth
 #####################################################
