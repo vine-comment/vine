@@ -13,19 +13,18 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     #url(r'^$', TemplateView.as_view(template_name='index.html'), name='index'),
     url('', include('social.apps.django_app.urls', namespace='social')),
-    url(r'^test/$', TemplateView.as_view(template_name='comments/test.html')),
 )
 
 # TEST python-social-auth
 urlpatterns = patterns('',
-    url(r'^$', 'example.app.views.home'),
+    url(r'^$', 'social_auth_app.views.home'),
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^signup-email/', 'example.app.views.signup_email'),
-    url(r'^email-sent/', 'example.app.views.validation_sent'),
-    url(r'^login/$', 'example.app.views.home'),
-    url(r'^logout/$', 'example.app.views.logout'),
-    url(r'^done/$', 'example.app.views.done', name='done'),
-    url(r'^email/$', 'example.app.views.require_email', name='require_email'),
+    url(r'^signup-email/', 'social_auth_app.views.signup_email'),
+    url(r'^email-sent/', 'social_auth_app.views.validation_sent'),
+    url(r'^login/$', 'social_auth_app.views.home'),
+    url(r'^logout/$', 'social_auth_app.views.logout'),
+    url(r'^done/$', 'social_auth_app.views.done', name='done'),
+    url(r'^email/$', 'social_auth_app.views.require_email', name='require_email'),
     url(r'', include('social.apps.django_app.urls', namespace='social'))
 )
 
@@ -34,6 +33,7 @@ urlpatterns += patterns('',
     url(r'^account/(?P<url_b64>.*?)/?$', AccountView.as_view(), name='account'),
     url(r'^letter/(?P<url_b64>.*?)/?$', LetterView.as_view(), name='letter'),
     url(r'^setting/(?P<url_b64>.*?)/?$', SettingView.as_view(), name='setting'),
+    url(r'^test/$', TemplateView.as_view(template_name='comments/test.html')),
 )
 
 from functools import wraps
