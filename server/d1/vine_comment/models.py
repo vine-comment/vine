@@ -74,4 +74,3 @@ class Comment(TimeMixin, models.Model):
 
     def __unicode__(self):
         return self.time_added.strftime("%Y-%m-%d %H:%M:%S") + self.title + ' ' + self.comment_str
-
