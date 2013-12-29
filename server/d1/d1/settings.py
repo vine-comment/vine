@@ -100,7 +100,7 @@ TEMPLATE_LOADERS = (
 )
 
 MIDDLEWARE_CLASSES = (
-    'd1.middleware.SpacelessMiddleware',
+    #'d1.middleware.SpacelessMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -263,10 +263,6 @@ SOCIAL_AUTH_GOOGLE_OAUTH_SCOPE = [
     'https://www.googleapis.com/auth/userinfo.profile'
 ]
 
-# testing now, remove it later
-SOCIAL_AUTH_DOUBAN_OAUTH2_KEY = '017053976856b4b80450fac639041e28'
-SOCIAL_AUTH_DOUBAN_OAUTH2_SECRET = '2efd78f59372a1ac'
-
 # SOCIAL_AUTH_EMAIL_FORM_URL = '/signup-email'
 SOCIAL_AUTH_EMAIL_FORM_HTML = 'email_signup.html'
 SOCIAL_AUTH_EMAIL_VALIDATION_FUNCTION = 'example.app.mail.send_validation'
@@ -289,7 +285,7 @@ SOCIAL_AUTH_PIPELINE = (
 )
 
 try:
-    from example.local_settings import *
+    from example.social_local_settings import *
 except ImportError:
     pass
 ##################################################### 
