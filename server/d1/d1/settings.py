@@ -258,6 +258,7 @@ AUTHENTICATION_BACKENDS = (
     'social_auth.backends.contrib.live.LiveBackend',
     'social_auth.backends.contrib.livejournal.LiveJournalBackend',
     'social_auth.backends.contrib.douban.DoubanBackend',
+    'social_auth.backends.contrib.douban.Douban2Backend',
     'social_auth.backends.contrib.weibo.WeiboBackend',
     'social_auth.backends.contrib.vk.VKOpenAPIBackend',
     'social_auth.backends.contrib.vk.VKOAuth2Backend',
@@ -294,12 +295,10 @@ SOCIAL_AUTH_PIPELINE = (
 
 SOCIAL_AUTH_TWITTER_KEY = ''
 SOCIAL_AUTH_TWITTER_SECRET = ''
-TWITTER_CONSUMER_KEY         = ''
-TWITTER_CONSUMER_SECRET      = ''
+SOCIAL_AUTH_LINKEDIN_KEY = ''
+SOCIAL_AUTH_LINKEDIN_SECRET = ''
 FACEBOOK_APP_ID              = ''
 FACEBOOK_API_SECRET          = ''
-LINKEDIN_CONSUMER_KEY        = ''
-LINKEDIN_CONSUMER_SECRET     = ''
 ORKUT_CONSUMER_KEY           = ''
 ORKUT_CONSUMER_SECRET        = ''
 GOOGLE_CONSUMER_KEY          = ''
@@ -321,8 +320,8 @@ READABILITY_CONSUMER_SECRET  = ''
 
 SOCIAL_AUTH_DOUBAN_KEY = ''
 SOCIAL_AUTH_DOUBAN_SECRET = ''
-SOCIAL_AUTH_DOUBAN_OAUTH2_KEY = ''
-SOCIAL_AUTH_DOUBAN_OAUTH2_SECRET = ''
+SOCIAL_AUTH_DOUBAN_OAUTH2_KEY = '017053976856b4b80450fac639041e28'
+SOCIAL_AUTH_DOUBAN_OAUTH2_SECRET = '2efd78f59372a1ac'
 
 LOGIN_URL          = '/login-form/'
 LOGIN_REDIRECT_URL = '/logged-in/'
