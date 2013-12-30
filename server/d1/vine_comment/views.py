@@ -153,6 +153,14 @@ class CommentRawView(TemplateView):
             'url_b64': url_b64,
         })
 
+    @csrf_exempt
+    def dispatch(self, request, *args, **kwargs):
+        url_b64 = kwargs.get('url_b64', self.base64_default_str)
+        kwargs['index_url'] = base64.b64decode(url_b64)
+
+        #self.debug(request, *args, **kwargs)
+        return super(CommentRawView, self).dispatch(request, *args, **kwargs)
+
 class UserView(TemplateView):
     pass
 
