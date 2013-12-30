@@ -80,11 +80,11 @@ function main() {
             var btn = $(this);
 
             //FIXME l.protocol
-            if (nav_id != "nav_comment")
+            if ($(this).attr('id') != "nav_comment")
                 $('#showMsg').load(l.origin + '/' + nav_buttons[btn.attr('id')]);
             else
             // FIXME 注意这里pathname在当前是comment/xxx，以后就不一定了
-                $('#showMsg').load(l.origin + '/ajax/' + pathname);
+                $('#showMsg').load(l.origin + '/ajax' + pathname);
 
             $('.nav .active').removeClass('active');
             btn.addClass('active');
