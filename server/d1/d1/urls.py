@@ -31,8 +31,11 @@ urlpatterns = patterns('',
 urlpatterns += patterns('',
     url(r'^comment/(?P<url_b64>.*?)/?$', CommentView.as_view(), name='comment'),
     url(r'^account/(?P<url_b64>.*?)/?$', AccountView.as_view(), name='account'),
+    url(r'^account_raw/(?P<url_b64>.*?)/?$', AccountRawView.as_view(), name='account_raw'),
     url(r'^letter/(?P<url_b64>.*?)/?$', LetterView.as_view(), name='letter'),
+    url(r'^letter_raw/(?P<url_b64>.*?)/?$', LetterRawView.as_view(), name='letter_raw'),
     url(r'^setting/(?P<url_b64>.*?)/?$', SettingView.as_view(), name='setting'),
+    url(r'^setting_raw/(?P<url_b64>.*?)/?$', SettingRawView.as_view(), name='setting_raw'),
     url(r'^test/$', TemplateView.as_view(template_name='comments/test.html')),
 )
 

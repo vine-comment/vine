@@ -145,3 +145,21 @@ class SettingView(TemplateView):
 
     def get(self, request, *args, **kwargs):
         return render(request, self.template_name)
+
+class AccountRawView(TemplateView):
+    template_name = 'comments/account_raw.html'
+
+    def get(self, request, *args, **kwargs):
+        return render(request, self.template_name)
+
+class LetterRawView(TemplateView):
+    template_name = 'comments/letter_raw.html'
+
+    def get(self, request, *args, **kwargs):
+        return render(request, self.template_name)
+
+class SettingRawView(TemplateView):
+    template_name = 'comments/setting_raw.html'
+
+    def get(self, request, *args, **kwargs):
+        return render(request, self.template_name)
