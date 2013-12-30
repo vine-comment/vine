@@ -72,6 +72,18 @@ function main() {
         });
     }
 
+    var nav_buttons = {"nav_comment":"comment_raw", "nav_account":"account_raw", "nav_letter":"letter_raw", "nav_setting":"setting_raw"};
+    // TODO 把导航变为ajax形式
+    for (nav_id in nav_buttons) {
+        $("#" + nav_id).on('click', function(){
+            var btn = $(this);
+            //FIXME l.protocol
+            $('#showMsg').load(l.origin + '/' + nav_buttons[btn.attr('id')]);
+            $('.nav .active').removeClass('active');
+            btn.addClass('active');
+        });
+    }
+    
     // TODO 把pagenation都变为ajax形式
     for (pageNavi in $('.pagination li a')) {
         ;

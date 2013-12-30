@@ -30,6 +30,7 @@ urlpatterns = patterns('',
 
 urlpatterns += patterns('',
     url(r'^comment/(?P<url_b64>.*?)/?$', CommentView.as_view(), name='comment'),
+    url(r'^comment_raw/(?P<url_b64>.*?)/?$', CommentRawView.as_view(), name='comment_raw'),
     url(r'^account/(?P<url_b64>.*?)/?$', AccountView.as_view(), name='account'),
     url(r'^account_raw/(?P<url_b64>.*?)/?$', AccountRawView.as_view(), name='account_raw'),
     url(r'^letter/(?P<url_b64>.*?)/?$', LetterView.as_view(), name='letter'),
