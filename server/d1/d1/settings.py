@@ -206,15 +206,10 @@ LOGGING = {
             'level': 'WARN',
             'propagate': True,
         },
-        'vine_comment': {
-            'handlers': ['console'],
-            'level': 'DEBUG',
-            'propagate': True,
-        },
         # this handler control all other logs
         '': {
             'handlers': ['console'],
-            'level': 'WARN',
+            'level': 'DEBUG',
             'propagate': True,
         },
     },
