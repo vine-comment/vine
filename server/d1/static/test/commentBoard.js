@@ -39,6 +39,7 @@ function main() {
     //var target_url = 'http://www.anwcl.com:8000/comment/' + btoa(parent_url);
     var l = document.location
     var target_url = l.protocol + l.origin + l.pathname
+    var pathname = l.pathname
 
     // last_url这里作为资源索引，不直接post到/comment上，而是/comment/<last_url>
     var last_url = target_url.replace(/^.*[\\\/]/, '')
@@ -77,8 +78,14 @@ function main() {
     for (nav_id in nav_buttons) {
         $("#" + nav_id).on('click', function(){
             var btn = $(this);
+
             //FIXME l.protocol
-            $('#showMsg').load(l.origin + '/' + nav_buttons[btn.attr('id')]);
+            if (nav_id != "nav_comment")
+                $('#showMsg').load(l.origin + '/' + nav_buttons[btn.attr('id')]);
+            else
+            // FIXME 注意这里pathname在当前是comment/xxx，以后就不一定了
+                $('#showMsg').load(l.origin + '/ajax/' + pathname);
+
             $('.nav .active').removeClass('active');
             btn.addClass('active');
         });
