@@ -1,6 +1,6 @@
 from django.conf import settings
 from django.template import RequestContext
-from django.shortcuts import render_to_response, redirect
+from django.shortcuts import render_to_response, redirect, render
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout as auth_logout
 
@@ -10,8 +10,8 @@ from social.backends.google import GooglePlusAuth
 def logout(request):
     """Logs out user"""
     auth_logout(request)
-    return render_to_response('home.html', {}, RequestContext(request))
-
+    return redirect('/comment')
+    #return render_to_response('home.html', {}, RequestContext(request))
 
 def home(request):
     """Home view, displays login mechanism"""
@@ -26,6 +26,7 @@ def home(request):
 def done(request):
     """Login complete view, displays user data"""
     scope = ' '.join(GooglePlusAuth.DEFAULT_SCOPE)
+    return redirect('/comment')
     return render_to_response('done.html', {
         'user': request.user,
         'plus_id': getattr(settings, 'SOCIAL_AUTH_GOOGLE_PLUS_KEY', None),

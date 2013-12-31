@@ -1,4 +1,5 @@
 {% load humanize %}
+{% if user.is_authenticated %}
 
 <ul class="list-group">
 {% for message in p_comment.object_list %}
@@ -42,5 +43,11 @@
 </script>
 {% endif %}
 
-
 </ul>
+
+{% else %} <!-- not authenticated -->
+<!-- <iframe src="{% url 'test' %}" frameborder="0" onload="document.getElementById('loadImg').style.display='none';"
+width="100%" height=100% frameborder="0">
+</iframe> -->
+{% include "social_signin.html" %}
+{% endif %}

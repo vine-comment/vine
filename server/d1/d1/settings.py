@@ -238,6 +238,7 @@ AUTHENTICATION_BACKENDS = (
     # twitter has been blocked..
     #'social.backends.twitter.TwitterOAuth',
     'social.backends.google.GoogleOAuth2',
+    'social.backends.github.GithubOAuth2',
     'social.backends.douban.DoubanOAuth2',
     'social.backends.weibo.WeiboOAuth2',
     'social.backends.email.EmailAuth',
