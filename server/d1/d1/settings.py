@@ -156,6 +156,7 @@ EMAIL_HOST = 'localhost'
 EMAIL_PORT = 8025
 LOGIN_REDIRECT_URL = 'index'
 DEFAULT_FROM_EMAIL = 'webmaster@localhost'
+EMAIL_FROM = 'webmaster@localhost'
 #COMMENTS_APP = 'threadedcomments'
 
 # A sample logging configuration. The only tangible logging
@@ -239,6 +240,7 @@ AUTHENTICATION_BACKENDS = (
     'social.backends.google.GoogleOAuth2',
     'social.backends.douban.DoubanOAuth2',
     'social.backends.weibo.WeiboOAuth2',
+    'social.backends.email.EmailAuth',
     'django.contrib.auth.backends.ModelBackend',
 )
 
