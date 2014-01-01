@@ -33,8 +33,8 @@ def home(request):
 def done(request):
     """Login complete view, displays user data"""
     scope = ' '.join(GooglePlusAuth.DEFAULT_SCOPE)
-    
-    print request
+
+    #print request
     #return render(request, 'refresh_iframe.html')
     return redirect(request.META.get('HTTP_REFERER', '/comment'))
     return render_to_response('done.html', {

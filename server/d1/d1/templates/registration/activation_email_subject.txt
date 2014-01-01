@@ -1,1 +1,1 @@
-{% load i18n %}{% trans "Account activation on" %} {{ site.name }}
+Activate your djangoproject.com account - you have {{ expiration_days }} days!

@@ -29,6 +29,7 @@ urlpatterns = patterns('',
 )
 
 urlpatterns += patterns('',
+    url(r'^accounts/', include('registration.backends.default.urls')),
     url(r'^comment/(?P<url_b64>.*?)/?$', CommentView.as_view(), name='comment'),
     url(r'^ajax/comment/(?P<url_b64>.*?)/?$', CommentRawView.as_view(), name='comment_raw'),
     url(r'^comment_raw/(?P<url_b64>.*?)/?$', CommentRawView.as_view(), name='comment_raw'),
