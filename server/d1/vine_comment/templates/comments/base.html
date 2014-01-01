@@ -24,12 +24,25 @@
 		<ul class="nav nav-pills" class="panel panel-default">
 		  <li id="nav_comment" class="{% active request "comment" %}" title="{{ index_url }}"><a href="#">
 		  <span class="badge pull-right">{{ p_comment.paginator.count }}</span> 口水</a> </li>
-		  <li id="nav_account" class="{% active request "account" %}"><a href="#"><span class="badge pull-right">2</span> 账户</a></li>
+		  <!-- <li id="nav_account" class="{% active request "account" %}"><a href="#"><span class="badge pull-right">2</span> 账户</a></li>
 		  <li id="nav_letter" class="{% active request "letter" %}"><a href="#"><span class="badge pull-right">33</span> 信封</a></li>
-		  <li id="nav_setting" class="{% active request "setting" %}"><a href="#"> 设置</a></li>
+		  <li id="nav_setting" class="{% active request "setting" %}"><a href="#"> 设置</a></li> -->
+          <li class="dropdown">
+        {% if user.is_authenticated %}
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+              {{ user.username }}<span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+            <li>
+          {% for assoc in backends.associated %}
+              <a href="/logout/">{{ assoc.provider }} logout</a>
+          {% endfor %}
+            </li>
+            </ul>
+        {% endif %}
+          </li>
 		</ul>
-		<br>
-
+<br/>
 		{% block content%}
 
 		{% endblock %}

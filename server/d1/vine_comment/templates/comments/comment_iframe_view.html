@@ -10,7 +10,7 @@
 
 <div id="special_div_for_anwcl_comment_board">
   <div id="loadImg"><div><img src="{% static "icons/loading1.gif" %}" /></div></div>
-  <iframe src="http://www.anwcl.com:8000/comment/{{ url_b64 }}" width="100%" height="100%" frameborder="0" onload="document.getElementById('loadImg').style.display='none';""></iframe>
+  <iframe id="__vine_comment" src="http://www.anwcl.com:8000/comment/{{ url_b64 }}" width="100%" height="100%" frameborder="0" onload="document.getElementById('loadImg').style.display='none';""></iframe>
   <div id="boardLeft" >
     <a href="#">
       <div id="boardDesc"><p>神 吐 槽 —</p></div>
