@@ -134,20 +134,16 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.humanize',
-    #'threadedcomments',
-    #'django.contrib.comments',
-    'social.apps.django_app.default',
+    # optional apps
     'django.contrib.admin',
-    'd1',
+    # 3rd party apps
+    'social.apps.django_app.default',
     'registration',
-    'books',
+    # my apps
+    'd1',
     'vine_comment',
-    'news',
-    'feeds',
-    'testapp',
     'social_auth_app',
-    #'django_wysiwyg',
-    # Uncomment the next line to enable admin documentation:
+    # 'django_wysiwyg',
     # 'django.contrib.admindocs',
 )
 
