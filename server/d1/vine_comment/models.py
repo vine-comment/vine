@@ -71,7 +71,7 @@ class Comment(TimeMixin, models.Model):
     comment_board = models.ForeignKey(CommentBoard)
     auther_ip = models.IPAddressField(blank=True, null=True)
     # 在后面加入auther的详细信息，分为匿名和实名
-    user = models.OneToOneField(User)
+    user = models.ForeignKey(User)
 
     def __unicode__(self):
         return self.time_added.strftime("%Y-%m-%d %H:%M:%S") + self.title + ' ' + self.comment_str
