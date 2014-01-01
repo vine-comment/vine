@@ -33,11 +33,12 @@
               {{ user.username }}<span class="caret"></span>
             </a>
             <ul class="dropdown-menu">
-            <li>
           {% for assoc in backends.associated %}
+            <li>
               <a href="/logout/">{{ assoc.provider }} logout</a>
-          {% endfor %}
             </li>
+          {% endfor %}
+            <li><a href="/logout/">normal logout</li>
             </ul>
         {% endif %}
           </li>
