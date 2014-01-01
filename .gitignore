@@ -1,6 +1,7 @@
 
 *.settings
 social_local_settings.py
+*.bak
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

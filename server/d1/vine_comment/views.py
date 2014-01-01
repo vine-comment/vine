@@ -57,9 +57,12 @@ class CommentView(TemplateView):
     template_meta = 'comments/comment_view_meta.html'
 
     @csrf_exempt
-    def _post_comment(self, index_url, comment_str, auther_ip):
+    def _post_comment(self, index_url, comment_str, auther_ip, user):
         title=urlparse(index_url).netloc
+        
+        print comment_str, user
         logger.debug('Auther_ip:' + auther_ip
+                     + ' User:' + str(user)
                      + ' Title:' + title
                      + ' Index_url:' + index_url
                      + ' Comment_str:' + comment_str)
@@ -73,15 +76,17 @@ class CommentView(TemplateView):
                                     tzinfo=utc),
                     comment_str=comment_str,
                     comment_board=comment_board,
-                    auther_ip=auther_ip)
+                    auther_ip=auther_ip,
+                    user=user) # 以后换成auther，现在先用user
         comment.save()
 
     @csrf_exempt
     def record_index_url(self, request, *args, **kwargs):
         index_url = kwargs.get('index_url', self.index_default_str)
         auther_ip = request.META.get('REMOTE_ADDR', '0.0.0.0')
+        user = request.user
         comment_str = index_url
-        self._post_comment(index_url, comment_str, auther_ip)
+        self._post_comment(index_url, comment_str, auther_ip, user)
 
     @csrf_exempt
     def debug(self, request, *args, **kwargs):
@@ -92,7 +97,8 @@ class CommentView(TemplateView):
         comment_str = request.POST.get('comment', 'Empty Comment')
         auther_ip = request.META.get('REMOTE_ADDR', '0.0.0.0')
         index_url = kwargs.get('index_url', self.index_default_str)
-        self._post_comment(index_url, comment_str, auther_ip)
+        user = request.user
+        self._post_comment(index_url, comment_str, auther_ip, user)
 
         kwargs['template'] = self.template_raw
         return self.get(request, *args, **kwargs)

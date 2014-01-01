@@ -208,11 +208,11 @@ LOGGING = {
             'propagate': True,
         },
         # this handler control all other logs
-        '': {
-            'handlers': ['console'],
-            'level': 'DEBUG',
-            'propagate': True,
-        },
+        #'': {
+        #    'handlers': ['console'],
+        #    'level': 'DEBUG',
+        #    'propagate': True,
+        #},
     },
 }
 

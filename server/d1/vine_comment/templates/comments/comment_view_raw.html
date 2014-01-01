@@ -4,7 +4,8 @@
 <ul class="list-group">
 {% for message in p_comment.object_list %}
     <li class="list-group-item">
-    <strong>{{ message.auther_ip }}</strong> <span id='comment_time'> {{ message.time_added|naturaltime }}</span> {{message.comment_str}} <br>
+     <strong>{% if message.user %}{{ message.user }}{% else %}{{ message.auther_ip }}{% endif %}</strong>
+     <span id='comment_time'> {{ message.time_added|naturaltime }}</span> {{message.comment_str}} <br>
     </li>
 {% endfor %}
 </ul>
@@ -49,5 +50,5 @@
 <!-- <iframe src="{% url 'test' %}" frameborder="0" onload="document.getElementById('loadImg').style.display='none';"
 width="100%" height=100% frameborder="0">
 </iframe> -->
-{% include "social_signin.html" %}
+{% include "social_signin_raw.html" %}
 {% endif %}
