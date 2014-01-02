@@ -145,8 +145,8 @@
 			<small class="text-muted">选择你想要使用的社交网络</small>
 			<br><br> -->
 <p>
-<a class="btn btn-primary social-login-btn social-weibo" href="/login/weibo"><i class="fa fa-weibo"> 微博登录</i></a>
-<a class="btn btn-primary social-login-btn social-github" href="/login/github"><i class="fa fa-github"> github登录</i></a>
+<a class="btn btn-primary social-login-btn social-weibo" href="/login/weibo?next={{ request.path }}"><i class="fa fa-weibo"> 微博登录</i></a>
+<a class="btn btn-primary social-login-btn social-github" href="/login/github?next={{ request.path }}"><i class="fa fa-github"> github登录</i></a>
 </p>
 <!--
 <p>

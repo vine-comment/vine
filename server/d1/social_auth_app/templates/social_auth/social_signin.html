@@ -150,12 +150,12 @@
 
 			
 <p>
-<a class="btn btn-primary social-login-btn social-facebook" href="/auth/facebook"><i class="fa fa-facebook"></i></a>
-<a class="btn btn-primary social-login-btn social-twitter" href="/auth/twitter"><i class="fa fa-twitter"></i></a>
+<a class="btn btn-primary social-login-btn social-facebook" href="/auth/facebook?next={{ request.path }}"><i class="fa fa-facebook"></i></a>
+<a class="btn btn-primary social-login-btn social-twitter" href="/auth/twitter?next={{ request.path }}"><i class="fa fa-twitter"></i></a>
 </p>
 <p>
-<a class="btn btn-primary social-login-btn social-linkedin" href="/auth/linkedin"><i class="fa fa-linkedin"></i></a>
-<a class="btn btn-primary social-login-btn social-google" href="/auth/google"><i class="fa fa-google-plus"></i></a>
+<a class="btn btn-primary social-login-btn social-linkedin" href="/auth/linkedin?next={{ request.path }}"><i class="fa fa-linkedin"></i></a>
+<a class="btn btn-primary social-login-btn social-google" href="/auth/google?next={{ request.path }}"><i class="fa fa-google-plus"></i></a>
 </p>
 
 <div class="btn-group social-login-more">
