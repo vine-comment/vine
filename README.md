@@ -66,6 +66,9 @@ vine
 5. @
 6. tag for comments and sites.
 7. Multilevel comment.
+8. url ranking list by comments number
+9. follow account
+10. star comment
 
 ####Research other 3rd party comment system
 1. disqus
