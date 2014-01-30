@@ -63,7 +63,7 @@ vine
 2. reply to reply
 3. notification
 4. timeline
-5. @
+5. @ mention(twitter style)
 6. tag for comments and sites.
 7. Multilevel comment.
 8. url ranking list by comments number
