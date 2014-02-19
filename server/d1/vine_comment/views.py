@@ -71,13 +71,24 @@ class CommentView(TemplateView):
                                     url=index_url,
                                     title=urlparse(index_url).netloc)
         comment_board.save() if created else None
-        comment = Comment(
+        if user:
+            comment = Comment(
                     time_added=datetime.datetime.utcnow().replace(
                                     tzinfo=utc),
                     comment_str=comment_str,
                     comment_board=comment_board,
                     auther_ip=auther_ip,
                     user=user) # 以后换成auther，现在先用user
+        else:
+            '''
+            Annoymous User access the site.
+            '''
+            comment = Comment(
+                    time_added=datetime.datetime.utcnow().replace(
+                                    tzinfo=utc),
+                    comment_str=comment_str,
+                    comment_board=comment_board,
+                    auther_ip=auther_ip)
         comment.save()
 
     @csrf_exempt
