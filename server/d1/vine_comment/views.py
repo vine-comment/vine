@@ -71,7 +71,7 @@ class CommentView(TemplateView):
                                     url=index_url,
                                     title=urlparse(index_url).netloc)
         comment_board.save() if created else None
-        if user:
+        if user.is_authenticated():
             comment = Comment(
                     time_added=datetime.datetime.utcnow().replace(
                                     tzinfo=utc),
