@@ -6,11 +6,6 @@ vine
 * main languages: JavaScript, Python
 * main framework: jquery, django, bootstrap
 
-###NOT-REQUIREMENT
-
-* current the wysiwyg_editor is useful, but also too big, I'm thinking about using another light editor.
-[django_wysiwyg](https://github.com/pydanny/django-wysiwyg): pip install django-wysiwyg
-
 ####DOING
 
 * accounts
@@ -79,3 +74,8 @@ vine
 6. another Alternatives
 7. http://ralsina.com.ar/stories/twitter-as-a-comment-engine.html 
 8. social media integrate
+
+###TODO-LONGTERM
+
+* current the wysiwyg_editor is useful, but also too big, I'm thinking about using another light editor.
+[django_wysiwyg](https://github.com/pydanny/django-wysiwyg): pip install django-wysiwyg
