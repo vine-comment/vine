@@ -16,6 +16,9 @@ class TimeMixin(models.Model):
     def __unicode__(self):
         return str(self.time_added)
 
+    class Meta:
+        abstract = True
+
 class CountMixin(models.Model):
     count_viewed = models.IntegerField()
     count_modified = models.IntegerField()
@@ -75,3 +78,4 @@ class Comment(TimeMixin, models.Model):
 
     def __unicode__(self):
         return self.time_added.strftime("%Y-%m-%d %H:%M:%S") + self.title + ' ' + self.comment_str
+
