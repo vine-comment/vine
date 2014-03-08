@@ -10,7 +10,7 @@ import logging
 from django.http import *
 from django.shortcuts import render
 from django.views.generic import *
-from django.core.paginator import Paginator
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.utils.timezone import utc
 from django.views.decorators.csrf import csrf_exempt
 
@@ -121,11 +121,21 @@ class CommentView(TemplateView):
         index_page = request.GET.get('page', 1)
         index_url = kwargs.get('index_url', self.index_default_str)
         url_b64 = kwargs.get('url_b64', self.base64_default_str)
+ 
+        #TODO performance optimization for objects order_by('-time_added')
+        comments = filter(lambda x:urlparse(index_url).netloc in x.comment_board.title,
+                Comment.objects.order_by('-time_added'))
+        print comments
+        print len(comments)
+        try:
+            p = Paginator(comments, 10).page(index_page)
+        except PageNotAnInteger:
+        # If page is not an integer, deliver first page.
+            p = Paginator(comments, 10).page(1)
+        except EmptyPage:
+        # If page is out of range (e.g. 9999), deliver last page of results.
+            p = Paginator(comments, 10).page(paginator.num_pages)
 
-        comments = Comment.objects.filter(
-                        comment_board__title__contains=\
-                        urlparse(index_url).netloc).order_by('-time_added')
-        p = Paginator(comments, 10).page(index_page)
         template_name = kwargs.get('template', self.template_meta)
 
         return render(request, template_name, {
@@ -158,9 +168,9 @@ class CommentRawView(TemplateView):
         index_url = kwargs.get('index_url', self.index_default_str)
         url_b64 = kwargs.get('url_b64', self.base64_default_str)
 
-        comments = Comment.objects.filter(
-                        comment_board__title__contains=\
-                        urlparse(index_url).netloc).order_by('-time_added')
+        #TODO performance optimization for objects order_by('-time_added')
+        comments = filter(lambda x:urlparse(index_url).netloc in x.comment_board.title,
+                Comment.objects.order_by('-time_added'))
         p = Paginator(comments, 10).page(index_page)
         template_name = kwargs.get('template', self.template_raw)
 
