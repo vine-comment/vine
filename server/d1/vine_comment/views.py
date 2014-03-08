@@ -121,9 +121,10 @@ class CommentView(TemplateView):
         index_page = request.GET.get('page', 1)
         index_url = kwargs.get('index_url', self.index_default_str)
         url_b64 = kwargs.get('url_b64', self.base64_default_str)
-
+ 
+        #TODO performance optimization for objects order_by('-time_added')
         comments = filter(lambda x:x.comment_board.title == urlparse(index_url).netloc,
-                Comment.objects.all())#TODO get order_by('-time_added')
+                Comment.objects.all().order_by('-time_added'))
         print comments
         print len(comments)
         try:
@@ -167,9 +168,9 @@ class CommentRawView(TemplateView):
         index_url = kwargs.get('index_url', self.index_default_str)
         url_b64 = kwargs.get('url_b64', self.base64_default_str)
 
-        comments = Comment.objects.filter(
-                        comment_board__title__contains=\
-                        urlparse(index_url).netloc).order_by('-time_added')
+        #TODO performance optimization for objects order_by('-time_added')
+        comments = filter(lambda x:x.comment_board.title == urlparse(index_url).netloc,
+                Comment.objects.all().order_by('-time_added'))
         p = Paginator(comments, 10).page(index_page)
         template_name = kwargs.get('template', self.template_raw)
 
