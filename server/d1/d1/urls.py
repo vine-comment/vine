@@ -39,7 +39,8 @@ urlpatterns += patterns('',
     url(r'^letter_raw/(?P<url_b64>.*?)/?$', LetterRawView.as_view(), name='letter_raw'),
     url(r'^setting/(?P<url_b64>.*?)/?$', SettingView.as_view(), name='setting'),
     url(r'^setting_raw/(?P<url_b64>.*?)/?$', SettingRawView.as_view(), name='setting_raw'),
-    url(r'^test/$', TemplateView.as_view(template_name='social_signin.html'), name='test'),
+    url(r'^auth_test/$', TemplateView.as_view(template_name='social_signin.html'), name='auth_test'),
+    url(r'^test/$', TemplateView.as_view(template_name='test.html'), name='test'),
 )
 
 from functools import wraps

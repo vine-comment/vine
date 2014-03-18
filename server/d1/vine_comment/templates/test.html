@@ -1,0 +1,16 @@
+<script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
+<script src="/static/js/btoa.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	if (!window.btoa) window.btoa = base64.encode;
+	$('body').append('<div id="vine_comment_iframe"></div>');
+	$.support.cors = true;
+	$('#vine_comment_iframe').load("/iframe/" + btoa(document.location));
+});
+</script>
+
+<body>
+	<p>
+	this is for test!!!
+	</p>
+</body>
