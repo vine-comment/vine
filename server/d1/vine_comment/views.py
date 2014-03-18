@@ -43,6 +43,9 @@ class CommentIframeView(TemplateView):
     # 此view是server第一入口，回应iframe信息
     def get(self, request, *args, **kwargs):
         url_b64 = kwargs.get('url_b64', self.index_default_str)
+        print "................."
+        print request.path
+        print "................."
         return render(request, self.template_name, {
             'url_b64': url_b64,
         })
