@@ -4,3 +4,4 @@
 * mail server
   * sendmail, smtp.gmail, etc. Need mail account authentication
   * python -m smtpd -n -c DebuggingServer localhost:1025
+* crispy forms
