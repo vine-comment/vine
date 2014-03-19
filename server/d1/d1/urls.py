@@ -5,6 +5,14 @@ admin.autodiscover()
 
 from d1.views import *
 from vine_comment.views import *
+from vine_comment.forms import *
+
+from django.contrib.auth.decorators import login_required
+
+
+from registration.forms import RegistrationFormTermsOfService
+from registration.backends.simple.views import RegistrationView
+
 
 # NORMAL url patterns
 urlpatterns = patterns('',
@@ -41,6 +49,10 @@ urlpatterns += patterns('',
     url(r'^setting_raw/(?P<url_b64>.*?)/?$', SettingRawView.as_view(), name='setting_raw'),
     url(r'^auth_test/$', TemplateView.as_view(template_name='social_signin.html'), name='auth_test'),
     url(r'^test/$', TemplateView.as_view(template_name='test.html'), name='test'),
+    url(r'^accounts/register/$',
+          RegistrationView.as_view(form_class=VineRegistrationForm),
+          name='registration_register'),
+
 )
 
 from functools import wraps

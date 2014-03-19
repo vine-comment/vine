@@ -134,6 +134,7 @@ INSTALLED_APPS = (
     # 3rd party apps
     'social.apps.django_app.default',
     'registration',
+    'crispy_forms',
     # my apps
     'd1',
     'vine_comment',
@@ -146,7 +147,7 @@ INSTALLED_APPS = (
 
 ACCOUNT_ACTIVATION_DAYS = 7
 EMAIL_HOST = 'localhost'
-EMAIL_PORT = 8025
+EMAIL_PORT = 1025
 LOGIN_REDIRECT_URL = 'index'
 DEFAULT_FROM_EMAIL = 'webmaster@localhost'
 EMAIL_FROM = 'webmaster@localhost'
@@ -220,6 +221,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     #'social.apps.django_app.context_processors.backends',
     #'social.apps.django_app.context_processors.login_redirect',
     'social.apps.django_app.context_processors.backends',
+    "vine_comment.context_processors.registration"
 )
 
 ##################################################### 
@@ -276,3 +278,7 @@ except ImportError:
 ##################################################### 
 # end django-social-auth
 #####################################################
+
+# crispy_form
+CRISPY_TEMPLATE_PACK = 'bootstrap3'
+
