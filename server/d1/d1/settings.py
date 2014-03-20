@@ -135,14 +135,14 @@ INSTALLED_APPS = (
     'social.apps.django_app.default',
     'registration',
     'crispy_forms',
-    # my apps
-    'd1',
-    'vine_comment',
-    'social_auth_app',
     # 'django_wysiwyg',
     # 'django.contrib.admindocs',
     'django_mongodb_engine',
     'djangotoolbox',
+    # my apps
+    'd1',
+    'vine_comment',
+    'social_auth_app',
 )
 
 ACCOUNT_ACTIVATION_DAYS = 7
