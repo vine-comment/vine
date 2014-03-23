@@ -1,10 +1,14 @@
 vine
 ========
 
-###a 3rd party comment system
+##A 3rd party comment system
 
 * main languages: JavaScript, Python
 * main framework: jquery, django, bootstrap
+
+## Trello board
+
+https://trello.com/b/N05Gszf8/vine-comment
 
 ####DOING
 
