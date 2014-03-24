@@ -1,7 +1,17 @@
-###Misc should install.
-* python-social-auth
-* mongodb
+###djanog-nonrel
+**http://django-mongodb-engine.readthedocs.org/en/latest/topics/setup.html**
+* django-nonrel
+* djangotoolbox
+* django-mongodb-engine
+
+###misc
+* django-registration
 * django-crispy-forms
+* django-admin-bootstrapped
+
+###python
+* python-dev (apt-get install python-dev)
+* Pillow (pip install Pillow)
 
 ###Items should run.
 * Run a mail server to use account authentication.
