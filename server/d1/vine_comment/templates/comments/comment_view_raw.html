@@ -6,12 +6,11 @@
   <li class="list-group-item">
     <span style="float:right">
       <script type="text/javascript">
-        var id = "{{message.id}}";
-        function up() {
+        function up(id) {
           $.get("/ajax/up/comment/"+id);
         };
       </script>
-      <i class="fa fa-thumbs-o-up" style="cursor:pointer" onclick="up()"></i>{{ message.up_users|length }}
+      <i class="fa fa-thumbs-o-up" style="cursor:pointer" onclick="up('{{message.id}}')"></i>{{ message.up_users|length }}
       <i class="fa fa-thumbs-down fa-flip-horizontal"></i>{{ message.down_users|length }}
      </span>
      <strong>{% if message.user %}{{ message.user }}{% else %}{{ message.auther_ip }}{% endif %}</strong>
