@@ -3,10 +3,14 @@
 
 <ul class="list-group">
 {% for message in p_comment.object_list %}
-    <li class="list-group-item">
+  <li class="list-group-item">
+    <span style="float:right">
+      <i class="fa fa-thumbs-o-up"></i>{{message.up_users|length}}
+      <i class="fa fa-thumbs-down fa-flip-horizontal"></i>{{message.down_users|length}}
+     </span>
      <strong>{% if message.user %}{{ message.user }}{% else %}{{ message.auther_ip }}{% endif %}</strong>
      <span id='comment_time'> {{ message.time_added|naturaltime }}</span> {{message.comment_str}} <br>
-    </li>
+  </li>
 {% endfor %}
 </ul>
 
