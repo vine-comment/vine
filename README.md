@@ -78,6 +78,9 @@ https://trello.com/b/N05Gszf8/vine-comment
 6. another Alternatives
 7. http://ralsina.com.ar/stories/twitter-as-a-comment-engine.html 
 8. social media integrate
+9. husky chat: https://chrome.google.com/webstore/detail/husky-chat-beta/lbmgpgocopbpmchjlnlmdfiebepmpcdo
+10. webchat: http://www.v2ex.com/t/105514
+11. sidewiki: http://en.wikipedia.org/wiki/Google_Sidewiki
 
 ###TODO-LONGTERM
 
