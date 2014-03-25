@@ -229,3 +229,14 @@ class SettingRawView(TemplateView):
 
     def get(self, request, *args, **kwargs):
         return render(request, self.template_name)
+
+class CommentUpView(TemplateView):
+    def get(self, request, id):
+        comments = Comment.objects.filter(id=id)
+        if not comments:
+            return HttpResponse(status=404)
+        comment = comments[0]
+        comment.up_users.append(request.user.id)
+        comment.save()
+        return HttpResponse(status=200)
+
