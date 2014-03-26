@@ -237,12 +237,14 @@ class CommentUpView(TemplateView):
             return HttpResponse(status=404)
         comment = comments[0]
         if request.user.id in comment.up_users:
-            return HttpResponse(status=404)
+            return HttpResponse('duplicated', mimetype='plain/text')
         if request.user.id in comment.down_users:
             comment.down_users.remove(request.user.id)
+            comment.save()
+            return HttpResponse('down-1', mimetype='plain/text')
         comment.up_users.append(request.user.id)
         comment.save()
-        return HttpResponse(status=200)
+        return HttpResponse("+1", mimetype='plain/text')
 
 class CommentDownView(TemplateView):
     def get(self, request, id):
