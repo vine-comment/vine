@@ -238,7 +238,23 @@ class CommentUpView(TemplateView):
         comment = comments[0]
         if request.user.id in comment.up_users:
             return HttpResponse(status=404)
+        if request.user.id in comment.down_users:
+            comment.down_users.remove(request.user.id)
         comment.up_users.append(request.user.id)
+        comment.save()
+        return HttpResponse(status=200)
+
+class CommentDownView(TemplateView):
+    def get(self, request, id):
+        comments = Comment.objects.filter(id=id)
+        if not comments:
+            return HttpResponse(status=404)
+        comment = comments[0]
+        if request.user.id in comment.down_users:
+            return HttpResponse(status=404)
+        if request.user.id in comment.up_users:
+            comment.up_users.remove(request.user.id)
+        comment.down_users.append(request.user.id)
         comment.save()
         return HttpResponse(status=200)
 
