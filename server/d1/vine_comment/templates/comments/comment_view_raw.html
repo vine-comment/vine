@@ -7,10 +7,16 @@
     <span style="float:right">
       <script type="text/javascript">
         function up(id) {
-          $.get("/ajax/up/comment/"+id);
+          $.get("/ajax/up/comment/"+id)
+            .done(function(){
+                popup_message("up +1");
+                var ups = $('#up_comment_'+id).find('i');
+                var count = parseInt(ups.text())+1;
+                ups.text(count);
+            });
         };
       </script>
-			<a href="#"><i class="fa fa-thumbs-o-up" style="cursor:pointer" onclick="up('{{message.id}}')"></i></a>{{ message.up_users|length }}
+			<a href="#" id="up_comment_{{message.id}}"><i class="fa fa-thumbs-o-up" style="cursor:pointer" onclick="up('{{message.id}}')">{{ message.up_users|length }}</i></a>
 					<a href="#"><i class="fa fa-thumbs-down fa-flip-horizontal"></i></a>{{ message.down_users|length }}
      </span>
      <strong>{% if message.user %}{{ message.user }}{% else %}{{ message.auther_ip }}{% endif %}</strong>

@@ -236,8 +236,9 @@ class CommentUpView(TemplateView):
         if not comments:
             return HttpResponse(status=404)
         comment = comments[0]
-        if not request.user.id in comment.up_users:
-            comment.up_users.append(request.user.id)
+        if request.user.id in comment.up_users:
+            return HttpResponse(status=404)
+        comment.up_users.append(request.user.id)
         comment.save()
         return HttpResponse(status=200)
 
