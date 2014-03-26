@@ -65,6 +65,10 @@ function main() {
             var posting = $.post(last_url, {'comment': comment_input.val(), 'target_url': target_url })
             .fail(function(data){if ( data.responseCode ) console.log( data.responseCode );});
             posting.done(function(data) {
+                var badge = $('#comments_count');
+                var count = parseInt(badge.html())+1;
+                badge.html(count);
+
                 $('#showMsg').html(data);
                 comment_input.val('');
                 btn.button('reset');
