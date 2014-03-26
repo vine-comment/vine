@@ -43,8 +43,8 @@
             });
         };
       </script>
-			<a href="#" id="up_comment_{{message.id}}"><i class="fa fa-thumbs-o-up" onclick="up('{{message.id}}')"></i><span> {{ message.up_users|length }}</span></a>
-					<a href="#" id="down_comment_{{message.id}}"><i class="fa fa-thumbs-down fa-flip-horizontal" onclick="down('{{message.id}}')"></i><span> {{ message.down_users|length }}</span></a>
+			<a href="#" id="up_comment_{{message.id}}"><i class="fa fa-thumbs-o-up" onclick="up('{{message.id}}')"></i>&nbsp<span>{{ message.up_users|length }}</span></a>
+					<a href="#" id="down_comment_{{message.id}}"><i class="fa fa-thumbs-down fa-flip-horizontal" onclick="down('{{message.id}}')"></i>&nbsp<span>{{ message.down_users|length }}</span></a>
      </span>
      <strong>{% if message.user %}{{ message.user }}{% else %}{{ message.auther_ip }}{% endif %}</strong>
      <span id='comment_time'> {{ message.time_added|naturaltime }}</span> {{message.comment_str}} <br>
