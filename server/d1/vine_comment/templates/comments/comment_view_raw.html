@@ -26,11 +26,20 @@
         };
         function down(id) {
           $.get("/ajax/down/comment/"+id)
-            .done(function(){
-                popup_message("down +1");
-                var downs = $('#down_comment_'+id).find('span');
-                var count = parseInt(downs.text())+1;
-                downs.text(count);
+            .done(function(data){
+                if (data == "duplicated") {
+                    popup_message("You can only down once :)");
+                } else if (data == "+1") {
+                    popup_message("down+1");
+                    var downs = $('#down_comment_'+id).find('span');
+                    var count = parseInt(downs.text())+1;
+                    downs.text(count);
+                } else if (data == "up-1") {
+                    popup_message("up-1");
+                    var ups = $('#up_comment_'+id).find('span');
+                    var count = parseInt(ups.text())-1;
+                    ups.text(count);
+                }
             });
         };
       </script>
