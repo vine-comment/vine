@@ -1,48 +1,48 @@
 {% load humanize %}
 
+<script type="text/javascript">
+function up(id) {
+ $.get("/ajax/up/comment/"+id)
+   .done(function(data){
+      if (data == "duplicated") {
+          popup_message("You can only up once :)");
+      } else if (data == "+1") {
+          popup_message("up+1");
+          var ups = $('#up_comment_'+id).find('span');
+          var count = parseInt(ups.text())+1;
+          ups.text(count);
+      } else if (data == "down-1") {
+          popup_message("down-1");
+          var downs = $('#down_comment_'+id).find('span');
+          var count = parseInt(downs.text())-1;
+          downs.text(count);
+      }
+   });
+};
+function down(id) {
+  $.get("/ajax/down/comment/"+id)
+   .done(function(data){
+      if (data == "duplicated") {
+          popup_message("You can only down once :)");
+      } else if (data == "+1") {
+          popup_message("down+1");
+          var downs = $('#down_comment_'+id).find('span');
+          var count = parseInt(downs.text())+1;
+          downs.text(count);
+      } else if (data == "up-1") {
+          popup_message("up-1");
+          var ups = $('#up_comment_'+id).find('span');
+          var count = parseInt(ups.text())-1;
+          ups.text(count);
+      }
+   });
+};
+</script>
 
 <ul class="list-group">
 {% for message in p_comment.object_list %}
   <li class="list-group-item">
     <span style="float:right">
-      <script type="text/javascript">
-        function up(id) {
-          $.get("/ajax/up/comment/"+id)
-            .done(function(data){
-                if (data == "duplicated") {
-                    popup_message("You can only up once :)");
-                } else if (data == "+1") {
-                    popup_message("up+1");
-                    var ups = $('#up_comment_'+id).find('span');
-                    var count = parseInt(ups.text())+1;
-                    ups.text(count);
-                } else if (data == "down-1") {
-                    popup_message("down-1");
-                    var downs = $('#down_comment_'+id).find('span');
-                    var count = parseInt(downs.text())-1;
-                    downs.text(count);
-                }
-              });
-        };
-        function down(id) {
-          $.get("/ajax/down/comment/"+id)
-            .done(function(data){
-                if (data == "duplicated") {
-                    popup_message("You can only down once :)");
-                } else if (data == "+1") {
-                    popup_message("down+1");
-                    var downs = $('#down_comment_'+id).find('span');
-                    var count = parseInt(downs.text())+1;
-                    downs.text(count);
-                } else if (data == "up-1") {
-                    popup_message("up-1");
-                    var ups = $('#up_comment_'+id).find('span');
-                    var count = parseInt(ups.text())-1;
-                    ups.text(count);
-                }
-            });
-        };
-      </script>
 			<a href="#" id="up_comment_{{message.id}}"><i class="fa fa-thumbs-o-up" onclick="up('{{message.id}}')"></i>+<span>{{ message.up_users|length }}</span></a>
 					<a href="#" id="down_comment_{{message.id}}"><i class="fa fa-thumbs-down fa-flip-horizontal" onclick="down('{{message.id}}')"></i>-<span>{{ message.down_users|length }}</span></a>
      </span>
