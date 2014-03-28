@@ -12,16 +12,15 @@ https://trello.com/b/N05Gszf8/vine-comment
 
 ####DOING
 
-* accounts
-* android front
-* use redis
-* comment as a tree(site->dir1->dir2->last_pathname)
-* ajax pagination(dynamic)
+* Account system with OAuth.
+* Android native app.
+* Redis as a cache layer.
+* Multi-layer comment board. `(site->dir1->dir2->page)`
 
 ####BUG-TRACKING
 
-* https://github.com/ bugs... the script couldn't work via https. maybe we need a https scripts
-* iframe in page will load this plugin, it may be an unwanted action
+* https://github.com/ the script couldn't work via https. We need to support scripts via https.
+* iframe in page will load this plugin, it may be an unwanted action.
 * timezone is not correct.. now it's utc. we should display it as viewers' time. Or it should be showed like youtube?
 * jquery confict again.
 
