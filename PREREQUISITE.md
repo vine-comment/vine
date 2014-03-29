@@ -9,6 +9,7 @@
 * django-crispy-forms
 * django-admin-bootstrapped
 * python-social-auth
+* jieba
 
 ###python
 * python-dev (apt-get install python-dev)
