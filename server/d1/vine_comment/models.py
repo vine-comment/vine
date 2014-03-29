@@ -78,6 +78,7 @@ class Comment(TimeMixin, models.Model):
     user = models.ForeignKey(User, blank=True, null=True)
     up_users = ListField(models.ForeignKey(User))
     down_users = ListField(models.ForeignKey(User))
+    tags = ListField(models.CharField(max_length=128))
 
     def __unicode__(self):
         return self.time_added.strftime("%Y-%m-%d %H:%M:%S") + self.title + ' ' + self.comment_str

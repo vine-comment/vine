@@ -15,6 +15,9 @@ from django.utils.timezone import utc
 from django.views.decorators.csrf import csrf_exempt
 
 # 3rd party modules
+import jieba
+import jieba.analyse
+
 # private modules
 from models import Comment, CommentBoard
 
@@ -92,6 +95,9 @@ class CommentView(TemplateView):
                     comment_str=comment_str,
                     comment_board=comment_board,
                     auther_ip=auther_ip)
+
+        # Generate top 10 tags for comment.
+        comment.tags = jieba.analyse.extract_tags(comment_str, topK=10)
         comment.save()
 
     @csrf_exempt
