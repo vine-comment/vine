@@ -92,6 +92,8 @@ function down(id) {
 <!-- <iframe src="{% url 'test' %}" frameborder="0" onload="document.getElementById('loadImg').style.display='none';"
 width="100%" height=100% frameborder="0">
 </iframe> -->
+{% comment %}
 {% else %}
 {% include "social_signin_raw.html" %}
+{% endcomment %}
 {% endif %}
