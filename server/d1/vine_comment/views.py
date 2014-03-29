@@ -66,12 +66,12 @@ class CommentView(TemplateView):
     def _post_comment(self, index_url, comment_str, auther_ip, user):
         title=urlparse(index_url).netloc
         
-        print comment_str, user
-        logger.debug('Auther_ip:' + auther_ip
-                     + ' User:' + str(user)
-                     + ' Title:' + title
-                     + ' Index_url:' + index_url
-                     + ' Comment_str:' + comment_str)
+        # print comment_str, user
+        logger.info('评论:' + comment_str
+                     + 'IP:' + auther_ip
+                     + ' 用户:' + str(user)
+                     + ' TITLE:' + title
+                     + ' INDEX:' + index_url)
 
         comment_board, created = CommentBoard.objects.get_or_create(
                                     url=index_url,
@@ -96,8 +96,9 @@ class CommentView(TemplateView):
                     comment_board=comment_board,
                     auther_ip=auther_ip)
 
-        # Generate top 10 tags for comment.
-        comment.tags = jieba.analyse.extract_tags(comment_str, topK=10)
+        # Generate top 5 tags for comment.
+        comment.tags = jieba.analyse.extract_tags(comment_str, topK=5)
+        logger.info('tags: ' + repr(comment.tags).decode("unicode-escape"))
         comment.save()
 
     @csrf_exempt
@@ -134,8 +135,7 @@ class CommentView(TemplateView):
         #TODO performance optimization for objects order_by('-time_added')
         comments = filter(lambda x:urlparse(index_url).netloc in x.comment_board.title,
                 Comment.objects.order_by('-time_added'))
-        print comments
-        print len(comments)
+        logger.info(str(len(comments)) + ': ' + str(comments))
         try:
             p = Paginator(comments, 10).page(index_page)
         except PageNotAnInteger:
