@@ -10,6 +10,8 @@
 * django-admin-bootstrapped
 * python-social-auth
 * jieba
+* Whoosh
+* django-haystack
 
 ###python
 * python-dev (apt-get install python-dev)
