@@ -274,12 +274,19 @@ class CommentDownView(TemplateView):
             comment.save()
             return HttpResponse("down+1", mimetype='plain/text')
 
+        """
+        for comment in most_up_comments:
+            comment.up_num = len(comment.up_users)
+        comments = most_up_comments.order_by('up_num').all()
+        """
 class HomeView(TemplateView):
     template_name = 'home.html'
 
     def get(self, request, *args, **kwargs):
         comments = Comment.objects.order_by('-time_added').all()
+        comments = sorted(comments,key=lambda o:len(o.up_users),reverse=True)
         index_page = request.GET.get('page', 1)
+
  
         #TODO performance optimization for objects order_by('-time_added')
         logger.info(str(len(comments)) + ': ' + str(comments))
