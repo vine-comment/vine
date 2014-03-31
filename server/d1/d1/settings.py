@@ -131,14 +131,17 @@ INSTALLED_APPS = (
     'django.contrib.humanize',
     # optional apps
     'django.contrib.admin',
+    # 'django.contrib.admindocs',
+
     # 3rd party apps
     'social.apps.django_app.default',
     'registration',
     'crispy_forms',
+    'haystack',
     # 'django_wysiwyg',
-    # 'django.contrib.admindocs',
     'django_mongodb_engine',
     'djangotoolbox',
+
     # my apps
     'd1',
     'vine_comment',
@@ -281,4 +284,11 @@ except ImportError:
 
 # crispy_form
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
+
+HAYSTACK_CONNECTIONS = {
+    'default': {
+        'ENGINE': 'haystack.backends.whoosh_backend.WhooshEngine',
+        'PATH': CURRENT_DIR + 'whoosh_index',
+    },
+}
 
