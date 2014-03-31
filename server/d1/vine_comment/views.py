@@ -247,10 +247,13 @@ class CommentUpView(TemplateView):
         if request.user.id in comment.down_users:
             comment.down_users.remove(request.user.id)
             comment.save()
-            return HttpResponse('down-1', mimetype='plain/text')
-        comment.up_users.append(request.user.id)
-        comment.save()
-        return HttpResponse("+1", mimetype='plain/text')
+            comment.up_users.append(request.user.id)
+            comment.save()
+            return HttpResponse('down-1,up+1', mimetype='plain/text')
+        else:
+            comment.up_users.append(request.user.id)
+            comment.save()
+            return HttpResponse("up+1", mimetype='plain/text')
 
 class CommentDownView(TemplateView):
     def get(self, request, id):
@@ -263,8 +266,11 @@ class CommentDownView(TemplateView):
         if request.user.id in comment.up_users:
             comment.up_users.remove(request.user.id)
             comment.save()
-            return HttpResponse('up-1', mimetype='plain/text')
-        comment.down_users.append(request.user.id)
-        comment.save()
-        return HttpResponse("+1", mimetype='plain/text')
+            comment.down_users.append(request.user.id)
+            comment.save()
+            return HttpResponse('up-1,down+1', mimetype='plain/text')
+        else:
+            comment.down_users.append(request.user.id)
+            comment.save()
+            return HttpResponse("down+1", mimetype='plain/text')
 

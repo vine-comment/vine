@@ -6,16 +6,26 @@ function up(id) {
    .done(function(data){
       if (data == "duplicated") {
           popup_message("You can only up once :)");
-      } else if (data == "+1") {
-          popup_message("up+1");
+      } else if (data == "up+1") {
+          popup_message(data);
           var ups = $('#up_comment_'+id).find('span');
           var count = parseInt(ups.text())+1;
           ups.text(count);
-      } else if (data == "down-1") {
-          popup_message("down-1");
+          var up_icon = $('#up_comment_'+id).find('i');
+          up_icon.prop('class', "fa fa-thumbs-up");
+      } else if (data == "down-1,up+1") {
+          popup_message(data);
           var downs = $('#down_comment_'+id).find('span');
           var count = parseInt(downs.text())-1;
           downs.text(count);
+          var down_icon = $('#down_comment_'+id).find('i');
+          down_icon.prop('class', "fa fa-thumbs-o-down fa-flip-horizontal");
+
+          var ups = $('#up_comment_'+id).find('span');
+          var count = parseInt(ups.text())+1;
+          ups.text(count);
+          var up_icon = $('#up_comment_'+id).find('i');
+          up_icon.prop('class', "fa fa-thumbs-up");
       }
    });
 };
@@ -24,16 +34,26 @@ function down(id) {
    .done(function(data){
       if (data == "duplicated") {
           popup_message("You can only down once :)");
-      } else if (data == "+1") {
-          popup_message("down+1");
+      } else if (data == "down+1") {
+          popup_message(data);
           var downs = $('#down_comment_'+id).find('span');
           var count = parseInt(downs.text())+1;
           downs.text(count);
-      } else if (data == "up-1") {
-          popup_message("up-1");
+          var down_icon = $('#down_comment_'+id).find('i');
+          down_icon.prop('class', "fa fa-thumbs-down fa-flip-horizontal");
+      } else if (data == "up-1,down+1") {
+          popup_message(data);
           var ups = $('#up_comment_'+id).find('span');
           var count = parseInt(ups.text())-1;
           ups.text(count);
+          var up_icon = $('#up_comment_'+id).find('i');
+          up_icon.prop('class', "fa fa-thumbs-o-up");
+
+          var downs = $('#down_comment_'+id).find('span');
+          var count = parseInt(downs.text())+1;
+          downs.text(count);
+          var down_icon = $('#down_comment_'+id).find('i');
+          down_icon.prop('class', "fa fa-thumbs-down fa-flip-horizontal");
       }
    });
 };
@@ -43,8 +63,22 @@ function down(id) {
 {% for message in p_comment.object_list %}
   <li class="list-group-item">
     <span style="float:right">
-			<a href="#" id="up_comment_{{message.id}}" onclick="up('{{message.id}}')"><i class="fa fa-thumbs-o-up"></i>+<span>{{ message.up_users|length }}</span></a>
-					<a href="#" id="down_comment_{{message.id}}" onclick="down('{{message.id}}')"><i class="fa fa-thumbs-down fa-flip-horizontal"></i>-<span>{{ message.down_users|length }}</span></a>
+      <a href="#" id="up_comment_{{message.id}}" onclick="up('{{message.id}}')">
+        {% if user.id in message.up_users %}
+        <i class="fa fa-thumbs-up"></i>
+        {% else %}
+        <i class="fa fa-thumbs-o-up"></i>
+        {% endif %}
+        +<span>{{ message.up_users|length }}</span>
+      </a>
+      <a href="#" id="down_comment_{{message.id}}" onclick="down('{{message.id}}')">
+        {% if user.id in message.down_users %}
+        <i class="fa fa-thumbs-down fa-flip-horizontal"></i>
+        {% else %}
+        <i class="fa fa-thumbs-o-down fa-flip-horizontal"></i>
+        {% endif %}
+        -<span>{{ message.down_users|length }}</span>
+      </a>
      </span>
      <strong>{% if message.user %}{{ message.user }}{% else %}{{ message.auther_ip }}{% endif %}</strong>
      <span id='comment_time'> {{ message.time_added|naturaltime }}</span> {{message.comment_str}} <br>
