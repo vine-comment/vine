@@ -15,8 +15,20 @@ $(document).ready(function(){
 	$.support.cors = true;
 	$('#vine_comment_iframe').load("/iframe/" + btoa(document.location));
 });
+function DayHot() {
+  $.get("/home/hot/1")
+   .done(function(data){
+        $('#showMsg').html(data);
+       });
+};
 function WeekHot() {
-  $.get("/home/weekhot/")
+  $.get("/home/hot/7")
+   .done(function(data){
+        $('#showMsg').html(data);
+       });
+};
+function MonthHot() {
+  $.get("/home/hot/30")
    .done(function(data){
         $('#showMsg').html(data);
        });
@@ -26,9 +38,9 @@ function WeekHot() {
 
 <body>
 	<h1>Vine Comments</h1>
-  <button class="btn btn-primary">今日最热</button>
-  <button class="btn btn-primary" onclick="WeekHot()">周最热</button>
-  <button class="btn btn-primary">月最热</button>
+  <button class="btn btn-primary" onclick="DayHot()">今日最热</button>
+  <button class="btn btn-primary" onclick="WeekHot()">7天最热</button>
+  <button class="btn btn-primary" onclick="MonthHot()">30天最热</button>
 	<div id="showMsg">
     {% include 'comments_list.html' %}
 	</div> <!-- /#showMsg -->

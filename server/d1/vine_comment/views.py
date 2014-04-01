@@ -334,12 +334,12 @@ class HomeListView(TemplateView):
             'p_comment': p,
         })
 
-class HomeWeekHotView(TemplateView):
-    template_name = 'comments_weekhot.html'
+class HomeHotView(TemplateView):
+    template_name = 'comments_hot.html'
 
-    def get(self, request, *args, **kwargs):
+    def get(self, request, days):
 # need to use time_modified instead of time added
-        comments = Comment.objects.order_by('-time_added').filter(time_added__gte=datetime.datetime.now()-timedelta(days=7))
+        comments = Comment.objects.order_by('-time_added').filter(time_added__gte=datetime.datetime.now()-timedelta(days=eval(days)))
         comments = sorted(comments,key=lambda o:len(o.up_users),reverse=True)
         index_page = request.GET.get('page', 1)
         print index_page
@@ -358,4 +358,5 @@ class HomeWeekHotView(TemplateView):
 
         return render(request, self.template_name, {
             'p_comment': p,
+            'days': days,
         })
