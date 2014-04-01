@@ -13,6 +13,7 @@ __pycache__/
 *.so
 
 # Distribution / packaging
+d1whoosh_index/
 bin/
 build/
 develop-eggs/
