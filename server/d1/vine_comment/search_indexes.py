@@ -6,8 +6,8 @@ from vine_comment.models import Comment
 class CommentIndex(indexes.SearchIndex, indexes.Indexable):
     text = indexes.CharField(document=True, use_template=True)
     comment_str = indexes.CharField(model_attr='comment_str')
-    title = indexes.CharField(model_attr='title')
-    author_ip = indexes.CharField(model_attr='author_ip', null=True)
+    title = indexes.CharField()
+    author_ip = indexes.CharField(null=True)
 
     def get_model(self):
         return Comment

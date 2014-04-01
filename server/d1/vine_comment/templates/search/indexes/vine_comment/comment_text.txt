@@ -1,3 +1,4 @@
 {{ object.text }}
 {{ object.comment_str }}
 {{ object.author_ip }}
+{{ object.title }}
