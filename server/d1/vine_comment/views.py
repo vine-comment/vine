@@ -68,11 +68,11 @@ class CommentView(TemplateView):
         title=urlparse(index_url).netloc
         
         # print comment_str, user
-        logger.info('评论:' + comment_str
-                     + 'IP:' + auther_ip
-                     + ' 用户:' + str(user)
-                     + ' TITLE:' + title
-                     + ' INDEX:' + index_url)
+        logger.info(u'评论:' + comment_str
+                     + u'IP:' + auther_ip
+                     + u' 用户:' + str(user)
+                     + u' TITLE:' + title
+                     + u' INDEX:' + index_url)
 
         comment_board, created = CommentBoard.objects.get_or_create(
                                     url=index_url,
