@@ -15,19 +15,25 @@ $(document).ready(function(){
 	$.support.cors = true;
 	$('#vine_comment_iframe').load("/iframe/" + btoa(document.location));
 });
-function DayHot() {
+function DayHot(me) {
+  $('.get_hotest').prop('class',"btn btn-primary get_hotest");
+  $(me).prop('class',"btn btn-success get_hotest");
   $.get("/home/hot/1")
    .done(function(data){
         $('#showMsg').html(data);
        });
 };
-function WeekHot() {
+function WeekHot(me) {
+  $('.get_hotest').prop('class',"btn btn-primary get_hotest");
+  $(me).prop('class',"btn btn-success get_hotest");
   $.get("/home/hot/7")
    .done(function(data){
         $('#showMsg').html(data);
        });
 };
-function MonthHot() {
+function MonthHot(me) {
+  $('.get_hotest').prop('class',"btn btn-primary get_hotest");
+  $(me).prop('class',"btn btn-success get_hotest");
   $.get("/home/hot/30")
    .done(function(data){
         $('#showMsg').html(data);
@@ -38,9 +44,9 @@ function MonthHot() {
 
 <body>
 	<h1>Vine Comments</h1>
-  <button class="btn btn-primary" onclick="DayHot()">今日最热</button>
-  <button class="btn btn-primary" onclick="WeekHot()">7天最热</button>
-  <button class="btn btn-primary" onclick="MonthHot()">30天最热</button>
+  <button class="btn btn-primary get_hotest" onclick="DayHot(this)">今日最热</button>
+  <button class="btn btn-primary get_hotest" onclick="WeekHot(this)">7天最热</button>
+  <button class="btn btn-primary get_hotest" onclick="MonthHot(this)">30天最热</button>
 	<div id="showMsg">
     {% include 'comments_list.html' %}
 	</div> <!-- /#showMsg -->
