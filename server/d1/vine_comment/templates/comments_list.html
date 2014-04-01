@@ -1,4 +1,6 @@
 {% load humanize %}
+{% load staticfiles %}
+<script src="{% static 'jquery/2.0.3/jquery.min.js' %}"></script>
 
 		<script type="text/javascript">
 		function up(id) {
@@ -93,7 +95,7 @@
 		<script type="text/javascript">
 			var l = document.location;
 			$('#pagination_arrow_{{ p_comment.previous_page_number }}').on('click', function() {
-				$('#showMsg').load(l.origin + '/ajax' + l.pathname + '?page={{ p_comment.previous_page_number }}');
+				$('#showMsg').load('/home/list?page={{ p_comment.previous_page_number }}');
 			});
 		</script>
 		{% endif %}
@@ -103,9 +105,8 @@
 			{% else %}
 				<li id='pagination_{{num}}'><a href="#">{{ num }}</a></li>
 				<script type="text/javascript">
-					var l = document.location;
 					$('#pagination_{{num}}').on('click', function() {
-						$('#showMsg').load(l.origin + '/ajax' + l.pathname + '?page={{ num }}');
+						$('#showMsg').load('/home/list?page={{ num }}');
 					});
 				</script>
 
@@ -114,9 +115,8 @@
 		{% if p_comment.has_next %}
 		<li id='pagination_arrow_{{ p_comment.next_page_number }}'><a href="#">»</a></li>
 		<script type="text/javascript">
-			var l = document.location;
 			$('#pagination_arrow_{{ p_comment.next_page_number }}').on('click', function() {
-				$('#showMsg').load(l.origin + '/ajax' + l.pathname + '?page={{ p_comment.next_page_number }}');
+				$('#showMsg').load('/home/list?page={{ p_comment.next_page_number }}');
 			});
 		</script>
 		{% endif %}
