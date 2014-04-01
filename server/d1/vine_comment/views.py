@@ -82,6 +82,8 @@ class CommentView(TemplateView):
             comment = Comment(
                     time_added=datetime.datetime.utcnow().replace(
                                     tzinfo=utc),
+                    time_modified=datetime.datetime.utcnow().replace(
+                                    tzinfo=utc),
                     comment_str=comment_str,
                     comment_board=comment_board,
                     auther_ip=auther_ip,
@@ -336,7 +338,8 @@ class HomeWeekHotView(TemplateView):
     template_name = 'comments_weekhot.html'
 
     def get(self, request, *args, **kwargs):
-        comments = Comment.objects.order_by('-time_added').filter(time_modified__gte=datetime.datetime.now()-timedelta(days=7))
+# need to use time_modified instead of time added
+        comments = Comment.objects.order_by('-time_added').filter(time_added__gte=datetime.datetime.now()-timedelta(days=7))
         comments = sorted(comments,key=lambda o:len(o.up_users),reverse=True)
         index_page = request.GET.get('page', 1)
         print index_page
