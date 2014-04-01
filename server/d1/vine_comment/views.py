@@ -20,7 +20,7 @@ import jieba
 import jieba.analyse
 
 # private modules
-from models import Comment, CommentBoard
+from vine_comment.models import Comment, CommentBoard
 
 logger = logging.getLogger( __name__ )
 
@@ -64,12 +64,12 @@ class CommentView(TemplateView):
     template_meta = 'comments/comment_view_meta.html'
 
     @csrf_exempt
-    def _post_comment(self, index_url, comment_str, auther_ip, user):
+    def _post_comment(self, index_url, comment_str, author_ip, user):
         title=urlparse(index_url).netloc
         
         # print comment_str, user
         logger.info(u'评论:' + comment_str
-                     + u'IP:' + auther_ip
+                     + u'IP:' + author_ip
                      + u' 用户:' + str(user)
                      + u' TITLE:' + title
                      + u' INDEX:' + index_url)
@@ -86,8 +86,8 @@ class CommentView(TemplateView):
                                     tzinfo=utc),
                     comment_str=comment_str,
                     comment_board=comment_board,
-                    auther_ip=auther_ip,
-                    user=user) # 以后换成auther，现在先用user
+                    author_ip=author_ip,
+                    user=user) # 以后换成author，现在先用user
         else:
             '''
             Annoymous User access the site.
@@ -99,7 +99,7 @@ class CommentView(TemplateView):
                                     tzinfo=utc),
                     comment_str=comment_str,
                     comment_board=comment_board,
-                    auther_ip=auther_ip)
+                    author_ip=author_ip)
 
         # Generate top 5 tags for comment.
         comment.tags = jieba.analyse.extract_tags(comment_str, topK=5)
@@ -109,10 +109,10 @@ class CommentView(TemplateView):
     @csrf_exempt
     def record_index_url(self, request, *args, **kwargs):
         index_url = kwargs.get('index_url', self.index_default_str)
-        auther_ip = request.META.get('REMOTE_ADDR', '0.0.0.0')
+        author_ip = request.META.get('REMOTE_ADDR', '0.0.0.0')
         user = request.user
         comment_str = index_url
-        self._post_comment(index_url, comment_str, auther_ip, user)
+        self._post_comment(index_url, comment_str, author_ip, user)
 
     @csrf_exempt
     def debug(self, request, *args, **kwargs):
@@ -121,10 +121,10 @@ class CommentView(TemplateView):
     @csrf_exempt
     def post(self, request, *args, **kwargs):
         comment_str = request.POST.get('comment', 'Empty Comment')
-        auther_ip = request.META.get('REMOTE_ADDR', '0.0.0.0')
+        author_ip = request.META.get('REMOTE_ADDR', '0.0.0.0')
         index_url = kwargs.get('index_url', self.index_default_str)
         user = request.user
-        self._post_comment(index_url, comment_str, auther_ip, user)
+        self._post_comment(index_url, comment_str, author_ip, user)
 
         kwargs['template'] = self.template_raw
         return self.get(request, *args, **kwargs)

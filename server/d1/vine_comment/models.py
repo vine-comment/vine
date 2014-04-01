@@ -73,8 +73,8 @@ class Comment(TimeMixin, models.Model):
     comment_str = models.CharField(max_length=128)
     desc = models.CharField(max_length=64, blank=True, null=True)
     comment_board = models.ForeignKey(CommentBoard)
-    auther_ip = models.IPAddressField(blank=True, null=True)
-    # 在后面加入auther的详细信息，分为匿名和实名
+    author_ip = models.IPAddressField(blank=True, null=True)
+    # 在后面加入author的详细信息，分为匿名和实名
     user = models.ForeignKey(User, blank=True, null=True)
     up_users = ListField(models.ForeignKey(User))
     down_users = ListField(models.ForeignKey(User))

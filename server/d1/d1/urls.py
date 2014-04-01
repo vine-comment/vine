@@ -14,7 +14,7 @@ from registration.forms import RegistrationFormTermsOfService
 from registration.backends.simple.views import RegistrationView
 
 
-# NORMAL url patterns
+# NOT USE NOW.
 urlpatterns = patterns('',
     (r'^accounts/', include('registration.backends.default.urls')),
     url(r'^matrix/?$', TemplateView.as_view(template_name='matrix/matrix.html'), name='matrix'),
@@ -25,6 +25,7 @@ urlpatterns = patterns('',
 
 # TEST python-social-auth
 urlpatterns = patterns('',
+    (r'^search/', include('haystack.urls')),
     url(r'^$', 'social_auth_app.views.home'),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^signup-email/', 'social_auth_app.views.signup_email'),
