@@ -6,6 +6,12 @@
 <link rel="stylesheet" href="{% static 'test/comment_styles.css' %}" type="text/css" media="all" />
 <link href="{% static 'font-awesome/4.0.3/css/font-awesome.min.css' %}" rel="stylesheet">
 <link href="{% static 'twitter-bootstrap/3.0.3/css/bootstrap.min.css' %}" rel="stylesheet">
+<style>
+ .subjects .nav li div {
+ display: table-cell;
+ vertical-align: middle; 
+}
+</style>
 <script src="{% static 'jquery/2.0.3/jquery.min.js' %}"></script>
 <script src="/static/js/btoa.js"></script>
 <script type="text/javascript">
@@ -42,12 +48,12 @@ function MonthHot(me) {
 </script>
 </head>
 
-<body>
+<body style="margin-top:10px;width:90%;margin-left:5%">
 	<h1>Vine Comments</h1>
   <button class="btn btn-primary get_hotest" onclick="DayHot(this)">今日最热</button>
   <button class="btn btn-primary get_hotest" onclick="WeekHot(this)">7天最热</button>
   <button class="btn btn-primary get_hotest" onclick="MonthHot(this)">30天最热</button>
-	<div id="showMsg">
+	<div id="showMsg" style="margin-top:10px;">
     {% include 'comments_list.html' %}
 	</div> <!-- /#showMsg -->
 </body>
