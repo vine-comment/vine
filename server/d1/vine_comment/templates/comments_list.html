@@ -6,8 +6,13 @@
 		function up(id) {
 		 $.get("/ajax/up/comment/"+id)
 			 .done(function(data){
-					if (data == "duplicated") {
-							popup_message("You can only up once :)");
+					if (data == "up-1") {
+							popup_message(data);
+							var ups = $('#up_comment_'+id).find('span');
+							var count = parseInt(ups.text())-1;
+							ups.text(count);
+							var up_icon = $('#up_comment_'+id).find('i');
+							up_icon.prop('class', "fa fa-thumbs-o-up");
 					} else if (data == "up+1") {
 							popup_message(data);
 							var ups = $('#up_comment_'+id).find('span');
@@ -34,8 +39,13 @@
 		function down(id) {
 			$.get("/ajax/down/comment/"+id)
 			 .done(function(data){
-					if (data == "duplicated") {
-							popup_message("You can only down once :)");
+					if (data == "down-1") {
+							popup_message(data);
+							var downs = $('#down_comment_'+id).find('span');
+							var count = parseInt(downs.text())-1;
+							downs.text(count);
+							var down_icon = $('#down_comment_'+id).find('i');
+							down_icon.prop('class', "fa fa-thumbs-o-down fa-flip-horizontal");
 					} else if (data == "down+1") {
 							popup_message(data);
 							var downs = $('#down_comment_'+id).find('span');
