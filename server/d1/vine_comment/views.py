@@ -293,7 +293,8 @@ class HomeView(TemplateView):
 
     def get(self, request, *args, **kwargs):
         comments = Comment.objects.order_by('-time_added').all()
-        comments = sorted(comments,key=lambda o:len(o.up_users),reverse=True)
+# only use time to sort in normal list
+        #comments = sorted(comments,key=lambda o:len(o.up_users),reverse=True)
         index_page = request.GET.get('page', 1)
         print index_page
 
@@ -318,7 +319,8 @@ class HomeListView(TemplateView):
 
     def get(self, request, *args, **kwargs):
         comments = Comment.objects.order_by('-time_added').all()
-        comments = sorted(comments,key=lambda o:len(o.up_users),reverse=True)
+# only use time to sort in normal list
+        #comments = sorted(comments,key=lambda o:len(o.up_users),reverse=True)
         index_page = request.GET.get('page', 1)
         print index_page
 
