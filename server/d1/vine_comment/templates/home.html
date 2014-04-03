@@ -2,6 +2,9 @@
 
 <head>
 {% load humanize %}
+{% load tags %}
+{% load i18n %}
+{% load crispy_forms_tags %}
 {% load staticfiles %}
 <link rel="stylesheet" href="{% static 'test/comment_styles.css' %}" type="text/css" media="all" />
 <link href="{% static 'font-awesome/4.0.3/css/font-awesome.min.css' %}" rel="stylesheet">
@@ -57,6 +60,92 @@ function MonthHot(me) {
 </head>
 
 <body style="margin-top:10px;width:90%;margin-left:5%">
+  <ul class="nav nav-pills" class="panel panel-default">
+		 <li id="nav_comment" ><a href="#">
+		 <span class="badge pull-right" id="comments_count">{{ p_comment.paginator.count }}</span> 口水</a> </li>
+			 {% if user.is_authenticated %}
+				 <li class="dropdown">
+					 <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+						 {{ user.username }}<span class="caret"></span>
+					 </a>
+					 <ul class="dropdown-menu">
+				 {% for assoc in backends.associated %}
+					 <li>
+						 <a href="/logout/">{{ assoc.provider }} logout</a>
+					 </li>
+				 {% endfor %}
+					 <li><a href="/logout/">normal logout</a></li>
+					 </ul>
+				 </li>
+			 {% else %}
+				 <li><a href="#" data-toggle="modal" data-target="#loginModal">登录</a></li>
+				 <li><a href="#" data-toggle="modal" data-target="#registerModal">注册</a></li>
+				 <!-- 登录：Modal 弹出框 -->
+				 <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+					 <div class="modal-dialog">
+						 <div class="modal-content">
+							 <div class="modal-header">
+								 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+								 <h2 class="modal-title" id="myModalLabel">登录</h4>
+							 </div>
+							 <div class="modal-body">
+								 <form id="login-form" class="form-inline" action="{% url "django.contrib.auth.views.login" %}" method="post">
+									 {% csrf_token %}
+									 <style type="text/css">
+										 .modal-body .input-group {
+											 margin-bottom: 10px;
+										 }
+									 </style>
+									 <div class="input-group margin-bottom-sm">
+										 <span class="input-group-addon"><i class="fa fa-envelope-o fa-fw"></i></span>
+										 <input id="id_username" name="username" class="form-control" type="text" placeholder="邮箱 或 用户名"/>
+									 </div>
+
+									 <!-- XXX 这个form的实现简单暴力，应该考虑参考registration/login.html的form field调用方法，调用auth里的form，避免升级时出问题 -->
+									 <div class="input-group">
+										 <span class="input-group-addon"><i class="fa fa-key fa-fw"></i></span>
+										 <input id="id_password" name="password" class="form-control" type="password" placeholder="密码"/>
+									 </div>
+
+									 <label class="checkbox">
+										 <input type="checkbox" value="remember-me"> 记住我
+									 </label>
+									<button class="btn btn-large btn-primary" type="submit" value="Log in">登录</button>
+								 </form>
+								 <p><a href="{% url 'django.contrib.auth.views.password_reset' %}">{% trans '重设密码' %}</a></p>
+							 </div>
+						 </div><!-- /.modal-content -->
+					 </div><!-- /.modal-dialog -->
+				 </div><!-- /.modal -->
+
+				 <!-- 注册：Modal 弹出框 -->
+				 <div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+					 <div class="modal-dialog">
+						 <div class="modal-content">
+							 <div class="modal-header">
+								 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+								 <h4 class="modal-title" id="myModalLabel">注册</h4>
+							 </div>
+							 <div class="modal-body">
+								 <form class="form" method="post" action="{% url 'registration_register' %}">
+									 {% csrf_token %}
+									 {{ registration_form|crispy }}
+									 <div class="control-group">
+										 <div class="controls">
+											 <button type="submit" class="btn">注册</button>
+										 </div>
+									 </div>
+								 </form>
+							 </div>
+							 <!-- <div class="modal-footer">
+								 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+								 <button type="button" class="btn btn-primary">Save changes</button>
+							 </div> -->
+						 </div><!-- /.modal-content -->
+					 </div><!-- /.modal-dialog -->
+				 </div><!-- /.modal -->
+			 {% endif %}
+		</ul>
 	<h1>Vine Comments</h1>
   <button class="btn btn-success get_hotest" onclick="Newest(this)">最新</button>
   <button class="btn btn-primary get_hotest" onclick="DayHot(this)">今日最热</button>
