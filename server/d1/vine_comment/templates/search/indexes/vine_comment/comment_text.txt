@@ -2,3 +2,8 @@
 {{ object.comment_str }}
 {{ object.author_ip }}
 {{ object.title }}
+{{ object.desc }}
+{{ object.comment_board.title }}
+{% for tag in object.tags %}
+  {{ tag }}
+{% endfor %}
