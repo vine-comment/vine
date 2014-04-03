@@ -60,7 +60,8 @@ function MonthHot(me) {
 </head>
 
 <body style="margin-top:10px;width:90%;margin-left:5%">
-  <ul class="nav nav-pills" class="panel panel-default">
+	<h1>Vine Comments</h1>
+  <ul class="nav nav-pills" class="panel panel-default" style="float:right">
 		 <li id="nav_comment" ><a href="#">
 		 <span class="badge pull-right" id="comments_count">{{ p_comment.paginator.count }}</span> 口水</a> </li>
 			 {% if user.is_authenticated %}
@@ -146,7 +147,6 @@ function MonthHot(me) {
 				 </div><!-- /.modal -->
 			 {% endif %}
 		</ul>
-	<h1>Vine Comments</h1>
   <button class="btn btn-success get_hotest" onclick="Newest(this)">最新</button>
   <button class="btn btn-primary get_hotest" onclick="DayHot(this)">今日最热</button>
   <button class="btn btn-primary get_hotest" onclick="WeekHot(this)">7天最热</button>
