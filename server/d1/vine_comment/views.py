@@ -6,6 +6,7 @@ import datetime
 from datetime import timedelta
 import base64
 import logging
+import math
 
 # django modules
 from django.http import *
@@ -288,11 +289,25 @@ class CommentDownView(TemplateView):
             comment.up_num = len(comment.up_users)
         comments = most_up_comments.order_by('up_num').all()
         """
+def expected_rating(o):
+    ups = len(o.up_users)
+    downs = len(o.down_users)
+    n = ups + downs;
+    if n == 0:
+        score = 0
+    else:
+        z = 1.96
+        phat = ups / n
+        score = (phat + z*z/(2*n) - z * math.sqrt((phat*(1-phat)+z*z/(4*n))/n))/(1+z*z/n)
+    return score
+
 class HomeView(TemplateView):
     template_name = 'home.html'
 
     def get(self, request, *args, **kwargs):
+#TODO use best sorting!
         comments = Comment.objects.order_by('-time_added').all()
+        comments = sorted(comments,key=lambda x:expected_rating(x),reverse=True)
 # only use time to sort in normal list
         #comments = sorted(comments,key=lambda o:len(o.up_users),reverse=True)
         index_page = request.GET.get('page', 1)
@@ -314,8 +329,35 @@ class HomeView(TemplateView):
             'p_comment': p,
         })
 
-class HomeListView(TemplateView):
-    template_name = 'comments_list.html'
+class HomeBestView(TemplateView):
+    template_name = 'comments_best.html'
+
+    def get(self, request, *args, **kwargs):
+        comments = Comment.objects.order_by('-time_added').all()
+        comments = sorted(comments,key=lambda x:expected_rating(x),reverse=True)
+# only use time to sort in normal list
+        #comments = sorted(comments,key=lambda o:len(o.up_users),reverse=True)
+        index_page = request.GET.get('page', 1)
+        print index_page
+
+ 
+        #TODO performance optimization for objects order_by('-time_added')
+        logger.info(str(len(comments)) + ': ' + str(comments))
+        try:
+            p = Paginator(comments, 10).page(index_page)
+        except PageNotAnInteger:
+        # If page is not an integer, deliver first page.
+            p = Paginator(comments, 10).page(1)
+        except EmptyPage:
+        # If page is out of range (e.g. 9999), deliver last page of results.
+            p = Paginator(comments, 10).page(paginator.num_pages)
+
+        return render(request, self.template_name, {
+            'p_comment': p,
+        })
+
+class HomeNewestView(TemplateView):
+    template_name = 'comments_newest.html'
 
     def get(self, request, *args, **kwargs):
         comments = Comment.objects.order_by('-time_added').all()
