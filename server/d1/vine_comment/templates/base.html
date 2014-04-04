@@ -2,16 +2,18 @@
 
 <html>
 <head>
-<link href="{% static 'test/comment_styles.css' %}" rel="stylesheet">
-<link href="{% static 'font-awesome/4.0.3/css/font-awesome.min.css' %}" rel="stylesheet">
-<link href="{% static 'twitter-bootstrap/3.0.3/css/bootstrap.min.css' %}" rel="stylesheet>
+<link href="{% static 'test/comment_styles.css' %}" rel="stylesheet"/>
+<link href="{% static 'font-awesome/4.0.3/css/font-awesome.min.css' %}" rel="stylesheet"/>
+<link href="{% static 'twitter-bootstrap/3.0.3/css/bootstrap.min.css' %}" rel="stylesheet"/>
 {% block head %}
 {% endblock %}
 </head>
 
 <body>
+<div class="container">
 {% block content %}
 {% endblock %}
+</div>
 
 <script src="{% static 'jquery/2.0.3/jquery.min.js' %}"></script>
 <script src="{% static 'test/commentBoard.js' %}"></script>
