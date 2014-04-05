@@ -20,7 +20,6 @@
 <body style="margin-top:10px;width:90%;margin-left:5%">
   <h1>Vine Comments</h1>
   <ul class="nav nav-pills" class="panel panel-default" style="float:right">
-    <!--<li id="nav_comment" ><a href="#"><span class="badge pull-right" id="comments_count">{{ p_comment.paginator.count }}</span> 口水</a> </li>-->
     {% include 'auth/auth_all__li.html' %}
   </ul>
   <button class="btn btn-success get_hotest" onclick="Best(this)">最优</button>
@@ -29,7 +28,7 @@
   <button class="btn btn-primary get_hotest" onclick="WeekHot(this)">7天最热</button>
   <button class="btn btn-primary get_hotest" onclick="MonthHot(this)">30天最热</button>
   <div id="showMsg" style="margin-top:10px;">
-  {% include 'comments_best.html' %}
+    {% include 'comments_best.html' %}
   </div> <!-- /#showMsg -->
 </body>
 
