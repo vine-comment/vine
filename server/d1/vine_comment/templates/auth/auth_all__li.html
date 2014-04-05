@@ -1,0 +1,23 @@
+{% load humanize %}
+{% load tags %}
+{% load i18n %}
+{% load crispy_forms_tags %}
+{% load staticfiles %}
+
+ {% if user.is_authenticated %}
+	 <li class="dropdown">
+		 <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+			 {{ user.username }}<span class="caret"></span>
+		 </a>
+		 <ul class="dropdown-menu">
+	 {% for assoc in backends.associated %}
+		 <li>
+			 <a href="/logout/">{{ assoc.provider }} logout</a>
+		 </li>
+	 {% endfor %}
+		 <li><a href="/logout/">normal logout</a></li>
+		 </ul>
+	 </li>
+ {% else %}
+	 {% include 'auth/auth_modal.html' %}
+ {% endif %}
