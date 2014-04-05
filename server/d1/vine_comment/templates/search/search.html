@@ -2,6 +2,7 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
+{% comment %}
 <div class="row">
   <h2>Search</h2>
   <form class="col-md-6 form" role="form" method="get" action=".">
@@ -13,9 +14,9 @@
     </div>
   </form>
 </div>
-
+{% endcomment %}
 {% if query %}
-<div class="row">
+
   <h2>Results</h2>
 
   {% for result in page.object_list %}
@@ -33,7 +34,7 @@
       {% if page.has_next %}<a href="?q={{ query }}&amp;page={{ page.next_page_number }}">{% endif %}Next &raquo;{% if page.has_next %}</a>{% endif %}
     </div>
   {% endif %}
-</div>
+
 {% else %}
   {# Show some example queries to run, maybe query syntax, something else? #}
 {% endif %}
