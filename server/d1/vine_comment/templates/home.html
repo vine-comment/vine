@@ -18,18 +18,35 @@
 </head>
 
 <body style="margin-top:10px;width:90%;margin-left:5%">
-  <h1>Vine Comments</h1>
-  <ul class="nav nav-pills" class="panel panel-default" style="float:right">
-    {% include 'auth/auth_all__li.html' %}
-  </ul>
-<ul class="nav nav-tabs">
-  <li class="active"><a href="#" data-toggle="tab" onclick="Best(this)">最优</a></li>
-  <li><a href="#" data-toggle="tab" onclick="Newest(this)">最新</a></li>
-  <li><a href="#" data-toggle="tab" onclick="DayHot(this)">今日最热</a></li>
-  <li><a href="#" data-toggle="tab" onclick="WeekHot(this)">7天最热</a></li>
-  <li><a href="#" data-toggle="tab" onclick="MonthHot(this)">30天最热</a></li>
-</ul>
-  <div id="showMsg" style="margin-top:10px;">
+  <div class="navbar navbar-default">
+    <div class="navbar-collapse collapse navbar-responsive-collapse">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="/">Vine comments</a>
+      </div>
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="#" data-toggle="tab" onclick="Best(this)">最优</a></li>
+        <li><a href="#best" data-toggle="tab" onclick="Newest(this)">最新</a></li>
+        <li><a href="#24-hours-hot" data-toggle="tab" onclick="DayHot(this)">今日最热</a></li>
+        <li><a href="#7-days-hot" data-toggle="tab" onclick="WeekHot(this)">7天最热</a></li>
+        <li><a href="#30-days-hot" data-toggle="tab" onclick="MonthHot(this)">30天最热</a></li>
+      </ul>
+      <form class="navbar-form navbar-left" role="search" method="get" action="/search">
+        <div class="form-group">
+          <input id="search-input" type="text" name="q" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default" onclick="Search(this)"><span class="glyphicon glyphicon-search"></span></button>
+      </form>
+      <ul class="nav navbar-nav navbar-right">
+        {% include 'auth/auth_all__li.html' %}
+      </ul>
+    </div> <!-- .navbar-header -->
+  </div> <!-- .navbar-collapse -->
+  <div id="showMsg">
     {% include 'comments_best.html' %}
   </div> <!-- /#showMsg -->
 </body>
@@ -45,39 +62,40 @@ $(document).ready(function(){
 	$('#vine_comment_iframe').load("/iframe/" + btoa(document.location));
 });
 function Best(me) {
-  $('.get_hotest').prop('class',"btn btn-primary get_hotest");
   $.get("/home/best")
    .done(function(data){
         $('#showMsg').html(data);
        });
 };
 function Newest(me) {
-  $('.get_hotest').prop('class',"btn btn-primary get_hotest");
   $.get("/home/newest")
    .done(function(data){
         $('#showMsg').html(data);
        });
 };
 function DayHot(me) {
-  $('.get_hotest').prop('class',"btn btn-primary get_hotest");
   $.get("/home/hot/1")
    .done(function(data){
         $('#showMsg').html(data);
        });
 };
 function WeekHot(me) {
-  $('.get_hotest').prop('class',"btn btn-primary get_hotest");
   $.get("/home/hot/7")
    .done(function(data){
         $('#showMsg').html(data);
        });
 };
 function MonthHot(me) {
-  $('.get_hotest').prop('class',"btn btn-primary get_hotest");
   $.get("/home/hot/30")
    .done(function(data){
         $('#showMsg').html(data);
        });
+};
+function Search(me) {
+  $.get("/search/?q=" + $('#search-input').text())
+  .done(function(data) {
+    $('#showMsg').html(data);
+  });
 };
 </script>
 
