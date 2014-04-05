@@ -22,11 +22,13 @@
   <ul class="nav nav-pills" class="panel panel-default" style="float:right">
     {% include 'auth/auth_all__li.html' %}
   </ul>
-  <button class="btn btn-success get_hotest" onclick="Best(this)">最优</button>
-  <button class="btn btn-primary get_hotest" onclick="Newest(this)">最新</button>
-  <button class="btn btn-primary get_hotest" onclick="DayHot(this)">今日最热</button>
-  <button class="btn btn-primary get_hotest" onclick="WeekHot(this)">7天最热</button>
-  <button class="btn btn-primary get_hotest" onclick="MonthHot(this)">30天最热</button>
+<ul class="nav nav-tabs">
+  <li class="active"><a href="#" data-toggle="tab" onclick="Best(this)">最优</a></li>
+  <li><a href="#" data-toggle="tab" onclick="Newest(this)">最新</a></li>
+  <li><a href="#" data-toggle="tab" onclick="DayHot(this)">今日最热</a></li>
+  <li><a href="#" data-toggle="tab" onclick="WeekHot(this)">7天最热</a></li>
+  <li><a href="#" data-toggle="tab" onclick="MonthHot(this)">30天最热</a></li>
+</ul>
   <div id="showMsg" style="margin-top:10px;">
     {% include 'comments_best.html' %}
   </div> <!-- /#showMsg -->
@@ -44,7 +46,6 @@ $(document).ready(function(){
 });
 function Best(me) {
   $('.get_hotest').prop('class',"btn btn-primary get_hotest");
-  $(me).prop('class',"btn btn-success get_hotest");
   $.get("/home/best")
    .done(function(data){
         $('#showMsg').html(data);
@@ -52,7 +53,6 @@ function Best(me) {
 };
 function Newest(me) {
   $('.get_hotest').prop('class',"btn btn-primary get_hotest");
-  $(me).prop('class',"btn btn-success get_hotest");
   $.get("/home/newest")
    .done(function(data){
         $('#showMsg').html(data);
@@ -60,7 +60,6 @@ function Newest(me) {
 };
 function DayHot(me) {
   $('.get_hotest').prop('class',"btn btn-primary get_hotest");
-  $(me).prop('class',"btn btn-success get_hotest");
   $.get("/home/hot/1")
    .done(function(data){
         $('#showMsg').html(data);
@@ -68,7 +67,6 @@ function DayHot(me) {
 };
 function WeekHot(me) {
   $('.get_hotest').prop('class',"btn btn-primary get_hotest");
-  $(me).prop('class',"btn btn-success get_hotest");
   $.get("/home/hot/7")
    .done(function(data){
         $('#showMsg').html(data);
@@ -76,7 +74,6 @@ function WeekHot(me) {
 };
 function MonthHot(me) {
   $('.get_hotest').prop('class',"btn btn-primary get_hotest");
-  $(me).prop('class',"btn btn-success get_hotest");
   $.get("/home/hot/30")
    .done(function(data){
         $('#showMsg').html(data);
