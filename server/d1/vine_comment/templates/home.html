@@ -37,7 +37,7 @@
       </ul>
       <form class="navbar-form navbar-left" role="search" method="get" action="/search">
         <div class="form-group">
-          <input id="search-input" type="text" name="q" class="form-control" placeholder="Search">
+          <input id="search-input" type="text" name="q" class="form-control" placeholder="Search" onkeypress="return SearchIfEnter(event)">
         </div>
         <a href="#" onclick="Search(this)"><span class="glyphicon glyphicon-search"></span></a>
       </form>
@@ -96,7 +96,19 @@ function Search(me) {
   .done(function(data) {
     $('#showMsg').html(data);
   });
+  return false;
 };
+function SearchIfEnter(event) {
+	//if (!event) { var event = window.event; }
+    //event.preventDefault();
+    var keypressed = event.keyCode || event.which;
+    if (keypressed == 13) {
+        Search(this);
+        return false;
+    }
+    return true;
+}
+//$('#search-input').keyup(SearchIfEnter(event));
 </script>
 
 <script src="{% static 'test/commentBoard.js' %}"></script>
