@@ -4,15 +4,13 @@
 {% load crispy_forms_tags %}
 {% load staticfiles %}
 
- <li><a href="#" data-toggle="modal" data-target="#loginModal">登录</a></li>
- <li><a href="#" data-toggle="modal" data-target="#registerModal">注册</a></li>
  <!-- 登录：Modal 弹出框 -->
  <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
    <div class="modal-dialog">
      <div class="modal-content">
        <div class="modal-header">
          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-         <h2 class="modal-title" id="myModalLabel">登录</h4>
+         <h4 class="modal-title" id="myModalLabel">登录</h4>
        </div>
        <div class="modal-body">
          <form id="login-form" class="form-inline" action="{% url "django.contrib.auth.views.login" %}" method="post">
