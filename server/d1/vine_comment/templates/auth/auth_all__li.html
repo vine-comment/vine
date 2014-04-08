@@ -12,10 +12,10 @@
 		 <ul class="dropdown-menu">
 	 {% for assoc in backends.associated %}
 		 <li>
-			 <a href="/logout/">{{ assoc.provider }} logout</a>
+			 <a href="/logout/">登出{{ assoc.provider }}</a>
 		 </li>
 	 {% endfor %}
-		 <li><a href="/logout/">normal logout</a></li>
+		 <li><a href="/logout/">登出</a></li>
 		 </ul>
 	 </li>
  {% else %}
