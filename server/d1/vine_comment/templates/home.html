@@ -5,49 +5,6 @@
 {% endblock %}
 
 {% block content %}
-  <div class="navbar-xs">
-  <div class="navbar-primary">
-  <div class="navbar navbar-default navbar-fixed-top" role="navigation">
-  <div class="container">
-    
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="/">藤蔓评论</a>
-      </div> <!-- .navbar-header -->
-    <div class="navbar-collapse collapse navbar-responsive-collapse">
-      <ul class="nav navbar-nav">
-        <li class="active"><a href="#" data-toggle="tab" onclick="Best(this)">最优</a></li>
-        <li><a href="#best" data-toggle="tab" onclick="Newest(this)">最新</a></li>
-        <li><a href="#24-hours-hot" data-toggle="tab" onclick="DayHot(this)">今日最热</a></li>
-        <li><a href="#7-days-hot" data-toggle="tab" onclick="WeekHot(this)">7天最热</a></li>
-        <li><a href="#30-days-hot" data-toggle="tab" onclick="MonthHot(this)">30天最热</a></li>
-      </ul>
-      <form class="navbar-form navbar-left" role="search" method="get" action="/search">
-        <div class="form-group">
-          <input id="search-input" type="text" name="q" class="form-control" placeholder="搜索全站内容" onkeypress="return SearchIfEnter(event)">
-        </div>
-        <a href="#" onclick="Search(this)"><span class="glyphicon glyphicon-search"></span></a>
-      </form>
-      <ul class="nav navbar-nav navbar-right">
-        {% include 'auth/auth_all__li.html' %}
-      </ul>
-    </div> <!-- .navbar-collapse -->
-  </div> <!-- .container -->
-  </div>
-  </div> <!-- .navbar-primary -->
-  </div> <!-- .navbar-xs -->
-
-  {% include "auth/auth_modal.html" %}
-
-  <div class="container">
-    <div id="showMsg" style="padding:10px;">
-      {% include 'comments_best.html' %}
-    </div> <!-- /#showMsg -->
-  </div>
 {% endblock %}
 
 
