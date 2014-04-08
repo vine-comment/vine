@@ -6,11 +6,17 @@
 <html>
 
 <head>
-<link href="{% static 'test/comment_styles.css' %}" rel="stylesheet"/>
-<link href="{% static 'font-awesome/4.0.3/css/font-awesome.min.css' %}" rel="stylesheet"/>
-<link href="{% static 'twitter-bootstrap/3.0.3/css/bootstrap.min.css' %}" rel="stylesheet"/>
-<link href="{% static 'css/navbar.css' %}" rel="stylesheet"/>
-<link href="{% static 'css/navbar_dwarf.css' %}" rel="stylesheet"/>
+  <meta charset="utf-8">
+  <title>藤蔓评论</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="{% static 'font-awesome/4.0.3/css/font-awesome.min.css' %}" rel="stylesheet"/>
+  <link href="{% static 'twitter-bootstrap/3.0.3/css/bootstrap.min.css' %}" rel="stylesheet"/>
+  <link href="{% static 'css/navbar.css' %}" rel="stylesheet"/>
+  <link href="{% static 'css/navbar_dwarf.css' %}" rel="stylesheet"/>
 
 {% block head %}
 {% endblock %}
@@ -64,6 +70,14 @@
 <script src="{% static 'test/commentBoard.js' %}"></script>
 <script src="{% static 'twitter-bootstrap/3.0.3/js/bootstrap.min.js' %}"></script>
 <script src="{% static 'js/btoa.js' %}"></script>
+<script type="text/javascript">$('a').tooltip();</script>
+
+<!--[if lt IE 9]>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/wysihtml5/0.3.0/wysihtml5.min.js"></script>
+  <script src="http://cdn.bootcss.com/html5shiv/r29/html5.min.js"></script>
+  <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+
 {% block footer %}
 {% endblock %}
 </body>
