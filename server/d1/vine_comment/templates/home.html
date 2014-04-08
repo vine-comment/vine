@@ -1,20 +1,10 @@
-<html>
-
-<head>
-{% load humanize %}
-{% load tags %}
-{% load i18n %}
-{% load crispy_forms_tags %}
+{% extends 'base.html' %}
 {% load staticfiles %}
-<link href="{% static 'test/comment_styles.css' %}" rel="stylesheet"/>
-<link href="{% static 'font-awesome/4.0.3/css/font-awesome.min.css' %}" rel="stylesheet"/>
-<link href="{% static 'twitter-bootstrap/3.0.3/css/bootstrap.min.css' %}" rel="stylesheet"/>
-<link href="{% static 'css/navbar.css' %}" rel="stylesheet"/>
-<link href="{% static 'css/navbar_dwarf.css' %}" rel="stylesheet"/>
+{% block head %}
 <link href="{% static 'css/home.css' %}" rel="stylesheet"/>
-</head>
+{% endblock %}
 
-<body>
+{% block content %}
   <div class="navbar-xs">
   <div class="navbar-primary">
   <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -58,11 +48,11 @@
       {% include 'comments_best.html' %}
     </div> <!-- /#showMsg -->
   </div>
-</body>
+{% endblock %}
 
 
-<script src="{% static 'jquery/2.0.3/jquery.min.js' %}"></script>
-<script src="/static/js/btoa.js"></script>
+{% block footer %}
+
 <script type="text/javascript">
 $(document).ready(function(){
 	if (!window.btoa) window.btoa = base64.encode;
@@ -125,4 +115,4 @@ Best();
 <script src="{% static 'test/commentBoard.js' %}"></script>
 <script src="{% static 'twitter-bootstrap/3.0.3/js/bootstrap.min.js' %}"></script>
 
-</html>
+{% endblock %}
