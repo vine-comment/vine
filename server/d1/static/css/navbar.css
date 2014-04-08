@@ -6,7 +6,7 @@
 	color: #ffffff;
 }
 .navbar-default .navbar-brand:hover, .navbar-default .navbar-brand:focus {
-	color: #7db4f0;
+	color: #ffffff;
 }
 .navbar-default .navbar-text {
 	color: #ffffff;
@@ -15,12 +15,17 @@
 	color: #ffffff;
 }
 .navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
-	color: #7db4f0;
+color: #FFFFFF;
+background-color: #77BAF8;
 }
 .navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus {
 	color: #7db4f0;
-	background-color: #ffffff;
+	background-color: #f9f9f9;
 	font-weight: bold;
+}
+.navbar-default .navbar-nav > .active > a:hover {
+	color: #7dbfff;
+	background-color: #ffffff;
 }
 .navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:hover, .navbar-default .navbar-nav > .open > a:focus {
 	color: #7db4f0;
@@ -64,3 +69,10 @@ body { padding-top: 40px; }
     body { padding-top: 40px; }
 }
 
+.navbar-form .form-group {
+	padding: 2 0 2 0;
+}
+
+.form-control {
+	max-height: 30px;
+}
