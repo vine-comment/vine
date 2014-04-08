@@ -23,8 +23,8 @@ def logout(request):
 
 def home(request):
     """Home view, displays login mechanism"""
-    if request.user.is_authenticated():
-        return redirect('done')
+    #if request.user.is_authenticated():
+    #    return redirect('done')
     return render_to_response('home.html', {
         'plus_id': getattr(settings, 'SOCIAL_AUTH_GOOGLE_PLUS_KEY', None)
     }, RequestContext(request))
