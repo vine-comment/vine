@@ -307,6 +307,7 @@ class HomeView(TemplateView):
     def get(self, request, *args, **kwargs):
         comments = Comment.objects.order_by('-time_added').all()
 # "best" algorithm from Reddit
+        comments = sorted(comments,key=lambda x:len(x.up_users)-len(x.down_users),reverse=True)
         comments = sorted(comments,key=lambda x:expected_rating(x),reverse=True)
         index_page = request.GET.get('page', 1)
         print index_page
@@ -332,6 +333,7 @@ class HomeBestView(TemplateView):
 
     def get(self, request, *args, **kwargs):
         comments = Comment.objects.order_by('-time_added').all()
+        comments = sorted(comments,key=lambda x:len(x.up_users)-len(x.down_users),reverse=True)
         comments = sorted(comments,key=lambda x:expected_rating(x),reverse=True)
         index_page = request.GET.get('page', 1)
         print index_page
