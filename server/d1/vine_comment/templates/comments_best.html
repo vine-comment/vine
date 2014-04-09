@@ -1,38 +1,8 @@
-{% load humanize %}
 {% load staticfiles %}
 <script src="{% static 'jquery/2.0.3/jquery.min.js' %}"></script>
 <script src="{% static 'js/comment_updown.js' %}"></script>
 
-		<ul class="list-group">
-		{% for message in p_comment.object_list %}
-			<li class="list-group-item">
-				<span style="float:right">
-					<a href="#" id="up_comment_{{message.id}}" onclick="up('{{message.id}}')">
-						{% if user.id in message.up_users %}
-						<i class="fa fa-thumbs-up"></i>
-						{% else %}
-						<i class="fa fa-thumbs-o-up"></i>
-						{% endif %}
-						+<span>{{ message.up_users|length }}</span>
-					</a>
-					<a href="#" id="down_comment_{{message.id}}" onclick="down('{{message.id}}')">
-						{% if user.id in message.down_users %}
-						<i class="fa fa-thumbs-down fa-flip-horizontal"></i>
-						{% else %}
-						<i class="fa fa-thumbs-o-down fa-flip-horizontal"></i>
-						{% endif %}
-						-<span>{{ message.down_users|length }}</span>
-					</a>
-				 </span>
-				 <span>{{message.comment_str}}</span>
-				 <span>(<a href="{{message.comment_board.url}}">{{message.comment_board.url}}</a>)</span>
-				 <br>
-				 <strong>{% if message.user %}{{ message.user }}{% else %}{{ message.author_ip }}{% endif %}</strong>
-				  提交于
-				 <span id='comment_time'> {{ message.time_added|naturaltime }}</span>
-			</li>
-		{% endfor %}
-		</ul>
+{% include 'comments_list.html' %}
 
 		<ul class='pagination'>
 		{% if p_comment.has_previous %}
