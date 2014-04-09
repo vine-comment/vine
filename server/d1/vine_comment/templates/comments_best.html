@@ -25,7 +25,7 @@
 					</a>
 				 </span>
 				 <span>{{message.comment_str}}</span>
-				 <span>(<a href="//{{message.comment_board.url}}">{{message.comment_board.url}}</a>)</span>
+				 <span>(<a href="{{message.comment_board.url}}">{{message.comment_board.url}}</a>)</span>
 				 <br>
 				 <strong>{% if message.user %}{{ message.user }}{% else %}{{ message.author_ip }}{% endif %}</strong>
 				  提交于
