@@ -21,12 +21,11 @@
 						-<span>{{ message.down_users|length }}</span>
 					</a>
 				 </span>
-				 <span>{{message.comment_str}}</span>
+				 <span style="font-size:200%">{{message.comment_str}}</span>
 				 <span>(<a href="{{message.comment_board.url}}">{{message.comment_board.url}}</a>)</span>
 				 <br>
-				 <strong>{% if message.user %}{{ message.user }}{% else %}{{ message.author_ip }}{% endif %}</strong>
-				  提交于
-				 <span id='comment_time'> {{ message.time_added|naturaltime }}</span>
+				 <a href="#" style="margin-left:10px">{% if message.user %}{{ message.user }}{% else %}{{ message.author_ip }}{% endif %}</a>
+				 <span id='comment_time'>提交于 {{ message.time_added|naturaltime }}</span>
 			</li>
 		{% endfor %}
 		</ul>
