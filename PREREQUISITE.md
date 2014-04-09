@@ -1,23 +1,24 @@
-###djanog-nonrel
-**http://django-mongodb-engine.readthedocs.org/en/latest/topics/setup.html**
+###django-nonrel
+  > Check **http://django-mongodb-engine.readthedocs.org/en/latest/topics/setup.html** to install.
+
 * django-nonrel
 * djangotoolbox
 * django-mongodb-engine
 
-###misc
+###django-3rd-party-lib
 * django-registration
 * django-crispy-forms
 * django-admin-bootstrapped
-* python-social-auth
-* jieba
-* Whoosh
 * django-haystack
-* memcache
 
 ###python
 * python-dev (apt-get install python-dev)
 * Pillow (pip install Pillow)
 * python-memcached
+* python-social-auth
+* jieba
+* Whoosh
+* memcache
 
 ###Items should run.
 * Run a mail server to use account authentication.
