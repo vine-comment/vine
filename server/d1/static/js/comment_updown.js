@@ -1,5 +1,7 @@
 		function up(id) {
-		 $.get("/ajax/up/comment/"+id)
+            var onclick = $('#up_comment_'+id).attr('onclick');
+            $('#up_comment_'+id).prop('onclick','return false;');
+		    $.get("/ajax/up/comment/"+id)
 			 .done(function(data){
 					if (data == "up-1") {
 							popup_message(data);
@@ -29,9 +31,12 @@
 							var up_icon = $('#up_comment_'+id).find('i');
 							up_icon.prop('class', "fa fa-thumbs-up");
 					}
+                    $('#up_comment_'+id).attr('onclick',onclick);//must use attr, not prop
 			 });
 		};
 		function down(id) {
+            var onclick = $('#down_comment_'+id).attr('onclick');
+            $('#down_comment_'+id).prop('onclick','return false;');
 			$.get("/ajax/down/comment/"+id)
 			 .done(function(data){
 					if (data == "down-1") {
@@ -62,5 +67,6 @@
 							var down_icon = $('#down_comment_'+id).find('i');
 							down_icon.prop('class', "fa fa-thumbs-down fa-flip-horizontal");
 					}
+                    $('#down_comment_'+id).attr('onclick',onclick);//must use attr, not prop
 			 });
 		};
