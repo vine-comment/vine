@@ -18,6 +18,7 @@
   <link href="{% static 'twitter-bootstrap/3.0.3/css/bootstrap.min.css' %}" rel="stylesheet"/>
   <link href="{% static 'css/navbar.css' %}" rel="stylesheet"/>
   <link href="{% static 'css/navbar_dwarf.css' %}" rel="stylesheet"/>
+  <link href="{% static 'css/base.css' %}" rel="stylesheet"/>
 
 {% block head %}
 {% endblock %}
@@ -37,6 +38,7 @@
       </div> <!-- .navbar-header -->
     <div class="navbar-collapse collapse navbar-responsive-collapse">
       <ul class="nav navbar-nav">
+        <li><a href="/">首页</a></li>
         <li class="active"><a href="#" data-toggle="tab" onclick="Best(this)">最优</a></li>
         <li><a href="#best" data-toggle="tab" onclick="Newest(this)">最新</a></li>
         <li><a href="#24-hours-hot" data-toggle="tab" onclick="DayHot(this)">今日最热</a></li>
@@ -59,6 +61,12 @@
   </div> <!-- .navbar-xs -->
 
   {% include "auth/auth_modal.html" %}
+
+<div class="panel panel-default">
+  <div class="panel-body">
+    Basic panel
+  </div>
+</div>
 
 {% block content %}
 {% endblock %}
