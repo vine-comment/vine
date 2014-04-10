@@ -64,10 +64,12 @@ background-color: #77BAF8;
 	}
 }
 
+/*
 body { padding-top: 50px; }
 @media screen and (max-width: 768px) {
     body { padding-top: 50px; }
 }
+*/
 
 .navbar-form .form-group {
 	padding: 2px 0 2px 0;
