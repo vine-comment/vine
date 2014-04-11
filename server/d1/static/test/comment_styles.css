@@ -33,6 +33,9 @@ text-decoration:none;
 color:#000000;
 }
 
+#boardLeft:hover{
+background:#00ff00;
+}
 /* #boardLeft:hover, #boardLeft:focus, #boardLeft a:focus, #boardLeft a:hover {
 	background:#000011;
 	border-bottom-color:#777;
