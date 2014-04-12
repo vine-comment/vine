@@ -8,6 +8,10 @@
 </ol>
 
 {% include 'comments_list.html' %}
+{% comment %}
+<script src="{% static 'jquery/2.0.3/jquery.min.js' %}"></script>
+<script src="{% static 'js/comment_updown.js' %}"></script>
+{% endcomment %}
 
 		<ul class='pagination'>
 		{% if p_comment.has_previous %}

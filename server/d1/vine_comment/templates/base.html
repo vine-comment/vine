@@ -37,9 +37,9 @@
       </div> <!-- .navbar-header -->
     <div class="navbar-collapse collapse navbar-responsive-collapse">
       <ul class="nav navbar-nav">
-        <li><a href="/">首页</a></li>
-        <li class="active"><a href="#" data-toggle="tab" onclick="Best(this)">最优</a></li>
-        <li><a href="#best" data-toggle="tab" onclick="Newest(this)">最新</a></li>
+        <li><a href="#home" data-toggle="tab" onclick="Home(this)">首页</a></li>
+        <li class="active"><a href="#best" data-toggle="tab" onclick="Best(this)">最优</a></li>
+        <li><a href="#newest" data-toggle="tab" onclick="Newest(this)">最新</a></li>
         <li><a href="#24-hours-hot" data-toggle="tab" onclick="DayHot(this)">今日最热</a></li>
         <li><a href="#7-days-hot" data-toggle="tab" onclick="WeekHot(this)">7天最热</a></li>
         <li><a href="#30-days-hot" data-toggle="tab" onclick="MonthHot(this)">30天最热</a></li>
@@ -90,6 +90,14 @@ $(document).ready(function(){
 	$.support.cors = true;
 	$('#vine_comment_iframe').load("/iframe/" + btoa(document.location));
 });
+function Home(me) {
+  window.location.href = '{% static 'onepage-scroll/Demo/demo.html' %}';
+
+  $.get("/index")
+   .done(function(data){
+        $('#showMsg').html(data);
+   });
+};
 function Best(me) {
   $.get("/home/best")
    .done(function(data){

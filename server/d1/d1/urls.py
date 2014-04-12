@@ -60,7 +60,7 @@ urlpatterns += patterns('',
     url(r'^accounts/register/$',
           RegistrationView.as_view(form_class=VineRegistrationForm),
           name='registration_register'),
-
+    url(r'^index$', TemplateView.as_view(template_name='index.html'), name='index'),
 )
 
 from functools import wraps
