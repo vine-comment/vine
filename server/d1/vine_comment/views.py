@@ -103,7 +103,7 @@ class CommentView(TemplateView):
                     author_ip=author_ip)
 
         # Generate top 5 tags for comment.
-        comment.tags = jieba.analyse.extract_tags(comment_str, topK=5)
+        comment.tags = jieba.analyse.extract_tags(comment_str, topK=3)
         logger.info('tags: ' + repr(comment.tags).decode("unicode-escape"))
         comment.save()
 

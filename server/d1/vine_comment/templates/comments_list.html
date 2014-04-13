@@ -26,6 +26,11 @@
 				 <br>
 				 <a href="#" style="margin-left:10px">{% if message.user %}{{ message.user }}{% else %}{{ message.author_ip }}{% endif %}</a>
 				 <span id='comment_time'>提交于 {{ message.time_added|naturaltime }}</span>
+				 <span>
+				   {%for tag in message.tags%}
+				   <span class="label label-default">{{tag}}</span>
+				   {%endfor%}
+				 <span>
 			</li>
 		{% endfor %}
 		</ul>
