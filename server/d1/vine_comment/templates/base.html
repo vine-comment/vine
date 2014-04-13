@@ -145,6 +145,12 @@ function SearchIfEnter(event) {
     }
     return true;
 }
+function SearchText(text) {
+  $.get("/search/?q=" + text)
+  .done(function(data) {
+    $('#showMsg').html(data);
+  });
+};
 //$('#search-input').keyup(SearchIfEnter(event));
 
 Best();

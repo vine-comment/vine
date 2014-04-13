@@ -28,7 +28,7 @@
 				 <span id='comment_time'>提交于 {{ message.time_added|naturaltime }}</span>
 				 <span>
 				   {%for tag in message.tags%}
-				   <span class="label label-default">{{tag}}</span>
+				   <a href="#" onclick="SearchText('{{tag}}')"><span class="label label-default">{{tag}}</span></a>
 				   {%endfor%}
 				 <span>
 			</li>
