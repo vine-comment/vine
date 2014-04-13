@@ -16,6 +16,9 @@ from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.utils.timezone import utc
 from django.views.decorators.csrf import csrf_exempt
 
+from django_akismet_comments import AkismetModerator
+from akismet import *
+
 # 3rd party modules
 import jieba
 import jieba.analyse
@@ -64,6 +67,28 @@ class CommentView(TemplateView):
     template_raw = 'comments/comment_view_raw.html'
     template_meta = 'comments/comment_view_meta.html'
 
+    @csrf_exempt
+    def _check_spam(self, index_url, comment_str, author_ip, user):
+        #ak = Akismet(key=settings.AKISMET_API_KEY,blog_url='http://www.abfeucd')
+        ak = Akismet(key='d56b9a5394bf',blog_url='http://www.abfeucd')
+
+        if ak.verify_key():
+            data = {
+            'user_ip': '',
+            'user_agent': '',
+            'referrer': '',
+            'comment_type': 'comment',
+            'comment_author': '',
+            }
+            if ak.comment_check(comment=comment_str.encode('utf-8'), data=data, build_data=False):
+               #this is a spam
+               return True
+            else :
+               return False
+        else:
+            return False
+        
+        
     @csrf_exempt
     def _post_comment(self, index_url, comment_str, author_ip, user):
         title=urlparse(index_url).netloc
@@ -125,6 +150,10 @@ class CommentView(TemplateView):
         author_ip = request.META.get('REMOTE_ADDR', '0.0.0.0')
         index_url = kwargs.get('index_url', self.index_default_str)
         user = request.user
+        if(self._check_spam(index_url, comment_str, author_ip, user)):
+             logger.info(comment_str + 'this is a spam')
+             #TODO: how to add django-simple-captcha
+             
         self._post_comment(index_url, comment_str, author_ip, user)
 
         kwargs['template'] = self.template_raw

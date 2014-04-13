@@ -15,6 +15,7 @@
 * Pillow
 * python-social-auth
 * python-memcached
+* django_akismet_comments
 
 ###apt-get install / download & setup
 * python-dev

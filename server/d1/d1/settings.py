@@ -21,6 +21,9 @@ DATABASES = {
     }
 }
 
+# this key is use clent AntiSpam server
+AKISMET_API_KEY = 'd56b9a5394bf'
+
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
 ALLOWED_HOSTS = []
@@ -141,6 +144,7 @@ INSTALLED_APPS = (
     'registration',
     'crispy_forms',
     'haystack',
+    'django_akismet_comments',
     # 'django_wysiwyg',
     'django_mongodb_engine',
     'djangotoolbox',
