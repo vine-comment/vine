@@ -409,4 +409,4 @@ class CommentDetailView(TemplateView):
     template_name = 'comments/comment_detail_view.html'
 
     def get(self, request, *args, **kwargs):
-        pass
+        return render(request, self.template_name)
