@@ -44,9 +44,18 @@
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">
             <div class="subject-title">最热 <b class="caret"></b></div></a>
           <ul class="dropdown-menu">
-            <li><a href="#24-hours-hot" data-toggle="tab" onclick="DayHot(this)">今日最多up</a></li>
-            <li><a href="#7-days-hot" data-toggle="tab" onclick="WeekHot(this)">7天最多up</a></li>
-            <li><a href="#30-days-hot" data-toggle="tab" onclick="MonthHot(this)">30天最多up</a></li>
+            <li><a href="#24-hours-hot" data-toggle="tab" onclick="Hotest(this, '1')">今日最多up</a></li>
+            <li><a href="#7-days-hot" data-toggle="tab" onclick="Hotest(this, '7')">7天最多up</a></li>
+            <li><a href="#30-days-hot" data-toggle="tab" onclick="Hotest(this, '30')">30天最多up</a></li>
+          </ul>
+        </li>
+        <li class="dropdown subject-item">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            <div class="subject-title">最具争议 <b class="caret"></b></div></a>
+          <ul class="dropdown-menu">
+            <li><a href="#24-hours-debate" data-toggle="tab" onclick="Debate(this, '1')">今日最具争议</a></li>
+            <li><a href="#7-days-debate" data-toggle="tab" onclick="Debate(this, '7')">7天最具争议</a></li>
+            <li><a href="#30-days-debate" data-toggle="tab" onclick="Debate(this, '30')">30天最具争议</a></li>
           </ul>
         </li>
       </ul>
@@ -112,20 +121,14 @@ function Newest(me) {
         $('#showMsg').html(data);
    });
 };
-function DayHot(me) {
-  $.get("/home/hot/1")
+function Hotest(me, days) {
+  $.get("/home/hot/"+days)
    .done(function(data){
         $('#showMsg').html(data);
        });
 };
-function WeekHot(me) {
-  $.get("/home/hot/7")
-   .done(function(data){
-        $('#showMsg').html(data);
-       });
-};
-function MonthHot(me) {
-  $.get("/home/hot/30")
+function Debate(me, days) {
+  $.get("/home/debate/"+days)
    .done(function(data){
         $('#showMsg').html(data);
        });

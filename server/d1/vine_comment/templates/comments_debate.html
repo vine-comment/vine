@@ -1,0 +1,42 @@
+{% load staticfiles %}
+<script src="{% static 'jquery/2.0.3/jquery.min.js' %}"></script>
+<script src="{% static 'js/comment_updown.js' %}"></script>
+
+<ol class="breadcrumb">
+  <li><a href="/">藤蔓评论</a></li>
+  <li class="active">{{days}}天最热</li>
+</ol>
+
+{% include 'comments_list.html' %}
+		<ul class='pagination'>
+		{% if p_comment.has_previous %}
+		<li id='pagination_arrow_{{ p_comment.previous_page_number }}'><a href='#'>«</a></li>
+		<script type="text/javascript">
+			$('#pagination_arrow_{{ p_comment.previous_page_number }}').on('click', function() {
+				$('#showMsg').load('/home/debate/{{days}}?page={{ p_comment.previous_page_number }}');
+			});
+		</script>
+		{% endif %}
+		{% for num in p_comment.paginator.page_range %}
+			{% ifequal num p_comment.number %}
+				<li><span class="current"><b>{{ num }}</b></span></li>
+			{% else %}
+				<li id='pagination_{{num}}'><a href="#">{{ num }}</a></li>
+				<script type="text/javascript">
+					$('#pagination_{{num}}').on('click', function() {
+						$('#showMsg').load('/home/debate/{{days}}?page={{ num }}');
+					});
+				</script>
+
+			{% endifequal %}
+		{% endfor %}
+		{% if p_comment.has_next %}
+		<li id='pagination_arrow_{{ p_comment.next_page_number }}'><a href="#">»</a></li>
+		<script type="text/javascript">
+			$('#pagination_arrow_{{ p_comment.next_page_number }}').on('click', function() {
+          $('#showMsg').load('/home/debate/{{days}}?page={{ p_comment.next_page_number }}');
+			});
+		</script>
+		{% endif %}
+
+		</ul>

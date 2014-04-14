@@ -434,6 +434,34 @@ class HomeHotView(TemplateView):
             'days': days,
         })
 
+class HomeDebateView(TemplateView):
+    template_name = 'comments_debate.html'
+
+    def get(self, request, days):
+# need to use time_modified instead of time added
+        comments = Comment.objects.order_by('-time_added').filter(time_added__gte=datetime.datetime.now()-timedelta(days=eval(days)))
+        comments = sorted(comments,key=lambda o:len(o.up_users),reverse=True)
+        comments = sorted(comments,key=lambda o:len(o.down_users),reverse=True)
+        index_page = request.GET.get('page', 1)
+        print index_page
+
+ 
+        #TODO performance optimization for objects order_by('-time_added')
+        logger.info(str(len(comments)) + ': ' + str(comments))
+        try:
+            p = Paginator(comments, 10).page(index_page)
+        except PageNotAnInteger:
+        # If page is not an integer, deliver first page.
+            p = Paginator(comments, 10).page(1)
+        except EmptyPage:
+        # If page is out of range (e.g. 9999), deliver last page of results.
+            p = Paginator(comments, 10).page(paginator.num_pages)
+
+        return render(request, self.template_name, {
+            'p_comment': p,
+            'days': days,
+        })
+
 class CommentDetailView(TemplateView):
     template_name = 'comments/comment_detail_view.html'
 
