@@ -91,7 +91,7 @@ $(document).ready(function(){
 	$('#vine_comment_iframe').load("/iframe/" + btoa(document.location));
 });
 function Home(me) {
-  window.location.href = '{% static 'onepage-scroll/Demo/demo.html' %}';
+  window.location.href = "{% static 'onepage-scroll/Demo/demo.html' %}";
 
   $.get("/index")
    .done(function(data){
@@ -153,7 +153,7 @@ function SearchText(text) {
 };
 //$('#search-input').keyup(SearchIfEnter(event));
 
-Best();
+Best('');
 </script>
 
 {% block footer %}
