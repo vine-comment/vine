@@ -437,5 +437,6 @@ class HomeHotView(TemplateView):
 class CommentDetailView(TemplateView):
     template_name = 'comments/comment_detail_view.html'
 
-    def get(self, request, *args, **kwargs):
-        return render(request, self.template_name)
+    def get(self, request, id, *args, **kwargs):
+        comment = Comment.objects.filter(id=id)[0]
+        return render(request, self.template_name, {'comment': comment})
