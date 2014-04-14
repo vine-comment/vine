@@ -9,7 +9,8 @@ function verifyJQueryCdnLoaded() {
   if (typeof jQuery === "undefined") {
     loadjQuery("http://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js", main);
   } else {
-    main();
+    var jQuery_anwcl = jQuery.noConflict();
+    main(jQuery_anwcl);
   }
 }
 
@@ -31,8 +32,15 @@ function width_percent(jquery_object)
   return ( 100 * parseFloat(jquery_object.css('width')) / parseFloat(jquery_object.parent().css('width')) ) + '%';
 }
 
-function main() {
-  var jQuery_anwcl = jQuery.noConflict();
+function main(jquery_object) {
+  if (!jQuery) {
+    console.log('floatCommentBoard: jquery load failed!');
+    return ;
+  }
+
+  if (!jQuery_anwcl)
+	var jQuery_anwcl = jQuery;
+
   jQuery_anwcl("#special_div_for_anwcl_comment_board #boardLeft").bind('click', function(){
     comment_board = jQuery_anwcl("#special_div_for_anwcl_comment_board");
 	if (!jQuery_anwcl(this).attr('data-toggled') || jQuery_anwcl(this).attr('data-toggled') == 'off') {

@@ -66,12 +66,14 @@
   <div class="panel-body"> 每日推荐  预留 </div>
 </div>
 
+<div id="showMsg">
+</div> <!-- /#showMsg -->
+
 {% block content %}
 {% endblock %}
 </div>
 
 <script src="{% static 'jquery/2.0.3/jquery.min.js' %}"></script>
-<script src="{% static 'test/commentBoard.js' %}"></script>
 <script src="{% static 'twitter-bootstrap/3.0.3/js/bootstrap.min.js' %}"></script>
 <script src="{% static 'js/btoa.js' %}"></script>
 <script type="text/javascript">$('a').tooltip();</script>
@@ -84,12 +86,6 @@
 
 
 <script type="text/javascript">
-$(document).ready(function(){
-	if (!window.btoa) window.btoa = base64.encode;
-	$('body').append('<div id="vine_comment_iframe"></div>');
-	$.support.cors = true;
-	$('#vine_comment_iframe').load("/iframe/" + btoa(document.location));
-});
 function Home(me) {
   window.location.href = "{% static 'onepage-scroll/Demo/demo.html' %}";
 
@@ -102,13 +98,13 @@ function Best(me) {
   $.get("/home/best")
    .done(function(data){
         $('#showMsg').html(data);
-       });
+   });
 };
 function Newest(me) {
   $.get("/home/newest")
    .done(function(data){
         $('#showMsg').html(data);
-       });
+   });
 };
 function DayHot(me) {
   $.get("/home/hot/1")
@@ -153,7 +149,15 @@ function SearchText(text) {
 };
 //$('#search-input').keyup(SearchIfEnter(event));
 
-Best('');
+$(document).ready(function() {
+	if (!window.btoa) {
+	  window.btoa = base64.encode;
+	}
+	$('body').append('<div id="vine_comment_iframe"></div>');
+	$.support.cors = true;
+	$('#vine_comment_iframe').load("/iframe/" + btoa(document.location));
+    Best('');
+});
 </script>
 
 {% block footer %}
