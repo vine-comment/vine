@@ -1,5 +1,5 @@
 .navbar-default {
-	background-color: #0ca9ed;
+	background-color: #24BE37;
 	border-color: #ffffff;
 }
 .navbar-default .navbar-brand {
@@ -16,19 +16,19 @@
 }
 .navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
 color: #FFFFFF;
-background-color: #77BAF8;
+background-color: #23D338;
 }
 .navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus {
-	color: #7db4f0;
+	color: #23D338;
 	background-color: #f9f9f9;
 	font-weight: bold;
 }
 .navbar-default .navbar-nav > .active > a:hover {
-	color: #7dbfff;
+	color: #23D338;
 	background-color: #ffffff;
 }
 .navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:hover, .navbar-default .navbar-nav > .open > a:focus {
-	color: #7db4f0;
+	color: #23D338;
 	background-color: #ffffff;
 }
 .navbar-default .navbar-toggle {
