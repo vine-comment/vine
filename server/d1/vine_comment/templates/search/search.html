@@ -12,8 +12,8 @@
   </form>
 </div>
 {% endcomment %}
+<div class="block">
 {% if query %}
-
   <h2>Results</h2>
 
   {% for result in page.object_list %}
@@ -31,7 +31,8 @@
       {% if page.has_next %}<a href="?q={{ query }}&amp;page={{ page.next_page_number }}">{% endif %}Next &raquo;{% if page.has_next %}</a>{% endif %}
     </div>
   {% endif %}
-
 {% else %}
   {# Show some example queries to run, maybe query syntax, something else? #}
+  <p>没有请求。</p>
 {% endif %}
+</div>

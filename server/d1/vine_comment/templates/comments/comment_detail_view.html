@@ -2,10 +2,12 @@
 
 {% block content %}
 
+<div class="block">
 <div class="page-header">
 <h1>Comment Detail <small>{{comment.comment_board}}</small> </h1> 
 </div>
 
+<p>
 title: {{ comment.title }}<br/>
 comment_str: {{ comment.comment_str }}<br/>
 desc: {{ comment.desc }}<br/>
@@ -15,5 +17,8 @@ user: {{ comment.user }}<br/>
 up_users: {{ comment.up_users }}<br/>
 down_users: {{ comment.down_users }}<br/>
 tags: {%for tag in comment.tags%}{{ tag }},{%endfor%}<br/>
+</p>
+
+</div> <!-- .block -->
 
 {% endblock %}
