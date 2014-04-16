@@ -434,14 +434,22 @@ class HomeHotView(TemplateView):
             'days': days,
         })
 
+def debate_index(o):
+    ups = len(o.up_users)
+    downs = len(o.down_users)
+    summ = ups+downs
+    diff = abs(ups-downs)
+    if summ == 0:
+        return float('inf')
+    return diff/summ
+
 class HomeDebateView(TemplateView):
     template_name = 'comments_debate.html'
 
     def get(self, request, days):
 # need to use time_modified instead of time added
         comments = Comment.objects.order_by('-time_added').filter(time_added__gte=datetime.datetime.now()-timedelta(days=eval(days)))
-        comments = sorted(comments,key=lambda o:len(o.up_users),reverse=True)
-        comments = sorted(comments,key=lambda o:len(o.down_users),reverse=True)
+        comments = sorted(comments,key=lambda o:debate_index(o))
         index_page = request.GET.get('page', 1)
         print index_page
 
