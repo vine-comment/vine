@@ -1,39 +1,73 @@
 {% load humanize %}
+  <script>
+    function expandReply(id) {
+      if (!$('#repliesof'+id).is(':visible')) {
+        $('#repliesof'+id).show();
+      } else {
+        $('#repliesof'+id).hide();
+      }
+    }
+  </script>
 
-		<ul class="list-group">
-		{% for message in p_comment.object_list %}
-			<li class="list-group-item">
-				<span style="float:right">
-					<a href="#" id="up_comment_{{message.id}}" onclick="up('{{message.id}}')">
-						{% if user.id in message.up_users %}
-						<i class="fa fa-thumbs-up"></i>
-						{% else %}
-						<i class="fa fa-thumbs-o-up"></i>
-						{% endif %}
-						+<span>{{ message.up_users|length }}</span>
-					</a>
-					<a href="#" id="down_comment_{{message.id}}" onclick="down('{{message.id}}')">
-						{% if user.id in message.down_users %}
-						<i class="fa fa-thumbs-down fa-flip-horizontal"></i>
-						{% else %}
-						<i class="fa fa-thumbs-o-down fa-flip-horizontal"></i>
-						{% endif %}
-						-<span>{{ message.down_users|length }}</span>
-					</a>
-				 </span>
-				 <span style="font-size:200%">{{message.comment_str}}</span>
-				 <span>
-					 (<a href="{{message.comment_board.url}}">{{message.comment_board.url}}</a>)
+    <ul class="list-group">
+    {% for message in p_comment.object_list %}
+      <li class="list-group-item">
+        <span style="float:right">
+          <a href="#" id="up_comment_{{message.id}}" onclick="up('{{message.id}}')">
+            {% if user.id in message.up_users %}
+            <i class="fa fa-thumbs-up"></i>
+            {% else %}
+            <i class="fa fa-thumbs-o-up"></i>
+            {% endif %}
+            +<span>{{ message.up_users|length }}</span>
+          </a>
+          <a href="#" id="reply_comment_{{message.id}}" onclick="expandReply('{{message.id}}')">
+            <i class="fa fa-comments-o"></i>
+            <span>{{ message.replies|length }}</span>
+          </a>
+          <a href="#" id="down_comment_{{message.id}}" onclick="down('{{message.id}}')">
+            {% if user.id in message.down_users %}
+            <i class="fa fa-thumbs-down fa-flip-horizontal"></i>
+            {% else %}
+            <i class="fa fa-thumbs-o-down fa-flip-horizontal"></i>
+            {% endif %}
+            -<span>{{ message.down_users|length }}</span>
+          </a>
+         </span>
+         <span style="font-size:200%">{{message.comment_str}}</span>
+         <span>
+           (<a href="{{message.comment_board.url}}">{{message.comment_board.url}}</a>)
            <a href="/detail/comment/{{message.id}}"><i class="fa fa-info-circle"></i></a>
-				 </span>
-				 <br>
-				 <a href="#" style="margin-left:10px">{% if message.user %}{{ message.user }}{% else %}{{ message.author_ip }}{% endif %}</a>
-				 <span id='comment_time'>提交于 {{ message.time_added|naturaltime }}</span>
-				 <span>
-				   {%for tag in message.tags%}
-				   <a href="#" onclick="SearchText('{{tag}}')"><span class="label label-default">{{tag}}</span></a>
-				   {%endfor%}
-				 <span>
-			</li>
-		{% endfor %}
-		</ul>
+         </span>
+         <br>
+         <a href="#" style="margin-left:10px">{% if message.user %}{{ message.user }}{% else %}{{ message.author_ip }}{% endif %}</a>
+         <span id='comment_time'>提交于 {{ message.time_added|naturaltime }}</span>
+         <span>
+           {%for tag in message.tags%}
+           <a href="#" onclick="SearchText('{{tag}}')"><span class="label label-default">{{tag}}</span></a>
+           {%endfor%}
+         </span>
+         <br>
+         <ul class="list-group" id="repliesof{{message.id}}" style="display:none;margin-top:5px">
+           {% for reply in message.replies %}
+           <li class="list-group-item">
+             <span style="font-size:200%">{{message.comment_str}}</span>
+             <br>
+             <a href="#" style="margin-left:10px">{% if message.user %}{{ message.user }}{% else %}{{ message.author_ip }}{% endif %}</a>
+             <span id='comment_time'>提交于 {{ message.time_added|naturaltime }}</span>
+           </li>
+           {% endfor %}
+           <li class="list-group-item">
+					 <div class="input-group">
+						 <textarea rows="1" class="form-control" id="commentReply" name="commentRely" placeholder="可输入5-140个字"></textarea>
+						 <span class="input-group-btn">
+							 <button class="btn btn-default submitComment" data-loading-text="评论中" id="submitCommentReply" type="button">
+								评论
+							 </button>
+						 </span>
+					 </div><!-- /input-group -->
+           </li>
+         </ul>
+      </li>
+    {% endfor %}
+    </ul>

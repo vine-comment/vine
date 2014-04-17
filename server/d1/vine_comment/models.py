@@ -68,6 +68,11 @@ class CommentBoard(models.Model):
     def __unicode__(self):
         return self.title
 
+class Reply(TimeMixin, models.Model):
+    reply_str = models.CharField(max_length=128)
+    author_ip = models.IPAddressField(blank=True, null=True)
+    user = models.ForeignKey(User, blank=True, null=True)
+
 class Comment(TimeMixin, models.Model):
     title = models.CharField(max_length=64)
     comment_str = models.CharField(max_length=128)
@@ -78,6 +83,7 @@ class Comment(TimeMixin, models.Model):
     user = models.ForeignKey(User, blank=True, null=True)
     up_users = ListField(models.ForeignKey(User))
     down_users = ListField(models.ForeignKey(User))
+    replies = ListField(models.ForeignKey(Reply))
     tags = ListField(models.CharField(max_length=128))
 
     def __unicode__(self):
