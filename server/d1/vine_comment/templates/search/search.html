@@ -25,7 +25,7 @@
 {# 这个block是用于显示所有搜索结果的 #}
 <div class="block">
 {% if query %}
-  <h2>Results</h2>
+  <blockquote><p><strong>{{ query }}</strong> 的搜索结果</p></blockquote>
 
   {% for result in page.object_list %}
     <p>
