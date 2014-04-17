@@ -1,6 +1,7 @@
 {% load crispy_forms_tags %}
+
 {% comment %}
-<div class="row">
+<div class="block">
   <h2>Search</h2>
   <form class="col-md-6 form" role="form" method="get" action=".">
     <div>
@@ -12,6 +13,16 @@
   </form>
 </div>
 {% endcomment %}
+<div class="block">
+<form class="form-inline" role="search" method="get" action="/search">
+  <div class="form-group">
+    <input id="search-input" type="text" name="q" class="form-control" placeholder="搜索全站内容" onkeypress="return SearchIfEnter(event)">
+  </div>
+  <a href="#" onclick="Search(this)" data-original-title="" title=""><span class="glyphicon glyphicon-search"></span></a>
+</form>
+</div>
+
+{# 这个block是用于显示所有搜索结果的 #}
 <div class="block">
 {% if query %}
   <h2>Results</h2>
