@@ -22,7 +22,10 @@
 					</a>
 				 </span>
 				 <span style="font-size:200%">{{message.comment_str}}</span>
-				 <span>(<a href="{{message.comment_board.url}}">{{message.comment_board.url}}</a>)</span>
+				 <span>
+					 (<a href="{{message.comment_board.url}}">{{message.comment_board.url}}</a>)
+           <a href="/detail/comment/{{message.id}}"><i class="fa fa-info-circle"></i></a>
+				 </span>
 				 <br>
 				 <a href="#" style="margin-left:10px">{% if message.user %}{{ message.user }}{% else %}{{ message.author_ip }}{% endif %}</a>
 				 <span id='comment_time'>提交于 {{ message.time_added|naturaltime }}</span>
