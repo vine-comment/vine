@@ -1,12 +1,19 @@
 {% load humanize %}
   <script>
     function expandReply(id) {
-      if (!$('#repliesof'+id).is(':visible')) {
-        $('#repliesof'+id).show();
+      if (!$('#replyDiv'+id).is(':visible')) {
+        $('#replyDiv'+id).show();
       } else {
-        $('#repliesof'+id).hide();
+        $('#replyDiv'+id).hide();
       }
     }
+		function reply(id) {
+			reply_str = $('#reply'+id).val();
+			$.post("/ajax/reply/comment/"+id, {'reply_str':reply_str})
+			.done(function(data) {
+				$('#repliesof'+id ).html(data);
+			});
+		}
   </script>
 
     <ul class="list-group">
@@ -48,20 +55,17 @@
            {%endfor%}
          </span>
          <br>
-         <ul class="list-group" id="repliesof{{message.id}}" style="display:none;margin-top:5px">
-           {% for reply in message.replies %}
-           <li class="list-group-item">
-             <span style="font-size:200%">{{message.comment_str}}</span>
-             <br>
-             <a href="#" style="margin-left:10px">{% if message.user %}{{ message.user }}{% else %}{{ message.author_ip }}{% endif %}</a>
-             <span id='comment_time'>提交于 {{ message.time_added|naturaltime }}</span>
-           </li>
-           {% endfor %}
+				 <ul class="list-group" id="replyDiv{{message.id}}" style="display:none;margin-top:5px">
+					 <div id="repliesof{{message.id}}">
+					 {% for reply in message.replies %}
+					 {% include 'reply.html' %}
+	         {% endfor %}
+					 </div>
            <li class="list-group-item">
 					 <div class="input-group">
-						 <textarea rows="1" class="form-control" id="commentReply" name="commentRely" placeholder="可输入5-140个字"></textarea>
+						 <textarea rows="1" class="form-control" id="reply{{message.id}}" name="reply" placeholder="可输入5-140个字"></textarea>
 						 <span class="input-group-btn">
-							 <button class="btn btn-default submitComment" data-loading-text="评论中" id="submitCommentReply" type="button">
+							 <button class="btn btn-default submitComment" data-loading-text="评论中" onclick="reply('{{message.id}}')" type="button">
 								评论
 							 </button>
 						 </span>

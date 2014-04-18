@@ -313,11 +313,31 @@ class CommentDownView(TemplateView):
             comment.save()
             return HttpResponse("down+1", mimetype='plain/text')
 
-        """
-        for comment in most_up_comments:
-            comment.up_num = len(comment.up_users)
-        comments = most_up_comments.order_by('up_num').all()
-        """
+
+class CommentReplyView(TemplateView):
+    template_name = 'replies.html'
+
+    def get(self, request, id):
+        comments = Comment.objects.filter(id=id)
+        if not comments:
+            return HttpResponse(status=404)
+        comment = comments[0]
+        return render(request, self.template_name, {
+            'replies': comment.replies,
+        })
+
+    @csrf_exempt
+    def post(self, request, id):
+        comments = Comment.objects.filter(id=id)
+        reply = request.POST.get('reply')
+        if not comments:
+            return HttpResponse(status=404)
+        comment = comments[0]
+        reply_obj = Reply.objects.create(reply_str=reply)
+        reply_obj.save()
+        comment.replies.append(reply_obj.id)
+        return HttpResponseRedirect('/ajax/reply/comment/'+id)
+
 def expected_rating(o):
     ups = len(o.up_users)
     downs = len(o.down_users)
