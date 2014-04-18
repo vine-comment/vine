@@ -333,11 +333,22 @@ class CommentReplyView(TemplateView):
         if not comments:
             return HttpResponse(status=404)
         comment = comments[0]
-        reply_obj = Reply.objects.create(
-                    author_ip=request.META.get('REMOTE_ADDR', '0.0.0.0'),
-                    time_added=datetime.datetime.utcnow().replace(
-                                    tzinfo=utc),
-                    reply_str=reply_str)
+        if request.user.is_authenticated():
+            reply_obj = Reply.objects.create(
+                        user=request.user,
+                        author_ip=request.META.get('REMOTE_ADDR', '0.0.0.0'),
+                        time_added=datetime.datetime.utcnow().replace(
+                                        tzinfo=utc),
+                        reply_str=reply_str)
+        else:
+            '''
+            Annoymous User access the site.
+            '''
+            reply_obj = Reply.objects.create(
+                        author_ip=request.META.get('REMOTE_ADDR', '0.0.0.0'),
+                        time_added=datetime.datetime.utcnow().replace(
+                                        tzinfo=utc),
+                        reply_str=reply_str)
         reply_obj.save()
         comment.replies.append(reply_obj)
         comment.save()
