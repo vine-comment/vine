@@ -3,7 +3,6 @@
    {% for reply in replies %}
 	 <li class="list-group-item">
 		 <span style="font-size:200%">{{reply.reply_str}}</span>
-		 <br>
 		 <a href="#" style="margin-left:10px">{% if reply.user %}{{ reply.user }}{% else %}{{ reply.author_ip }}{% endif %}</a>
 		 <span id='comment_time'>提交于 {{ reply.time_added|naturaltime }}</span>
 	 </li>
