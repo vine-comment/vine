@@ -1,17 +1,23 @@
 {% load humanize %}
+
   <script>
     function expandReply(id) {
       if (!$('#replyDiv'+id).is(':visible')) {
         $('#replyDiv'+id).show();
+				$.get("/ajax/reply/comment/"+id, {})
+				.done(function(data) {
+					$('#repliesof'+id ).html(data);
+				});
       } else {
         $('#replyDiv'+id).hide();
       }
     }
 		function reply(id) {
-			reply_str = $('#reply'+id).val();
+			var reply_str = $('#reply'+id).val();
 			$.post("/ajax/reply/comment/"+id, {'reply_str':reply_str})
 			.done(function(data) {
 				$('#repliesof'+id ).html(data);
+        $('#reply'+id).val('');
 			});
 		}
   </script>
@@ -57,9 +63,7 @@
          <br>
 				 <ul class="list-group" id="replyDiv{{message.id}}" style="display:none;margin-top:5px">
 					 <div id="repliesof{{message.id}}">
-					 {% for reply in message.replies %}
 					 {% include 'reply.html' %}
-	         {% endfor %}
 					 </div>
            <li class="list-group-item">
 					 <div class="input-group">

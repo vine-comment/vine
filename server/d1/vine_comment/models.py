@@ -83,7 +83,7 @@ class Comment(TimeMixin, models.Model):
     user = models.ForeignKey(User, blank=True, null=True)
     up_users = ListField(models.ForeignKey(User))
     down_users = ListField(models.ForeignKey(User))
-    replies = ListField(models.ForeignKey(Reply))
+    replies = ListField(EmbeddedModelField('Reply'))
     tags = ListField(models.CharField(max_length=128))
 
     def __unicode__(self):

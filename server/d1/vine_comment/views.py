@@ -24,7 +24,7 @@ import jieba
 import jieba.analyse
 
 # private modules
-from vine_comment.models import Comment, CommentBoard
+from vine_comment.models import Comment, CommentBoard, Reply
 
 logger = logging.getLogger( __name__ )
 
@@ -315,27 +315,32 @@ class CommentDownView(TemplateView):
 
 
 class CommentReplyView(TemplateView):
-    template_name = 'replies.html'
+    template_name = 'reply.html'
 
     def get(self, request, id):
         comments = Comment.objects.filter(id=id)
         if not comments:
             return HttpResponse(status=404)
         comment = comments[0]
+        #replies = filter(lambda x: x.id in comment.replies, Reply.objects.all())
         return render(request, self.template_name, {
             'replies': comment.replies,
         })
 
-    @csrf_exempt
     def post(self, request, id):
         comments = Comment.objects.filter(id=id)
-        reply = request.POST.get('reply')
+        reply_str = request.POST.get('reply_str')
         if not comments:
             return HttpResponse(status=404)
         comment = comments[0]
-        reply_obj = Reply.objects.create(reply_str=reply)
+        reply_obj = Reply.objects.create(
+                    author_ip=request.META.get('REMOTE_ADDR', '0.0.0.0'),
+                    time_added=datetime.datetime.utcnow().replace(
+                                    tzinfo=utc),
+                    reply_str=reply_str)
         reply_obj.save()
-        comment.replies.append(reply_obj.id)
+        comment.replies.append(reply_obj)
+        comment.save()
         return HttpResponseRedirect('/ajax/reply/comment/'+id)
 
 def expected_rating(o):
