@@ -1,3 +1,5 @@
+# coding=utf-8
+
 from django.conf.urls import *
 from django.conf import settings
 from django.contrib import admin
@@ -66,7 +68,9 @@ urlpatterns += patterns('',
 )
 
 from haystack.views import SearchView, search_view_factory
+from haystack.forms import HighlightedModelSearchForm
 
+# patterns 第一个参数是 prefix（对view的），所以这里是 haystack.views.SearchView (?)
 urlpatterns += patterns('haystack.views',
     url(r'^advanced_search$', search_view_factory(
         view_class=SearchView,
