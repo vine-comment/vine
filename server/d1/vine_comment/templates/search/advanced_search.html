@@ -1,9 +1,50 @@
 {% extends 'base.html' %}
+{% load crispy_forms_tags %}
 
 {% block content %}
+<div class="block">
+<form class="form-inline" role="search" method="get" action="/search">
+  <div class="form-group">
+    <input id="search-input" type="text" name="q" class="form-control" placeholder="搜索全站内容" onkeypress="return SearchIfEnter(event)">
+  </div>
+  <a href="#" onclick="AdvancedSearch(this)" data-original-title="" title=""><span class="glyphicon glyphicon-search"></span></a>
+</form>
+</div>
 
+<div class="block">
+{% if query %}
+  <blockquote><p><strong>{{ query }}</strong> 的搜索结果</p></blockquote>
+
+  {% for result in page.object_list %}
+    <p>
+      {{ result.object.comment_board.title }}: <a href="{{ result.object.get_absolute_url }}">{{ result.object.comment_str }}</a>
+    </p>
+  {% empty %}
+    <p>No results found.</p>
+  {% endfor %}
+
+  {% if page.has_previous or page.has_next %}
+    <div>
+      {% if page.has_previous %}<a href="?q={{ query }}&amp;page={{ page.previous_page_number }}">{% endif %}&laquo; Previous{% if page.has_previous %}</a>{% endif %}
+      |
+      {% if page.has_next %}<a href="?q={{ query }}&amp;page={{ page.next_page_number }}">{% endif %}Next &raquo;{% if page.has_next %}</a>{% endif %}
+    </div>
+  {% endif %}
+{% else %}
+  {# Show some example queries to run, maybe query syntax, something else? #}
+  <p>没有请求。</p>
+{% endif %}
+</div>
 {% endblock %}
 
+
 {% block footer %}
+
+<script>
+function AdvancedSearch() {
+  return;
+};
+</script>
+
 {% endblock %}
 
