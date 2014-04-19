@@ -18,18 +18,18 @@ class CommentIndex(indexes.SearchIndex, indexes.Indexable):
 
 
 # All Fields
-class AllNoteIndex(indexes.ModelSearchIndex, indexes.Indexable):
+class AllCommentIndex(indexes.ModelSearchIndex, indexes.Indexable):
     class Meta:
         model = Comment
 
 # Blacklisted Fields
-class LimitedNoteIndex(indexes.ModelSearchIndex, indexes.Indexable):
+class LimitedCommentIndex(indexes.ModelSearchIndex, indexes.Indexable):
     class Meta:
         model = Comment
         excludes = ['user']
 
 # Whitelisted Fields
-class NoteIndex(indexes.ModelSearchIndex, indexes.Indexable):
+class CommentIndex(indexes.ModelSearchIndex, indexes.Indexable):
     class Meta:
         model = Comment
         fields = ['user', 'pub_date']
@@ -37,4 +37,4 @@ class NoteIndex(indexes.ModelSearchIndex, indexes.Indexable):
     # Note that regular ``SearchIndex`` methods apply.
     def index_queryset(self, using=None):
         "Used when the entire index for model is updated."
-        return Note.objects.filter(pub_date__lte=datetime.datetime.now())
+        return Comment.objects.filter(pub_date__lte=datetime.datetime.now())
