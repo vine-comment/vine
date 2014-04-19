@@ -15,3 +15,26 @@ class CommentIndex(indexes.SearchIndex, indexes.Indexable):
     def index_queryset(self, using=None):
         """Used when the entire index for model is updated."""
         return self.get_model().objects.filter(time_modified__lte=datetime.datetime.now())
+
+
+# All Fields
+class AllNoteIndex(indexes.ModelSearchIndex, indexes.Indexable):
+    class Meta:
+        model = Comment
+
+# Blacklisted Fields
+class LimitedNoteIndex(indexes.ModelSearchIndex, indexes.Indexable):
+    class Meta:
+        model = Comment
+        excludes = ['user']
+
+# Whitelisted Fields
+class NoteIndex(indexes.ModelSearchIndex, indexes.Indexable):
+    class Meta:
+        model = Comment
+        fields = ['user', 'pub_date']
+
+    # Note that regular ``SearchIndex`` methods apply.
+    def index_queryset(self, using=None):
+        "Used when the entire index for model is updated."
+        return Note.objects.filter(pub_date__lte=datetime.datetime.now())
