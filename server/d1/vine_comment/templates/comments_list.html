@@ -18,6 +18,9 @@
 			.done(function(data) {
 				$('#repliesof'+id ).html(data);
         $('#reply'+id).val('');
+				var reply_num = $('#reply_comment_'+id).find('span');
+				var count = parseInt(reply_num.text())+1;
+				reply_num.text(count);
 			});
 		}
   </script>
