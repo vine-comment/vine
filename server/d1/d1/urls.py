@@ -65,6 +65,18 @@ urlpatterns += patterns('',
     url(r'^index$', TemplateView.as_view(template_name='index.html'), name='index'),
 )
 
+from haystack.views import SearchView, search_view_factory
+
+urlpatterns += patterns('haystack.views',
+    url(r'^advanced_search$', search_view_factory(
+        view_class=SearchView,
+        template='search/advanced_search.html',
+        # 当前不需要sqs，它是用来filter某个范围的
+        # searchqueryset=sqs,
+        form_class=HighlightedModelSearchForm
+    ), name='advanced_search'),
+)
+
 from functools import wraps
 from django.contrib.staticfiles.views import serve as serve_static
 
