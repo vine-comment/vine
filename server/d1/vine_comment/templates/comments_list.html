@@ -4,25 +4,25 @@
     function expandReply(id) {
       if (!$('#replyDiv'+id).is(':visible')) {
         $('#replyDiv'+id).show();
-				$.get("/ajax/reply/comment/"+id, {})
-				.done(function(data) {
-					$('#repliesof'+id ).html(data);
-				});
+        $.get("/ajax/reply/comment/"+id, {})
+        .done(function(data) {
+          $('#repliesof'+id ).html(data);
+        });
       } else {
         $('#replyDiv'+id).hide();
       }
     }
-		function reply(id) {
-			var reply_str = $('#reply'+id).val();
-			$.post("/ajax/reply/comment/"+id, {'reply_str':reply_str})
-			.done(function(data) {
-				$('#repliesof'+id ).html(data);
+    function reply(id) {
+      var reply_str = $('#reply'+id).val();
+      $.post("/ajax/reply/comment/"+id, {'reply_str':reply_str})
+      .done(function(data) {
+        $('#repliesof'+id ).html(data);
         $('#reply'+id).val('');
-				var reply_num = $('#reply_comment_'+id).find('span');
-				var count = parseInt(reply_num.text())+1;
-				reply_num.text(count);
-			});
-		}
+        var reply_num = $('#reply_comment_'+id).find('span');
+        var count = parseInt(reply_num.text())+1;
+        reply_num.text(count);
+      });
+    }
   </script>
 
     <ul class="list-group">
@@ -64,19 +64,19 @@
            {%endfor%}
          </span>
          <br>
-				 <ul class="list-group" id="replyDiv{{message.id}}" style="display:none;margin-top:5px">
-					 <div id="repliesof{{message.id}}">
-					 {% include 'reply.html' %}
-					 </div>
+         <ul class="list-group" id="replyDiv{{message.id}}" style="display:none;margin-top:5px">
+           <div id="repliesof{{message.id}}">
+           {% include 'reply.html' %}
+           </div>
            <li class="list-group-item">
-					 <div class="input-group">
-						 <textarea rows="1" class="form-control" id="reply{{message.id}}" name="reply" placeholder="可输入5-140个字"></textarea>
-						 <span class="input-group-btn">
-							 <button class="btn btn-default submitComment" data-loading-text="评论中" onclick="reply('{{message.id}}')" type="button">
-								评论
-							 </button>
-						 </span>
-					 </div><!-- /input-group -->
+           <div class="input-group">
+             <textarea rows="1" class="form-control" id="reply{{message.id}}" name="reply" placeholder="可输入5-140个字"></textarea>
+             <span class="input-group-btn">
+               <button class="btn btn-default submitComment" data-loading-text="评论中" onclick="reply('{{message.id}}')" type="button">
+                评论
+               </button>
+             </span>
+           </div><!-- /input-group -->
            </li>
          </ul>
       </li>
