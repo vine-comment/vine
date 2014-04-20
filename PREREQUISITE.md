@@ -28,6 +28,10 @@
 * Run a mail server to use account authentication.
   * sendmail, smtp.gmail, etc. 
   * python -m smtpd -n -c DebuggingServer localhost:1025
+  * postfix for ubuntu
+
+    > Check: **https://help.ubuntu.com/12.04/serverguide/postfix.html**
+
 * Memcached server
   * Linux: if your memcached server don't run automatically, try `./memcached -d -m 2048 -l 10.0.0.40 -p 11211`
   * Windows: download and run the binary.
