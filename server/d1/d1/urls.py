@@ -41,6 +41,7 @@ urlpatterns = patterns('',
 
 urlpatterns += patterns('',
     url(r'^accounts/', include('registration.backends.default.urls')),
+    url(r'^comment/delete/(?P<id>.*?)/?$', CommentDeleteView.as_view(), name='comment_delete'),
     url(r'^comment/(?P<url_b64>.*?)/?$', CommentView.as_view(), name='comment'),
     url(r'^ajax/comment/(?P<url_b64>.*?)/?$', CommentRawView.as_view(), name='comment_raw'),
     url(r'^ajax/up/comment/(?P<id>.*?)/?$', CommentUpView.as_view(), name='comment_up'),

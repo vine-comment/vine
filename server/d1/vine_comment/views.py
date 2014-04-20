@@ -196,6 +196,16 @@ class CommentView(TemplateView):
         #self.debug(request, *args, **kwargs)
         return super(CommentView, self).dispatch(request, *args, **kwargs)
 
+class CommentDeleteView(TemplateView):
+
+    def get(self, request, id):
+        comments = Comment.objects.filter(id=id)
+        if len(comments) == 0:
+            return HttpResponse(status=404)
+        comment = comments[0]
+        comment.delete()
+        return HttpResponseRedirect('/home/')
+
 # This view is used for ajax load, see commentBoard.js for more details.
 class CommentRawView(TemplateView):
     template_name = ''

@@ -5,10 +5,12 @@
 <div class="block">
 <div class="page-header">
 <h1>Comment Detail <small>{{comment.comment_board}}</small> </h1> 
+{% if user == comment.user %}
+<a href="/comment/delete/{{comment.id}}">Delete</a>
+{% endif %}
+<!--TODO: allow administrator to delete-->
 </div>
 
-<!--TODO owner can delete, admin can delete-->
-<button>Delete</button>
 
 <p>
 title: {{ comment.title }}<br/>
