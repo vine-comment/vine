@@ -1,8 +1,26 @@
 
 <h1>Comments</h1>
 
-<ul>
-  {% for comment in latest_comment_list %}
-    <li class="comment">{{ comment }}</li>
-  {% endfor %}
-</ul>
+<div class="block">
+<div class="page-header">
+<h1>Comment Detail <small>{{comment.comment_board}}</small> </h1> 
+<!--TODO owner can delete, admin can delete-->
+<a href="/comment/delete/{{comment.id}}">Delete</a>
+</div>
+
+
+<p>
+title: {{ comment.title }}<br/>
+comment_str: {{ comment.comment_str }}<br/>
+desc: {{ comment.desc }}<br/>
+comment_board: {{ comment.comment_board }}<br/>
+author_ip: {{ comment.author_ip }}<br/>
+user: {{ comment.user }}<br/>
+up_users: {{ comment.up_users }}<br/>
+down_users: {{ comment.down_users }}<br/>
+tags: {%for tag in comment.tags%}{{ tag }},{%endfor%}<br/>
+</p>
+
+</div> <!-- .block -->
+
+{% endblock %}
