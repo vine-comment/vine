@@ -17,6 +17,7 @@ class CommentIndex(indexes.SearchIndex, indexes.Indexable):
         return self.get_model().objects.filter(time_modified__lte=datetime.datetime.now())
 
 
+'''
 # All Fields
 class AllCommentIndex(indexes.ModelSearchIndex, indexes.Indexable):
     class Meta:
@@ -38,3 +39,4 @@ class CommentIndex(indexes.ModelSearchIndex, indexes.Indexable):
     def index_queryset(self, using=None):
         "Used when the entire index for model is updated."
         return Comment.objects.filter(pub_date__lte=datetime.datetime.now())
+'''
