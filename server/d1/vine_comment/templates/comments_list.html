@@ -23,6 +23,17 @@
         reply_num.text(count);
       });
     }
+    function expandDetail(id) {
+      if (!$('#detailDiv'+id).is(':visible')) {
+        $('#detailDiv'+id).show();
+        $.get("/detail/comment/"+id,{})
+         .done(function(data) {
+           $('#detailDiv'+id).html(data);
+         });
+      } else {
+        $('#detailDiv'+id).hide();
+      }
+    }
   </script>
 
     <ul class="list-group">
@@ -53,7 +64,7 @@
          <span style="font-size:200%">{{message.comment_str}}</span>
          <span>
            (<a href="{{message.comment_board.url}}">{{message.comment_board.url}}</a>)
-           <a href="/detail/comment/{{message.id}}"><i class="fa fa-info-circle"></i></a>
+           <a href="#" onclick="expandDetail('{{message.id}}');return false;"><i class="fa fa-info-circle"></i></a>
          </span>
          <br>
          <a href="#" style="margin-left:10px">{% if message.user %}{{ message.user }}{% else %}{{ message.author_ip }}{% endif %}</a>
@@ -64,6 +75,9 @@
            {%endfor%}
          </span>
          <br>
+         <ul class="list-group" id="detailDiv{{message.id}}" style="display:none;margin-top:5px">
+           loading ...
+         </ul>
          <ul class="list-group" id="replyDiv{{message.id}}" style="display:none;margin-top:5px">
            <div id="repliesof{{message.id}}">
            {% include 'reply.html' %}

@@ -1,10 +1,8 @@
-{% extends 'base.html' %}
 {% load staticfiles %}
 
-{% block content %}
 <div class="block">
 <div class="page-header">
-<h1>Comment Detail <small>{{comment.comment_board}}</small> </h1> 
+<h3>Comment Detail <small>{{comment.comment_board}}</small> </h3> 
 {% if user == comment.user %}
 <a href="/comment/delete/{{comment.id}}">Delete</a>
 {% endif %}
@@ -30,9 +28,6 @@ tags: {%for tag in comment.tags%}{{ tag }},{%endfor%}<br/>
 
 </div> <!-- .block -->
 
-{% endblock %}
-
-{% block footer %}
 <script src="{% static 'js/jeditable/jquery.jeditable.js' %}" type="text/javascript" charset="utf-8"></script>
 <script src="{% static 'js/jeditable/jquery.jeditable.autogrow.js' %}"></script>
 <script src="{% static 'js/jeditable/jquery.autogrow.js' %}"></script>
@@ -54,5 +49,4 @@ tags: {%for tag in comment.tags%}{{ tag }},{%endfor%}<br/>
    });
 
 </script>
-{% endblock %}
 
