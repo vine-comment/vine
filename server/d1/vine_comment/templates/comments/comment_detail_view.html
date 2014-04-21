@@ -14,7 +14,11 @@
 
 <p>
 title: {{ comment.title }}<br/>
-comment_str: <p class="autogrow_article"> {{ comment.comment_str }}</p><br/>
+{% if user == comment.user %}
+comment_str: <p class="autogrow_article"> {{ comment.comment_str }}</p>
+{% else %}
+comment_str: <p> {{ comment.comment_str }}</p>
+{% endif %}
 desc: {{ comment.desc }}<br/>
 comment_board: {{ comment.comment_board }}<br/>
 author_ip: {{ comment.author_ip }}<br/>
