@@ -206,6 +206,18 @@ class CommentDeleteView(TemplateView):
         comment.delete()
         return HttpResponseRedirect('/home/')
 
+class CommentModifyView(TemplateView):
+
+    def post(self, request, id):
+        comment_str = request.POST.get('comment_str')
+        comments = Comment.objects.filter(id=id)
+        if len(comments) == 0 or not comment_str:
+            return HttpResponse(status=404)
+        comment = comments[0]
+        comment.comment_str = comment_str
+        comment.save()
+        return HttpResponse(status=200)
+
 # This view is used for ajax load, see commentBoard.js for more details.
 class CommentRawView(TemplateView):
     template_name = ''

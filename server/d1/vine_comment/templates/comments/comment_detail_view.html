@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
+{% load staticfiles %}
 
 {% block content %}
-
 <div class="block">
 <div class="page-header">
 <h1>Comment Detail <small>{{comment.comment_board}}</small> </h1> 
@@ -14,7 +14,7 @@
 
 <p>
 title: {{ comment.title }}<br/>
-comment_str: {{ comment.comment_str }}<br/>
+comment_str: <p class="autogrow_article"> {{ comment.comment_str }}</p><br/>
 desc: {{ comment.desc }}<br/>
 comment_board: {{ comment.comment_board }}<br/>
 author_ip: {{ comment.author_ip }}<br/>
@@ -27,3 +27,28 @@ tags: {%for tag in comment.tags%}{{ tag }},{%endfor%}<br/>
 </div> <!-- .block -->
 
 {% endblock %}
+
+{% block footer %}
+<script src="{% static 'js/jeditable/jquery.jeditable.js' %}" type="text/javascript" charset="utf-8"></script>
+<script src="{% static 'js/jeditable/jquery.jeditable.autogrow.js' %}"></script>
+<script src="{% static 'js/jeditable/jquery.autogrow.js' %}"></script>
+<script>
+   $(".autogrow_article").editable(function(value, settings) {
+         $.post("/comment/modify/{{comment.id}}", {'comment_str':value});
+         value = value.replace(/\n/g, '<br>');
+         $(this).html(value);
+       }, { 
+       type      : "autogrow",
+       submit    : 'OK',
+       cancel    : 'cancel',
+       tooltip   : "Click to edit...",
+       onblur    : "ignore",
+       autogrow : {
+          lineHeight : 32,
+          minHeight  : 32
+       },
+   });
+
+</script>
+{% endblock %}
+
