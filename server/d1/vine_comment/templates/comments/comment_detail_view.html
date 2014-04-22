@@ -40,6 +40,7 @@ tags: <p>{%for tag in comment.tags%}{{ tag }},{%endfor%}</p>
          $.post("/comment/modify/{{comment.id}}", {'comment_str':value});
          value = value.replace(/\n/g, '<br>');
          $(this).html(value);
+         $('#comment_str_{{comment.id}}').text(value);
        }, { 
        type      : "autogrow",
        submit    : 'OK',
@@ -55,10 +56,13 @@ tags: <p>{%for tag in comment.tags%}{{ tag }},{%endfor%}</p>
        var tags = value.split(',');
        var uniqueTags = [];
        var raw_tags = '';
+       $('#comment_tags_{{comment.id}}').html('');
        $.each(tags, function(i, el){
          if($.inArray(el, uniqueTags) === -1) {
            uniqueTags.push(el); 
            raw_tags += el+',';
+           $('<a href="#" onclick="SearchText(\''+el+'\');return false;"><span class="label label-default">'+el+'</span></a>')
+           .appendTo('#comment_tags_{{comment.id}}');
          }
        });
        $(this).html(raw_tags);
