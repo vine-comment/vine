@@ -13,7 +13,7 @@
 <p>
 title: {{ comment.title }}<br/>
 {% if user == comment.user %}
-comment_str: <p class="autogrow_article"> {{ comment.comment_str }}</p>
+comment_str: <p class="autogrow_comment_str"> {{ comment.comment_str }}</p>
 {% else %}
 comment_str: <p> {{ comment.comment_str }}</p>
 {% endif %}
@@ -23,7 +23,11 @@ author_ip: {{ comment.author_ip }}<br/>
 user: {{ comment.user }}<br/>
 up_users: {{ comment.up_users }}<br/>
 down_users: {{ comment.down_users }}<br/>
-tags: {%for tag in comment.tags%}{{ tag }},{%endfor%}<br/>
+{% if user == comment.user %}
+tags: <p class="editable_comment_tags"> {%for tag in comment.tags%}{{ tag }},{%endfor%}</p>
+{% else %}
+tags: <p>{%for tag in comment.tags%}{{ tag }},{%endfor%}</p>
+{% endif %}
 </p>
 
 </div> <!-- .block -->
@@ -32,7 +36,7 @@ tags: {%for tag in comment.tags%}{{ tag }},{%endfor%}<br/>
 <script src="{% static 'js/jeditable/jquery.jeditable.autogrow.js' %}"></script>
 <script src="{% static 'js/jeditable/jquery.autogrow.js' %}"></script>
 <script>
-   $(".autogrow_article").editable(function(value, settings) {
+   $(".autogrow_comment_str").editable(function(value, settings) {
          $.post("/comment/modify/{{comment.id}}", {'comment_str':value});
          value = value.replace(/\n/g, '<br>');
          $(this).html(value);
@@ -46,6 +50,25 @@ tags: {%for tag in comment.tags%}{{ tag }},{%endfor%}<br/>
           lineHeight : 32,
           minHeight  : 32
        },
+   });
+   $(".editable_comment_tags").editable(function(value, settings) {
+       var tags = value.split(',');
+       var uniqueTags = [];
+       var raw_tags = '';
+       $.each(tags, function(i, el){
+         if($.inArray(el, uniqueTags) === -1) {
+           uniqueTags.push(el); 
+           raw_tags += el+',';
+         }
+       });
+       $(this).html(raw_tags);
+       $.post("/comment/modify/{{comment.id}}", {'comment_tags':raw_tags});
+     }, { 
+       type   : 'text',
+       select : true,
+       submit : "√",
+       cancel : "×",
+       tooltip : "点击修改",
    });
 
 </script>

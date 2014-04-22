@@ -209,12 +209,17 @@ class CommentDeleteView(TemplateView):
 class CommentModifyView(TemplateView):
 
     def post(self, request, id):
-        comment_str = request.POST.get('comment_str')
+        comment_str = request.POST.get('comment_str',None)
+        comment_tags = request.POST.get('comment_tags',None)
         comments = Comment.objects.filter(id=id)
-        if len(comments) == 0 or not comment_str:
+        if len(comments) == 0 or (not comment_str and not comment_tags):
             return HttpResponse(status=404)
         comment = comments[0]
-        comment.comment_str = comment_str
+        if comment_str:
+            comment.comment_str = comment_str
+        if comment_tags:
+            tags = comment_tags.split(',')
+            comment.tags = tags
         comment.save()
         return HttpResponse(status=200)
 
