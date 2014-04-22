@@ -1,5 +1,13 @@
+# python
 import datetime
+
+# django
+from django.contrib.auth.models import User
+
+# third-party
 from haystack import indexes
+
+# vine
 from vine_comment.models import Comment
 
 
@@ -16,6 +24,11 @@ class CommentIndex(indexes.SearchIndex, indexes.Indexable):
         """Used when the entire index for model is updated."""
         return self.get_model().objects.filter(time_modified__lte=datetime.datetime.now())
 
+
+# All User Fields
+class AllUserIndex(indexes.ModelSearchIndex, indexes.Indexable):
+    class Meta:
+        model = User
 
 '''
 # All Fields

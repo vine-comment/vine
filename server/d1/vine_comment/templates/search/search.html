@@ -1,4 +1,6 @@
 {% load crispy_forms_tags %}
+{% load highlight %}
+{% load more_like_this %}
 
 {% comment %}
 <div class="block">
@@ -28,6 +30,7 @@
   <blockquote><p><strong>{{ query }}</strong> 的搜索结果</p></blockquote>
 
   {% for result in page.object_list %}
+    {% more_like_this comment as related_content %}
     <p>
       {{ result.object.comment_board.title }}: <a href="{{ result.object.get_absolute_url }}">{{ result.object.comment_str }}</a>
     </p>
