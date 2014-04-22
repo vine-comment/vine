@@ -24,7 +24,7 @@ user: {{ comment.user }}<br/>
 up_users: {{ comment.up_users }}<br/>
 down_users: {{ comment.down_users }}<br/>
 {% if user == comment.user %}
-tags: <p class="editable_comment_tags"> {%for tag in comment.tags%}{{ tag }},{%endfor%}</p>
+tags: <p class="editable_comment_tags">{%for tag in comment.tags%}{{ tag }},{%endfor%}</p>
 {% else %}
 tags: <p>{%for tag in comment.tags%}{{ tag }},{%endfor%}</p>
 {% endif %}
@@ -58,10 +58,10 @@ tags: <p>{%for tag in comment.tags%}{{ tag }},{%endfor%}</p>
        var raw_tags = '';
        $('#comment_tags_{{comment.id}}').html('');
        $.each(tags, function(i, el){
-         if($.inArray(el, uniqueTags) === -1) {
+         if(el != '' && $.inArray(el, uniqueTags) === -1) {
            uniqueTags.push(el); 
            raw_tags += el+',';
-           $('<a href="#" onclick="SearchText(\''+el+'\');return false;"><span class="label label-default">'+el+'</span></a>')
+           $('<a href="#" onclick="SearchText('+el+');return false;"><span class="label label-default">'+el+'</span></a>')
            .appendTo('#comment_tags_{{comment.id}}');
          }
        });
