@@ -14,8 +14,12 @@ from vine_comment.models import Comment
 class CommentIndex(indexes.SearchIndex, indexes.Indexable):
     text = indexes.CharField(document=True, use_template=True)
     comment_str = indexes.CharField(model_attr='comment_str')
-    title = indexes.CharField()
+    # if we set facet to True, then the title would stored as
+    # *title* and *title_exact*.
+    title = indexes.CharField(facet=True)
     author_ip = indexes.CharField(null=True)
+    # Another example:
+    # pub_date = DateTimeField(model_attr='pub_date')
 
     def get_model(self):
         return Comment
