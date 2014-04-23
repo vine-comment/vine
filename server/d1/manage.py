@@ -8,5 +8,7 @@ if __name__ == "__main__":
 
     from django.core.management import execute_from_command_line
 
-    jieba.initialize()
+    if 'runserver' in sys.argv:
+        if not jieba.initialized:
+            jieba.initialize()
     execute_from_command_line(sys.argv)
