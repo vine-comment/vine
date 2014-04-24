@@ -7,7 +7,7 @@
 
 ###search engine
 * django-haystack
-* [Elasticsearch](http://www.elasticsearch.org/overview/elkdownloads/)
+* **[Elasticsearch](http://www.elasticsearch.org/overview/elkdownloads/)**
 
 ###pip install
 * django-registration
