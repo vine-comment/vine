@@ -5,6 +5,10 @@
 * djangotoolbox
 * django-mongodb-engine
 
+###search engine
+* django-haystack
+* [Elasticsearch](http://www.elasticsearch.org/overview/elkdownloads/)
+
 ###pip install
 * django-registration
 * django-crispy-forms
@@ -16,6 +20,7 @@
 * python-social-auth
 * python-memcached
 * django_akismet_comments
+* elasticsearch
 
 ###apt-get install / download & setup
 * python-dev
