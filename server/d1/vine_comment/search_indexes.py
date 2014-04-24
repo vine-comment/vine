@@ -16,7 +16,7 @@ class CommentIndex(indexes.SearchIndex, indexes.Indexable):
     comment_str = indexes.CharField(model_attr='comment_str')
     # if we set facet to True, then the title would stored as
     # *title* and *title_exact*.
-    title = indexes.CharField(faceted=True)
+    title = indexes.CharField(faceted=True, model_attr='title')
     author_ip = indexes.CharField(null=True)
     # Another example:
     # pub_date = DateTimeField(model_attr='pub_date')
