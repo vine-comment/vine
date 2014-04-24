@@ -1,7 +1,12 @@
+{% extends 'base.html' %}
 {% load staticfiles %}
+{% block head %}
+<link href="{% static 'css/home.css' %}" rel="stylesheet"/>
 <script src="{% static 'jquery/2.0.3/jquery.min.js' %}"></script>
 <script src="{% static 'js/comment_updown.js' %}"></script>
+{% endblock %}
 
+{% block content %}
 <ol class="breadcrumb">
   <li><a href="/">藤蔓评论</a></li>
   <li class="active">{{days}}天最热</li>
@@ -40,3 +45,4 @@
 		{% endif %}
 
 		</ul>
+{% endblock %}

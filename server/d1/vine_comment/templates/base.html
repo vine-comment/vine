@@ -38,24 +38,24 @@
     <div class="navbar-collapse collapse navbar-responsive-collapse">
       <ul class="nav navbar-nav">
         <li><a href="#home" data-toggle="tab" onclick="Home(this)">展示</a></li>
-        <li class="active"><a href="#best" data-toggle="tab" onclick="Best(this)">最优</a></li>
-        <li><a href="#newest" data-toggle="tab" onclick="Newest(this)">最新</a></li>
+        <li><a href="/home/best" id="comments_best">最优</a></li>
+        <li><a href="/home/newest" id="comments_newest">最新</a></li>
         <li class="dropdown subject-item">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">
             <div class="subject-title">最热 <b class="caret"></b></div></a>
           <ul class="dropdown-menu">
-            <li><a href="#24-hours-hot" data-toggle="tab" onclick="Hotest(this, '1')">今日最多up</a></li>
-            <li><a href="#7-days-hot" data-toggle="tab" onclick="Hotest(this, '7')">7天最多up</a></li>
-            <li><a href="#30-days-hot" data-toggle="tab" onclick="Hotest(this, '30')">30天最多up</a></li>
+            <li><a href="/home/hot/1" id="comments_hot_1">今日最多up</a></li>
+            <li><a href="/home/hot/7" id="comments_hot_7">7天最多up</a></li>
+            <li><a href="/home/hot/30" id="comments_hot_30">30天最多up</a></li>
           </ul>
         </li>
         <li class="dropdown subject-item">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">
             <div class="subject-title">最具争议 <b class="caret"></b></div></a>
           <ul class="dropdown-menu">
-            <li><a href="#24-hours-debate" data-toggle="tab" onclick="Debate(this, '1')">今日最具争议</a></li>
-            <li><a href="#7-days-debate" data-toggle="tab" onclick="Debate(this, '7')">7天最具争议</a></li>
-            <li><a href="#30-days-debate" data-toggle="tab" onclick="Debate(this, '30')">30天最具争议</a></li>
+            <li><a href="/home/debate/1" id="comments_debate_1">今日最具争议</a></li>
+            <li><a href="/home/debate/7" id="comments_debate_7">7天最具争议</a></li>
+            <li><a href="/home/debate/30" id="comments_debate_30">30天最具争议</a></li>
           </ul>
         </li>
       </ul>
@@ -92,16 +92,17 @@
 </div>
 
 <div id="showMsg">
-</div> <!-- /#showMsg -->
-
 {% block content %}
 {% endblock %}
+</div> <!-- /#showMsg -->
+
 </div>
 
 <script src="{% static 'jquery/2.0.3/jquery.min.js' %}"></script>
 <script src="{% static 'twitter-bootstrap/3.0.3/js/bootstrap.min.js' %}"></script>
 <script src="{% static 'js/btoa.js' %}"></script>
 <script src="{% static 'js/csrf.js' %}"></script>
+<script src="{% static 'js/jquery.pjax.js' %}"></script>
 <script src="{% static 'js/comment_updown.js' %}"></script>
 <script type="text/javascript">$('a').tooltip();</script>
 <!-- XXX: use popup_message in commentBoard.js -->
