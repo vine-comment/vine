@@ -29,6 +29,24 @@
 {% if query %}
   <blockquote><p><strong>{{ query }}</strong> 的搜索结果</p></blockquote>
 
+    <!-- Begin faceting. -->
+    <h2>By Title</h2>
+
+    <div>
+        <dl>
+            {% if facets.fields.author %}
+                <dt>Author</dt>
+                {# Provide only the top 5 authors #}
+                {% for author in facets.fields.author|slice:":5" %}
+                    <dd><a href="{{ request.get_full_path }}&amp;selected_facets=author_exact:{{ author.0|urlencode }}">{{ author.0 }}</a> ({{ author.1 }})</dd>
+                {% endfor %}
+            {% else %}
+                <p>No author facets.</p>
+            {% endif %}
+        </dl>
+    </div>
+    <!-- End faceting -->
+
   {% for result in page.object_list %}
     <p>
       {{ result.object.comment_board.title }}: <a href="{{ result.object.get_absolute_url }}">{{ result.object.comment_str }}</a>

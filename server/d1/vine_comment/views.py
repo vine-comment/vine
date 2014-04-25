@@ -91,8 +91,8 @@ class CommentView(TemplateView):
         
     @csrf_exempt
     def _post_comment(self, index_url, comment_str, author_ip, user):
-        title=urlparse(index_url).netloc
-        
+        title = urlparse(index_url).netloc
+
         # print comment_str, user
         logger.info(u'评论:' + comment_str
                      + u'IP:' + author_ip
@@ -102,7 +102,7 @@ class CommentView(TemplateView):
 
         comment_board, created = CommentBoard.objects.get_or_create(
                                     url=index_url,
-                                    title=urlparse(index_url).netloc)
+                                    title=title)
         comment_board.save() if created else None
         if user.is_authenticated():
             comment = Comment(
@@ -113,6 +113,7 @@ class CommentView(TemplateView):
                     comment_str=comment_str,
                     comment_board=comment_board,
                     author_ip=author_ip,
+                    title=title,
                     user=user) # 以后换成author，现在先用user
         else:
             '''
@@ -125,6 +126,7 @@ class CommentView(TemplateView):
                                     tzinfo=utc),
                     comment_str=comment_str,
                     comment_board=comment_board,
+                    title=title,
                     author_ip=author_ip)
 
         # Generate top 5 tags for comment.
