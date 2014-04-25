@@ -28,7 +28,7 @@
                 <dt>标题</dt>
                 {# Provide only the top 5 titles #}
                 {% for title in facets.fields.title|slice:":5" %}
-                    <dd><a href="{{ request.get_full_path }}&amp;selected_facets=author_exact:{{ title.0|urlencode }}">{{ title.0 }}</a> ({{ title.1 }})</dd>
+                    <dd><a href="{{ request.get_full_path }}&amp;selected_facets=title_exact:{{ title.0|urlencode }}">{{ title.0 }}</a> ({{ title.1 }})</dd>
                 {% endfor %}
             {% else %}
                 <p>没有可供选择的title</p>
@@ -58,6 +58,7 @@
   <p>没有请求。</p>
 {% endif %}
 </div>
+
 {% endblock %}
 
 
