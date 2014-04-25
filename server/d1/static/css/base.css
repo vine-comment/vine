@@ -16,6 +16,13 @@ h1, h2, h3, h4, h5, p, div, form {
 max-width: 1000px;
 }
 
+<!-- You can use col-md-* with it. -->
+.col-block {
+padding: 15px 15px 15px 15px;
+margin: 0 -15px 15px;
+background-color: #fafafa;
+}
+
 .block {
 position: relative;
 padding: 15px 15px 15px 15px;
