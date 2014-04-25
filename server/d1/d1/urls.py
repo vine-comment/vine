@@ -76,7 +76,7 @@ from haystack.query import SearchQuerySet
 
 # patterns 第一个参数是 prefix（对view的），所以这里是 haystack.views.SearchView (?)
 urlpatterns += patterns('haystack.views',
-    url(r'^advanced_search$', search_view_factory(
+    url(r'^advanced_search/', search_view_factory(
         view_class=SearchView,
         template='search/advanced_search.html',
         # 当前不需要sqs，它是用来filter某个范围的
@@ -89,7 +89,7 @@ sqs = SearchQuerySet().facet('title')
 
 # patterns 第一个参数是 prefix（对view的），所以这里是 haystack.views.SearchView (?)
 urlpatterns += patterns('haystack.views',
-    url(r'^faceted_search$', search_view_factory(
+    url(r'^faceted_search/', search_view_factory(
         view_class=FacetedSearchView,
         template='search/faceted_search.html',
         searchqueryset=sqs,
