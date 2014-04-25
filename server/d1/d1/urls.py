@@ -70,8 +70,11 @@ urlpatterns += patterns('',
     url(r'^index$', TemplateView.as_view(template_name='index.html'), name='index'),
 )
 
-from haystack.views import SearchView, search_view_factory
-from haystack.forms import HighlightedModelSearchForm
+from haystack.views import SearchView, search_view_factory, FacetedSearchView
+from haystack.forms import HighlightedModelSearchForm, FacetedSearchForm
+from haystack.query import SearchQuerySet
+
+sqs = SearchQuerySet().facet('author')
 
 # patterns 第一个参数是 prefix（对view的），所以这里是 haystack.views.SearchView (?)
 urlpatterns += patterns('haystack.views',
@@ -82,6 +85,16 @@ urlpatterns += patterns('haystack.views',
         # searchqueryset=sqs,
         form_class=HighlightedModelSearchForm
     ), name='advanced_search'),
+)
+
+# patterns 第一个参数是 prefix（对view的），所以这里是 haystack.views.SearchView (?)
+urlpatterns += patterns('haystack.views',
+    url(r'^faceted_search$', search_view_factory(
+        view_class=FacetedSearchView,
+        template='search/faceted_search.html',
+        searchqueryset=sqs,
+        form_class=FacetedSearchForm
+    ), name='faceted_search'),
 )
 
 from functools import wraps
