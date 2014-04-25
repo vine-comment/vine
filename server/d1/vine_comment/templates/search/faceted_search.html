@@ -3,13 +3,13 @@
 
 {% block content %}
 
-<div class="row">
+<div class="row block">
   <h2>Search</h2>
   <form class="col-md-6 form" role="form" method="get" action=".">
     <div>
     {{ form|crispy }}
     </div>
-    <div class="form-group ">
+    <div class="form-group">
       <button type="submit" class="btn btn-default">Search</button>
     </div>
   </form>
@@ -34,14 +34,14 @@
 
     <div>
         <dl>
-            {% if facets.fields.author %}
+            {% if facets.fields.title %}
                 <dt>Author</dt>
                 {# Provide only the top 5 authors #}
-                {% for author in facets.fields.author|slice:":5" %}
-                    <dd><a href="{{ request.get_full_path }}&amp;selected_facets=author_exact:{{ author.0|urlencode }}">{{ author.0 }}</a> ({{ author.1 }})</dd>
+                {% for title in facets.fields.title|slice:":5" %}
+                    <dd><a href="{{ request.get_full_path }}&amp;selected_facets=author_exact:{{ title.0|urlencode }}">{{ title.0 }}</a> ({{ title.1 }})</dd>
                 {% endfor %}
             {% else %}
-                <p>No author facets.</p>
+                <p>No title facets.</p>
             {% endif %}
         </dl>
     </div>
