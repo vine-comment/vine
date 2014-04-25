@@ -74,8 +74,6 @@ from haystack.views import SearchView, search_view_factory, FacetedSearchView
 from haystack.forms import HighlightedModelSearchForm, FacetedSearchForm
 from haystack.query import SearchQuerySet
 
-sqs = SearchQuerySet().facet('author')
-
 # patterns 第一个参数是 prefix（对view的），所以这里是 haystack.views.SearchView (?)
 urlpatterns += patterns('haystack.views',
     url(r'^advanced_search$', search_view_factory(
@@ -86,6 +84,8 @@ urlpatterns += patterns('haystack.views',
         form_class=HighlightedModelSearchForm
     ), name='advanced_search'),
 )
+
+sqs = SearchQuerySet().facet('title')
 
 # patterns 第一个参数是 prefix（对view的），所以这里是 haystack.views.SearchView (?)
 urlpatterns += patterns('haystack.views',
