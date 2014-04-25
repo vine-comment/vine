@@ -3,25 +3,14 @@
 
 {% block content %}
 
-<div class="row block">
-  <h2>Search</h2>
-  <form class="col-md-6 form" role="form" method="get" action=".">
-    <div>
-    {{ form|crispy }}
-    </div>
-    <div class="form-group">
-      <button type="submit" class="btn btn-default">Search</button>
-    </div>
-  </form>
-</div>
-
-
 <div class="block">
-<form class="form-inline" role="search" method="get" action="/search">
+<form class="form-inline" role="search" method="get" action=".">
   <div class="form-group">
     <input id="search-input" type="text" name="q" class="form-control" placeholder="搜索全站内容" onkeypress="return SearchIfEnter(event)">
   </div>
-  <a href="#" onclick="AdvancedSearch(this)" data-original-title="" title=""><span class="glyphicon glyphicon-search"></span></a>
+  <div class="form-group">
+    <button type="submit" class="btn btn-default">Search</button>
+  </div>
 </form>
 </div>
 
@@ -29,23 +18,25 @@
 {% if query %}
   <blockquote><p><strong>{{ query }}</strong> 的搜索结果</p></blockquote>
 
+  <blockquote>
     <!-- Begin faceting. -->
-    <h2>By Title</h2>
+    <h4>高级选项</h4>
 
     <div>
         <dl>
             {% if facets.fields.title %}
-                <dt>Author</dt>
-                {# Provide only the top 5 authors #}
+                <dt>标题</dt>
+                {# Provide only the top 5 titles #}
                 {% for title in facets.fields.title|slice:":5" %}
                     <dd><a href="{{ request.get_full_path }}&amp;selected_facets=author_exact:{{ title.0|urlencode }}">{{ title.0 }}</a> ({{ title.1 }})</dd>
                 {% endfor %}
             {% else %}
-                <p>No title facets.</p>
+                <p>没有可供选择的title</p>
             {% endif %}
         </dl>
     </div>
     <!-- End faceting -->
+  </blockquote>
 
   {% for result in page.object_list %}
     <p>
