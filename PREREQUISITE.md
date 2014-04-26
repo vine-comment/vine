@@ -20,7 +20,7 @@
 * python-social-auth
 * python-memcached
 * django_akismet_comments
-* elasticsearch
+* elasticsearch (for ubuntu: pyelasticsearch)
 
 ###apt-get install / download & setup
 * python-dev
