@@ -80,7 +80,7 @@
          </span>
          <span id="comment_tags_{{message.id}}">
            {%for tag in message.tags%}
-           <a href="#" onclick="SearchText('{{tag}}');return false;"><span class="label label-default">{{tag}}</span></a>
+           <a href="/faceted_search/?q={{tag}}"><span class="label label-default">{{tag}}</span></a>
            {%endfor%}
          </span>
          <br>
