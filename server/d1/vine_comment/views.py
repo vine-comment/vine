@@ -24,7 +24,7 @@ import jieba
 import jieba.analyse
 
 # private modules
-from vine_comment.models import Comment, CommentBoard, Reply
+from vine_comment.models import Comment, CommentBoard, Reply, Author
 
 logger = logging.getLogger( __name__ )
 
@@ -546,3 +546,11 @@ class CommentDetailView(TemplateView):
     def get(self, request, id, *args, **kwargs):
         comment = Comment.objects.filter(id=id)[0]
         return render(request, self.template_name, {'comment': comment})
+
+def get_author(request):
+    authors = Author.objects.filter(user=request.user)
+    if authors:
+        author = authors[0]
+	return author
+    else:
+	return None

@@ -231,7 +231,8 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     #'social.apps.django_app.context_processors.backends',
     #'social.apps.django_app.context_processors.login_redirect',
     'social.apps.django_app.context_processors.backends',
-    "vine_comment.context_processors.registration"
+    "vine_comment.context_processors.registration",
+    "vine_comment.context_processors.comment_author"
 )
 
 ##################################################### 

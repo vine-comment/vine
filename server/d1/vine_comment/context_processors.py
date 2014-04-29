@@ -1,4 +1,5 @@
 from forms import VineRegistrationForm as registration_form
+from vine_comment.views import get_author
 
 
 def registration(request):
@@ -8,4 +9,6 @@ def registration(request):
 def login(request):
     pass
 
-
+def comment_author(request):
+    author = get_author(request)
+    return {"author": author}
