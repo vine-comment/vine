@@ -21,10 +21,10 @@ def logout(request):
     return redirect(request.META.get('HTTP_REFERER', '/comment'))
     #return render_to_response('home.html', {}, RequestContext(request))
 
-def home(request):
+def comments(request):
     """Home view, displays login mechanism"""
     #if request.user.is_authenticated():
-    return redirect('/home/best')
+    return redirect('/comments/best')
     return render_to_response('home.html', {
         'plus_id': getattr(settings, 'SOCIAL_AUTH_GOOGLE_PLUS_KEY', None)
     }, RequestContext(request))

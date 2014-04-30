@@ -206,7 +206,7 @@ class CommentDeleteView(TemplateView):
             return HttpResponse(status=404)
         comment = comments[0]
         comment.delete()
-        return HttpResponseRedirect('/home/')
+        return HttpResponseRedirect('/comments/')
 
 class CommentModifyView(TemplateView):
 
@@ -395,12 +395,12 @@ def expected_rating(o):
         score = (phat + z*z/(2*n) - z * math.sqrt((phat*(1-phat)+z*z/(4*n))/n))/(1+z*z/n)
     return score
 
-class HomeView(TemplateView):
+class CommentsView(TemplateView):
 
     def get(self, request, *args, **kwargs):
-        return HttpResponseRedirect('/home/best')
+        return HttpResponseRedirect('/comments/best')
 
-class HomeBestView(TemplateView):
+class CommentsBestView(TemplateView):
     template_name = 'comments_best.html'
 
     def get(self, request, *args, **kwargs):
@@ -426,7 +426,7 @@ class HomeBestView(TemplateView):
             'p_comment': p,
         })
 
-class HomeNewestView(TemplateView):
+class CommentsNewestView(TemplateView):
     template_name = 'comments_newest.html'
 
     def get(self, request, *args, **kwargs):
@@ -450,7 +450,7 @@ class HomeNewestView(TemplateView):
             'p_comment': p,
         })
 
-class HomeHotView(TemplateView):
+class CommentsHotView(TemplateView):
     template_name = 'comments_hot.html'
 
     def get(self, request, days):
@@ -477,7 +477,7 @@ class HomeHotView(TemplateView):
             'days': days,
         })
 
-class HomeUpView(TemplateView):
+class CommentsUpView(TemplateView):
     template_name = 'comments_up.html'
 
     def get(self, request, days):
@@ -513,7 +513,7 @@ def debate_index(o):
         return float('inf')
     return diff/summ
 
-class HomeDebateView(TemplateView):
+class CommentsDebateView(TemplateView):
     template_name = 'comments_debate.html'
 
     def get(self, request, days):

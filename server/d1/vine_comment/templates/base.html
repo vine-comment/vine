@@ -38,33 +38,33 @@
     <div class="navbar-collapse collapse navbar-responsive-collapse">
       <ul class="nav navbar-nav">
         <!-- <li><a href="#home" data-toggle="tab" onclick="Home(this)">展示</a></li> -->
-        <li><a href="/home/best" id="comments_best">最优</a></li>
-        <li><a href="/home/newest" id="comments_newest">最新</a></li>
+        <li><a href="/comments/best" id="comments_best">最优</a></li>
+        <li><a href="/comments/newest" id="comments_newest">最新</a></li>
         <li class="dropdown subject-item">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">
             <div class="subject-title">最多评论 <b class="caret"></b></div></a>
           <ul class="dropdown-menu">
-            <li><a href="/home/hot/1" id="comments_hot_1">今日最多评论</a></li>
-            <li><a href="/home/hot/7" id="comments_hot_7">7天最多评论</a></li>
-            <li><a href="/home/hot/30" id="comments_hot_30">30天最多评论</a></li>
+            <li><a href="/comments/hot/1" id="comments_hot_1">今日最多评论</a></li>
+            <li><a href="/comments/hot/7" id="comments_hot_7">7天最多评论</a></li>
+            <li><a href="/comments/hot/30" id="comments_hot_30">30天最多评论</a></li>
           </ul>
         </li>
         <li class="dropdown subject-item">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">
             <div class="subject-title">最多up <b class="caret"></b></div></a>
           <ul class="dropdown-menu">
-            <li><a href="/home/up/1" id="comments_hot_1">今日最多up</a></li>
-            <li><a href="/home/up/7" id="comments_hot_7">7天最多up</a></li>
-            <li><a href="/home/up/30" id="comments_hot_30">30天最多up</a></li>
+            <li><a href="/comments/up/1" id="comments_hot_1">今日最多up</a></li>
+            <li><a href="/comments/up/7" id="comments_hot_7">7天最多up</a></li>
+            <li><a href="/comments/up/30" id="comments_hot_30">30天最多up</a></li>
           </ul>
         </li>
         <li class="dropdown subject-item">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">
             <div class="subject-title">最具争议 <b class="caret"></b></div></a>
           <ul class="dropdown-menu">
-            <li><a href="/home/debate/1" id="comments_debate_1">今日最具争议</a></li>
-            <li><a href="/home/debate/7" id="comments_debate_7">7天最具争议</a></li>
-            <li><a href="/home/debate/30" id="comments_debate_30">30天最具争议</a></li>
+            <li><a href="/comments/debate/1" id="comments_debate_1">今日最具争议</a></li>
+            <li><a href="/comments/debate/7" id="comments_debate_7">7天最具争议</a></li>
+            <li><a href="/comments/debate/30" id="comments_debate_30">30天最具争议</a></li>
           </ul>
         </li>
       </ul>
@@ -139,25 +139,25 @@ function Home(me) {
    });
 };
 function Best(me) {
-  $.get("/home/best")
+  $.get("/comments/best")
    .done(function(data){
         $('#showMsg').html(data);
    });
 };
 function Newest(me) {
-  $.get("/home/newest")
+  $.get("/comments/newest")
    .done(function(data){
         $('#showMsg').html(data);
    });
 };
 function Hotest(me, days) {
-  $.get("/home/hot/"+days)
+  $.get("/comments/hot/"+days)
    .done(function(data){
         $('#showMsg').html(data);
        });
 };
 function Debate(me, days) {
-  $.get("/home/debate/"+days)
+  $.get("/comments/debate/"+days)
    .done(function(data){
         $('#showMsg').html(data);
        });

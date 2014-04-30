@@ -18,7 +18,7 @@
 		<li id='pagination_arrow_{{ p_comment.previous_page_number }}'><a href='#'>«</a></li>
 		<script type="text/javascript">
 			$('#pagination_arrow_{{ p_comment.previous_page_number }}').on('click', function() {
-				$('#showMsg').load('/home/debate/{{days}}?page={{ p_comment.previous_page_number }}');
+				$('#showMsg').load('/comments/debate/{{days}}?page={{ p_comment.previous_page_number }}');
 			});
 		</script>
 		{% endif %}
@@ -29,7 +29,7 @@
 				<li id='pagination_{{num}}'><a href="#">{{ num }}</a></li>
 				<script type="text/javascript">
 					$('#pagination_{{num}}').on('click', function() {
-						$('#showMsg').load('/home/debate/{{days}}?page={{ num }}');
+						$('#showMsg').load('/comments/debate/{{days}}?page={{ num }}');
 					});
 				</script>
 
@@ -39,7 +39,7 @@
 		<li id='pagination_arrow_{{ p_comment.next_page_number }}'><a href="#">»</a></li>
 		<script type="text/javascript">
 			$('#pagination_arrow_{{ p_comment.next_page_number }}').on('click', function() {
-          $('#showMsg').load('/home/debate/{{days}}?page={{ p_comment.next_page_number }}');
+          $('#showMsg').load('/comments/debate/{{days}}?page={{ p_comment.next_page_number }}');
 			});
 		</script>
 		{% endif %}
