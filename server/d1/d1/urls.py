@@ -40,6 +40,7 @@ urlpatterns = patterns('',
 )
 
 urlpatterns += patterns('',
+    url(r'^home/?$', login_required(HomeView.as_view()), name='home'),
     url(r'^accounts/', include('registration.backends.default.urls')),
     url(r'^comment/delete/(?P<id>.*?)/?$', CommentDeleteView.as_view(), name='comment_delete'),
     url(r'^comment/modify/(?P<id>.*?)/?$', CommentModifyView.as_view(), name='comment_modify'),

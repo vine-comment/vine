@@ -554,3 +554,10 @@ def get_author(request):
 	return author
     else:
 	return None
+
+class HomeView(TemplateView):
+    template_name = 'home.html'
+
+    def get(self, request, *args, **kwargs):
+        return render(request, self.template_name)
+
