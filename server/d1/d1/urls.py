@@ -41,6 +41,7 @@ urlpatterns = patterns('',
 
 urlpatterns += patterns('',
     url(r'^home/?$', login_required(HomeView.as_view()), name='home'),
+    url(r'^user/head-sculpture/?$', login_required(UserHeadSculptureView.as_view()), name='user_head_sculpture'),
     url(r'^accounts/', include('registration.backends.default.urls')),
     url(r'^comment/delete/(?P<id>.*?)/?$', CommentDeleteView.as_view(), name='comment_delete'),
     url(r'^comment/modify/(?P<id>.*?)/?$', CommentModifyView.as_view(), name='comment_modify'),
@@ -69,6 +70,7 @@ urlpatterns += patterns('',
           RegistrationView.as_view(form_class=VineRegistrationForm),
           name='registration_register'),
     url(r'^index$', TemplateView.as_view(template_name='index.html'), name='index'),
+    url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT}),
 )
 
 from haystack.views import SearchView, search_view_factory, FacetedSearchView

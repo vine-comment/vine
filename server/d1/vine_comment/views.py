@@ -10,7 +10,7 @@ import math
 
 # django modules
 from django.http import *
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.generic import *
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.utils.timezone import utc
@@ -25,6 +25,7 @@ import jieba.analyse
 
 # private modules
 from vine_comment.models import Comment, CommentBoard, Reply, Author
+from vine_comment.forms import *
 
 logger = logging.getLogger( __name__ )
 
@@ -551,13 +552,40 @@ def get_author(request):
     authors = Author.objects.filter(user=request.user)
     if authors:
         author = authors[0]
-	return author
+        return author
     else:
-	return None
+        return None
 
 class HomeView(TemplateView):
     template_name = 'home.html'
 
     def get(self, request, *args, **kwargs):
-        return render(request, self.template_name)
+        author = get_author(request)
+        if not author:
+            author = Author.objects.create(
+                    user=request.user,
+                    time_added=datetime.datetime.utcnow().replace(
+                                        tzinfo=utc),
+                    )
+            author.save()
+        return render(request, self.template_name, {
+            'header_form': UploadHeadSculptureForm,
+            })
+
+class UserHeadSculptureView(TemplateView):
+    
+    def get(self, request, *args, **kwargs):
+        return HttpResponseForbidden('allowed only via POST')
+    
+    def post(self, request, *args, **kwargs):
+        form = UploadHeadSculptureForm(request.POST, request.FILES)
+        if form.is_valid():
+            author = get_author(request)
+            if not author:
+                return redirect(request.META.get('HTTP_REFERER', '/'))
+            author.picture = form.cleaned_data['image']
+            author.save()
+            # XXX success hint
+            return redirect(request.META.get('HTTP_REFERER', '/'))
+        return redirect(request.META.get('HTTP_REFERER', '/'))
 

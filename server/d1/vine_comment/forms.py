@@ -36,3 +36,6 @@ class VineRegistrationForm(forms.Form):
         return self.cleaned_data
 
 
+class UploadHeadSculptureForm(forms.Form):
+    image = forms.ImageField(label='上传图片')
+

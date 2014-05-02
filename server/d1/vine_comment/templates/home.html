@@ -43,7 +43,6 @@ background-color: #F3F3F3;
             {% endif %}
           </div>
         </a>
-        {% comment %}
         <form method="post" action="{% url 'user_head_sculpture' %}" enctype="multipart/form-data" style='display:none' id='picForm'>
           {% csrf_token %}
           {{ header_form|crispy }}
@@ -53,7 +52,6 @@ background-color: #F3F3F3;
             </div>
           </div>
         </form>
-        {% endcomment %}
       </div>
     </div>
 
@@ -174,7 +172,7 @@ background-color: #F3F3F3;
 </div>
 {% endblock %}
 
-{% block body_footer %}
+{% block footer %}
 <script src="http://cdn.jsdelivr.net/jquery.knob/1.2.2/jquery.knob.min.js"></script>
 
 <script>
