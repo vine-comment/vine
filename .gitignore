@@ -1,4 +1,5 @@
 
+media/
 *.swp
 *.settings
 social_local_settings.py
