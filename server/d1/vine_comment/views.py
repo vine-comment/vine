@@ -549,25 +549,20 @@ class CommentDetailView(TemplateView):
         return render(request, self.template_name, {'comment': comment})
 
 def get_author(request):
-    authors = Author.objects.filter(user=request.user)
-    if authors:
-        author = authors[0]
-        return author
-    else:
+    if not request.user.is_authenticated():
         return None
+    author, created = Author.objects.get_or_create(
+            user=request.user,
+            time_added=datetime.datetime.utcnow().replace(tzinfo=utc)
+            )
+    author.save() if created else None
+    return author
 
 class HomeView(TemplateView):
     template_name = 'home.html'
 
     def get(self, request, *args, **kwargs):
         author = get_author(request)
-        if not author:
-            author = Author.objects.create(
-                    user=request.user,
-                    time_added=datetime.datetime.utcnow().replace(
-                                        tzinfo=utc),
-                    )
-            author.save()
         return render(request, self.template_name, {
             'header_form': UploadHeadSculptureForm,
             })

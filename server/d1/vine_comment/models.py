@@ -38,6 +38,7 @@ class RateMixin(models.Model):
 
 # Create your models here.
 class Author(TimeMixin, models.Model):
+    """
     email = models.EmailField()
     password = models.CharField(max_length=64)
     name = models.CharField(max_length=30)
@@ -48,6 +49,7 @@ class Author(TimeMixin, models.Model):
     website = models.URLField()
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=40)
+    """
     picture = models.ImageField(upload_to='head_sculpture', blank=True, null=True)
     
     user = models.OneToOneField(User)
