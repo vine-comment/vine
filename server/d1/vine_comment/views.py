@@ -551,11 +551,15 @@ class CommentDetailView(TemplateView):
 def get_author(request):
     if not request.user.is_authenticated():
         return None
-    author, created = Author.objects.get_or_create(
+    authors = Author.objects.filter(user=request.user)
+    if authors:
+        author = authors[0]
+    else:
+        author = Author.objects.create(
             user=request.user,
             time_added=datetime.datetime.utcnow().replace(tzinfo=utc)
             )
-    author.save() if created else None
+        author.save()
     return author
 
 class HomeView(TemplateView):
