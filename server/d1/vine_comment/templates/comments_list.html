@@ -70,7 +70,7 @@
          <span>
            <a href="/home/">
                {% if message.author.picture %}
-                <img class="avatar large border" src="{{ author.picture.url }}" style="max-width:50px; max-height:30px;">
+                <img class="avatar large border" src="{{ message.author.picture.url }}" style="max-width:50px; max-height:30px;">
                {% else %} <!-- no head sculpture -->
                <img class="avatar large border" src="http://www.gravatar.com/avatar/73c2759e2936bc26746d0d26375aed31?d=retro&amp;s=30">
                {% endif %}
