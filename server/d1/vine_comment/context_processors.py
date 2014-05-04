@@ -10,5 +10,5 @@ def login(request):
     pass
 
 def comment_author(request):
-    author = get_author(request)
+    author = get_author(request.user)
     return {"author": author}

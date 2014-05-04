@@ -24,7 +24,7 @@
         -<span>{{ message.down_users|length }}</span>
       </a>
      </span>
-     <strong>{% if message.user %}{{ message.user }}{% else %}{{ message.author_ip }}{% endif %}</strong>
+     <strong>{% if message.author %}{{ message.author.user }}{% else %}{{ message.author_ip }}{% endif %}</strong>
      <span id='comment_time'> {{ message.time_added|naturaltime }}</span> {{message.comment_str}} <br>
   </li>
 {% endfor %}

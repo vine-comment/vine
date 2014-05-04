@@ -55,7 +55,7 @@ class Author(TimeMixin, models.Model):
     user = models.OneToOneField(User)
     
     def __unicode__(self):
-        return self.name
+        return self.user.name
 
 class Url(models.Model):
     content = models.CharField(max_length=64)
@@ -83,7 +83,7 @@ class Comment(TimeMixin, models.Model):
     comment_board = models.ForeignKey(CommentBoard)
     author_ip = models.IPAddressField(blank=True, null=True)
     # 在后面加入author的详细信息，分为匿名和实名
-    user = models.ForeignKey(User, blank=True, null=True)
+    author = models.ForeignKey(Author, blank=True, null=True)
     up_users = ListField(models.ForeignKey(User))
     down_users = ListField(models.ForeignKey(User))
     replies = ListField(EmbeddedModelField('Reply'))

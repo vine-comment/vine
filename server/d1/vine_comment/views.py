@@ -106,6 +106,7 @@ class CommentView(TemplateView):
                                     title=title)
         comment_board.save() if created else None
         if user.is_authenticated():
+            author = get_author(user)
             comment = Comment(
                     time_added=datetime.datetime.utcnow().replace(
                                     tzinfo=utc),
@@ -115,7 +116,7 @@ class CommentView(TemplateView):
                     comment_board=comment_board,
                     author_ip=author_ip,
                     title=title,
-                    user=user) # 以后换成author，现在先用user
+                    author=author) # 以后换成author，现在先用user
         else:
             '''
             Annoymous User access the site.
@@ -548,15 +549,15 @@ class CommentDetailView(TemplateView):
         comment = Comment.objects.filter(id=id)[0]
         return render(request, self.template_name, {'comment': comment})
 
-def get_author(request):
-    if not request.user.is_authenticated():
+def get_author(user):
+    if not user.is_authenticated():
         return None
-    authors = Author.objects.filter(user=request.user)
+    authors = Author.objects.filter(user=user)
     if authors:
         author = authors[0]
     else:
         author = Author.objects.create(
-            user=request.user,
+            user=user,
             time_added=datetime.datetime.utcnow().replace(tzinfo=utc)
             )
         author.save()
@@ -566,7 +567,7 @@ class HomeView(TemplateView):
     template_name = 'home.html'
 
     def get(self, request, *args, **kwargs):
-        author = get_author(request)
+        author = get_author(request.user)
         return render(request, self.template_name, {
             'header_form': UploadHeadSculptureForm,
             })
@@ -579,7 +580,7 @@ class UserHeadSculptureView(TemplateView):
     def post(self, request, *args, **kwargs):
         form = UploadHeadSculptureForm(request.POST, request.FILES)
         if form.is_valid():
-            author = get_author(request)
+            author = get_author(request.user)
             if not author:
                 return redirect(request.META.get('HTTP_REFERER', '/'))
             author.picture = form.cleaned_data['image']
