@@ -18,6 +18,7 @@
 * python-memcached
 * django_akismet_comments
 * elasticsearch (for ubuntu: pyelasticsearch)
+* django-avatar (if can't work, see https://github.com/jezdez/django-avatar/issues/53)
 
 ###apt-get install / download & setup
 *   python-dev
