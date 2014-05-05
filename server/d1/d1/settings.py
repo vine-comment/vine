@@ -144,6 +144,7 @@ INSTALLED_APPS = (
     'registration',
     'crispy_forms',
     'haystack',
+    'avatar',
     'django_akismet_comments',
     # 'django_wysiwyg',
     'django_mongodb_engine',

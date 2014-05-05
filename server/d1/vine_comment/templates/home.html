@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load crispy_forms_tags %}
+{% load avatar_tags %}
 
 {% block head %}
 <style>
@@ -34,13 +35,10 @@ background-color: #F3F3F3;
 
     <div id="user-info-view" class="col-md-2 pull-left">
       <div class="avatar-wrapper">
-        <a onclick="showForm(this, 'picForm')" title="更换头像" href='#'>
+        <!--a onclick="showForm(this, 'picForm')" title="更换头像" href='#'-->
+        <a href="{% url 'avatar_change' %}" title="更换头像">
           <div class="avatar-image-container">
-            {% if author.picture %}
-             <img class="avatar large border" src="{{ author.picture.url }}" style="max-width:100%; max-height:100%;">
-            {% else %} <!-- no head sculpture -->
-            <img class="avatar large border" src="http://www.gravatar.com/avatar/73c2759e2936bc26746d0d26375aed31?d=retro&amp;s=140">
-            {% endif %}
+            {% avatar user %}
           </div>
         </a>
         <form method="post" action="{% url 'user_head_sculpture' %}" enctype="multipart/form-data" style='display:none' id='picForm'>

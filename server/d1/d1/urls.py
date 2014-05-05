@@ -28,6 +28,7 @@ urlpatterns = patterns('',
 # TEST python-social-auth
 urlpatterns = patterns('',
     (r'^search/', include('haystack.urls')),
+    (r'^avatar/', include('avatar.urls')),
     url(r'^$', 'social_auth_app.views.comments'),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^signup-email/', 'social_auth_app.views.signup_email'),
