@@ -41,6 +41,7 @@ background-color: #F3F3F3;
             {% avatar user %}
           </div>
         </a>
+        {% comment %}
         <form method="post" action="{% url 'user_head_sculpture' %}" enctype="multipart/form-data" style='display:none' id='picForm'>
           {% csrf_token %}
           {{ header_form|crispy }}
@@ -50,6 +51,7 @@ background-color: #F3F3F3;
             </div>
           </div>
         </form>
+        {% endcomment %}
       </div>
     </div>
 
@@ -96,7 +98,7 @@ background-color: #F3F3F3;
           <span class="cright">连续登录<strong class="study-cright">{{ author.study_cright }}天</strong></span>
         </div>
         <div class="points-labels">
-          <span class="cright">连续登录<strong class="exam-cright">{{ author.exam_cright }}天</strong></span>
+          <span class="cright">最长连续登录<strong class="exam-cright">{{ author.exam_cright }}天</strong></span>
         </div>
       </div>
     </div>
