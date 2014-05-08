@@ -71,11 +71,6 @@ class CommentBoard(models.Model):
     def __unicode__(self):
         return self.title
 
-class Reply(TimeMixin, models.Model):
-    reply_str = models.CharField(max_length=128)
-    author_ip = models.IPAddressField(blank=True, null=True)
-    user = models.ForeignKey(User, blank=True, null=True)
-
 class Comment(TimeMixin, models.Model):
     title = models.CharField(max_length=64)
     comment_str = models.CharField(max_length=128)
@@ -95,3 +90,10 @@ class Comment(TimeMixin, models.Model):
     @models.permalink
     def get_absolute_url(self):
         return ('comment-detail', [], {'id': self.id})
+
+class Reply(TimeMixin, models.Model):
+    comment = models.ForeignKey(Comment)
+    reply_str = models.CharField(max_length=128)
+    author_ip = models.IPAddressField(blank=True, null=True)
+    user = models.ForeignKey(User, blank=True, null=True)
+

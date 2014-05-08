@@ -366,6 +366,7 @@ class CommentReplyView(TemplateView):
         comment = comments[0]
         if request.user.is_authenticated():
             reply_obj = Reply.objects.create(
+                        comment=comment,
                         user=request.user,
                         author_ip=request.META.get('REMOTE_ADDR', '0.0.0.0'),
                         time_added=datetime.datetime.utcnow().replace(
@@ -376,6 +377,7 @@ class CommentReplyView(TemplateView):
             Annoymous User access the site.
             '''
             reply_obj = Reply.objects.create(
+                        comment=comment,
                         author_ip=request.META.get('REMOTE_ADDR', '0.0.0.0'),
                         time_added=datetime.datetime.utcnow().replace(
                                         tzinfo=utc),
