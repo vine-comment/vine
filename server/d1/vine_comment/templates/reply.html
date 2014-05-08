@@ -1,7 +1,17 @@
 {% load humanize %}
+  <script>
+    function replyAtReply(comment_id, reply_user) {
+      $('#reply'+comment_id).text('@'+reply_user+' ');
+    }
+  </script>
 
    {% for reply in replies %}
 	 <li class="list-group-item">
+     <span style="float:right">
+       <a href="#" onclick="replyAtReply('{{reply.comment.id}}','{{reply.user}}');return false;">
+        <i class="fa fa-reply"></i>
+      </a>
+     </span>
    [#{{ forloop.counter }}]
    <span style="font-size:150%">{{reply.reply_str}}</span>
 		 <a href="#" style="margin-left:10px">{% if reply.user %}{{ reply.user }}{% else %}{{ reply.author_ip }}{% endif %}</a>
