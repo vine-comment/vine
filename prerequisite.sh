@@ -11,7 +11,7 @@
 # pip section #
 ###############
 
-items_pip=( django-registration django-crispy-forms django-admin-bootstrapped django-haystck jieba Whoosh Pillow python-social-auth python-memcached django_akismet_comments elasticsearch pyelasticsearch django-avatar )
+items_pip=( django-registration django-crispy-forms django-admin-bootstrapped django-haystack jieba Whoosh Pillow python-social-auth python-memcached django_akismet_comments elasticsearch pyelasticsearch django-avatar )
 
 alias p='pip install -i http://pypi.douban.com/simple'
 
