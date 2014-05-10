@@ -9,7 +9,28 @@
 {% block content %}
 <ol class="breadcrumb">
   <li><a href="/">藤蔓评论</a></li>
-  <li class="active">{{days}}天最多up</li>
+  <li class="active">最多up</li>
+  {% if days == '1' %}
+  <li class="active">
+    <a href="/comments/up/1" id="comments_up_1"><b>今日</b></a> | 
+    <a href="/comments/up/7" id="comments_up_7">7天</a> | 
+    <a href="/comments/up/30" id="comments_up_30">30天</a>
+  </li>
+  {% else %}
+  {% if days == '7' %}
+  <li class="active">
+    <a href="/comments/up/1" id="comments_up_1">今日</a> | 
+    <a href="/comments/up/7" id="comments_up_7"><b>7天</b></a> | 
+    <a href="/comments/up/30" id="comments_up_30">30天</a>
+  </li>
+  {% else %}
+  <li class="active">
+    <a href="/comments/up/1" id="comments_up_1">今日</a> | 
+    <a href="/comments/up/7" id="comments_up_7">7天</a> | 
+    <a href="/comments/up/30" id="comments_up_30"><b>30天</b></a>
+  </li>
+  {% endif %}
+  {% endif %}
 </ol>
 
 {% include 'comments_list.html' %}
