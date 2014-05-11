@@ -43,6 +43,7 @@ urlpatterns = patterns('',
 urlpatterns += patterns('',
     url(r'^home/?$', login_required(HomeView.as_view()), name='home'),
     url(r'^user/head-sculpture/?$', login_required(UserHeadSculptureView.as_view()), name='user_head_sculpture'),
+    # TODO social auth registration
     url(r'^accounts/', include('registration.backends.default.urls')),
     url(r'^comment/delete/(?P<id>.*?)/?$', CommentDeleteView.as_view(), name='comment_delete'),
     url(r'^comment/modify/(?P<id>.*?)/?$', CommentModifyView.as_view(), name='comment_modify'),
@@ -89,6 +90,8 @@ urlpatterns += patterns('haystack.views',
     ), name='advanced_search'),
 )
 
+# 以如下形式在模版里调用：
+# {% for title in facets.fields.title|slice:":5" %}
 sqs = SearchQuerySet().facet('title')
 
 # patterns 第一个参数是 prefix（对view的），所以这里是 haystack.views.SearchView (?)
