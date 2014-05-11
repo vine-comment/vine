@@ -8,6 +8,6 @@ def send_validation(strategy, code):
             '?verification_code=' + code.code
     send_mail('Validate your account',
               'Validate your account {0}'.format(url),
-              settings.EMAIL_FROM,
+              settings.EMAIL_HOST_USER,
               [code.email],
               fail_silently=False)
