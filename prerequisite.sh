@@ -15,6 +15,8 @@ items_pip=( django-registration django-crispy-forms django-admin-bootstrapped dj
 
 alias p='pip install -i http://pypi.douban.com/simple'
 
+pip install -U pip -i http://pypi.douban.com/simple
+
 for i in ${items_pip[@]}; do
 p $i
 done
