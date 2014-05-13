@@ -61,8 +61,8 @@ function main() {
                 popup_message("输入长度要在5-140之间哟小伙伴~");
                 return;
             }
-
-            var posting = $.post(last_url, {'comment': comment_input.val(), 'target_url': target_url })
+   
+            var posting = $.post(last_url, {'comment': comment_input.val(), 'target_url': target_url, 'captcha_key':$('#id_captcha_0').val(),'captcha_value':$('#id_captcha_1').val() })
             .fail(function(data){if ( data.responseCode ) console.log( data.responseCode );});
             posting.done(function(data) {
                 var badge = $('#comments_count');

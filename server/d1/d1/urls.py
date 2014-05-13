@@ -116,6 +116,11 @@ urlpatterns += patterns('haystack.views',
     ), name='faceted_search'),
 )
 
+
+urlpatterns += patterns('',
+                    url(r'^captcha/', include('captcha.urls')),
+                    )
+
 from functools import wraps
 from django.contrib.staticfiles.views import serve as serve_static
 

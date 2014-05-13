@@ -5,6 +5,12 @@ from django.utils.translation import ugettext_lazy as _
 
 from models import *
 
+from captcha.fields import CaptchaField
+ 
+class CaptchaTestForm(forms.Form):
+#    myfield = AnyOtherField()
+    captcha = CaptchaField()
+    
 class VineRegistrationForm(forms.Form):
     required_css_class = 'required'
 

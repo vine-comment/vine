@@ -146,6 +146,7 @@ INSTALLED_APPS = (
     'haystack',
     'avatar',
     'django_akismet_comments',
+    'captcha',
     # 'django_wysiwyg',
     'django_mongodb_engine',
     'djangotoolbox',

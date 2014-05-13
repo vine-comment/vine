@@ -26,6 +26,7 @@ import jieba.analyse
 # private modules
 from vine_comment.models import Comment, CommentBoard, Reply, Author
 from vine_comment.forms import *
+from captcha.models import CaptchaStore
 
 logger = logging.getLogger( __name__ )
 
@@ -154,11 +155,31 @@ class CommentView(TemplateView):
         author_ip = request.META.get('REMOTE_ADDR', '0.0.0.0')
         index_url = kwargs.get('index_url', self.index_default_str)
         user = request.user
+       
+        captcha_key = request.POST.get('captcha_key', '') 
+        captcha_input_value= request.POST.get('captcha_value', '')
+        
+        form = CaptchaTestForm(request.POST)
+        captcha_really_value = CaptchaStore.objects.get(hashkey=captcha_key)
+
+        # Validate the form: the captcha field will automatically
+        # check the input
+        if (captcha_input_value == captcha_really_value.challenge):
+            #is human 
+            self._post_comment(index_url, comment_str, author_ip, user)
+        else:
+            #TODO return error to user
+            print 'captcha error'
+
+            
         if(self._check_spam(index_url, comment_str, author_ip, user)):
-             logger.info(comment_str + 'this is a spam')
-             #TODO: how to add django-simple-captcha
+             print comment_str + 'this is a spam'
+             #TODO: show captcha
+        else:
+             #TODO hidden captcha
+             print comment_str + 'this is no a spam'
+              
              
-        self._post_comment(index_url, comment_str, author_ip, user)
 
         kwargs['template'] = self.template_raw
         return self.get(request, *args, **kwargs)
@@ -185,11 +206,12 @@ class CommentView(TemplateView):
             p = Paginator(comments, 10).page(paginator.num_pages)
 
         template_name = kwargs.get('template', self.template_meta)
-
+        form = CaptchaTestForm()
         return render(request, template_name, {
             'p_comment': p,
             'index_url': index_url,
             'url_b64': url_b64,
+            'form': form,
         })
 
     @csrf_exempt

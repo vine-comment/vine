@@ -13,6 +13,8 @@
 			<div class="input-group">
 			  <textarea rows="1" class="form-control" id="commentTop" name="commentTop" placeholder="可输入5-140个字"></textarea>
 			  <span class="input-group-btn">
+			  			 {% csrf_token %}
+		  {{ form.captcha }}
           <button class="btn btn-default submitComment" data-loading-text="评论中" id="submitCommentTop" type="button">
             评论
           </button>

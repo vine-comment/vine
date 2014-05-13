@@ -17,6 +17,7 @@
 * python-social-auth
 * python-memcached
 * django_akismet_comments
+* django-simple-captcha
 * elasticsearch (for ubuntu: pyelasticsearch)
 * django-avatar
    * if can't work, see https://github.com/jezdez/django-avatar/issues/53
