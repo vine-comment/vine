@@ -102,6 +102,7 @@ urlpatterns += patterns('haystack.views',
     ), name='advanced_search'),
 )
 
+# 对title进行切片（facet）
 # 以如下形式在模版里调用：
 # {% for title in facets.fields.title|slice:":5" %}
 sqs = SearchQuerySet().facet('title')
