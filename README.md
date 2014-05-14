@@ -9,7 +9,7 @@ Check [PREREQUISITE.md](https://github.com/vine-comment/vine/blob/master/PREREQU
 
 TODO
 `
-  git clone git@github.com:vine-comment/vine.git &&
+  git clone https://github.com/vine-comment/vine.git &&
   cd vine &&
   sudo ./prerequisite.sh
 `
