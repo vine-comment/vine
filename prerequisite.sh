@@ -27,8 +27,19 @@ for i in ${items_pip[@]}; do
 done
 
 
+#########################
+# django-nonrel section #
+#########################
+sudo pip install virtualenv
+cd ..
+virtualenv vine
+source vine/bin/activate
+pip install git+https://github.com/django-nonrel/django@nonrel-1.5
+pip install git+https://github.com/django-nonrel/djangotoolbox
+pip install git+https://github.com/django-nonrel/mongodb-engine
+
+
 # TODO:
-# django-nonrel section
 # apt-get / download & setup section
 
 
