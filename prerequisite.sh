@@ -40,6 +40,13 @@ pip install git+https://github.com/django-nonrel/mongodb-engine
 cd vine
 
 
+####################
+# gunicorn section #
+####################
+pip install gunicorn
+cp gunicorn_start bin/.
+
+
 # TODO:
 # apt-get / download & setup section
 
