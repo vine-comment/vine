@@ -1,6 +1,6 @@
 #!/bin/bash
 
-NAME="crike"                                                      # Name of the application
+NAME="vine"                                                       # Name of the application
 DJANGODIR=~/vine/server/d1                                        # Django project directory
 SOCKFILE=$DJANGODIR/run/gunicorn.sock                             # we will communicte using this unix socket
 USER=vine                                                         # the user to run as
