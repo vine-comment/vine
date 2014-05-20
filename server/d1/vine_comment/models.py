@@ -54,6 +54,8 @@ class Author(TimeMixin, models.Model):
     
     user = models.OneToOneField(User)
     
+    is_not_human = models.BooleanField()
+    
     def __unicode__(self):
         return self.user.name
 

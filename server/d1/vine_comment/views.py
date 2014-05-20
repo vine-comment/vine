@@ -96,11 +96,11 @@ class CommentView(TemplateView):
         title = urlparse(index_url).netloc
 
         # print comment_str, user
-        logger.info(u'评论:' + comment_str
-                     + u'IP:' + author_ip
-                     + u' 用户:' + str(user)
-                     + u' TITLE:' + title
-                     + u' INDEX:' + index_url)
+#        logger.info(u'评论:' + comment_str
+#                     + u'IP:' + author_ip
+#                     + u' 用户:' + str(user)
+#                     + u' TITLE:' + title
+#                     + u' INDEX:' + index_url)
 
         comment_board, created = CommentBoard.objects.get_or_create(
                                     url=index_url,
@@ -155,32 +155,43 @@ class CommentView(TemplateView):
         author_ip = request.META.get('REMOTE_ADDR', '0.0.0.0')
         index_url = kwargs.get('index_url', self.index_default_str)
         user = request.user
-       
-        captcha_key = request.POST.get('captcha_key', '') 
-        captcha_input_value= request.POST.get('captcha_value', '')
         
-        form = CaptchaTestForm(request.POST)
-        captcha_really_value = CaptchaStore.objects.get(hashkey=captcha_key)
-
-        # Validate the form: the captcha field will automatically
-        # check the input
-        if (captcha_input_value == captcha_really_value.challenge):
-            #is human 
-            self._post_comment(index_url, comment_str, author_ip, user)
+             
+        if user.is_authenticated():
+            author = get_author(user)
+            is_not_human = author.is_not_human
         else:
-            #TODO return error to user
-            print 'captcha error'
-
+            is_not_human = True
             
         if(self._check_spam(index_url, comment_str, author_ip, user)):
              print comment_str + 'this is a spam'
-             #TODO: show captcha
+             author.is_not_human = True
+             author.save()
         else:
-             #TODO hidden captcha
              print comment_str + 'this is no a spam'
-              
-             
-
+             author.is_not_human = False
+             author.save() 
+           
+        if(is_not_human):
+            captcha_key = request.POST.get('captcha_key', '') 
+            captcha_input_value= request.POST.get('captcha_value', '')
+        
+            form = CaptchaTestForm(request.POST)
+            captcha_really_value = CaptchaStore.objects.get(hashkey=captcha_key)
+            # Validate the form: the captcha field will automatically
+            # check the input
+            if (captcha_input_value == captcha_really_value.challenge):
+                #is human 
+                self._post_comment(index_url, comment_str, author_ip, user)
+                author.is_not_human = False
+                author.save() 
+            else:
+                #TODO return error to user
+                print 'captcha error'
+        else:
+                self._post_comment(index_url, comment_str, author_ip, user)
+            
+        #TODO in order to Refresh the captcha , it must be change commentBoard.js urls.py and template
         kwargs['template'] = self.template_raw
         return self.get(request, *args, **kwargs)
 
@@ -207,11 +218,20 @@ class CommentView(TemplateView):
 
         template_name = kwargs.get('template', self.template_meta)
         form = CaptchaTestForm()
+        
+        user = request.user
+        if user.is_authenticated():
+            author = get_author(user)
+            is_not_human = author.is_not_human
+        else:
+            is_not_human = True
+        
         return render(request, template_name, {
             'p_comment': p,
             'index_url': index_url,
             'url_b64': url_b64,
             'form': form,
+            'is_not_human': is_not_human,
         })
 
     @csrf_exempt
