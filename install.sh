@@ -29,7 +29,7 @@ user = vine                                                               ; User
 stdout_logfile = $HOME/vine/logs/gunicorn_supervisor.log                  ; Where to write log messages
 redirect_stderr = true 
 EOF
-) >/etc/supervisor/conf.d/.conf
+) >/etc/supervisor/conf.d/vine.conf
 
 mkdir -p /logs
 touch $HOME/vine/logs/gunicorn_supervisor.log
