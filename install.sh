@@ -36,3 +36,10 @@ touch $HOME/vine/logs/gunicorn_supervisor.log
 
 sudo supervisorctl reread
 sudo supervisorctl update
+
+
+#################
+# nginx section #
+#################
+sudo apt-get install nginx
+sudo service nginx start
