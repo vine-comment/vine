@@ -39,17 +39,11 @@ urlpatterns = patterns('',
     url(r'^email/$', 'social_auth_app.views.require_email', name='require_email'),
     url(r'', include('social.apps.django_app.urls', namespace='social')),
     # 这个 social.apps.django_app.urls 实际上包含了所有social auth的处理逻辑：
-    '''
-    url(r'^login/(?P<backend>[^/]+)/$', 'auth',
-        name='begin'),
-    url(r'^complete/(?P<backend>[^/]+)/$', 'complete',
-        name='complete'),
-    # disconnection
-    url(r'^disconnect/(?P<backend>[^/]+)/$', 'disconnect',
-        name='disconnect'),
-    url(r'^disconnect/(?P<backend>[^/]+)/(?P<association_id>[^/]+)/$',
-        'disconnect', name='disconnect_individual'),
-    '''
+
+    # url(r'^login/(?P<backend>[^/]+)/$', 'auth', name='begin'),
+    # url(r'^complete/(?P<backend>[^/]+)/$', 'complete', name='complete'),
+    # url(r'^disconnect/(?P<backend>[^/]+)/$', 'disconnect', name='disconnect'),
+    # url(r'^disconnect/(?P<backend>[^/]+)/(?P<association_id>[^/]+)/$', 'disconnect', name='disconnect_individual'),
 )
 
 urlpatterns += patterns('',
