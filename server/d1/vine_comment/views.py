@@ -161,7 +161,8 @@ class CommentView(TemplateView):
             author = get_author(user)
             is_not_human = author.is_not_human
         else:
-            is_not_human = True
+            # CAPTCHA-FIXME: forbid annoymous user to comment.
+            is_not_human = False
             
         if(self._check_spam(index_url, comment_str, author_ip, user)):
              print comment_str + 'this is a spam'
@@ -224,7 +225,8 @@ class CommentView(TemplateView):
             author = get_author(user)
             is_not_human = author.is_not_human
         else:
-            is_not_human = True
+            # CAPTCHA-FIXME: forbid annoymous user to comment.
+            is_not_human = False
         
         return render(request, template_name, {
             'p_comment': p,
