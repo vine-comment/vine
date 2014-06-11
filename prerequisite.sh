@@ -18,6 +18,7 @@ if [ $? -ne 0 ]; then
   sudo apt-get install python-pip
 fi
 
+# NOTE: need zlib for PIL/pillow.
 items_pip=( django-registration django-crispy-forms django-admin-bootstrapped django-haystack jieba Whoosh Pillow python-social-auth python-memcached django_akismet_comments elasticsearch pyelasticsearch django-avatar )
 
 alias p='sudo pip install -i http://pypi.douban.com/simple'
