@@ -40,6 +40,23 @@ border-radius: 0;
 border-width: 0 0 1px;
 }
 
+a:link.reply-icon { 
+color:#FF0000; 
+text-decoration:none; 
+} 
+.reply-icon a:visited { 
+color:#00FF00; 
+text-decoration:none; 
+} 
+.reply-icon a:hover { 
+color:#000000; 
+text-decoration:none; 
+} 
+.reply-icon a:active { 
+color:#FFFFFF; 
+text-decoration:none; 
+} 
+
 @media (min-width: 768px) {
 
 .block {
