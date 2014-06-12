@@ -7,9 +7,9 @@ Visit [Trello](https://trello.com/b/N05Gszf8/vine-comment) to see bugs and tasks
 
 Check [PREREQUISITE.md](https://github.com/vine-comment/vine/blob/master/PREREQUISITE.md)
 
-TODO
-`
+#### TODO
+```
   git clone https://github.com/vine-comment/vine.git &&
   cd vine &&
   sudo ./prerequisite.sh
-`
+```
