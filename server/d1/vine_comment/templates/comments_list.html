@@ -64,7 +64,7 @@
             <span>{{ message.replies|length }}</span>
           </a>
          </span>
-         <span style="font-size:120%" id="comment_str_{{message.id}}">{{message.comment_str}}</span>
+         <span class="comment-text" id="comment_str_{{message.id}}">{{message.comment_str}}</span>
          <span>
            (<a href="{{message.comment_board.url}}">{{message.comment_board.url}}</a>)
            <a href="#" onclick="expandDetail('{{message.id}}');return false;"><i class="fa fa-info-circle"></i></a>

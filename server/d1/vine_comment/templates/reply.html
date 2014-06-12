@@ -5,16 +5,16 @@
     }
   </script>
 
-   {% for reply in replies %}
-	 <li class="list-group-item">
-     <span style="float:right">
-       <a href="#reply{{reply.comment.id}}" onclick="replyAtReply('{{reply.comment.id}}','{{reply.user}}');">
+  {% for reply in replies %}
+    <li class="list-group-item">
+      <span style="float:right">
+      <a href="#reply{{reply.comment.id}}" onclick="replyAtReply('{{reply.comment.id}}','{{reply.user}}');">
         <i class="fa fa-reply"></i>
-      </a>
-     </span>
-   [#{{ forloop.counter }}]
-   <span style="font-size:150%">{{reply.reply_str}}</span>
-		 <a href="#" style="margin-left:10px">{% if reply.user %}{{ reply.user }}{% else %}{{ reply.author_ip }}{% endif %}</a>
-		 <span id='comment_time'>提交于 {{ reply.time_added|naturaltime }}</span>
-	 </li>
-	 {% endfor %}
+       </a>
+      </span>
+      [#{{ forloop.counter }}]
+      <span class="comment-reply">{{reply.reply_str}}</span>
+	  <a href="#" style="margin-left:10px">{% if reply.user %}{{ reply.user }}{% else %}{{ reply.author_ip }}{% endif %}</a>
+	  <span id='comment_time'>提交于 {{ reply.time_added|naturaltime }}</span>
+    </li>
+  {% endfor %}

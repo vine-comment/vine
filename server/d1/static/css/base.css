@@ -40,6 +40,14 @@ border-radius: 0;
 border-width: 0 0 1px;
 }
 
+.comment-text {
+font-size: 120%;
+}
+
+.comment-reply {
+font-size: 110%;
+}
+
 a:link.reply-icon { 
 color:#FF0000; 
 text-decoration:none; 
