@@ -15,6 +15,6 @@
       [#{{ forloop.counter }}]
       <span class="comment-reply">{{reply.reply_str}}</span>
 	  <a href="#" style="margin-left:10px">{% if reply.user %}{{ reply.user }}{% else %}{{ reply.author_ip }}{% endif %}</a>
-	  <span id='comment_time'>提交于 {{ reply.time_added|naturaltime }}</span>
+	  <span class='comment-time'>提交于 {{ reply.time_added|naturaltime }}</span>
     </li>
   {% endfor %}

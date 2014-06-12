@@ -48,6 +48,10 @@ font-size: 120%;
 font-size: 110%;
 }
 
+.comment-time {
+color: #C0C0C0;
+}
+
 a:link.reply-icon { 
 color:#FF0000; 
 text-decoration:none; 
