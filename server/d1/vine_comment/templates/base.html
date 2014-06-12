@@ -16,7 +16,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="{% static 'font-awesome/4.0.3/css/font-awesome.min.css' %}" rel="stylesheet"/>
   <link href="{% static 'twitter-bootstrap/3.0.3/css/bootstrap.min.css' %}" rel="stylesheet"/>
-  <link href="{% static 'css/navbar.css' %}" rel="stylesheet"/>
+  {# navbar.css/navbar_black.css 表示navbar颜色 #}
+  <link href="{% static 'css/navbar_black.css' %}" rel="stylesheet"/>
   <link href="{% static 'css/navbar_dwarf.css' %}" rel="stylesheet"/>
   <link href="{% static 'css/base.css' %}" rel="stylesheet"/>
 
@@ -42,7 +43,7 @@
         <li><a href="/comments/newest" id="comments_newest">最新</a></li>
         <li><a href="/comments/hot/7" id="comments_hot_default">最多评论</a></li>
         <li><a href="/comments/up/7" id="comments_up_default">最多up</a></li>
-        <li><a href="/comments/debate/7" id="comments_debate_default">最具争议</a></li>
+        <li><a href="/comments/debate/7" id="comments_debate_default">热议</a></li>
       </ul>
       <div class="col-sm-3 col-md-3">
       <form class="navbar-form navbar-left" role="search" method="get" action="/faceted_search">
