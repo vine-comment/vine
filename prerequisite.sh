@@ -18,6 +18,14 @@ if [ $? -ne 0 ]; then
   sudo apt-get install python-pip
 fi
 
+######################
+# virtualenv section #
+######################
+sudo pip install virtualenv
+cd ..
+virtualenv ~/vine
+source ~/vine/bin/activate
+
 # NOTE: If you're using windows, please use Pillow installer from here: http://www.lfd.uci.edu/~gohlke/pythonlibs/
 # (Pillow is a better maintained PIL lib.)
 items_pip=( django-registration django-crispy-forms django-admin-bootstrapped django-haystack jieba Whoosh Pillow python-social-auth python-memcached django_akismet_comments elasticsearch pyelasticsearch django-avatar )
@@ -32,21 +40,15 @@ done
 #########################
 # django-nonrel section #
 #########################
-sudo pip install virtualenv
-cd ..
-virtualenv ~/vine
-source ~/vine/bin/activate
 pip install git+https://github.com/django-nonrel/django@nonrel-1.5
 pip install git+https://github.com/django-nonrel/djangotoolbox
 pip install git+https://github.com/django-nonrel/mongodb-engine
-cd vine
-
 
 ####################
 # gunicorn section #
 ####################
 pip install gunicorn
-cp gunicorn_start bin/.
+cp gunicorn_start ~/vine/bin/
 
 
 # TODO:
