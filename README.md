@@ -11,5 +11,5 @@ Check [PREREQUISITE.md](https://github.com/vine-comment/vine/blob/master/PREREQU
 ```
   git clone https://github.com/vine-comment/vine.git &&
   cd vine &&
-  sudo ./prerequisite.sh
+  sudo ./install.sh
 ```
