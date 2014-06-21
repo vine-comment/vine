@@ -42,7 +42,7 @@
     {% for message in p_comment.object_list %}
       <li class="list-group-item">
          <span style="float:right">
-          <a href="#" id="up_comment_{{message.id}}" onclick="up('{{message.id}}');return false;">
+          <a href="javascript:void(0);" id="up_comment_{{message.id}}" onclick="up('{{message.id}}');return false;">
             {% if user.id in message.up_users %}
             <i class="fa fa-thumbs-up"></i>
             {% else %}
@@ -50,7 +50,7 @@
             {% endif %}
             +<span>{{ message.up_users|length }}</span>
           </a>
-          <a href="#" id="down_comment_{{message.id}}" onclick="down('{{message.id}}');return false;">
+          <a href="javascript:void(0);" id="down_comment_{{message.id}}" onclick="down('{{message.id}}');return false;">
             {% if user.id in message.down_users %}
             <i class="fa fa-thumbs-down fa-flip-horizontal"></i>
             {% else %}
@@ -59,7 +59,7 @@
             -<span>{{ message.down_users|length }}</span>
           </a>
           {# TODO: 添加tips，说明icon功能，不然留言icon字太小。 #}
-          <a class="reply-icon" href="#" id="reply_comment_{{message.id}}" onclick="expandReply('{{message.id}}');return false;">
+          <a class="reply-icon" href="javascript:void(0);" id="reply_comment_{{message.id}}" onclick="expandReply('{{message.id}}');return false;">
             <i class="fa fa-comments-o"></i>
             <span>{{ message.replies|length }}</span>
           </a>
@@ -67,7 +67,7 @@
          <span class="comment-text" id="comment_str_{{message.id}}">{{message.comment_str}}</span>
          <span>
            (<a href="{{message.comment_board.url}}">{{message.comment_board.url}}</a>)
-           <a href="#" onclick="expandDetail('{{message.id}}');return false;"><i class="fa fa-info-circle"></i></a>
+           <a href="javascript:void(0);" onclick="expandDetail('{{message.id}}');return false;"><i class="fa fa-info-circle"></i></a>
          </span>
          <br>
          <span>
