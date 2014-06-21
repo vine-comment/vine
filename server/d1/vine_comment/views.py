@@ -165,12 +165,12 @@ class CommentView(TemplateView):
             is_not_human = False
 
         if(self._check_spam(index_url, comment_str, author_ip, user)):
-             print comment_str + ' this is a spam'
+             logger.info(comment_str + ' this is a spam')
              if author is not None:
                  author.is_not_human = True
                  author.save()
         else:
-             print comment_str + ' this is no a spam'
+             logger.info(comment_str + ' this is no a spam')
              if author is not None:
                  author.is_not_human = False
                  author.save()
