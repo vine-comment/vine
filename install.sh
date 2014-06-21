@@ -51,10 +51,12 @@ install_pypackages()
 
 install_mac ()
 {
-    echo "we will download brew(like apt-get on ubuntu) and install mongodb."
+    echo "NOTE: you should install JDK 1.7 first."
+    echo "we will download brew(like apt-get on ubuntu) and install mongodb and elasticsearch."
     echo "it will take a long time, please wait."
     ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
     brew install mongodb
+    brew install elasticsearch
     # consider mac section of installing openstack
     install_pypackages
 }
