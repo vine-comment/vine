@@ -52,9 +52,13 @@ font-size: 110%;
 color: #C0C0C0;
 }
 
+a:link[id^=up_comment], a:link[id^=down_comment] {
+text-decoration: none;
+}
+
 a:link.reply-icon { 
-color:#FF0000; 
-text-decoration:none; 
+color: #000000; 
+text-decoration: none; 
 } 
 .reply-icon a:visited { 
 color:#00FF00; 
