@@ -89,8 +89,8 @@ class CommentView(TemplateView):
                return False
         else:
             return False
-        
-        
+
+
     @csrf_exempt
     def _post_comment(self, index_url, comment_str, author_ip, user):
         title = urlparse(index_url).netloc
@@ -155,43 +155,45 @@ class CommentView(TemplateView):
         author_ip = request.META.get('REMOTE_ADDR', '0.0.0.0')
         index_url = kwargs.get('index_url', self.index_default_str)
         user = request.user
-        
-             
+
+        author = None
         if user.is_authenticated():
             author = get_author(user)
             is_not_human = author.is_not_human
         else:
             # CAPTCHA-FIXME: forbid annoymous user to comment.
             is_not_human = False
-            
+
         if(self._check_spam(index_url, comment_str, author_ip, user)):
-             print comment_str + 'this is a spam'
-             author.is_not_human = True
-             author.save()
+             print comment_str + ' this is a spam'
+             if author is not None:
+                 author.is_not_human = True
+                 author.save()
         else:
-             print comment_str + 'this is no a spam'
-             author.is_not_human = False
-             author.save() 
-           
+             print comment_str + ' this is no a spam'
+             if author is not None:
+                 author.is_not_human = False
+                 author.save()
+
         if(is_not_human):
-            captcha_key = request.POST.get('captcha_key', '') 
+            captcha_key = request.POST.get('captcha_key', '')
             captcha_input_value= request.POST.get('captcha_value', '')
-        
+
             form = CaptchaTestForm(request.POST)
             captcha_really_value = CaptchaStore.objects.get(hashkey=captcha_key)
             # Validate the form: the captcha field will automatically
             # check the input
             if (captcha_input_value == captcha_really_value.challenge):
-                #is human 
+                #is human
                 self._post_comment(index_url, comment_str, author_ip, user)
                 author.is_not_human = False
-                author.save() 
+                author.save()
             else:
                 #TODO return error to user
                 print 'captcha error'
         else:
                 self._post_comment(index_url, comment_str, author_ip, user)
-            
+
         #TODO in order to Refresh the captcha , it must be change commentBoard.js urls.py and template
         kwargs['template'] = self.template_raw
         return self.get(request, *args, **kwargs)
@@ -203,7 +205,7 @@ class CommentView(TemplateView):
         index_page = request.GET.get('page', 1)
         index_url = kwargs.get('index_url', self.index_default_str)
         url_b64 = kwargs.get('url_b64', self.base64_default_str)
- 
+
         #TODO performance optimization for objects order_by('-time_added')
         comments = filter(lambda x:urlparse(index_url).netloc in x.comment_board.title,
                 Comment.objects.order_by('-time_added'))
@@ -219,7 +221,7 @@ class CommentView(TemplateView):
 
         template_name = kwargs.get('template', self.template_meta)
         form = CaptchaTestForm()
-        
+
         user = request.user
         if user.is_authenticated():
             author = get_author(user)
@@ -227,7 +229,7 @@ class CommentView(TemplateView):
         else:
             # CAPTCHA-FIXME: forbid annoymous user to comment.
             is_not_human = False
-        
+
         return render(request, template_name, {
             'p_comment': p,
             'index_url': index_url,
@@ -458,7 +460,7 @@ class CommentsBestView(TemplateView):
         index_page = request.GET.get('page', 1)
         print index_page
 
- 
+
         #TODO performance optimization for objects order_by('-time_added')
         logger.info(str(len(comments)) + ': ' + str(comments))
         try:
@@ -482,7 +484,7 @@ class CommentsNewestView(TemplateView):
         index_page = request.GET.get('page', 1)
         print index_page
 
- 
+
         #TODO performance optimization for objects order_by('-time_added')
         logger.info(str(len(comments)) + ': ' + str(comments))
         try:
@@ -508,7 +510,7 @@ class CommentsHotView(TemplateView):
         index_page = request.GET.get('page', 1)
         print index_page
 
- 
+
         #TODO performance optimization for objects order_by('-time_added')
         logger.info(str(len(comments)) + ': ' + str(comments))
         try:
@@ -535,7 +537,7 @@ class CommentsUpView(TemplateView):
         index_page = request.GET.get('page', 1)
         print index_page
 
- 
+
         #TODO performance optimization for objects order_by('-time_added')
         logger.info(str(len(comments)) + ': ' + str(comments))
         try:
@@ -571,7 +573,7 @@ class CommentsDebateView(TemplateView):
         index_page = request.GET.get('page', 1)
         print index_page
 
- 
+
         #TODO performance optimization for objects order_by('-time_added')
         logger.info(str(len(comments)) + ': ' + str(comments))
         try:
@@ -619,10 +621,10 @@ class HomeView(TemplateView):
             })
 
 class UserHeadSculptureView(TemplateView):
-    
+
     def get(self, request, *args, **kwargs):
         return HttpResponseForbidden('allowed only via POST')
-    
+
     def post(self, request, *args, **kwargs):
         form = UploadHeadSculptureForm(request.POST, request.FILES)
         if form.is_valid():
