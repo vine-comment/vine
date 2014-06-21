@@ -32,11 +32,13 @@ ALLOWED_HOSTS = []
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
 # although not all choices may be available on all operating systems.
 # In a Windows environment this must be set to your system time zone.
-TIME_ZONE = 'America/Chicago'
+# TIME_ZONE = 'America/Chicago'
+TIME_ZONE = 'Asia/Shanghai'
 
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
-LANGUAGE_CODE = 'en-us'
+# LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'zh-cn'
 
 SITE_ID = u'53638d642dd8122832b97c4c'
 
@@ -49,7 +51,7 @@ USE_I18N = True
 USE_L10N = True
 
 # If you set this to False, Django will not use timezone-aware datetimes.
-USE_TZ = False
+USE_TZ = True
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/var/www/example.com/media/"
@@ -242,7 +244,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "vine_comment.context_processors.comment_author"
 )
 
-##################################################### 
+#####################################################
 # django-social-auth
 # example: https://github.com/omab/django-social-auth/tree/master/example/example
 #####################################################
@@ -293,7 +295,7 @@ try:
     from social_auth_app.social_local_settings import *
 except ImportError:
     pass
-##################################################### 
+#####################################################
 # end django-social-auth
 #####################################################
 
