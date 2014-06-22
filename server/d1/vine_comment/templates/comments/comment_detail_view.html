@@ -1,7 +1,7 @@
 {% load staticfiles %}
 
 <div class="block">
-<div class="page-header">
+<div class="page-header" style="margin:-10px 0 20px;">
 <h3>Comment Detail <small>{{comment.comment_board}}</small> </h3> 
 {% if user == comment.user %}
 <a href="/comment/delete/{{comment.id}}">Delete</a>
