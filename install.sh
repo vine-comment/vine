@@ -28,10 +28,8 @@ install_pypackages()
     # (Pillow is a better maintained PIL lib.)
     items_pip=( django-registration django-crispy-forms django-admin-bootstrapped django-haystack jieba Whoosh Pillow python-social-auth python-memcached django_akismet_comments elasticsearch pyelasticsearch django-avatar )
 
-    alias p='sudo pip install -i http://pypi.douban.com/simple'
-
     for i in ${items_pip[@]}; do
-        p $i
+        sudo pip install -i http://pypi.douban.com/simple $i
     done
 
 
