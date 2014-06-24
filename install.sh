@@ -20,16 +20,15 @@ install_pypackages()
     # virtualenv section #
     ######################
     sudo pip install virtualenv
-    cd ..
     virtualenv ~/vine
-    source ~/vine/bin/activate
+    ./activate.sh
 
     # NOTE: If you're using windows, please use Pillow installer from here: http://www.lfd.uci.edu/~gohlke/pythonlibs/
     # (Pillow is a better maintained PIL lib.)
     items_pip=( django-registration django-crispy-forms django-admin-bootstrapped django-haystack jieba Whoosh Pillow python-social-auth python-memcached django_akismet_comments elasticsearch pyelasticsearch django-avatar )
 
     for i in ${items_pip[@]}; do
-        sudo pip install -i http://pypi.douban.com/simple $i
+        pip install -i http://pypi.douban.com/simple $i
     done
 
 
@@ -78,16 +77,17 @@ install_ubuntu ()
     sudo apt-get install supervisor
 
     sudo cat << EOF >/etc/supervisor/conf.d/vine.conf
-    [program:vine]
-    command = $HOME/vine/bin/gunicorn_start                                   ; Command to start app
-    user = vine                                                               ; User to run as
-    stdout_logfile = $HOME/vine/logs/gunicorn_supervisor.log                  ; Where to write log messages
-    redirect_stderr = true
+[program:vine]
+command = $HOME/vine/bin/gunicorn_start                                   ; Command to start app
+user = root                                                               ; User to run as
+stdout_logfile = $HOME/vine/logs/gunicorn_supervisor.log                  ; Where to write log messages
+redirect_stderr = true
 EOF
     # wtf.. eof
 
-    mkdir -p /logs
+    mkdir -p $HOME/vine/logs
     touch $HOME/vine/logs/gunicorn_supervisor.log
+    sudo supervisord
 
     sudo supervisorctl reread
     sudo supervisorctl update
