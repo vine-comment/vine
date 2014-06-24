@@ -43,7 +43,7 @@ install_pypackages()
     # gunicorn section #
     ####################
     pip install gunicorn
-    cp gunicorn_start ~/vine/bin/
+    cp config/gunicorn_start ~/vine/bin/
 }
 
 install_mac ()
