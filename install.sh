@@ -61,6 +61,8 @@ install_mac ()
 install_ubuntu ()
 {
     # TODO install mongodb etc.
+    echo "You should install elasticsearch by yourself."
+    # sudo apt-get install mongodb
 
     HOME=~
     install_pypackages
@@ -74,6 +76,7 @@ install_ubuntu ()
     ######################
     # supervisor section #
     ######################
+    echo "Installing and configuring supervisor..."
     sudo apt-get install supervisor
 
     sudo cat << EOF >/etc/supervisor/conf.d/vine.conf
@@ -96,15 +99,21 @@ EOF
     #################
     # nginx section #
     #################
+    echo "Installing and configuring Nginx.."
     sudo apt-get install nginx
+    cp config/vine.nginxconf /etc/nginx/sites-available/vine
+    ln -s /etc/nginx/sites-available/vine /etc/nginx/sites-enabled/vine
+    cp -r server/d1/static $HOME/vine/static
     sudo service nginx start
 }
 
 main()
 {
     if [ "$(uname)" == "Darwin" ]; then
+        echo "Installing on MAC.."
         install_mac
     elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
+        echo "Installing on Ubuntu.. (doesn't support other Linux now)"
         install_ubuntu
     else
         echo "Unsupport OS $(uname -s)"
