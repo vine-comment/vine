@@ -49,7 +49,7 @@ install_pypackages()
 install_mac ()
 {
     echo "NOTE: you should install JDK 1.7 first."
-    echo "we will download brew(like apt-get on ubuntu) and install mongodb and elasticsearch."
+    echo "we will download brew(like apt-get) and install mongodb and elasticsearch."
     echo "it will take a long time, please wait."
     ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
     brew install mongodb
@@ -61,6 +61,7 @@ install_mac ()
 install_ubuntu ()
 {
     # TODO install mongodb etc.
+    # TODO install elasticsearch: https://gist.github.com/aaronshaf/1190526
     echo "You should install elasticsearch by yourself."
     # sudo apt-get install mongodb
 
