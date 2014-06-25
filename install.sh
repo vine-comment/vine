@@ -114,8 +114,10 @@ main()
         echo "Installing on MAC.."
         install_mac
     elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
-        echo "Installing on Ubuntu.. (doesn't support other Linux now)"
-        install_ubuntu
+        echo "Installing on Ubuntu.. (doesn't support other Linux distribution now)"
+        if [ grep DISTRIB_ID /etc/*-release | awk -F= '{print $2}' == Ubuntu ]; then
+            install_ubuntu
+        fi
     else
         echo "Unsupport OS $(uname -s)"
     fi
