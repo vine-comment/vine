@@ -1,3 +1,4 @@
+
 ##############################
 # Distribute Script for Vine #
 ##############################
@@ -25,9 +26,9 @@ install_pypackages()
 
     # NOTE: If you're using windows, please use Pillow installer from here: http://www.lfd.uci.edu/~gohlke/pythonlibs/
     # (Pillow is a better maintained PIL lib.)
-    items_pip=( django-registration django-crispy-forms django-admin-bootstrapped django-haystack jieba Whoosh Pillow python-social-auth python-memcached django_akismet_comments elasticsearch pyelasticsearch django-avatar )
+    items_pip="django-registration django-crispy-forms django-admin-bootstrapped django-haystack jieba Whoosh Pillow python-social-auth python-memcached django_akismet_comments elasticsearch pyelasticsearch django-avatar"
 
-    for i in ${items_pip[@]}; do
+    for i in $items_pip; do
         pip install -i http://pypi.douban.com/simple $i
     done
 
@@ -110,12 +111,14 @@ EOF
 
 main()
 {
-    if [ "$(uname)" == "Darwin" ]; then
+    if [ "$(uname)" = "Darwin" ]; then
         echo "Installing on MAC.."
         install_mac
-    elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
-        echo "Installing on Ubuntu.. (doesn't support other Linux distribution now)"
-        if [ grep DISTRIB_ID /etc/*-release | awk -F= '{print $2}' == Ubuntu ]; then
+    elif [ "$(expr substr $(uname -s) 1 5)" = "Linux" ]; then
+        distrib=`grep DISTRIB_ID /etc/*-release | awk -F= '{print $2}'`
+        echo "Your distrib is $distrib"
+        echo "Support Ubuntu now.."
+        if [ $distrib = Ubuntu ]; then
             install_ubuntu
         fi
     else
