@@ -9,7 +9,11 @@
   {% for reply in replies %}
     <li class="list-group-item">
       <span style="float:right">
+      {% if reply.user %}
       <a href="#reply{{reply.comment.id}}" onclick="replyAtReply('{{reply.comment.id}}','{{reply.user}}');">
+      {% else %}
+      <a href="#reply{{reply.comment.id}}" onclick="replyAtReply('{{reply.comment.id}}','{{reply.author_ip}}');">
+      {% endif %}
         <i class="fa fa-reply"></i>
        </a>
       </span>
