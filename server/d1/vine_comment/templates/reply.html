@@ -1,6 +1,7 @@
 {% load humanize %}
   <script>
     function replyAtReply(comment_id, reply_user) {
+      //todo: send an email to the user @'ed, and user name will link to the user's profile
       $('#reply'+comment_id).text('@'+reply_user+' ');
     }
   </script>

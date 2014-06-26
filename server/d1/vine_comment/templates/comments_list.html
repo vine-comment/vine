@@ -59,7 +59,7 @@
             -<span>{{ message.down_users|length }}</span>
           </a>
           {# TODO: 添加tips，说明icon功能，不然留言icon字太小。 #}
-          <a class="reply-icon" href="javascript:void(0);" id="reply_comment_{{message.id}}" onclick="expandReply('{{message.id}}');return false;">
+          <a href="javascript:void(0);" id="reply_comment_{{message.id}}" onclick="expandReply('{{message.id}}');return false;">
             <i class="fa fa-comments-o"></i>
             <span>{{ message.replies|length }}</span>
           </a>
@@ -95,11 +95,9 @@
            {% include 'reply.html' %}
            </div>
            <div name="reply{{message.id}}" class="input-group">
-             <textarea rows="5" class="form-control" id="reply{{message.id}}" name="reply" placeholder="可输入5-140个字"></textarea>
+             <textarea rows="5" style="width:100%;height:34px;resize:none" id="reply{{message.id}}" name="reply" placeholder="可输入5-140个字"></textarea>
              <span class="input-group-btn">
-               <button class="btn btn-default submitComment" data-loading-text="回复中" onclick="reply('{{message.id}}')" type="button">
-                回复
-               </button>
+               <button class="btn btn-default submitComment" data-loading-text="回复中" onclick="reply('{{message.id}}')" type="button">回复</button>
              </span>
            </div><!-- /input-group -->
          </div>
