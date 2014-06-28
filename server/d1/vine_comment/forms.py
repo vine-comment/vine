@@ -6,11 +6,11 @@ from django.utils.translation import ugettext_lazy as _
 from models import *
 
 from captcha.fields import CaptchaField
- 
+
 class CaptchaTestForm(forms.Form):
 #    myfield = AnyOtherField()
     captcha = CaptchaField()
-    
+
 class VineRegistrationForm(forms.Form):
     required_css_class = 'required'
 
@@ -23,10 +23,10 @@ class VineRegistrationForm(forms.Form):
                                 label="密码")
     password2 = forms.CharField(widget=forms.PasswordInput,
                                 label="密码 (重复)")
-    is_human = forms.NullBooleanField(label="你是人类吗？", required=False)
-    dob = forms.DateField(label="生日 (例子: 1999-2-19)", required=False)
-    phone = forms.CharField(label="手机", required=False)
-    gender = forms.CharField(label="性别", required=False)
+    # is_human = forms.NullBooleanField(label="你是人类吗？", required=False)
+    # dob = forms.DateField(label="生日 (例子: 1999-2-19)", required=False)
+    # phone = forms.CharField(label="手机", required=False)
+    # gender = forms.CharField(label="性别", required=False)
 
     def clean_username(self):
         existing = User.objects.filter(username__iexact=self.cleaned_data['username'])
