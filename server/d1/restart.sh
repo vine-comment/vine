@@ -1,7 +1,7 @@
 # NOTE: This script will kill all django processes.
 # For MAC
-pkill 'ython manage.py runserver 0.0.0.0:8000'
-pkill 'ython -m smtpd -n -c DebuggingServer localhost:1025'
+pkill -f 'Python manage.py runserver 0.0.0.0:8000'
+pkill -f 'Python -m smtpd -n -c DebuggingServer localhost:1025'
 # For Linux
 pkill -f 'python manage.py runserver 0.0.0.0:8000'
 pkill -f 'python -m smtpd -n -c DebuggingServer localhost:1025'
