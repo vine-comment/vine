@@ -327,3 +327,6 @@ CACHES = {
         'LOCATION': '127.0.0.1:11211',
     }
 }
+
+# IP for timezone
+GEOIP_DATABASE = PROJECT_DIR + 'd1/GeoLiteCity.dat'
