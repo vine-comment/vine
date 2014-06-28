@@ -65,6 +65,8 @@ install_ubuntu ()
     # TODO install elasticsearch: https://gist.github.com/aaronshaf/1190526
     echo "You should install elasticsearch by yourself."
     # sudo apt-get install mongodb
+    # For IP database
+    sudo apt-get install libgeoip-dev
 
     HOME=~
     install_pypackages
