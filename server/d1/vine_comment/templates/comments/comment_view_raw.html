@@ -1,5 +1,6 @@
 {% load humanize %}
 {% load staticfiles %}
+{% load tz %}
 
 <script src="{% static 'js/comment_updown.js' %}"></script>
 
@@ -25,7 +26,13 @@
       </a>
      </span>
      <strong>{% if message.author %}{{ message.author.user }}{% else %}{{ message.author_ip }}{% endif %}</strong>
+     {% localtime on %}
      <span class='comment-time'> {{ message.time_added|naturaltime }}</span> {{message.comment_str}} <br>
+     {% endlocaltime %}
+     {%comment%}
+     这种timezone用法是正常的。
+     {{message.time_added|timezone:"Asia/Shanghai"}}
+     {%endcomment%}
   </li>
 {% endfor %}
 </ul>

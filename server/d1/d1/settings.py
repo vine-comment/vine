@@ -33,7 +33,8 @@ ALLOWED_HOSTS = []
 # although not all choices may be available on all operating systems.
 # In a Windows environment this must be set to your system time zone.
 # TIME_ZONE = 'America/Chicago'
-TIME_ZONE = 'Asia/Shanghai'
+# TIME_ZONE = 'Asia/Shanghai'
+TIME_ZONE = 'UTC'
 
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
@@ -109,9 +110,10 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     # python-social-auth
     'social.apps.django_app.middleware.SocialAuthExceptionMiddleware',
+    'd1.middleware.AutoTimezoneMiddleware',
     # ACAO
     'd1.acao.ACAO',
-    'd1.middleware.TimezoneMiddleware',
+    # 'd1.middleware.TimezoneMiddleware',
     #'d1.middleware.SpacelessMiddleware',
     #'django.middleware.cache.FetchFromCacheMiddleware',
     # Uncomment the next line for simple clickjacking protection:
@@ -329,4 +331,4 @@ CACHES = {
 }
 
 # IP for timezone
-GEOIP_DATABASE = PROJECT_DIR + 'd1/GeoLiteCity.dat'
+GEOIP_DATABASE = PROJECT_DIR + '/d1/GeoLiteCity.dat'
