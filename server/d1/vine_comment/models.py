@@ -3,6 +3,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from djangotoolbox.fields import EmbeddedModelField, ListField
+from django.utils.timezone import utc
 import datetime
 
 class TimeMixin(models.Model):
@@ -11,9 +12,9 @@ class TimeMixin(models.Model):
     time_deleted = models.DateTimeField(blank=True, null=True)
 
     def modify(self):
-        self.time_modified = datetime.datetime.now()
+        self.time_modified = datetime.datetime.utcnow().replace(tzinfo=utc)
         super(TimeMixin, self).modify()
-    
+
     def __unicode__(self):
         return str(self.time_added)
 
@@ -51,11 +52,11 @@ class Author(TimeMixin, models.Model):
     last_name = models.CharField(max_length=40)
     """
     picture = models.ImageField(upload_to='head_sculpture', blank=True, null=True)
-    
+
     user = models.OneToOneField(User)
-    
+
     is_not_human = models.BooleanField()
-    
+
     def __unicode__(self):
         return self.user.name
 
@@ -69,7 +70,7 @@ class Url(models.Model):
 class CommentBoard(models.Model):
     title = models.CharField(max_length=64, blank=True, null=True)
     url = models.URLField(max_length=2048, blank=True, null=True)
-    
+
     def __unicode__(self):
         return self.title
 

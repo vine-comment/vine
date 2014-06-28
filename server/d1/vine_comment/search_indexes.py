@@ -3,6 +3,7 @@ import datetime
 
 # django
 from django.contrib.auth.models import User
+from django.utils.timezone import utc
 
 # third-party
 from haystack import indexes
@@ -26,7 +27,7 @@ class CommentIndex(indexes.SearchIndex, indexes.Indexable):
 
     def index_queryset(self, using=None):
         """Used when the entire index for model is updated."""
-        return self.get_model().objects.filter(time_modified__lte=datetime.datetime.now())
+        return self.get_model().objects.filter(time_modified__lte=datetime.datetime.utcnow(tzinfo=utc))
 
 '''
 # All User Fields
