@@ -12,8 +12,9 @@
          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
          <h4 class="modal-title" id="myModalLabel">登录</h4>
        </div>
+       
+       <form id="login-form" class="form-inline" style="margin-bottom:0px;" action="{% url "django.contrib.auth.views.login" %}" method="post">
        <div class="modal-body">
-         <form id="login-form" class="form-inline" action="{% url "django.contrib.auth.views.login" %}" method="post">
            {% csrf_token %}
            <style type="text/css">
              .modal-body .input-group {
@@ -34,10 +35,13 @@
            <label class="checkbox">
              <input type="checkbox" value="remember-me"> 记住我
            </label>
-          <button class="btn btn-large btn-primary" type="submit" value="Log in">登录</button>
-         </form>
-         <p><a href="{% url 'django.contrib.auth.views.password_reset' %}">{% trans '重设密码' %}</a></p>
+           <a style="float:right;" href="{% url 'django.contrib.auth.views.password_reset' %}">{% trans ' 忘记密码？' %}</a>
        </div>
+           <div class="modal-footer">
+             <button class="btn btn-large btn-default" type="button" value="close">关闭</button>
+             <button class="btn btn-large btn-primary" type="submit" value="Log in">登录</button>
+           </div>
+       </form>
      </div><!-- /.modal-content -->
    </div><!-- /.modal-dialog -->
  </div><!-- /.modal -->
@@ -50,17 +54,16 @@
          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
          <h4 class="modal-title" id="myModalLabel">注册</h4>
        </div>
-       <div class="modal-body">
-         <form class="form" method="post" action="{% url 'registration_register' %}">
-           {% csrf_token %}
-           {{ registration_form|crispy }}
-           <div class="control-group">
-             <div class="controls">
-               <button type="submit" class="btn btn-default">注册</button>
-             </div>
-           </div>
-         </form>
-       </div>
+       <form class="form" method="post" action="{% url 'registration_register' %}">
+         <div class="modal-body">
+             {% csrf_token %}
+             {{ registration_form|crispy }}
+         </div>
+         <div class="modal-footer">
+           <button type="button" class="btn btn-default">关闭</button>
+           <button type="submit" class="btn btn-primary">注册</button>
+         </div>
+       </form>
        <!-- <div class="modal-footer">
          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
          <button type="button" class="btn btn-primary">Save changes</button>
