@@ -155,8 +155,12 @@ class CommentView(TemplateView):
     def post(self, request, *args, **kwargs):
         comment_str = request.POST.get('comment', 'Empty Comment')
         author_ip = request.META.get('REMOTE_ADDR', '0.0.0.0')
+        # For Nginx
+        if not author_ip:
+            author_ip = request.META.get('HTTP_X_FORWARDED_FOR', '0.0.0.0')
         index_url = kwargs.get('index_url', self.index_default_str)
         user = request.user
+        logger.info(request.META)
 
         author = None
         if user.is_authenticated():
