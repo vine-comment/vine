@@ -22,6 +22,8 @@
 * django-avatar
    * if can't work, see https://github.com/jezdez/django-avatar/issues/53
    * Change PIL to Pillow,  Change x86_64 to i386 if you are installing it to a 32-bit machine
+* pytz
+* pygeoip
 
 ###apt-get install / download & setup
 *   python-dev
