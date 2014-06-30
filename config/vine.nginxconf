@@ -17,7 +17,7 @@ server {
     error_log /root/vine/logs/nginx-error.log;
  
     location /static/ {
-        alias   /root/vine/static/;
+        alias   /git/vine/server/d1/static/;
     }
     
     location /media/ {
@@ -59,6 +59,6 @@ server {
     # Error pages
     error_page 500 502 503 504 /500.html;
     location = /500.html {
-        root /root/vine/static/;
+        root /git/vine/server/d1/static/;
     }
 }
