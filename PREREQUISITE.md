@@ -55,6 +55,11 @@
 
     > Check: **https://github.com/elasticsearch/elasticsearch**
 
+###Options for better performance
+* gunicorn
+* supervisor
+* nginx
+
 ###search engine
 * django-haystack
 * **[Elasticsearch](http://www.elasticsearch.org/overview/elkdownloads/)**
