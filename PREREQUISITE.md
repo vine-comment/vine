@@ -35,6 +35,8 @@
    *   you may need to install java first
 
      > Check: **https://github.com/geekben/deployment/blob/master/java_on_ubuntu.md**
+     
+*   libgeoip-dev
 
 -----
 ###Items should run.
