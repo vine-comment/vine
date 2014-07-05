@@ -113,6 +113,8 @@ EOF
 
 main()
 {
+    echo "NOTE: This script is not mature."
+    echo "If you meet any problem, try to solve it by yourself. hahaha"
     if [ "$(uname)" = "Darwin" ]; then
         echo "Installing on MAC.."
         install_mac
