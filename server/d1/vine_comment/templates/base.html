@@ -68,25 +68,30 @@
   {% include "auth/auth_modal.html" %}
 
 <div class="container">
-<!--
-<div class="alert-messages" id="message-drawer" style="opacity: 0; display: none; float:top">
-	<div class="message ">
-		<div class="message-inside">
-			<span class="message-text">吐槽成功！</span>
-			<a class="dismiss" href="#" style="display: none;">×</a>
-		</div>
-	</div>
-</div>
--->
-<div class="panel panel-default">
-  <div class="panel-body"> 每日推荐  预留 </div>
-</div>
+  <div class="col-lg-9">
+  <!--
+  <div class="alert-messages" id="message-drawer" style="opacity: 0; display: none; float:top">
+  	<div class="message ">
+  		<div class="message-inside">
+  			<span class="message-text">吐槽成功！</span>
+  			<a class="dismiss" href="#" style="display: none;">×</a>
+  		</div>
+  	</div>
+  </div>
+  -->
+    <div class="panel panel-default">
+      <div class="panel-body"> 每日推荐  预留 </div>
+    </div>
+    
+    <div id="showMsg">
+    {% block content %}
+    {% endblock %}
+    </div> <!-- /#showMsg -->
+  </div> <!-- /#col-lg-9 -->
 
-<div id="showMsg">
-{% block content %}
-{% endblock %}
-</div> <!-- /#showMsg -->
-
+  <div class="col-lg-3 panel panel-default" style="height:300px">
+      <br/> 占位符
+  </div>
 </div>
 
 <script src="{% static 'jquery/2.0.3/jquery.min.js' %}"></script>
