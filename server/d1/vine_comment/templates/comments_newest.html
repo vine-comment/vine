@@ -16,34 +16,40 @@
 
 		<ul class='pagination'>
 		{% if p_comment.has_previous %}
-		<li id='pagination_arrow_{{ p_comment.previous_page_number }}'><a href='#'>«</a></li>
+		<li id='pagination_arrow_{{ p_comment.previous_page_number }}'><a href='/comments/newest?page={{ p_comment.previous_page_number }}'>«</a></li>
+    {% comment %}
 		<script type="text/javascript">
 			var l = document.location;
 			$('#pagination_arrow_{{ p_comment.previous_page_number }}').on('click', function() {
 				$('#showMsg').load('/comments/newest?page={{ p_comment.previous_page_number }}');
 			});
 		</script>
+    {% endcomment %}
 		{% endif %}
 		{% for num in p_comment.paginator.page_range %}
 			{% ifequal num p_comment.number %}
 				<li><span class="current"><b>{{ num }}</b></span></li>
 			{% else %}
-				<li id='pagination_{{num}}'><a href="#">{{ num }}</a></li>
+				<li id='pagination_{{num}}'><a href="/comments/newest?page={{ num }}">{{ num }}</a></li>
+    {% comment %}
 				<script type="text/javascript">
 					$('#pagination_{{num}}').on('click', function() {
 						$('#showMsg').load('/comments/newest?page={{ num }}');
 					});
 				</script>
+    {% endcomment %}
 
 			{% endifequal %}
 		{% endfor %}
 		{% if p_comment.has_next %}
-		<li id='pagination_arrow_{{ p_comment.next_page_number }}'><a href="#">»</a></li>
+		<li id='pagination_arrow_{{ p_comment.next_page_number }}'><a href="/comments/newest?page={{ p_comment.next_page_number }}">»</a></li>
+    {% comment %}
 		<script type="text/javascript">
 			$('#pagination_arrow_{{ p_comment.next_page_number }}').on('click', function() {
 				$('#showMsg').load('/comments/newest?page={{ p_comment.next_page_number }}');
 			});
 		</script>
+    {% endcomment %}
 		{% endif %}
 
 		</ul>
