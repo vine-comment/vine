@@ -356,6 +356,8 @@ class SettingRawView(TemplateView):
 
 class CommentUpView(TemplateView):
     def get(self, request, id):
+        if not request.user.is_authenticated():
+            return HttpResponse('non-user', mimetype='plain/text')
         comments = Comment.objects.filter(id=id)
         if not comments:
             return HttpResponse(status=404)
@@ -377,6 +379,8 @@ class CommentUpView(TemplateView):
 
 class CommentDownView(TemplateView):
     def get(self, request, id):
+        if not request.user.is_authenticated():
+            return HttpResponse('non-user', mimetype='plain/text')
         comments = Comment.objects.filter(id=id)
         if not comments:
             return HttpResponse(status=404)

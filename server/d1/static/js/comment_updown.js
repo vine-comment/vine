@@ -30,6 +30,8 @@
 							ups.text(count);
 							var up_icon = $('#up_comment_'+id).find('i');
 							up_icon.prop('class', "fa fa-thumbs-up");
+					} else if (data == "non-user") {
+							popup_message("亲，注册个用户吧");
 					}
                     $('#up_comment_'+id).attr('onclick',onclick);//must use attr, not prop
 			 });
