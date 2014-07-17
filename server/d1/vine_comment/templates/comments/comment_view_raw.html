@@ -8,7 +8,7 @@
 {% for message in p_comment.object_list %}
   <li class="list-group-item">
     <span style="float:right">
-      <a href="#" id="up_comment_{{message.id}}" onclick="up('{{message.id}}')">
+      <a href="javascript:void(0);" id="up_comment_{{message.id}}" onclick="up('{{message.id}}')">
         {% if user.id in message.up_users %}
         <i class="fa fa-thumbs-up"></i>
         {% else %}
@@ -16,7 +16,7 @@
         {% endif %}
         +<span>{{ message.up_users|length }}</span>
       </a>
-      <a href="#" id="down_comment_{{message.id}}" onclick="down('{{message.id}}')">
+      <a href="javascript:void(0);" id="down_comment_{{message.id}}" onclick="down('{{message.id}}')">
         {% if user.id in message.down_users %}
         <i class="fa fa-thumbs-down fa-flip-horizontal"></i>
         {% else %}
