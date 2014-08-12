@@ -9,7 +9,7 @@
       "all_frames": true,
       "js": [ "jquery.min.js","shentucao.js" ],
       "matches": [ "http://*/*" ],
-	  "exclude_matches": [ "https://*/*", "http://www.anwcl.com:8000/*" ]
+	  "exclude_matches": [ "https://*/*", "http://www.anwcl.com/*" ]
    } ],
 
    "browser_action": {
