@@ -16,5 +16,7 @@
       "default_icon": "icons/browser_action_disabled.png",
       "default_popup": "popup.html"
    },
-  "permissions": [ ]
+
+
+   "permissions": ["tabs", "http://www.anwcl.com/*"]
 }
