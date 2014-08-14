@@ -11,7 +11,8 @@ document.addEventListener('DOMContentLoaded', function () {
 chrome.tabs.getSelected(null,function(tab) {
     var tablink = tab.url;
 	if (!window.btoa) window.btoa = base64.encode;
-	$('body').append('<div id="vine_comment_iframe">Loading...</div>');
+	//$('body').append('<div id="vine_comment_iframe">Loading...</div>');
 	$.support.cors = true;
-	$('#vine_comment_iframe').load("http://www.anwcl.com/comment/" + btoa(tablink));
+	//$('#vine_comment_iframe').load("http://www.anwcl.com/comment/" + btoa(tablink));
+	$('body iframe').attr('src', "http://www.anwcl.com/comment/" + btoa(tablink));
 });
