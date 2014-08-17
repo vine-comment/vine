@@ -19,6 +19,7 @@ If you have any problem, Check [PREREQUISITE.md](https://github.com/vine-comment
   * enable comment with picture(s)
   * enable chrome-extension with screenshot or at least with picture input
   * build on site mail server to replace current sohu mail box
+  * 弹幕式
   
 #### ISSUE
   * set USE_TZ=False in settings.py for registration issue, this may cause timezone problem
