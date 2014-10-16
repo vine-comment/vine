@@ -24,7 +24,7 @@ import jieba
 import jieba.analyse
 
 # private modules
-from vine_comment.models import Comment, CommentBoard, Reply, Author
+from vine_comment.models import Comment, CommentBoard, Reply, Author, Tag
 from vine_comment.forms import *
 from captcha.models import CaptchaStore
 
@@ -135,8 +135,23 @@ class CommentView(TemplateView):
                     author_ip=author_ip)
 
         # Generate top 5 tags for comment.
-        comment.tags = jieba.analyse.extract_tags(comment_str, topK=3)
-        logger.info('tags: ' + repr(comment.tags).decode("unicode-escape"))
+        stags= jieba.analyse.extract_tags(comment_str, topK=3)
+        for stag in stags:
+            tags = Tag.objects.filter(name=stag)
+            if len(tags) > 0:
+                comment.tags.append(tags[0].id)
+                tags[0].comments.append(comment.id)
+                tags[0].save()
+            else:
+                tag = Tag.objects.create(
+                        name=stag,
+                        time_added=datetime.datetime.utcnow().replace(
+                                        tzinfo=utc),
+                        )
+                tag.comments.append(comment.id)
+                tag.save()
+                comment.tags.append(tag.id)
+        #logger.info('tags: ' + repr(comment.tags).decode("unicode-escape"))
         comment.save()
 
     @csrf_exempt
@@ -181,6 +196,7 @@ class CommentView(TemplateView):
                  author.is_not_human = False
                  author.save()
 
+        """
         if(is_not_human):
             captcha_key = request.POST.get('captcha_key', '')
             captcha_input_value= request.POST.get('captcha_value', '')
@@ -198,7 +214,8 @@ class CommentView(TemplateView):
                 #TODO return error to user
                 print 'captcha error'
         else:
-                self._post_comment(index_url, comment_str, author_ip, user)
+            """
+        self._post_comment(index_url, comment_str, author_ip, user)
 
         #TODO in order to Refresh the captcha , it must be change commentBoard.js urls.py and template
         kwargs['template'] = self.template_raw
@@ -274,8 +291,23 @@ class CommentModifyView(TemplateView):
         if comment_str:
             comment.comment_str = comment_str
         if comment_tags:
-            tags = comment_tags.split(',')
-            comment.tags = tags
+            stags = comment_tags.split(',')
+            #TODO: duplicated stag case
+            for stag in stags:
+                tags = Tag.objects.filter(name=stag)
+                if len(tags) > 0:
+                    comment.tags.append(tags[0].id)
+                    tags[0].comments.append(comment.id)
+                    tags[0].save()
+                else:
+                    tag = Tag.objects.create(
+                            name=stag,
+                            time_added=datetime.datetime.utcnow().replace(
+                                        tzinfo=utc),
+                            )
+                    tag.comments.append(comment.id)
+                    tag.save()
+                    comment.tags.append(tag.id)
         comment.save()
         return HttpResponse(status=200)
 

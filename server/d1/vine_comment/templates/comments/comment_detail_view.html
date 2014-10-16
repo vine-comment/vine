@@ -24,9 +24,9 @@ user: {{ comment.user }}<br/>
 up_users: {{ comment.up_users }}<br/>
 down_users: {{ comment.down_users }}<br/>
 {% if user == comment.user %}
-tags: <p class="editable_comment_tags">{%for tag in comment.tags%}{{ tag }},{%endfor%}</p>
+tags: <p class="editable_comment_tags">{%for tag in comment.tags%}{{ tag.name }},{%endfor%}</p>
 {% else %}
-tags: <p>{%for tag in comment.tags%}{{ tag }},{%endfor%}</p>
+tags: <p>{%for tag in comment.tags%}{{ tag.name }},{%endfor%}</p>
 {% endif %}
 </p>
 
