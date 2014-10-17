@@ -67,6 +67,11 @@ class Url(models.Model):
     def __unicode__(self):
         return self.content
 
+# 描述一对多的tag:url关系
+class UrlTag(models.Model):
+    tag = models.CharField(max_length=64)
+    url = ListField(models.ForeignKey(Url))
+
 class CommentBoard(models.Model):
     title = models.CharField(max_length=64, blank=True, null=True)
     url = models.URLField(max_length=2048, blank=True, null=True)
