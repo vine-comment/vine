@@ -3,7 +3,7 @@
 <div class="block">
 <div class="page-header" style="margin:-10px 0 20px;">
 <h3>Comment Detail <small>{{comment.comment_board}}</small> </h3> 
-{% if user == comment.user %}
+{% if user == comment.author.user %}
 <a href="/comment/delete/{{comment.id}}">Delete</a>
 {% endif %}
 <!--TODO: allow administrator to delete-->
@@ -12,7 +12,7 @@
 
 <p>
 title: {{ comment.title }}<br/>
-{% if user == comment.user %}
+{% if user == comment.author.user %}
 comment_str: <p class="autogrow_comment_str"> {{ comment.comment_str }}</p>
 {% else %}
 comment_str: <p> {{ comment.comment_str }}</p>
@@ -20,10 +20,10 @@ comment_str: <p> {{ comment.comment_str }}</p>
 desc: {{ comment.desc }}<br/>
 comment_board: {{ comment.comment_board }}<br/>
 author_ip: {{ comment.author_ip }}<br/>
-user: {{ comment.user }}<br/>
+user: {{ comment.author.user }}<br/>
 up_users: {{ comment.up_users }}<br/>
 down_users: {{ comment.down_users }}<br/>
-{% if user == comment.user %}
+{% if user == comment.author.user %}
 tags: <p class="editable_comment_tags">{%for tag in comment.tags%}{{ tag.name }},{%endfor%}</p>
 {% else %}
 tags: <p>{%for tag in comment.tags%}{{ tag.name }},{%endfor%}</p>
