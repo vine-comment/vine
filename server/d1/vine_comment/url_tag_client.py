@@ -3,7 +3,7 @@
 
 import argparse
 
-parser = argparse.ArgumentParser(description='Test parser.')
+parser = argparse.ArgumentParser(description='Url-Tag-Combination Client.')
 parser.add_argument('--add', help='add url tag combination')
 parser.add_argument('--rem', help='rem url tag combination')
 parser.add_argument('--get', help='get url tag combination')
@@ -24,7 +24,7 @@ class UrlTag(object):
         pass
 
 def main():
-    pass
+    args = parser.parse_args()
 
 if __name__ == '__main__':
     main()
