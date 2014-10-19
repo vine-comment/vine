@@ -89,7 +89,7 @@ class Comment(TimeMixin, models.Model):
     up_users = ListField(models.ForeignKey(User))
     down_users = ListField(models.ForeignKey(User))
     replies = ListField(EmbeddedModelField('Reply'))
-    tags = ListField(models.ForeignKey(Tag))
+    tags = ListField(EmbeddedModelField('Tag'))
 
     def __unicode__(self):
         return self.time_added.strftime("%Y-%m-%d %H:%M:%S") + self.title + ' ' + self.comment_str

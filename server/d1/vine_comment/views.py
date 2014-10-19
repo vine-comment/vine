@@ -134,12 +134,13 @@ class CommentView(TemplateView):
                     title=title,
                     author_ip=author_ip)
 
+        comment.save()#need to save here to create the ID
         # Generate top 5 tags for comment.
         stags= jieba.analyse.extract_tags(comment_str, topK=3)
         for stag in stags:
             tags = Tag.objects.filter(name=stag)
             if len(tags) > 0:
-                comment.tags.append(tags[0].id)
+                comment.tags.append(tags[0])
                 tags[0].comments.append(comment.id)
                 tags[0].save()
             else:
@@ -150,7 +151,7 @@ class CommentView(TemplateView):
                         )
                 tag.comments.append(comment.id)
                 tag.save()
-                comment.tags.append(tag.id)
+                comment.tags.append(tag)
         #logger.info('tags: ' + repr(comment.tags).decode("unicode-escape"))
         comment.save()
 
@@ -290,13 +291,14 @@ class CommentModifyView(TemplateView):
         comment = comments[0]
         if comment_str:
             comment.comment_str = comment_str
+        comment.tags = []
         if comment_tags:
             stags = comment_tags.split(',')
             #TODO: duplicated stag case
             for stag in stags:
                 tags = Tag.objects.filter(name=stag)
                 if len(tags) > 0:
-                    comment.tags.append(tags[0].id)
+                    comment.tags.append(tags[0])
                     tags[0].comments.append(comment.id)
                     tags[0].save()
                 else:
@@ -307,7 +309,7 @@ class CommentModifyView(TemplateView):
                             )
                     tag.comments.append(comment.id)
                     tag.save()
-                    comment.tags.append(tag.id)
+                    comment.tags.append(tag)
         comment.save()
         return HttpResponse(status=200)
 
