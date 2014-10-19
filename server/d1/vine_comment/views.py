@@ -277,6 +277,9 @@ class CommentDeleteView(TemplateView):
         if len(comments) == 0:
             return HttpResponse(status=404)
         comment = comments[0]
+        for tag in comment.tags:
+            tag.comments.remove(comment.id)
+            tag.save()
         comment.delete()
         return HttpResponseRedirect('/comments/')
 
@@ -291,6 +294,10 @@ class CommentModifyView(TemplateView):
         comment = comments[0]
         if comment_str:
             comment.comment_str = comment_str
+
+        for tag in comment.tags:
+            tag.comments.remove(comment.id)
+            tag.save()
         comment.tags = []
         if comment_tags:
             stags = comment_tags.split(',')
