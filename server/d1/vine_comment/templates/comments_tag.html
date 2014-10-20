@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block head %}
+<link href="{% static 'css/home.css' %}" rel="stylesheet"/>
+<script src="{% static 'jquery/2.0.3/jquery.min.js' %}"></script>
+<script src="{% static 'js/comment_updown.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+<ol class="breadcrumb">
+  <li><a href="/">藤蔓评论</a></li>
+  <li class="active">最优</li>
+</ol>
+
+{% include 'comments_list_tag.html' %}
+
+		<ul class='pagination'>
+
+		{% if p_comment.has_previous %}
+		<li id='pagination_arrow_{{ p_comment.previous_page_number }}'><a href='/comments/tag?page={{ p_comment.previous_page_number }}'>«</a></li>
+		{% endif %}
+		{% for num in p_comment.paginator.page_range %}
+			{% ifequal num p_comment.number %}
+				<li><span class="current"><b>{{ num }}</b></span></li>
+			{% else %}
+        <li id='pagination_{{num}}'><a href="/comments/tag?page={{ num }}">{{ num }}</a></li>
+			{% endifequal %}
+		{% endfor %}
+		{% if p_comment.has_next %}
+      <li id='pagination_arrow_{{ p_comment.next_page_number }}'><a href="/comments/tag?page={{ p_comment.next_page_number }}">»</a></li>
+		{% endif %}
+
+		</ul>
+{% endblock %}

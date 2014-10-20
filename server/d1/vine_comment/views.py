@@ -501,6 +501,36 @@ class CommentsView(TemplateView):
     def get(self, request, *args, **kwargs):
         return HttpResponseRedirect('/comments/best')
 
+class CommentsTagView(TemplateView):
+    template_name = 'comments_tag.html'
+
+    def get(self, request, *args, **kwargs):
+        tags = Tag.objects.order_by('-time_added').all()
+        tags = sorted(tags,key=lambda x:len(x.comments),reverse=True)
+        for tag in tags:
+            comments = filter(lambda x: x.id in tag.comments, Comment.objects.all())
+            print comments
+            tag.comments_list = sorted(comments,key=lambda x:len(x.up_users)-len(x.down_users),reverse=True)[0:3]
+
+        index_page = request.GET.get('page', 1)
+        print index_page
+
+
+        #TODO performance optimization for objects order_by('-time_added')
+        logger.info(str(len(tags)) + ': ' + str(tags))
+        try:
+            p = Paginator(tags, 5).page(index_page)
+        except PageNotAnInteger:
+        # If page is not an integer, deliver first page.
+            p = Paginator(tags, 5).page(1)
+        except EmptyPage:
+        # If page is out of range (e.g. 9999), deliver last page of results.
+            p = Paginator(tags, 5).page(paginator.num_pages)
+
+        return render(request, self.template_name, {
+            'p_comment': p,
+        })
+
 class CommentsBestView(TemplateView):
     template_name = 'comments_best.html'
 
