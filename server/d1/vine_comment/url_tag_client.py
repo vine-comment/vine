@@ -9,22 +9,34 @@ parser.add_argument('-r', '--rem', help='rem url tag combination', nargs=2, meta
 parser.add_argument('-g', '--get', help='get url tag combination', nargs=2, metavar=('url', 'tag'))
 parser.add_argument('-m', '--mod', help='mod url tag combination', nargs=2, metavar=('url', 'tag'))
 
+cmds = ['add', 'rem', 'get', 'mod']
+
 class UrlTag(object):
-    def add():
-        print('add')
+    @staticmethod
+    def add(*args, **kwargs):
         pass
-    def rem():
-        print('rem')
+
+    @staticmethod
+    def rem(*args, **kwargs):
         pass
-    def get():
-        print('get')
+
+    @staticmethod
+    def get(*args, **kwargs):
         pass
-    def mod():
-        print('mod')
+
+    @staticmethod
+    def mod(*args, **kwargs):
         pass
 
 def main():
-    args = parser.parse_args()
+    args = vars(parser.parse_args())
+    print("args: " + str(args))
+
+    for key in args:
+        if args[key] is None:
+            continue
+        func = getattr(UrlTag, key)
+        result = func(args[key])
 
 if __name__ == '__main__':
     main()
