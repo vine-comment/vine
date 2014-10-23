@@ -35,6 +35,7 @@ def main():
     for key in args:
         if args[key] is None:
             continue
+        print('calling '+key)
         func = getattr(UrlTag, key)
         result = func(args[key])
 
