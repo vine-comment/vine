@@ -10,6 +10,7 @@ parser.add_argument('-g', '--get', help='get url tag combination', nargs=2, meta
 parser.add_argument('-m', '--mod', help='mod url tag combination', nargs=2, metavar=('url', 'tag'))
 
 cmds = ['add', 'rem', 'get', 'mod']
+short_cmds = ['a', 'r', 'g', 'm']
 
 class UrlTag(object):
     @staticmethod
