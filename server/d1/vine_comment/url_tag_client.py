@@ -2,6 +2,8 @@
 #coding:utf8
 
 import argparse
+from models import UrlTag
+
 
 parser = argparse.ArgumentParser(description='Url Tag Combination Client.')
 parser.add_argument('-a', '--add', help='add url tag combination', nargs=2, metavar=('url', 'tag'))
