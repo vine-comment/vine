@@ -5,9 +5,10 @@
 import os
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "d1.settings")
 
+print(os.environ.get('DJANGO_SETTINGS_MODULE'))
+from vine_comment.models import UrlTag
 
 import argparse
-
 
 
 parser = argparse.ArgumentParser(description='Url Tag Combination Client.')
@@ -22,7 +23,7 @@ short_cmds = ['a', 'r', 'g', 'm']
 class UrlTag(object):
     @staticmethod
     def add(*args, **kwargs):
-        pass
+        UrlTag.create()
 
     @staticmethod
     def rem(*args, **kwargs):
@@ -48,9 +49,6 @@ def main():
         result = func(args[key])
 
 if __name__ == '__main__':
-    print(os.environ.get('DJANGO_SETTINGS_MODULE'))
-    from vine_comment.models import UrlTag
     main()
-
 
 
