@@ -5,9 +5,7 @@
 import os
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "d1.settings")
 
-print(os.environ.get('DJANGO_SETTINGS_MODULE'))
-from vine_comment.models import UrlTag
-
+from vine_comment.models import Url, UrlTag
 import argparse
 
 
@@ -15,23 +13,51 @@ parser = argparse.ArgumentParser(description='Url Tag Combination Client.')
 parser.add_argument('-a', '--add', help='add url tag combination', nargs=2, metavar=('url', 'tag'))
 parser.add_argument('-r', '--rem', help='rem url tag combination', nargs=2, metavar=('url', 'tag'))
 parser.add_argument('-g', '--get', help='get url tag combination', nargs=2, metavar=('url', 'tag'))
+parser.add_argument('-gu', '--getu', help='get url tag combination', nargs=1, metavar=('url'))
+parser.add_argument('-gt', '--gett', help='get url tag combination', nargs=1, metavar=('tag'))
 parser.add_argument('-m', '--mod', help='mod url tag combination', nargs=2, metavar=('url', 'tag'))
 
-cmds = ['add', 'rem', 'get', 'mod']
-short_cmds = ['a', 'r', 'g', 'm']
+cmds = ['add', 'rem', 'get', 'mod', 'gett']
+short_cmds = ['a', 'r', 'g', 'm', 'gt']
 
-class UrlTag(object):
+class UrlTagManager(object):
     @staticmethod
-    def add(*args, **kwargs):
-        UrlTag.create()
+    def add(url, tag):
+        url, created = Url.objects.get_or_create(url=url, content=url)
+        url_tag = UrlTag.objects.create(tag=tag)
+        url_tag.urls.append(url.id)
+        url_tag.save()
 
     @staticmethod
     def rem(*args, **kwargs):
         pass
 
     @staticmethod
-    def get(*args, **kwargs):
-        pass
+    def get(url, tag):
+        url_tags = UrlTag.objects.filter(tag=tag)
+        import pdb; pdb.set_trace()
+        for url_tag in url_tags:
+            print(url_tag.tag, url_tag.urls)
+            for url in url_tag.urls:
+                url_object = Url.objects.filter(id=url)
+                print(url_object)
+
+    @staticmethod
+    def gett(tag):
+        url_tags = UrlTag.objects.filter(tag=tag)
+        for url_tag in url_tags:
+            print(url_tag.tag, url_tag.urls)
+            for url in url_tag.urls:
+                url_object = Url.objects.filter(id=url)
+                print(url_object)
+
+    @staticmethod
+    def getu(url):
+        all_url_tag = UrlTag.objects.all()
+        for url_tag in all_url_tag:
+            for saved_url in url_tag.urls:
+                if url == saved_url:
+                    print(url_tag)
 
     @staticmethod
     def mod(*args, **kwargs):
@@ -44,9 +70,12 @@ def main():
     for key in args:
         if args[key] is None:
             continue
-        print('calling '+key)
-        func = getattr(UrlTag, key)
-        result = func(args[key])
+        print(key+' '+str(args[key]))
+        func = getattr(UrlTagManager, key)
+        if len(args[key]) == 1:
+            result = func(args[key][0])
+        elif len(args[key]) == 2:
+            result = func(args[key][0], args[key][1])
 
 if __name__ == '__main__':
     main()
