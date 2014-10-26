@@ -1,8 +1,13 @@
 #!/usr/bin/env python
 #coding:utf8
 
+
+import os
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "d1.settings")
+
+
 import argparse
-from models import UrlTag
+
 
 
 parser = argparse.ArgumentParser(description='Url Tag Combination Client.')
@@ -43,6 +48,8 @@ def main():
         result = func(args[key])
 
 if __name__ == '__main__':
+    print(os.environ.get('DJANGO_SETTINGS_MODULE'))
+    from vine_comment.models import UrlTag
     main()
 
 
