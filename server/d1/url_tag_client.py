@@ -23,14 +23,16 @@ short_cmds = ['a', 'r', 'g', 'm', 'gt']
 class UrlTagManager(object):
     @staticmethod
     def add(url, tag):
-        url, created = Url.objects.get_or_create(url=url, content=url)
-        url_tag = UrlTag.objects.create(tag=tag)
+        url, u_created = Url.objects.get_or_create(url=url, content=url)
+        url_tag, ut_created = UrlTag.objects.get_or_create(tag=tag)
         url_tag.urls.append(url.id)
         url_tag.save()
 
     @staticmethod
-    def rem(*args, **kwargs):
-        pass
+    def rem(url, tag):
+        url_tags = UrlTag.objects.filter(tag=tag)
+        for url_tag in url_tags:
+            url_tag.delete()
 
     @staticmethod
     def get(url, tag):
