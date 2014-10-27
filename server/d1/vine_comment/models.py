@@ -67,11 +67,6 @@ class Url(models.Model):
     def __unicode__(self):
         return self.content
 
-# 描述一对多的tag:url关系
-class UrlTag(models.Model):
-    tag = models.CharField(max_length=64)
-    urls = ListField(models.ForeignKey(Url))
-
 class CommentBoard(models.Model):
     title = models.CharField(max_length=64, blank=True, null=True)
     url = models.URLField(max_length=2048, blank=True, null=True)
@@ -82,6 +77,7 @@ class CommentBoard(models.Model):
 class Tag(TimeMixin, models.Model):
     name = models.CharField(max_length=30)
     comments = ListField(models.ForeignKey('Comment'))
+    urls = ListField(models.ForeignKey(Url))
 
 class Comment(TimeMixin, models.Model):
     title = models.CharField(max_length=64)

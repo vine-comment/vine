@@ -5,7 +5,7 @@
 import os
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "d1.settings")
 
-from vine_comment.models import Url, UrlTag
+from vine_comment.models import Url, Tag
 import argparse
 
 
@@ -20,42 +20,42 @@ parser.add_argument('-m', '--mod', help='mod url tag combination', nargs=2, meta
 cmds = ['add', 'rem', 'get', 'mod', 'gett']
 short_cmds = ['a', 'r', 'g', 'm', 'gt']
 
-class UrlTagManager(object):
+class TagManager(object):
     @staticmethod
     def add(url, tag):
         url, u_created = Url.objects.get_or_create(url=url, content=url)
-        url_tag, ut_created = UrlTag.objects.get_or_create(tag=tag)
+        url_tag, ut_created = Tag.objects.get_or_create(name=tag)
         url_tag.urls.append(url.id)
         url_tag.save()
 
     @staticmethod
     def rem(url, tag):
-        url_tags = UrlTag.objects.filter(tag=tag)
+        url_tags = Tag.objects.filter(name=tag)
         for url_tag in url_tags:
             url_tag.delete()
 
     @staticmethod
     def get(url, tag):
-        url_tags = UrlTag.objects.filter(tag=tag)
+        url_tags = Tag.objects.filter(name=tag)
         import pdb; pdb.set_trace()
         for url_tag in url_tags:
-            print(url_tag.tag, url_tag.urls)
+            print(url_tag.name, url_tag.urls)
             for url in url_tag.urls:
                 url_object = Url.objects.filter(id=url)
                 print(url_object)
 
     @staticmethod
     def gett(tag):
-        url_tags = UrlTag.objects.filter(tag=tag)
+        url_tags = Tag.objects.filter(name=tag)
         for url_tag in url_tags:
-            print(url_tag.tag, url_tag.urls)
+            print(url_tag.name, url_tag.urls)
             for url in url_tag.urls:
                 url_object = Url.objects.filter(id=url)
                 print(url_object)
 
     @staticmethod
     def getu(url):
-        all_url_tag = UrlTag.objects.all()
+        all_url_tag = Tag.objects.all()
         for url_tag in all_url_tag:
             for saved_url in url_tag.urls:
                 if url == saved_url:
@@ -73,7 +73,7 @@ def main():
         if args[key] is None:
             continue
         print(key+' '+str(args[key]))
-        func = getattr(UrlTagManager, key)
+        func = getattr(TagManager, key)
         if len(args[key]) == 1:
             result = func(args[key][0])
         elif len(args[key]) == 2:
