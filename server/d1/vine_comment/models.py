@@ -8,7 +8,10 @@ import datetime
 
 class TimeMixin(models.Model):
     time_modified = models.DateTimeField(blank=True, null=True)
-    time_added = models.DateTimeField()
+    time_added = models.DateTimeField(
+        default=datetime.datetime.utcnow().replace(tzinfo=utc)
+    )
+    #time_added=datetime.datetime.utcnow().replace(tzinfo=utc)
     time_deleted = models.DateTimeField(blank=True, null=True)
 
     def modify(self):
