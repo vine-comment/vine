@@ -37,7 +37,6 @@ class TagManager(object):
     @staticmethod
     def get(url, tag):
         url_tags = Tag.objects.filter(name=tag)
-        import pdb; pdb.set_trace()
         for url_tag in url_tags:
             print(url_tag.name, url_tag.urls)
             for url in url_tag.urls:
@@ -57,9 +56,10 @@ class TagManager(object):
     def getu(url):
         all_url_tag = Tag.objects.all()
         for url_tag in all_url_tag:
-            for saved_url in url_tag.urls:
-                if url == saved_url:
-                    print(url_tag)
+            for url_id in url_tag.urls:
+                url_object = Url.objects.get(id=url_id)
+                if url == url_object.url:
+                    print(url_tag.name)
 
     @staticmethod
     def mod(*args, **kwargs):
