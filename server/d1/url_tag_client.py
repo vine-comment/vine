@@ -66,7 +66,17 @@ class TagManager(object):
         pass
 
 def main():
+    exist_arg = False
     args = vars(parser.parse_args())
+
+    for key in args:
+        if args[key] is not None:
+            exist_arg = True
+
+    if exist_arg is False:
+        parser.print_help()
+        return
+
     print("args: " + str(args))
 
     for key in args:
