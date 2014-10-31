@@ -23,8 +23,8 @@ short_cmds = ['a', 'r', 'g', 'm', 'gt']
 class TagManager(object):
     @staticmethod
     def add(url, tag):
-        url, u_created = Url.objects.get_or_create(url=url, content=url)
-        url_tag, ut_created = Tag.objects.get_or_create(name=tag)
+        url, _ = Url.objects.get_or_create(url=url, content=url)
+        url_tag, _ = Tag.objects.get_or_create(name=tag)
         url_tag.urls.append(url.id)
         url_tag.save()
 
@@ -85,9 +85,9 @@ def main():
         print(key+' '+str(args[key]))
         func = getattr(TagManager, key)
         if len(args[key]) == 1:
-            result = func(args[key][0])
+            func(args[key][0])
         elif len(args[key]) == 2:
-            result = func(args[key][0], args[key][1])
+            func(args[key][0], args[key][1])
 
 if __name__ == '__main__':
     main()
