@@ -2,8 +2,9 @@
 
 # python modules
 from urlparse import urlparse
-import datetime
 from datetime import timedelta
+from random import sample
+import datetime
 import base64
 import logging
 import math
@@ -506,7 +507,15 @@ class CommentsTagView(TemplateView):
 
     def get(self, request, *args, **kwargs):
         tags = Tag.objects.order_by('-time_added').all()
-        tags = sorted(tags,key=lambda x:len(x.comments),reverse=True)
+        if len(tags) == 0:
+            return HttpResponse('No tag', mimetype='plain/text')
+        tags = sorted(tags,key=lambda x:len(x.comments),reverse=True)[0:10]
+        count = len(tags)
+        if count > 3:
+            tags = sample(tags, 3)
+        else:
+            tags = sample(tags, count)
+
         for tag in tags:
             comments = filter(lambda x: x.id in tag.comments, Comment.objects.all())
             print comments
