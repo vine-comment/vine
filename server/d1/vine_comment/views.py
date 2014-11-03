@@ -506,9 +506,54 @@ class CommentsTagView(TemplateView):
     template_name = 'comments_tag.html'
 
     def get(self, request, *args, **kwargs):
+        if kwargs['flag'] == 'raw':
+            self.template_name = 'comments_list_tag.html'
         tags = Tag.objects.order_by('-time_added').all()
         if len(tags) == 0:
             return HttpResponse('No tag', mimetype='plain/text')
+        tags = sorted(tags,key=lambda x:len(x.comments),reverse=True)[0:10]
+        count = len(tags)
+        if count > 3:
+            tags = sample(tags, 3)
+        else:
+            tags = sample(tags, count)
+
+        for tag in tags:
+            comments = filter(lambda x: x.id in tag.comments, Comment.objects.all())
+            print comments
+            tag.comments_list = sorted(comments,key=lambda x:len(x.up_users)-len(x.down_users),reverse=True)[0:3]
+
+        index_page = request.GET.get('page', 1)
+        print index_page
+
+
+        #TODO performance optimization for objects order_by('-time_added')
+        logger.info(str(len(tags)) + ': ' + str(tags))
+        try:
+            p = Paginator(tags, 5).page(index_page)
+        except PageNotAnInteger:
+        # If page is not an integer, deliver first page.
+            p = Paginator(tags, 5).page(1)
+        except EmptyPage:
+        # If page is out of range (e.g. 9999), deliver last page of results.
+            p = Paginator(tags, 5).page(paginator.num_pages)
+
+        return render(request, self.template_name, {
+            'p_comment': p,
+        })
+
+class CommentsRelatedView(TemplateView):
+    template_name = 'comments_list_tag.html'
+
+    def get(self, request, url_b64):
+        index_url = base64.b64decode(url_b64)
+        url_objects = Url.objects.filter(url=index_url)
+        if len(url_objects) == 0:
+            return HttpResponse('No tag: '+index_url, mimetype='plain/text')
+
+        tags = filter(lambda x:url_objects[0].id in x.urls, Tags.objects.order_by('-time_added'))
+        if len(tags) == 0:
+            return HttpResponse('No related tag', mimetype='plain/text')
         tags = sorted(tags,key=lambda x:len(x.comments),reverse=True)[0:10]
         count = len(tags)
         if count > 3:

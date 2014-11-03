@@ -15,4 +15,5 @@ chrome.tabs.getSelected(null,function(tab) {
 	$.support.cors = true;
 	//$('#vine_comment_iframe').load("http://www.anwcl.com/comment/" + btoa(tablink));
 	$('body iframe').attr('src', "http://www.anwcl.com/comment/" + btoa(tablink));
+	//$('body iframe').attr('src', "http://192.168.2.102:8000/comment/" + btoa(tablink));
 });
