@@ -12,23 +12,6 @@
   <li class="active">TAG前十位随机取3个</li>
 </ol>
 
-{% include 'comments_list_tag.html' %}
+{% include 'comments_tag_raw.html' %}
 
-		<ul class='pagination'>
-
-		{% if p_comment.has_previous %}
-		<li id='pagination_arrow_{{ p_comment.previous_page_number }}'><a href='/comments/tag?page={{ p_comment.previous_page_number }}'>«</a></li>
-		{% endif %}
-		{% for num in p_comment.paginator.page_range %}
-			{% ifequal num p_comment.number %}
-				<li><span class="current"><b>{{ num }}</b></span></li>
-			{% else %}
-        <li id='pagination_{{num}}'><a href="/comments/tag?page={{ num }}">{{ num }}</a></li>
-			{% endifequal %}
-		{% endfor %}
-		{% if p_comment.has_next %}
-      <li id='pagination_arrow_{{ p_comment.next_page_number }}'><a href="/comments/tag?page={{ p_comment.next_page_number }}">»</a></li>
-		{% endif %}
-
-		</ul>
 {% endblock %}

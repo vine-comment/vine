@@ -506,8 +506,9 @@ class CommentsTagView(TemplateView):
     template_name = 'comments_tag.html'
 
     def get(self, request, *args, **kwargs):
-        if kwargs['flag'] == 'raw':
-            self.template_name = 'comments_list_tag.html'
+        flag = kwargs['flag']
+        if flag == 'simple':
+            self.template_name = 'comments_tag_simple.html'
         tags = Tag.objects.order_by('-time_added').all()
         if len(tags) == 0:
             return HttpResponse('No tag', mimetype='plain/text')
@@ -540,6 +541,7 @@ class CommentsTagView(TemplateView):
 
         return render(request, self.template_name, {
             'p_comment': p,
+            'flag': flag,
         })
 
 class CommentsRelatedView(TemplateView):
@@ -750,8 +752,9 @@ class HomeView(TemplateView):
     template_name = 'home.html'
 
     def get(self, request, *args, **kwargs):
-        if kwargs['flag'] == 'raw':
-            self.template_name = 'home_raw.html'
+        flag = kwargs['flag']
+        if flag == 'simple':
+            self.template_name = 'home_simple.html'
         author = get_author(request.user)
         index_page = request.GET.get('page', 1)
 
@@ -771,6 +774,7 @@ class HomeView(TemplateView):
         return render(request, self.template_name, {
             'header_form': UploadHeadSculptureForm,
             'p_comment': p,
+            'flag': flag,
         })
 
 class UserHeadSculptureView(TemplateView):
