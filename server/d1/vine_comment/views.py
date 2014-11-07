@@ -750,10 +750,28 @@ class HomeView(TemplateView):
     template_name = 'home.html'
 
     def get(self, request, *args, **kwargs):
+        if kwargs['flag'] == 'raw':
+            self.template_name = 'home_raw.html'
         author = get_author(request.user)
+        index_page = request.GET.get('page', 1)
+
+        #TODO performance optimization for objects order_by('-time_added')
+        comments = Comment.objects.filter(author=author)
+        comments.order_by('-time_added')
+        logger.info(str(len(comments)) + ': ' + str(comments))
+        try:
+            p = Paginator(comments, 10).page(index_page)
+        except PageNotAnInteger:
+        # If page is not an integer, deliver first page.
+            p = Paginator(comments, 10).page(1)
+        except EmptyPage:
+        # If page is out of range (e.g. 9999), deliver last page of results.
+            p = Paginator(comments, 10).page(paginator.num_pages)
+
         return render(request, self.template_name, {
             'header_form': UploadHeadSculptureForm,
-            })
+            'p_comment': p,
+        })
 
 class UserHeadSculptureView(TemplateView):
 

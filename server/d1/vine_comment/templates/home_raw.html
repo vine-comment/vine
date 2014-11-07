@@ -1,30 +1,7 @@
-{% extends 'base.html' %}
+
+{% extends 'comments/base.html' %}
 {% load crispy_forms_tags %}
 {% load avatar_tags %}
-
-{% block head %}
-<style>
-
-.thumbnail {
-text-align:center;
-}
-.thumbnail p {
-white-space: nowrap;
-overflow:hidden;
-text-overflow:ellipsis;
-}
-.user-author-header {
-position: relative;
-padding: 30px 0;
-margin-bottom: 20px;
-background-color:white;
-}
-.header-gray {
-background-color: #F3F3F3;
-}
-
-</style>
-{% endblock %}
 
 {% block content %}
 
@@ -112,23 +89,20 @@ background-color: #F3F3F3;
 
 <ul class='pagination'>
   {% if p_comment.has_previous %}
-    <li id='pagination_arrow_{{ p_comment.previous_page_number }}'><a href='/home/?page={{ p_comment.previous_page_number }}'>«</a></li>
+    <li id='pagination_arrow_{{ p_comment.previous_page_number }}'><a href='/home/raw?page={{ p_comment.previous_page_number }}'>«</a></li>
   {% endif %}
   {% for num in p_comment.paginator.page_range %}
     {% ifequal num p_comment.number %}
       <li><span class="current"><b>{{ num }}</b></span></li>
     {% else %}
-      <li id='pagination_{{num}}'><a href="/home/?page={{ num }}">{{ num }}</a></li>
+      <li id='pagination_{{num}}'><a href="/home/raw?page={{ num }}">{{ num }}</a></li>
     {% endifequal %}
   {% endfor %}
   {% if p_comment.has_next %}
-    <li id='pagination_arrow_{{ p_comment.next_page_number }}'><a href="/home/?page={{ p_comment.next_page_number }}">»</a></li>
+    <li id='pagination_arrow_{{ p_comment.next_page_number }}'><a href="/home/raw?page={{ p_comment.next_page_number }}">»</a></li>
   {% endif %}
 </ul>
 
-{% endblock %}
-
-{% block footer %}
 <script src="http://cdn.jsdelivr.net/jquery.knob/1.2.2/jquery.knob.min.js"></script>
 
 <script>
@@ -155,4 +129,3 @@ function showForm(me, id) {
 </script>
 
 {% endblock %}
-

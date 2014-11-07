@@ -47,7 +47,7 @@ urlpatterns = patterns('',
 )
 
 urlpatterns += patterns('',
-    url(r'^home/?$', login_required(HomeView.as_view()), name='home'),
+    url(r'^home/(?P<flag>.*?)/?$', login_required(HomeView.as_view()), name='home'),
     url(r'^user/head-sculpture/?$', login_required(UserHeadSculptureView.as_view()), name='user_head_sculpture'),
     # TODO social auth registration
     url(r'^accounts/', include('registration.backends.default.urls')),
