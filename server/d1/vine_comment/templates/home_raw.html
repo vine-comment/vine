@@ -35,29 +35,12 @@
             <span class="username">用户名：{{ user }}</span>
           </div>
         </div>
-        <div>详细信息</div>
-      </div>
-    </div>
-
-    <div class="user-stats col-md-2">
-      <div class="user-points-bar-container">
         <div class="points-labels">
-          <span class="best">最高得分 <strong class="best-count"> {{ author.biggest_points }} </strong></span>
+          <span class="title">头衔 : {{ author.title }}</span>
         </div>
         <div class="points-labels">
-          <span class="best">历史积分 <strong class="best-count"> {{ author.total_points }} </strong></span>
+          <span class="points">积分 : {{ author.points }}</span>
         </div>
-        <div class="points-labels">
-          <span class="best">当前积分 <strong class="best-count"> {{ author.usable_points }} </strong></span>
-        </div>
-        <!-- 今天的分数
-        <div class="points-bar">
-          <span class="points-bar-fill" style="width: 0.0%">今天的分数
-            <span class="count-container count-right">
-              <span class="points-today-count"> XXX </span>
-            </span>
-          </span>
-        </div> -->
       </div>
     </div>
 
@@ -68,10 +51,13 @@
     <div class="user-stats col-md-2">
       <div class="user-points-bar-container">
         <div class="points-labels">
-          <span class="cright">连续登录<strong class="study-cright">{{ author.study_cright }}天</strong></span>
+          <span class="clogin">连续登录<strong>{{ author.continuous_login }}天</strong></span>
         </div>
         <div class="points-labels">
-          <span class="cright">最长连续登录<strong class="exam-cright">{{ author.exam_cright }}天</strong></span>
+          <span class="hclogin">最长连续登录<strong>{{ author.history_c_login }}天</strong></span>
+        </div>
+        <div class="points-labels">
+          <span class="comments_sum">发表评论<strong>{{ author.comments_sum }}条</strong></span>
         </div>
       </div>
     </div>

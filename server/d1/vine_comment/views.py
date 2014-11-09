@@ -120,7 +120,10 @@ class CommentView(TemplateView):
                     comment_board=comment_board,
                     author_ip=author_ip,
                     title=title,
-                    author=author) # 以后换成author，现在先用user
+                    author=author)
+            author.comments_sum += 1
+            author.points += 5
+            author.save()
         else:
             '''
             Annoymous User access the site.

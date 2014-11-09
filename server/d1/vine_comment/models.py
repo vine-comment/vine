@@ -55,10 +55,13 @@ class Author(TimeMixin, models.Model):
     last_name = models.CharField(max_length=40)
     """
     picture = models.ImageField(upload_to='head_sculpture', blank=True, null=True)
-
     user = models.OneToOneField(User)
-
     is_not_human = models.BooleanField(default=False) #trust at first time
+    title = models.CharField(max_length=64, null=True)
+    points = models.IntegerField(default=0)
+    continuous_login = models.IntegerField(default=0)
+    history_c_login = models.IntegerField(default=0)
+    comments_sum = models.IntegerField(default=0)
 
     def __unicode__(self):
         return self.user.name
