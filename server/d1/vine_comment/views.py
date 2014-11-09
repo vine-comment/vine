@@ -763,7 +763,7 @@ class HomeView(TemplateView):
 
         #TODO performance optimization for objects order_by('-time_added')
         comments = Comment.objects.filter(author=author)
-        comments.order_by('-time_added')
+        comments = comments.order_by('-time_added')
         logger.info(str(len(comments)) + ': ' + str(comments))
         try:
             p = Paginator(comments, 10).page(index_page)
