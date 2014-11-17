@@ -9,8 +9,8 @@ function verifyJQueryCdnLoaded() {
   if (typeof jQuery === "undefined") {
     loadjQuery("http://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js", main);
   } else {
-    var jQuery_anwcl = jQuery.noConflict();
-    main(jQuery_anwcl);
+    var jQuery_tengmanpinglun = jQuery.noConflict();
+    main(jQuery_tengmanpinglun);
   }
 }
 
@@ -38,21 +38,21 @@ function main(jquery_object) {
     return ;
   }
 
-  if (!jQuery_anwcl)
-	var jQuery_anwcl = jQuery;
+  if (!jQuery_tengmanpinglun)
+	var jQuery_tengmanpinglun = jQuery;
 
-  jQuery_anwcl("#special_div_for_anwcl_comment_board #boardLeft").bind('click', function(){
-    comment_board = jQuery_anwcl("#special_div_for_anwcl_comment_board");
-	if (!jQuery_anwcl(this).attr('data-toggled') || jQuery_anwcl(this).attr('data-toggled') == 'off') {
+  jQuery_tengmanpinglun("#special_div_for_tengmanpinglun_comment_board #boardLeft").bind('click', function(){
+    comment_board = jQuery_tengmanpinglun("#special_div_for_tengmanpinglun_comment_board");
+	if (!jQuery_tengmanpinglun(this).attr('data-toggled') || jQuery_tengmanpinglun(this).attr('data-toggled') == 'off') {
 
 	  comment_board.animate({right:'0'});
-	  jQuery_anwcl(this).attr('data-toggled','on');
-	  jQuery_anwcl("#boardButton").text(">");
+	  jQuery_tengmanpinglun(this).attr('data-toggled','on');
+	  jQuery_tengmanpinglun("#boardButton").text(">");
 	} else {
       old_position = '-' + comment_board.width(); //width_percent(comment_board);
 	  comment_board.animate({right:old_position}, function() {comment_board.css('right', '');});
-	  jQuery_anwcl(this).attr('data-toggled','off');
-	  jQuery_anwcl("#boardButton").text("<");
+	  jQuery_tengmanpinglun(this).attr('data-toggled','off');
+	  jQuery_tengmanpinglun("#boardButton").text("<");
 	}
   });
 }

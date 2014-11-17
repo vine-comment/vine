@@ -36,7 +36,7 @@ logger = logging.getLogger( __name__ )
 #
 # Client代码(tamper monkey)：
 #   $('body').append('<div id="vine_comment_iframe"></div>');
-#   $('#vine_comment_iframe').load("http://www.anwcl.com:8000/iframe/"
+#   $('#vine_comment_iframe').load("http://www.tengmanpinglun.com:8000/iframe/"
 #     + btoa(document.location));
 # 意即在body末尾append一个iframe，然后动态调用server流程
 # 注：在extension中机制不同，extension中静态存储资源较多。

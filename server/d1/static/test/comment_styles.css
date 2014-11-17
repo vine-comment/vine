@@ -8,7 +8,7 @@
 font-family: '微软雅黑', arial, sans-serif; 
 padding: 10px;}
 
-#special_div_for_anwcl_comment_board , #jquery_comment
+#special_div_for_tengmanpinglun_comment_board , #jquery_comment
 {position: fixed; z-index:2147483646; _overflow-x:hidden; width: 40%; height: 100%; right: -40%; 
 background: #ffffff; border-top-left-radius:0.5em;border-bottom-left-radius:0.5em; border:3px solid #d3d3d3; border-right:0px; top:0%;
 box-shadow: rgba(0, 0, 0, 0.0980392) -10px 0px 10px 0px;-webkit-box-shadow: rgba(0, 0, 0, 0.0980392) -10px 0px 10px 0px;}
@@ -113,7 +113,7 @@ MEDIA QUERIES
 /* for 980px or less */
 @media screen and (max-width: 980px) {
 
-	#special_div_for_anwcl_comment_board, #jquery_comment {
+	#special_div_for_tengmanpinglun_comment_board, #jquery_comment {
 		width: 60%;
         right: -60%;
 	}
@@ -123,7 +123,7 @@ MEDIA QUERIES
 /* for 700px or less */
 @media screen and (max-width: 700px) {
 
-	#special_div_for_anwcl_comment_board, #jquery_comment {
+	#special_div_for_tengmanpinglun_comment_board, #jquery_comment {
 		width: 80%;
         right: -80%;
 	}
@@ -133,7 +133,7 @@ MEDIA QUERIES
 /* for 480px or less */
 @media screen and (max-width: 480px) {
 
-	#special_div_for_anwcl_comment_board, #jquery_comment {
+	#special_div_for_tengmanpinglun_comment_board, #jquery_comment {
 		width: 100%;
         right: -100%;
 	}

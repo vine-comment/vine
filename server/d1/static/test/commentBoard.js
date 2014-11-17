@@ -36,7 +36,7 @@ function popup_message(text)
 
 function main() {
     var parent_url = (window.location != window.parent.location) ? document.referrer: document.location;
-    //var target_url = 'http://www.anwcl.com:8000/comment/' + btoa(parent_url);
+    //var target_url = 'http://www.tengmanpinglun.com:8000/comment/' + btoa(parent_url);
     var l = document.location
     var target_url = l.protocol + l.origin + l.pathname
     var pathname = l.pathname
