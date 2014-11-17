@@ -163,15 +163,15 @@ INSTALLED_APPS = (
 )
 
 ACCOUNT_ACTIVATION_DAYS = 7
-EMAIL_HOST = 'smtp.sohu.com'
-EMAIL_HOST_USER='wsn021@sohu.com'
-EMAIL_HOST_PASSWORD='password4wsn021'
-EMAIL_USE_TLS = True
-#EMAIL_HOST = 'localhost'
-#EMAIL_PORT = 1025
+#EMAIL_HOST = 'smtp.sohu.com'
+#EMAIL_HOST_USER='wsn021@sohu.com'
+#EMAIL_HOST_PASSWORD='password4wsn021'
+#DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+#EMAIL_USE_TLS = True
+EMAIL_HOST = 'localhost'
+EMAIL_PORT = 25
 LOGIN_REDIRECT_URL = 'index'
-DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
-#DEFAULT_FROM_EMAIL = 'webmaster@localhost'
+DEFAULT_FROM_EMAIL = 'webmaster@tengmanpinglun.com'
 #EMAIL_FROM = 'webmaster@localhost'
 #COMMENTS_APP = 'threadedcomments'
 
