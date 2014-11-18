@@ -45,6 +45,7 @@ install_pypackages()
     ####################
     pip install gunicorn
     cp config/gunicorn_start ~/vine/bin/
+    chmod +x ~/vine/bin/
 }
 
 install_mac ()
@@ -106,6 +107,9 @@ EOF
     echo "Installing and configuring Nginx.."
     sudo apt-get install nginx
     cp config/vine.nginxconf /etc/nginx/sites-available/vine
+    if [ -f "/etc/nginx/sites-enabled/vine" ];then
+        rm /etc/nginx/sites-enabled/vine
+    fi
     ln -s /etc/nginx/sites-available/vine /etc/nginx/sites-enabled/vine
     cp -r server/d1/static $HOME/vine/static
     sudo service nginx start
