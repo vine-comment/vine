@@ -8,8 +8,6 @@ if [ $? -ne 0 ]; then
     sudo apt-get install python-pip
 fi
 
-deactivate
-
 items_pip="django-registration django-crispy-forms django-admin-bootstrapped django-haystack jieba Whoosh Pillow python-social-auth python-memcached django_akismet_comments elasticsearch pyelasticsearch django-avatar pytz pygeoip PIL"
 
 for i in $items_pip; do
@@ -22,7 +20,7 @@ done
 #########################
 pip uninstall Django
 pip uninstall djangotoolbox
-pip uninstall mongodb-engine
+pip uninstall django-mongodb-engine
 
 ####################
 # gunicorn section #

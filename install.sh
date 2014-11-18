@@ -8,22 +8,6 @@
 
 install_pypackages()
 {
-    #######################
-    # install pip section #
-    #######################
-    sudo pip install -U pip -i http://pypi.douban.com/simple
-
-    if [ $? -ne 0 ]; then
-        sudo apt-get install python-pip
-    fi
-
-    ######################
-    # virtualenv section #
-    ######################
-    sudo pip install virtualenv
-    virtualenv ~/vine
-    ./activate.sh
-
     # NOTE: If you're using windows, please use Pillow installer from here: http://www.lfd.uci.edu/~gohlke/pythonlibs/
     # (Pillow is a better maintained PIL lib.)
     items_pip="django-registration django-crispy-forms django-admin-bootstrapped django-haystack jieba Whoosh Pillow python-social-auth python-memcached django_akismet_comments elasticsearch pyelasticsearch django-avatar pytz pygeoip"
@@ -45,7 +29,7 @@ install_pypackages()
     ####################
     pip install gunicorn
     cp config/gunicorn_start ~/vine/bin/
-    chmod +x ~/vine/bin/
+    chmod +x ~/vine/bin/gunicorn_start
 }
 
 install_mac ()
@@ -76,7 +60,6 @@ install_ubuntu ()
     # gunicorn section #
     ####################
     pip install gunicorn
-    cp gunicorn_start bin/.
 
     ######################
     # supervisor section #
