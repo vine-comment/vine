@@ -8,6 +8,7 @@ import datetime
 import base64
 import logging
 import math
+import sys
 
 # django modules
 from django.http import *
@@ -621,6 +622,7 @@ class CommentsNewestView(TemplateView):
 
     def get(self, request, *args, **kwargs):
         comments = Comment.objects.order_by('-time_added').all()
+        comments = sys.modules['__builtin__'].list(comments)
         index_page = request.GET.get('page', 1)
         print index_page
 
@@ -764,7 +766,7 @@ class HomeView(TemplateView):
         #TODO performance optimization for objects order_by('-time_added')
         comments = Comment.objects.filter(author=author)
         comments = comments.order_by('-time_added')
-        comments = sorted(comments,key=lambda o:len(o.replies),reverse=True)
+        comments = sys.modules['__builtin__'].list(comments)
         logger.info(str(len(comments)) + ': ' + str(comments))
         try:
             p = Paginator(comments, 10).page(index_page)
