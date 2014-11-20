@@ -58,6 +58,7 @@ urlpatterns += patterns('',
     url(r'^ajax/up/comment/(?P<id>.*?)/?$', CommentUpView.as_view(), name='comment_up'),
     url(r'^ajax/down/comment/(?P<id>.*?)/?$', CommentDownView.as_view(), name='comment_down'),
     url(r'^ajax/reply/comment/(?P<id>.*?)/?$', CommentReplyView.as_view(), name='comment_reply'),
+	url(r'^ajax/showmsg/comment/(?P<url_b64>.*?)/?$', CommentShowMsgView.as_view(), name='comment_raw'),
     url(r'^comment_raw/(?P<url_b64>.*?)/?$', CommentRawView.as_view(), name='comment_raw'),
     # TODO like reddit..
     url(r'^detail/comment/(?P<id>[^/]+)/?$', CommentDetailView.as_view(), name="comment-detail"),

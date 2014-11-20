@@ -1,0 +1,99 @@
+{% load humanize %}
+{% load avatar_tags %}
+
+<script language="JavaScript">
+<!--
+  function change_new_comment_num()
+  {
+		
+		if(document.getElementById("commetList_new_min").style.display == ""){
+			document.getElementById("new_button").innerHTML  = "收起";
+			document.getElementById("commetList_new_max").style.display="";
+			document.getElementById("commetList_new_min").style.display="none";
+			} else {
+			document.getElementById("new_button").innerHTML  = "展开";
+			document.getElementById("commetList_new_max").style.display="none";
+			document.getElementById("commetList_new_min").style.display="";
+		}
+		
+		//刷新
+  }
+-->
+</script>
+
+
+  
+<fieldset>
+  <legend>最新评论</legend>
+	
+	<div id="commetList_new_max" style="display: none;">
+		<ul class="list-group">
+		{% for message in p_comment_new_max.object_list %}
+			 <li class="list-group-item">
+				<strong>{% if message.author %}{{ message.author.user }}{% else %}{{ message.author_ip }}{% endif %}</strong>
+				 
+				 <span style="float:right">
+				   <span class='comment-time'>提交于 {{ message.time_added|naturaltime }}</span>
+				 </span>
+				 <a href="{{message.comment_board.url}}" target="_blank">
+				   <span class="comment-text" id="comment_str_{{message.id}}">{{message.comment_str}}</span>
+				 </a>
+				 <br/>
+				 <span style="float:right">
+				  <a href="javascript:void(0);" id="up_comment_{{message.id}}" onclick="up('{{message.id}}');return false;">
+					{% if user.id in message.up_users %}
+					<i class="fa fa-thumbs-up"></i>
+					{% else %}
+					<i class="fa fa-thumbs-o-up"></i>
+					{% endif %}
+					+<span>{{ message.up_users|length }}</span>
+				  </a>
+				  {# TODO: 添加tips，说明icon功能，不然留言icon字太小。 #}
+				  <a href="javascript:void(0);" id="reply_comment_{{message.id}}" onclick="expandReply('{{message.id}}');return false;">
+					<i class="fa fa-comments-o"></i>
+					<span>{{ message.replies|length }}</span>
+				  </a>
+				 </span>
+				 <br/>
+			  </li>
+		{% endfor %}
+		</ul>
+	</div>
+	
+	
+	<div id="commetList_new_min" style="display:"";">
+		<ul class="list-group">
+		{% for message in p_comment_new_min.object_list %}
+			  <li class="list-group-item">
+				 <strong>{% if message.author %}{{ message.author.user }}{% else %}{{ message.author_ip }}{% endif %}</strong>
+				 
+				 <span style="float:right">
+				   <span class='comment-time'>提交于 {{ message.time_added|naturaltime }}</span>
+				 </span>
+				 <a href="{{message.comment_board.url}}" target="_blank">
+				   <span class="comment-text" id="comment_str_{{message.id}}">{{message.comment_str}}</span>
+				 </a>
+				 <br/>
+				 <span style="float:right">
+				  <a href="javascript:void(0);" id="up_comment_{{message.id}}" onclick="up('{{message.id}}');return false;">
+					{% if user.id in message.up_users %}
+					<i class="fa fa-thumbs-up"></i>
+					{% else %}
+					<i class="fa fa-thumbs-o-up"></i>
+					{% endif %}
+					+<span>{{ message.up_users|length }}</span>
+				  </a>
+				  {# TODO: 添加tips，说明icon功能，不然留言icon字太小。 #}
+				  <a href="javascript:void(0);" id="reply_comment_{{message.id}}" onclick="expandReply('{{message.id}}');return false;">
+					<i class="fa fa-comments-o"></i>
+					<span>{{ message.replies|length }}</span>
+				  </a>
+				 </span>
+				 <br/>
+			  </li>
+		{% endfor %}
+		</ul>
+	</div>	
+	
+	<button id="new_button" style="float:right" type="button"  class = 'btn btn-sm btn-success'  onclick="change_new_comment_num();">展开</button>
+</fieldset>

@@ -70,6 +70,7 @@ class CommentView(TemplateView):
     template_inside_cb = 'comments/comment_view_inside_comment_board.html'
     template_raw = 'comments/comment_view_raw.html'
     template_meta = 'comments/comment_view_meta.html'
+    template_list = 'comments/comment_list.html'
 
     @csrf_exempt
     def _check_spam(self, index_url, comment_str, author_ip, user):
@@ -224,7 +225,7 @@ class CommentView(TemplateView):
         self._post_comment(index_url, comment_str, author_ip, user)
 
         #TODO in order to Refresh the captcha , it must be change commentBoard.js urls.py and template
-        kwargs['template'] = self.template_raw
+        kwargs['template'] = self.template_list
         return self.get(request, *args, **kwargs)
 
     # 注：get方法除了正常request中调用，也会在post之后被调用，但template由post给出
@@ -235,19 +236,46 @@ class CommentView(TemplateView):
         index_url = kwargs.get('index_url', self.index_default_str)
         url_b64 = kwargs.get('url_b64', self.base64_default_str)
 
-        #TODO performance optimization for objects order_by('-time_added')
-        comments = filter(lambda x:urlparse(index_url).netloc in x.comment_board.title,
-                Comment.objects.order_by('-time_added'))
-        logger.info(str(len(comments)) + ': ' + str(comments))
-        try:
-            p = Paginator(comments, 10).page(index_page)
-        except PageNotAnInteger:
-        # If page is not an integer, deliver first page.
-            p = Paginator(comments, 10).page(1)
-        except EmptyPage:
-        # If page is out of range (e.g. 9999), deliver last page of results.
-            p = Paginator(comments, 10).page(paginator.num_pages)
+        #HOT
+        comments_hot = Comment.objects.order_by('-time_added').filter(time_added__gte=datetime.datetime.now()-timedelta(days=30))
+        comments_hot = sorted(comments_hot,key=lambda o:len(o.up_users),reverse=True)
+        #comments_hot = filter(lambda x:urlparse(index_url).netloc in x.comment_board.title,
+        #        Comment.objects.order_by('-time_added'))
+        p_hot_max = Paginator(comments_hot, 10).page(1)
+        p_hot_min = Paginator(comments_hot, 3).page(1)
+        
+		#NEW
+        comments_new = Comment.objects.order_by('-time_added').all()
+        p_new_max = Paginator(comments_new, 10).page(1)
+        p_new_min = Paginator(comments_new, 3).page(1)
+		
+		
 
+		#TAGS AND 
+        tags = Tag.objects.order_by('-time_added').all()
+        if len(tags) == 0:
+            return HttpResponse('No tag', mimetype='plain/text')
+        tags = sorted(tags,key=lambda x:len(x.comments),reverse=True)[0:10]
+        count = len(tags)
+        if count > 3:
+            tags = sample(tags, 3)
+        else:
+            tags = sample(tags, count)
+
+        for tag in tags:
+            comments = filter(lambda x: x.id in tag.comments, Comment.objects.all())
+            print comments
+            tag.comments_list = sorted(comments,key=lambda x:len(x.up_users)-len(x.down_users),reverse=True)[0:3]
+
+        index_page = request.GET.get('page', 1)
+        print index_page
+
+
+        #TODO performance optimization for objects order_by('-time_added')
+        logger.info(str(len(tags)) + ': ' + str(tags))
+        p_tag = Paginator(tags, 5).page(1)
+
+		
         template_name = kwargs.get('template', self.template_meta)
         form = CaptchaTestForm()
 
@@ -260,7 +288,11 @@ class CommentView(TemplateView):
             is_not_human = False
 
         return render(request, template_name, {
-            'p_comment': p,
+            'p_comment_tag': p_tag,
+            'p_comment_hot_max': p_hot_max,
+			'p_comment_hot_min': p_hot_min,
+            'p_comment_new_max': p_new_max,
+            'p_comment_new_min': p_new_min,			
             'index_url': index_url,
             'url_b64': url_b64,
             'form': form,
@@ -325,6 +357,79 @@ class CommentModifyView(TemplateView):
         comment.save()
         return HttpResponse(status=200)
 
+		# This view is used for ajax load, see commentBoard.js for more details.
+class CommentShowMsgView(TemplateView):
+    template_name = ''
+    base64_default_str = '' #aHR0cDovL3d3dy5udWxsLmNvbS8=
+    index_default_str = '' #http://www.null.com/
+
+    template_list = 'comments/comment_list.html'
+
+    def get(self, request, *args, **kwargs):
+        #print request
+        index_page = request.GET.get('page', 1)
+        index_url = kwargs.get('index_url', self.index_default_str)
+        url_b64 = kwargs.get('url_b64', self.base64_default_str)
+
+        #HOT
+        comments_hot = Comment.objects.order_by('-time_added').filter(time_added__gte=datetime.datetime.now()-timedelta(days=30))
+        comments_hot = sorted(comments_hot,key=lambda o:len(o.up_users),reverse=True)
+        #comments_hot = filter(lambda x:urlparse(index_url).netloc in x.comment_board.title,
+        #        Comment.objects.order_by('-time_added'))
+        p_hot_max = Paginator(comments_hot, 10).page(1)
+        p_hot_min = Paginator(comments_hot, 3).page(1)
+        
+		#NEW
+        comments_new = Comment.objects.order_by('-time_added').all()
+        p_new_max = Paginator(comments_new, 10).page(1)
+        p_new_min = Paginator(comments_new, 3).page(1)
+		
+		
+		#TAGS AND 
+        tags = Tag.objects.order_by('-time_added').all()
+        if len(tags) == 0:
+            return HttpResponse('No tag', mimetype='plain/text')
+        tags = sorted(tags,key=lambda x:len(x.comments),reverse=True)[0:10]
+        count = len(tags)
+        if count > 3:
+            tags = sample(tags, 3)
+        else:
+            tags = sample(tags, count)
+
+        for tag in tags:
+            comments = filter(lambda x: x.id in tag.comments, Comment.objects.all())
+            print comments
+            tag.comments_list = sorted(comments,key=lambda x:len(x.up_users)-len(x.down_users),reverse=True)[0:3]
+
+        index_page = request.GET.get('page', 1)
+        print index_page
+
+
+        #TODO performance optimization for objects order_by('-time_added')
+        logger.info(str(len(tags)) + ': ' + str(tags))
+        p_tag = Paginator(tags, 5).page(1)
+
+		
+        template_name = kwargs.get('template', self.template_list)
+
+        return render(request, template_name, {
+            'p_comment_tag': p_tag,
+            'p_comment_hot_max': p_hot_max,
+			'p_comment_hot_min': p_hot_min,
+            'p_comment_new_max': p_new_max,
+            'p_comment_new_min': p_new_min,			
+            'index_url': index_url,
+            'url_b64': url_b64,
+        })
+
+    @csrf_exempt
+    def dispatch(self, request, *args, **kwargs):
+        url_b64 = kwargs.get('url_b64', self.base64_default_str)
+        kwargs['index_url'] = base64.b64decode(url_b64)
+
+        #self.debug(request, *args, **kwargs)
+        return super(CommentShowMsgView, self).dispatch(request, *args, **kwargs)
+		
 # This view is used for ajax load, see commentBoard.js for more details.
 class CommentRawView(TemplateView):
     template_name = ''

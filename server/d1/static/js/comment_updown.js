@@ -1,4 +1,5 @@
 		function up(id) {
+			var l = document.location;
             var onclick = $('#up_comment_'+id).attr('onclick');
             $('#up_comment_'+id).prop('onclick','return false;');
 		    $.get("/ajax/up/comment/"+id)
@@ -34,6 +35,7 @@
 							popup_message("亲，注册个用户吧");
 					}
                     $('#up_comment_'+id).attr('onclick',onclick);//must use attr, not prop
+					$('#showMsg').load(l.origin + '/ajax/showmsg' + l.pathname);
 			 });
 		};
 		function down(id) {

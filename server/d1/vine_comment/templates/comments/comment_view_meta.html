@@ -8,8 +8,6 @@
 		    </div>
 		  </div>
 		</div>
-    <li><a href="/comments/related/{{ url_b64 }}" id="comments_related">相关</a></li>
-    <li><a href="/comments/tag/simple" id="comments_related">推荐</a></li>
 		<div class="row">
 		  <div class="col-lg-6">
 			<div class="input-group">
@@ -28,19 +26,7 @@
 		</div><!-- /.row -->
 		<br>
 		<div id="showMsg">
-			{% include "comments/comment_view_raw.html" %}
+			{% include "comments/comment_list.html" %}
 		</div> <!-- /#showMsg -->
-		<div class="row">
-		  <div class="col-lg-6">
-			<div class="input-group">
-			  <textarea rows="1" class="form-control" style="resize:none" id="commentBottom" name="commentBottom" placeholder="可输入5-140个字"></textarea>
-			  <span class="input-group-btn">
-          <button class="btn btn-default submitComment" data-loading-text="评论中" id="submitCommentBottom" type="button">
-            评论
-          </button>
-			  </span>
-			</div><!-- /input-group -->
-		  </div><!-- /.col-lg-6 -->
-		</div><!-- /.row -->
 		<br>
 {% endblock %}

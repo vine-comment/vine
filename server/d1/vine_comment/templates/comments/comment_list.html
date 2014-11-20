@@ -1,0 +1,66 @@
+{% load humanize %}
+{% load staticfiles %}
+{% load tz %}
+
+
+
+<script src="{% static 'js/comment_updown.js' %}"></script>
+ 
+  
+<script language="JavaScript">
+<!--
+  function show_comment()
+  {
+		document.getElementById("commetList").style.display="";
+		document.getElementById("iTinkYouLike").style.display="none";
+  }
+  function show_you_like()
+  {
+		document.getElementById("commetList").style.display="none";
+		document.getElementById("iTinkYouLike").style.display="";
+  }
+
+  
+-->
+</script>
+
+<!-- TODO 百分比  -->
+<style>
+  .test{width:247px;}
+</style>
+
+<div class='rows' width=100%>
+	<div class='btn-group'>
+		<button id="test1" type="button" class = 'btn btn-info test' style="float:left" onclick="show_comment();">评论</button>
+		<button id="test2" type="button" class = 'btn btn-info test' style="float:right" onclick="show_you_like();">猜你喜欢</button>
+	</div>
+</div>
+
+
+
+
+<div id="commetList" style="display:"";">
+	{% include 'comments/comments_plugin_hot.html' %}
+	{% include 'comments/comments_plugin_new.html' %}
+	{% include 'comments/comments_plugin_relevant.html' %}
+</div>
+
+<div id="iTinkYouLike"	style="display: none;">
+	<button id="change" type="button" class = 'btn btn-info' style="float:right" onclick="reload_tagmsg();">换一批</button>
+	<!-- TODO ADD reload JS-->
+	<br>
+	<div id="tagmsg">
+		{% include 'comments_tag_raw.html' %}
+	</div>
+</div>
+
+
+{% if user.is_authenticated %} <!-- not authenticated -->
+<!-- <iframe src="" frameborder="0" onload="document.getElementById('loadImg').style.display='none';"
+width="100%" height=100% frameborder="0">
+</iframe> -->
+{% comment %}
+{% else %}
+{% include "social_signin_raw.html" %}
+{% endcomment %}
+{% endif %}

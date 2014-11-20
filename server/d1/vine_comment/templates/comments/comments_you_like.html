@@ -1,0 +1,9 @@
+{% load humanize %}
+{% load avatar_tags %}
+
+  
+    <button name="hot_button" style="float:right" type="button"  onclick="openOrClose();" value="close"  style="float:right">换一批</button>
+	<br>
+	<iframe id="if_you_like" src="//{{ request.META.HTTP_HOST }}/comments/tag/simple"></iframe>
+
+
