@@ -51,7 +51,7 @@ server {
         # Try to serve static files from nginx, no point in making an
         # *application* server like Unicorn/Rainbows! serve static files.
         if (!-f $request_filename) {
-            proxy_pass http://hello_app_server;
+            proxy_pass http://vine_django_server;
             break;
         }
     }
