@@ -1,3 +1,17 @@
+###apt-get install / download & setup
+*   mongodb
+*   python-dev
+*   memcached
+
+   > Windows x64: check **http://www.couchbase.com/communities/q-and-a/memcached-x64-version-couchbase**
+
+*   [elasticsearch](https://github.com/elasticsearch/elasticsearch)
+   *   you may need to install java first
+
+     > Check: **https://github.com/geekben/deployment/blob/master/java_on_ubuntu.md**
+     
+*   libgeoip-dev
+
 ###django-nonrel
   > Check **http://django-mongodb-engine.readthedocs.org/en/latest/topics/setup.html** to install.
 
@@ -24,19 +38,6 @@
    * Change PIL to Pillow,  Change x86_64 to i386 if you are installing it to a 32-bit machine
 * pytz
 * pygeoip
-
-###apt-get install / download & setup
-*   python-dev
-*   memcached
-
-   > Windows x64: check **http://www.couchbase.com/communities/q-and-a/memcached-x64-version-couchbase**
-
-*   [elasticearch](https://github.com/elasticsearch/elasticsearch)
-   *   you may need to install java first
-
-     > Check: **https://github.com/geekben/deployment/blob/master/java_on_ubuntu.md**
-     
-*   libgeoip-dev
 
 -----
 ###Items should run.
