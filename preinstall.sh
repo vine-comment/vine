@@ -1,3 +1,7 @@
+###########################
+# install mongodb section #
+###########################
+sudo apt-get install mongodb
 
 #######################
 # install pip section #
