@@ -265,11 +265,11 @@ class CommentView(TemplateView):
 
         for tag in tags:
             comments = filter(lambda x: x.id in tag.comments, Comment.objects.all())
-            print comments
+            print "comments:", comments
             tag.comments_list = sorted(comments,key=lambda x:len(x.up_users)-len(x.down_users),reverse=True)[0:3]
 
         index_page = request.GET.get('page', 1)
-        print index_page
+        print "index_page:", index_page
 
 
         #TODO performance optimization for objects order_by('-time_added')
@@ -400,11 +400,11 @@ class CommentShowMsgView(TemplateView):
 
         for tag in tags:
             comments = filter(lambda x: x.id in tag.comments, Comment.objects.all())
-            print comments
+            print "comments:", comments
             tag.comments_list = sorted(comments,key=lambda x:len(x.up_users)-len(x.down_users),reverse=True)[0:3]
 
         index_page = request.GET.get('page', 1)
-        print index_page
+        print "index_page:", index_page
 
 
         #TODO performance optimization for objects order_by('-time_added')
@@ -633,11 +633,11 @@ class CommentsTagView(TemplateView):
 
         for tag in tags:
             comments = filter(lambda x: x.id in tag.comments, Comment.objects.all())
-            print comments
+            print "comments:", comments
             tag.comments_list = sorted(comments,key=lambda x:len(x.up_users)-len(x.down_users),reverse=True)[0:3]
 
         index_page = request.GET.get('page', 1)
-        print index_page
+        print "index_page:", index_page
 
 
         #TODO performance optimization for objects order_by('-time_added')
@@ -678,11 +678,11 @@ class CommentsRelatedView(TemplateView):
 
         for tag in tags:
             comments = filter(lambda x: x.id in tag.comments, Comment.objects.all())
-            print comments
+            print "comments:", comments
             tag.comments_list = sorted(comments,key=lambda x:len(x.up_users)-len(x.down_users),reverse=True)[0:3]
 
         index_page = request.GET.get('page', 1)
-        print index_page
+        print "index_page:", index_page
 
 
         #TODO performance optimization for objects order_by('-time_added')
@@ -708,7 +708,7 @@ class CommentsBestView(TemplateView):
         comments = sorted(comments,key=lambda x:len(x.up_users)-len(x.down_users),reverse=True)
         comments = sorted(comments,key=lambda x:expected_rating(x),reverse=True)
         index_page = request.GET.get('page', 1)
-        print index_page
+        print "index_page:", index_page
 
 
         #TODO performance optimization for objects order_by('-time_added')
@@ -733,7 +733,7 @@ class CommentsNewestView(TemplateView):
         comments = Comment.objects.order_by('-time_added').all()
         comments = sys.modules['__builtin__'].list(comments)
         index_page = request.GET.get('page', 1)
-        print index_page
+        print "index_page:", index_page
 
 
         #TODO performance optimization for objects order_by('-time_added')
@@ -759,7 +759,7 @@ class CommentsHotView(TemplateView):
         comments = Comment.objects.order_by('-time_added').filter(time_added__gte=datetime.datetime.now()-timedelta(days=eval(days)))
         comments = sorted(comments,key=lambda o:len(o.replies),reverse=True)
         index_page = request.GET.get('page', 1)
-        print index_page
+        print "index_page:", index_page
 
 
         #TODO performance optimization for objects order_by('-time_added')
@@ -786,7 +786,7 @@ class CommentsUpView(TemplateView):
         comments = Comment.objects.order_by('-time_added').filter(time_added__gte=datetime.datetime.now()-timedelta(days=eval(days)))
         comments = sorted(comments,key=lambda o:len(o.up_users),reverse=True)
         index_page = request.GET.get('page', 1)
-        print index_page
+        print "index_page:", index_page
 
 
         #TODO performance optimization for objects order_by('-time_added')
@@ -822,7 +822,7 @@ class CommentsDebateView(TemplateView):
         comments = Comment.objects.order_by('-time_added').filter(time_added__gte=datetime.datetime.now()-timedelta(days=eval(days)))
         comments = sorted(comments,key=lambda o:debate_index(o))
         index_page = request.GET.get('page', 1)
-        print index_page
+        print "index_page:", index_page
 
 
         #TODO performance optimization for objects order_by('-time_added')
