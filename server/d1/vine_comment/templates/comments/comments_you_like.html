@@ -3,7 +3,112 @@
 
   
     <button name="hot_button" style="float:right" type="button"  onclick="openOrClose();" value="close"  style="float:right">换一批</button>
-	<br>
-	<iframe id="if_you_like" src="//{{ request.META.HTTP_HOST }}/comments/tag/simple"></iframe>
 
+  <script>
+    function expandReply(id) {
+      if (!$('#replyDiv'+id).is(':visible')) {
+        $('#replyDiv'+id).show();
+        $.get("/ajax/reply/comment/"+id, {})
+        .done(function(data) {
+          $('#repliesof'+id ).html(data);
+        });
+      } else {
+        $('#replyDiv'+id).hide();
+      }
+    }
+    function reply(id) {
+      var reply_str = $('#reply'+id).val();
+      $.post("/ajax/reply/comment/"+id, {'reply_str':reply_str})
+      .done(function(data) {
+        $('#repliesof'+id ).html(data);
+        $('#reply'+id).val('');
+        var reply_num = $('#reply_comment_'+id).find('span');
+        var count = parseInt(reply_num.text())+1;
+        reply_num.text(count);
+      });
+    }
+    function expandDetail(id) {
+      if (!$('#detailDiv'+id).is(':visible')) {
+        $('#detailDiv'+id).show();
+        $.get("/detail/comment/"+id,{})
+         .done(function(data) {
+           $('#detailDiv'+id).html(data);
+         });
+      } else {
+        $('#detailDiv'+id).hide();
+      }
+    }
+  </script>
 
+    <ul class="list-group">
+    {% for tag in p_comment_tag.object_list %}
+      <h2>{{tag.name}}</h2>
+      {% for message in tag.comments_list %}
+      <li class="list-group-item">
+         <span style="float:right">
+          <a href="javascript:void(0);" id="up_comment_{{message.id}}" onclick="up('{{message.id}}');return false;">
+            {% if user.id in message.up_users %}
+            <i class="fa fa-thumbs-up"></i>
+            {% else %}
+            <i class="fa fa-thumbs-o-up"></i>
+            {% endif %}
+            +<span>{{ message.up_users|length }}</span>
+          </a>
+          <a href="javascript:void(0);" id="down_comment_{{message.id}}" onclick="down('{{message.id}}');return false;">
+            {% if user.id in message.down_users %}
+            <i class="fa fa-thumbs-down fa-flip-horizontal"></i>
+            {% else %}
+            <i class="fa fa-thumbs-o-down fa-flip-horizontal"></i>
+            {% endif %}
+            -<span>{{ message.down_users|length }}</span>
+          </a>
+          {# TODO: 添加tips，说明icon功能，不然留言icon字太小。 #}
+          <a href="javascript:void(0);" id="reply_comment_{{message.id}}" onclick="expandReply('{{message.id}}');return false;">
+            <i class="fa fa-comments-o"></i>
+            <span>{{ message.replies|length }}</span>
+          </a>
+         </span>
+         <a href="{{message.comment_board.url}}" target="_blank">
+           <span class="comment-text" id="comment_str_{{message.id}}">{{message.comment_str}}</span>
+         </a>
+         <span>
+             <!-- TODO: 跳转到某个站点子类/首页 -->
+           (<a href="{{message.comment_board.url}}" target="_blank">{{message.comment_board.title}}</a>)
+           <a href="javascript:void(0);" onclick="expandDetail('{{message.id}}');return false;"><i class="fa fa-info-circle"></i></a>
+         </span>
+         <br>
+         <span>
+           <a href="/home/">
+             {% if message.author.user|has_avatar %}
+               {% avatar message.author.user 30 %}
+             {% else %} <!-- no head sculpture -->
+               <img class="avatar large border" style="height:30px; weight:30px;" src="http://www.gravatar.com/avatar/73c2759e2936bc26746d0d26375aed31?d=retro&amp;s=30" alt="头像">
+               {% endif %}
+             {% if message.author %}{{ message.author.user }}{% else %}{{ message.author_ip }}{% endif %}
+           </a>
+           <span class='comment-time'>提交于 {{ message.time_added|naturaltime }}</span>
+         </span>
+         <span id="comment_tags_{{message.id}}">
+           {%for tag in message.tags%}
+             <a href="/faceted_search/?q={{tag.name}}"><span class="label label-default">{{tag.name}}</span></a>
+           {%endfor%}
+         </span>
+         <br/>
+         <div id="detailDiv{{message.id}}" style="display:none;margin-top:10px">
+         </div>
+
+         <div id="replyDiv{{message.id}}" style="display:none;margin-top:10px">
+           <div id="repliesof{{message.id}}">
+           {% include 'reply.html' %}
+           </div>
+           <div name="reply{{message.id}}" class="input-group">
+             <textarea rows="5" style="width:100%;height:34px;resize:none" id="reply{{message.id}}" name="reply" placeholder="可输入5-140个字"></textarea>
+             <span class="input-group-btn">
+               <button class="btn btn-default submitComment" data-loading-text="回复中" onclick="reply('{{message.id}}')" type="button">回复</button>
+             </span>
+           </div><!-- /input-group -->
+         </div>
+      </li>
+      {% endfor %}
+    {% endfor %}
+    </ul>
