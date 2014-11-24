@@ -23,3 +23,4 @@ If you have any problem, Check [PREREQUISITE.md](https://github.com/vine-comment
   
 #### ISSUE
   * set USE_TZ=False in settings.py for registration issue, this may cause timezone problem
+  * gmail can't receive the registration mail from tengmanpinglun.com, 126 works
