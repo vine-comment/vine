@@ -243,18 +243,19 @@ class CommentView(TemplateView):
         #        Comment.objects.order_by('-time_added'))
         p_hot_max = Paginator(comments_hot, 10).page(1)
         p_hot_min = Paginator(comments_hot, 3).page(1)
-        
+
 		#NEW
         comments_new = Comment.objects.order_by('-time_added').all()
         p_new_max = Paginator(comments_new, 10).page(1)
         p_new_min = Paginator(comments_new, 3).page(1)
-		
-		
 
-		#TAGS AND 
+
+
+		#TAGS AND
         tags = Tag.objects.order_by('-time_added').all()
         if len(tags) == 0:
-            return HttpResponse('No tag', mimetype='plain/text')
+            print "No tag"
+            # return HttpResponse('No tag', mimetype='plain/text')
         tags = sorted(tags,key=lambda x:len(x.comments),reverse=True)[0:10]
         count = len(tags)
         if count > 3:
@@ -275,7 +276,7 @@ class CommentView(TemplateView):
         logger.info(str(len(tags)) + ': ' + str(tags))
         p_tag = Paginator(tags, 5).page(1)
 
-		
+
         template_name = kwargs.get('template', self.template_meta)
         form = CaptchaTestForm()
 
@@ -292,7 +293,7 @@ class CommentView(TemplateView):
             'p_comment_hot_max': p_hot_max,
 			'p_comment_hot_min': p_hot_min,
             'p_comment_new_max': p_new_max,
-            'p_comment_new_min': p_new_min,			
+            'p_comment_new_min': p_new_min,
             'index_url': index_url,
             'url_b64': url_b64,
             'form': form,
@@ -378,17 +379,18 @@ class CommentShowMsgView(TemplateView):
         #        Comment.objects.order_by('-time_added'))
         p_hot_max = Paginator(comments_hot, 10).page(1)
         p_hot_min = Paginator(comments_hot, 3).page(1)
-        
+
 		#NEW
         comments_new = Comment.objects.order_by('-time_added').all()
         p_new_max = Paginator(comments_new, 10).page(1)
         p_new_min = Paginator(comments_new, 3).page(1)
-		
-		
-		#TAGS AND 
+
+
+		#TAGS AND
         tags = Tag.objects.order_by('-time_added').all()
         if len(tags) == 0:
-            return HttpResponse('No tag', mimetype='plain/text')
+            print "No tag"
+            #return HttpResponse('No tag', mimetype='plain/text')
         tags = sorted(tags,key=lambda x:len(x.comments),reverse=True)[0:10]
         count = len(tags)
         if count > 3:
@@ -409,7 +411,7 @@ class CommentShowMsgView(TemplateView):
         logger.info(str(len(tags)) + ': ' + str(tags))
         p_tag = Paginator(tags, 5).page(1)
 
-		
+
         template_name = kwargs.get('template', self.template_list)
 
         return render(request, template_name, {
@@ -417,7 +419,7 @@ class CommentShowMsgView(TemplateView):
             'p_comment_hot_max': p_hot_max,
 			'p_comment_hot_min': p_hot_min,
             'p_comment_new_max': p_new_max,
-            'p_comment_new_min': p_new_min,			
+            'p_comment_new_min': p_new_min,
             'index_url': index_url,
             'url_b64': url_b64,
         })
@@ -429,7 +431,7 @@ class CommentShowMsgView(TemplateView):
 
         #self.debug(request, *args, **kwargs)
         return super(CommentShowMsgView, self).dispatch(request, *args, **kwargs)
-		
+
 # This view is used for ajax load, see commentBoard.js for more details.
 class CommentRawView(TemplateView):
     template_name = ''
@@ -620,7 +622,8 @@ class CommentsTagView(TemplateView):
             self.template_name = 'comments_tag_simple.html'
         tags = Tag.objects.order_by('-time_added').all()
         if len(tags) == 0:
-            return HttpResponse('No tag', mimetype='plain/text')
+            print "No tag"
+            # return HttpResponse('No tag', mimetype='plain/text')
         tags = sorted(tags,key=lambda x:len(x.comments),reverse=True)[0:10]
         count = len(tags)
         if count > 3:
@@ -660,7 +663,8 @@ class CommentsRelatedView(TemplateView):
         index_url = base64.b64decode(url_b64)
         url_objects = Url.objects.filter(url=index_url)
         if len(url_objects) == 0:
-            return HttpResponse('No tag: '+index_url, mimetype='plain/text')
+            print "No tag"
+            # return HttpResponse('No tag: '+index_url, mimetype='plain/text')
 
         tags = filter(lambda x:url_objects[0].id in x.urls, Tags.objects.order_by('-time_added'))
         if len(tags) == 0:
