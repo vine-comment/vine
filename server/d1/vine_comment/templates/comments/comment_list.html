@@ -10,12 +10,13 @@
 <script language="JavaScript">
   function show_comment()
   {
+    $('#commentList').load('/comments/{{url_b64}}/raw');
 		document.getElementById("commetList").style.display="";
 		document.getElementById("iTinkYouLike").style.display="none";
   }
   function show_you_like()
   {
-    $('#tagmsg').load('/comments/tag/raw');
+    $('#iTinkYouLike').load('/comments/tag/raw');
 		document.getElementById("commetList").style.display="none";
 		document.getElementById("iTinkYouLike").style.display="";
   }
@@ -39,17 +40,10 @@
 
 
 <div id="commetList" style="display:"";">
-	<!-- TODO ADD reload JS, also need to reload-->
-	{% include 'comments/comments_plugin_hot.html' %}
-	{% include 'comments/comments_plugin_new.html' %}
-	{% include 'comments/comments_plugin_relevant.html' %}
+		{% include 'comments/comment_list_raw.html' %}
 </div>
 
 <div id="iTinkYouLike"	style="display: none;">
-	<!--button id="change" type="button" class = 'btn btn-info' style="float:right" onclick="reload_tagmsg();">换一批</button-->
-	<!-- TODO ADD reload JS-->
-	<div id="tagmsg">
-	</div>
 </div>
 
 
