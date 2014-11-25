@@ -1,6 +1,14 @@
 {% load humanize %}
-Someone, hopefully you, signed up for a new account at djangoproject.com using this email address. If it was you, and you'd like to activate and use your account, click the link below or copy and paste it into your web browser's address bar:
+亲，您好！
+
+藤蔓评论已经收到了您的注册信息，点击下面的确认链接便可激活你的邮箱登录账号：
 
 http://www.tengmanpinglun.com/accounts/activate/{{ activation_key }}/
 
-If you didn't request this, you don't need to do anything; you won't receive any more email from us, and the account will expire automatically in {{ expiration_days|apnumber }} days.
+如果您的邮件阅读程序不支持点击，请将上面的地址拷贝至您的浏览器（例如Chrome）的地址栏后打开。
+请您尽快激活，我们只为你保留账号 {{ expiration_days|apnumber }} 天哦，亲！
+
+如果您没有注册过藤蔓评论，请您忽略这封邮件。
+
+感谢你对藤蔓评论http://www.tengmanpinglun.com的支持。
+(这是一封自动产生的email，请勿回复。)
