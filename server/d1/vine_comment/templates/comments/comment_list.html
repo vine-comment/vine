@@ -8,7 +8,6 @@
  
   
 <script language="JavaScript">
-<!--
   function show_comment()
   {
 		document.getElementById("commetList").style.display="";
@@ -16,12 +15,12 @@
   }
   function show_you_like()
   {
+    $('#tagmsg').load('/comments/tag/raw');
 		document.getElementById("commetList").style.display="none";
 		document.getElementById("iTinkYouLike").style.display="";
   }
 
   
--->
 </script>
 
 <!-- TODO 百分比  -->
@@ -40,6 +39,7 @@
 
 
 <div id="commetList" style="display:"";">
+	<!-- TODO ADD reload JS, also need to reload-->
 	{% include 'comments/comments_plugin_hot.html' %}
 	{% include 'comments/comments_plugin_new.html' %}
 	{% include 'comments/comments_plugin_relevant.html' %}
@@ -48,9 +48,7 @@
 <div id="iTinkYouLike"	style="display: none;">
 	<!--button id="change" type="button" class = 'btn btn-info' style="float:right" onclick="reload_tagmsg();">换一批</button-->
 	<!-- TODO ADD reload JS-->
-	<br>
 	<div id="tagmsg">
-		{% include 'comments/comments_you_like.html' %}
 	</div>
 </div>
 
