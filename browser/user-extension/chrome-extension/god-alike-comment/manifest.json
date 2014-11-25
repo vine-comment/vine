@@ -10,7 +10,7 @@
       "all_frames": true,
       "js": [ "jquery.min.js","shentucao.js" ],
       "matches": [ "http://*/*" ],
-	  "exclude_matches": [ "https://*/*", "http://www.anwcl.com/*" ]
+	  "exclude_matches": [ "https://*/*", "http://www.tengmanpinglun.com/*" ]
    } ]
    },
 
@@ -20,5 +20,5 @@
    },
 
 
-   "permissions": ["tabs", "http://www.anwcl.com/*"]
+   "permissions": ["tabs", "http://www.tengmanpinglun.com/*"]
 }
