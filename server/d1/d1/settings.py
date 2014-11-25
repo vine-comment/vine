@@ -171,7 +171,7 @@ ACCOUNT_ACTIVATION_DAYS = 7
 EMAIL_HOST = 'localhost'
 EMAIL_PORT = 25
 LOGIN_REDIRECT_URL = 'index'
-DEFAULT_FROM_EMAIL = 'webmaster@tengmanpinglun.com'
+DEFAULT_FROM_EMAIL = 'account@tengmanpinglun.com'
 #EMAIL_FROM = 'webmaster@localhost'
 #COMMENTS_APP = 'threadedcomments'
 
