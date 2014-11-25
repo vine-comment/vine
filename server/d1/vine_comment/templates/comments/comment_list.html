@@ -10,16 +10,19 @@
 <script language="JavaScript">
   function show_comment()
   {
-		document.getElementById("commetList").style.display="";
-		document.getElementById("iTinkYouLike").style.display="none";
+    document.getElementById("commetList").style.display="";
+    document.getElementById("iTinkYouLike").style.display="none";
   }
   function show_you_like()
   {
-    $('#tagmsg').load('/comments/tag/raw');
-		document.getElementById("commetList").style.display="none";
-		document.getElementById("iTinkYouLike").style.display="";
+    $('#tagmsg').load('/comments/tag/plug');
+    document.getElementById("commetList").style.display="none";
+    document.getElementById("iTinkYouLike").style.display="";
   }
-
+  function reload_tagmsg() 
+  {
+    $('#tagmsg').load('/comments/tag/plug');
+  }
   
 </script>
 
@@ -46,8 +49,9 @@
 </div>
 
 <div id="iTinkYouLike"	style="display: none;">
-	<!--button id="change" type="button" class = 'btn btn-info' style="float:right" onclick="reload_tagmsg();">换一批</button-->
+	<button id="change" type="button" class = 'btn btn-sm btn-success' style="float:right" onclick="reload_tagmsg();">换一批</button>
 	<!-- TODO ADD reload JS-->
+  
 	<div id="tagmsg">
 	</div>
 </div>

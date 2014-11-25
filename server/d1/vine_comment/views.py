@@ -622,6 +622,8 @@ class CommentsTagView(TemplateView):
             self.template_name = 'comments_tag_simple.html'
         if flag == 'raw':
             self.template_name = 'comments_tag_raw.html'
+        if flag == 'plug':
+            self.template_name = 'comments/comments_you_like.html'
         tags = Tag.objects.order_by('-time_added').all()
         if len(tags) == 0:
             print "No tag"

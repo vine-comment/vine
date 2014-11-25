@@ -1,9 +1,6 @@
 {% load humanize %}
 {% load avatar_tags %}
 
-  
-    <button name="hot_button" style="float:right" type="button"  onclick="openOrClose();" value="close"  style="float:right">换一批</button>
-
   <script>
     function expandReply(id) {
       if (!$('#replyDiv'+id).is(':visible')) {
@@ -41,7 +38,7 @@
   </script>
 
     <ul class="list-group">
-    {% for tag in p_comment_tag.object_list %}
+    {% for tag in p_comment.object_list %}
       <h2>{{tag.name}}</h2>
       {% for message in tag.comments_list %}
       <li class="list-group-item">
@@ -53,14 +50,6 @@
             <i class="fa fa-thumbs-o-up"></i>
             {% endif %}
             +<span>{{ message.up_users|length }}</span>
-          </a>
-          <a href="javascript:void(0);" id="down_comment_{{message.id}}" onclick="down('{{message.id}}');return false;">
-            {% if user.id in message.down_users %}
-            <i class="fa fa-thumbs-down fa-flip-horizontal"></i>
-            {% else %}
-            <i class="fa fa-thumbs-o-down fa-flip-horizontal"></i>
-            {% endif %}
-            -<span>{{ message.down_users|length }}</span>
           </a>
           {# TODO: 添加tips，说明icon功能，不然留言icon字太小。 #}
           <a href="javascript:void(0);" id="reply_comment_{{message.id}}" onclick="expandReply('{{message.id}}');return false;">
@@ -90,7 +79,7 @@
          </span>
          <span id="comment_tags_{{message.id}}">
            {%for tag in message.tags%}
-             <a href="/faceted_search/?q={{tag.name}}"><span class="label label-default">{{tag.name}}</span></a>
+             <span class="label label-default">{{tag.name}}</span>
            {%endfor%}
          </span>
          <br/>
@@ -112,3 +101,6 @@
       {% endfor %}
     {% endfor %}
     </ul>
+
+
+
