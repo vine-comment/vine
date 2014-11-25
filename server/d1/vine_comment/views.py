@@ -235,6 +235,7 @@ class CommentView(TemplateView):
         index_page = request.GET.get('page', 1)
         index_url = kwargs.get('index_url', self.index_default_str)
         url_b64 = kwargs.get('url_b64', self.base64_default_str)
+        flag = kwargs['flag']
 
         #HOT
         comments_hot = Comment.objects.order_by('-time_added').filter(time_added__gte=datetime.datetime.now()-timedelta(days=30))
@@ -250,33 +251,6 @@ class CommentView(TemplateView):
         p_new_min = Paginator(comments_new, 3).page(1)
 
 
-
-		#TAGS AND
-        tags = Tag.objects.order_by('-time_added').all()
-        if len(tags) == 0:
-            print "No tag"
-            # return HttpResponse('No tag', mimetype='plain/text')
-        tags = sorted(tags,key=lambda x:len(x.comments),reverse=True)[0:10]
-        count = len(tags)
-        if count > 3:
-            tags = sample(tags, 3)
-        else:
-            tags = sample(tags, count)
-
-        for tag in tags:
-            comments = filter(lambda x: x.id in tag.comments, Comment.objects.all())
-            print "comments:", comments
-            tag.comments_list = sorted(comments,key=lambda x:len(x.up_users)-len(x.down_users),reverse=True)[0:3]
-
-        index_page = request.GET.get('page', 1)
-        print "index_page:", index_page
-
-
-        #TODO performance optimization for objects order_by('-time_added')
-        logger.info(str(len(tags)) + ': ' + str(tags))
-        p_tag = Paginator(tags, 5).page(1)
-
-
         template_name = kwargs.get('template', self.template_meta)
         form = CaptchaTestForm()
 
@@ -288,8 +262,10 @@ class CommentView(TemplateView):
             # CAPTCHA-FIXME: forbid annoymous user to comment.
             is_not_human = False
 
+        if flag == 'raw':
+            template_name = 'comments/comment_list_raw.html'
+
         return render(request, template_name, {
-            'p_comment_tag': p_tag,
             'p_comment_hot_max': p_hot_max,
 			'p_comment_hot_min': p_hot_min,
             'p_comment_new_max': p_new_max,
