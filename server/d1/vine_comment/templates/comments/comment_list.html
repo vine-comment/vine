@@ -15,20 +15,7 @@
   }
   function show_you_like()
   {
-    $('#tagmsg').load('/comments/tag/plug');
-    document.getElementById("commetList").style.display="none";
-    document.getElementById("iTinkYouLike").style.display="";
-  }
-  function reload_tagmsg() 
-  {
-
-    $('#commentList').load('/comments/{{url_b64}}/plug');
-		document.getElementById("commetList").style.display="";
-		document.getElementById("iTinkYouLike").style.display="none";
-  }
-  function show_you_like()
-  {
-    $('#iTinkYouLike').load('/comments/tag/plug');
+    $('#iTinkYouLike').load('/comments/tag/raw');
 		document.getElementById("commetList").style.display="none";
 		document.getElementById("iTinkYouLike").style.display="";
 
@@ -49,16 +36,11 @@
     <button id="test2" type="button" class = 'btn btn-info btn-block right-angle'   onclick="show_you_like();">猜你喜欢</button>
 </div>
 
-<div id="commetList" style="display:"";">
+<div id="commetList" style="display:'';">
 		{% include 'comments/comment_list_raw.html' %}
 </div>
 
 <div id="iTinkYouLike"	style="display: none;">
-	<button id="change" type="button" class = 'btn btn-sm btn-success' style="float:right" onclick="reload_tagmsg();">换一批</button>
-	<!-- TODO ADD reload JS-->
-  
-	<div id="tagmsg">
-	</div>
 </div>
 
 
