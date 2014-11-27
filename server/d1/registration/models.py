@@ -2,6 +2,7 @@ import datetime
 import hashlib
 import random
 import re
+import logging
 
 from django.conf import settings
 from django.contrib.auth.models import User
@@ -22,6 +23,7 @@ except ImportError:
     datetime_now = datetime.datetime.now
 
 
+logger = logging.getLogger(__name__)
 SHA1_RE = re.compile('^[a-f0-9]{40}$')
 
 
@@ -260,7 +262,7 @@ class RegistrationProfile(models.Model):
                     'expiration_days': settings.ACCOUNT_ACTIVATION_DAYS,
                     'site': site,
                     'username': self.user.username}
-        print ctx_dict
+        logger.info(str(ctx_dict))
         subject = render_to_string('registration/activation_email_subject.txt',
                                    ctx_dict)
         # Email subject *must not* contain newlines
