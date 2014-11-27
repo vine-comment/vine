@@ -260,6 +260,7 @@ class RegistrationProfile(models.Model):
                     'expiration_days': settings.ACCOUNT_ACTIVATION_DAYS,
                     'site': site,
                     'username': self.user.username}
+        print ctx_dict
         subject = render_to_string('registration/activation_email_subject.txt',
                                    ctx_dict)
         # Email subject *must not* contain newlines
