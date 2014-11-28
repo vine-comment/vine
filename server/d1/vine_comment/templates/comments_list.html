@@ -78,7 +78,7 @@
              {% if message.author.user|has_avatar %}
                {% avatar message.author.user 30 %}
              {% else %} <!-- no head sculpture -->
-               <img class="avatar large border" style="height:30px; weight:30px;" src="http://www.gravatar.com/avatar/73c2759e2936bc26746d0d26375aed31?d=retro&amp;s=30" alt="头像">
+               <img class="avatar large border" style="height:30px; weight:30px;" src="/static/portrait/default-user-portrait.png" alt="头像">
                {% endif %}
              {% if message.author %}{{ message.author.user }}{% else %}{{ message.author_ip }}{% endif %}
            </a>
