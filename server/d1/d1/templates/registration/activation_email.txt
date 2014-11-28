@@ -6,7 +6,7 @@
 http://www.tengmanpinglun.com/accounts/activate/{{ activation_key }}/
 
 如果您的邮件阅读程序不支持点击，请将上面的地址拷贝至您的浏览器（例如Chrome）的地址栏后打开。
-请您尽快激活，我们只为你保留账号<strong>{{ expiration_days|apnumber }}</strong>天哦，亲！
+请您尽快激活，我们只为你保留账号{{ expiration_days }}天哦，亲！
 
 如果您没有注册过藤蔓评论，请您忽略这封邮件。
 
