@@ -50,6 +50,7 @@
             {% endif %}
             +<span>{{ message.up_users|length }}</span>
           </a>
+          {% comment %}
           <a href="javascript:void(0);" id="down_comment_{{message.id}}" onclick="down('{{message.id}}');return false;">
             {% if user.id in message.down_users %}
             <i class="fa fa-thumbs-down fa-flip-horizontal"></i>
@@ -58,6 +59,7 @@
             {% endif %}
             -<span>{{ message.down_users|length }}</span>
           </a>
+          {% endcomment %}
           {# TODO: 添加tips，说明icon功能，不然留言icon字太小。 #}
           <a href="javascript:void(0);" id="reply_comment_{{message.id}}" onclick="expandReply('{{message.id}}');return false;">
             <i class="fa fa-comments-o"></i>
@@ -85,9 +87,11 @@
            <span class='comment-time'>提交于 {{ message.time_added|naturaltime }}</span>
          </span>
          <span id="comment_tags_{{message.id}}">
+           {% comment %}
            {%for tag in message.tags%}
              <a href="/faceted_search/?q={{tag.name}}"><span class="label label-default">{{tag.name}}</span></a>
            {%endfor%}
+           {% endcomment %}
          </span>
          <br/>
          <div id="detailDiv{{message.id}}" style="display:none;margin-top:10px">
