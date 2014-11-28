@@ -12,13 +12,14 @@
   {
     document.getElementById("commetList").style.display="";
     document.getElementById("iTinkYouLike").style.display="none";
+    $('#you_like_bn').html("猜你喜欢");
   }
   function show_you_like()
   {
     $('#iTinkYouLike').load('/comments/tag/raw');
 		document.getElementById("commetList").style.display="none";
 		document.getElementById("iTinkYouLike").style.display="";
-
+    $('#you_like_bn').html("再猜猜看");
   }
   
 </script>
@@ -30,10 +31,10 @@
 </style>
 
 <div class='left'>
-    <button id="test1" type="button" class='btn btn-info btn-block right-angle' onclick="show_comment();">评论</button>
+    <button id="show_comment_bn" type="button" class='btn btn-info btn-block right-angle' onclick="show_comment();">评论</button>
 </div>
 <div class='right'>
-    <button id="test2" type="button" class = 'btn btn-info btn-block right-angle'   onclick="show_you_like();">猜你喜欢</button>
+    <button id="you_like_bn" type="button" class = 'btn btn-info btn-block right-angle'   onclick="show_you_like();">猜你喜欢</button>
 </div>
 
 <div id="commetList" style="display:'';">
