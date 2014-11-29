@@ -48,7 +48,7 @@
 持续时间    <span class="stat-count"> XXX </span> 天
 <div class="last-coded">上次编码<span class="last-coded-time"> XXX 天前</span></div>
 -->
-    <div class="user-stats col-md-2">
+    <div class="login-stats col-md-2">
       <div class="user-points-bar-container">
         <div class="points-labels">
           <span class="clogin">连续登录<strong>{{ author.continuous_login }}天</strong></span>
@@ -56,6 +56,14 @@
         <div class="points-labels">
           <span class="hclogin">最长连续登录<strong>{{ author.history_c_login }}天</strong></span>
         </div>
+        <div class="points-labels">
+          <span class="comments_sum">上次登录<strong>{{ author.user.last_login }}</strong></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="user-stats col-md-2">
+      <div class="user-points-bar-container">
         <div class="points-labels">
           <span class="comments_sum">发表评论<strong>{{ author.comments_sum }}条</strong></span>
         </div>
