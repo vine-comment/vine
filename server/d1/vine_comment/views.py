@@ -247,8 +247,7 @@ class CommentView(TemplateView):
 
 		#NEW
         comments_new = Comment.objects.order_by('-time_added').all()
-        p_new_max = Paginator(comments_new, 10).page(1)
-        p_new_min = Paginator(comments_new, 3).page(1)
+        p_new = Paginator(comments_new, 3).page(1)
 
 
         template_name = kwargs.get('template', self.template_meta)
@@ -268,8 +267,7 @@ class CommentView(TemplateView):
         return render(request, template_name, {
             'p_comment_hot_max': p_hot_max,
 			'p_comment_hot_min': p_hot_min,
-            'p_comment_new_max': p_new_max,
-            'p_comment_new_min': p_new_min,
+            'p_comment_new': p_new,
             'index_url': index_url,
             'url_b64': url_b64,
             'form': form,
@@ -358,8 +356,7 @@ class CommentShowMsgView(TemplateView):
 
 		#NEW
         comments_new = Comment.objects.order_by('-time_added').all()
-        p_new_max = Paginator(comments_new, 10).page(1)
-        p_new_min = Paginator(comments_new, 3).page(1)
+        p_new = Paginator(comments_new, 3).page(1)
 
 
 		#TAGS AND
@@ -394,8 +391,7 @@ class CommentShowMsgView(TemplateView):
             'p_comment_tag': p_tag,
             'p_comment_hot_max': p_hot_max,
 			'p_comment_hot_min': p_hot_min,
-            'p_comment_new_max': p_new_max,
-            'p_comment_new_min': p_new_min,
+            'p_comment_new': p_new,
             'index_url': index_url,
             'url_b64': url_b64,
         })
@@ -821,6 +817,26 @@ class CommentsDebateView(TemplateView):
             'days': days,
         })
 
+
+class CommentShowListView(TemplateView):
+    template_name = 'comments/comments_plugin_new.html'
+
+    def get(self, request, *args, **kwargs):
+# need to use time_modified instead of time added
+        flag = kwargs['flag']
+        print flag
+		#NEW
+        comments_new = Comment.objects.order_by('-time_added').all()
+        if flag == 'max':
+            p = Paginator(comments_new, 10).page(1)
+        else :
+            p = Paginator(comments_new, 3).page(1)
+
+        return render(request, self.template_name, {
+            'p_comment_new': p,
+        })
+
+        
 class CommentDetailView(TemplateView):
     template_name = 'comments/comment_detail_view.html'
 

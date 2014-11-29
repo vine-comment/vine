@@ -59,6 +59,7 @@ urlpatterns += patterns('',
     url(r'^ajax/down/comment/(?P<id>.*?)/?$', CommentDownView.as_view(), name='comment_down'),
     url(r'^ajax/reply/comment/(?P<id>.*?)/?$', CommentReplyView.as_view(), name='comment_reply'),
 	url(r'^ajax/showmsg/comment/(?P<url_b64>.*?)/?$', CommentShowMsgView.as_view(), name='comment_showmsg'),
+    url(r'^ajax/showmsg/new/comment/(?P<flag>.*?)/?$', CommentShowListView.as_view(), name='comment_plugin_new'),
 	#url(r'^ajax/youlike/comment/(?P<url_b64>.*?)/(?P<flag>.*?)/?$', CommentsTagView.as_view(), name='comment_youlike'),
     url(r'^comment_raw/(?P<url_b64>.*?)/?$', CommentRawView.as_view(), name='comment_raw'),
     # TODO like reddit..

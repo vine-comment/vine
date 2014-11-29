@@ -1,3 +1,28 @@
+
+<script>
+<!--
+  function change_new_comment_num()
+  {
+		 if (document.getElementById("new_button").innerHTML == "展开"){
+			document.getElementById("new_button").innerHTML  = "收起";
+            $.get("/ajax/showmsg/new/comment/max",{})
+            .done(function(data) {
+              $('#commet_new').html(data);
+            });
+			} else {
+			document.getElementById("new_button").innerHTML  = "展开";
+            $.get("/ajax/showmsg/new/comment/min", {})
+            .done(function(data) {
+              $('#commet_new').html(data);
+            });
+		}
+		
+		//刷新
+  }
+</script>
+
+
 {% include 'comments/comments_plugin_hot.html' %}
 {% include 'comments/comments_plugin_new.html' %}
+<button id="new_button" style="float:right" type="button"  class = 'btn btn-sm btn-success'  onclick="change_new_comment_num();">展开</button>
 {% include 'comments/comments_plugin_relevant.html' %}
