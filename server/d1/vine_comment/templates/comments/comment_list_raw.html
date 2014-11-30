@@ -21,7 +21,6 @@
   
   function change_hot_comment_num()
   {
-         alert("qx");
 		 if (document.getElementById("hot_button").innerHTML == "展开"){
 			document.getElementById("hot_button").innerHTML  = "收起";
             $.get("/ajax/showmsg/hot/comment/max",{})
