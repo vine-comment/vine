@@ -11,6 +11,7 @@ import argparse
 
 parser = argparse.ArgumentParser(description='Url Tag Combination Client.')
 parser.add_argument('-a', '--add', help='add url tag combination', nargs=2, metavar=('url', 'tag'))
+parser.add_argument('-aj', '--addjson', help='add url tag combination from json', nargs=1, metavar=('json'))
 parser.add_argument('-r', '--rem', help='rem url tag combination', nargs=2, metavar=('url', 'tag'))
 parser.add_argument('-g', '--get', help='get url tag combination', nargs=2, metavar=('url', 'tag'))
 parser.add_argument('-gu', '--getu', help='get url tag combination', nargs=1, metavar=('url'))
