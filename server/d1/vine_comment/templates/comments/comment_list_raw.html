@@ -1,29 +1,50 @@
 
 <script>
-<!--
   function change_new_comment_num()
   {
- if (document.getElementById("new_button").innerHTML == "展开"){
-document.getElementById("new_button").innerHTML  = "收起";
+		 if (document.getElementById("new_button").innerHTML == "展开"){
+			document.getElementById("new_button").innerHTML  = "收起";
             $.get("/ajax/showmsg/new/comment/max",{})
             .done(function(data) {
               $('#commet_new').html(data);
             });
-} else {
-document.getElementById("new_button").innerHTML  = "展开";
+			} else {
+			document.getElementById("new_button").innerHTML  = "展开";
             $.get("/ajax/showmsg/new/comment/min", {})
             .done(function(data) {
               $('#commet_new').html(data);
             });
-}
-//刷新
+		}
+		
+		//刷新
+  }
+  
+  function change_hot_comment_num()
+  {
+         alert("qx");
+		 if (document.getElementById("hot_button").innerHTML == "展开"){
+			document.getElementById("hot_button").innerHTML  = "收起";
+            $.get("/ajax/showmsg/hot/comment/max",{})
+            .done(function(data) {
+              $('#commet_hot').html(data);
+            });
+			} else {
+			document.getElementById("hot_button").innerHTML  = "展开";
+            $.get("/ajax/showmsg/hot/comment/min", {})
+            .done(function(data) {
+              $('#commet_hot').html(data);
+            });
+		}
   }
 </script>
 
 
 {% include 'comments/comments_plugin_hot.html' %}
+<button id="hot_button" style="float:right" type="button"  class = 'btn btn-sm btn-success'  onclick="change_hot_comment_num();">展开</button>
+<br>
+<br>
 {% include 'comments/comments_plugin_new.html' %}
 <button id="new_button" style="float:right" type="button"  class = 'btn btn-sm btn-success'  onclick="change_new_comment_num();">展开</button>
+<br>
+<br>
 {% include 'comments/comments_plugin_relevant.html' %}
-
-

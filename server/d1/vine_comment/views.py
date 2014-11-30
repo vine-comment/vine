@@ -242,8 +242,7 @@ class CommentView(TemplateView):
         comments_hot = sorted(comments_hot,key=lambda o:len(o.up_users),reverse=True)
         #comments_hot = filter(lambda x:urlparse(index_url).netloc in x.comment_board.title,
         #        Comment.objects.order_by('-time_added'))
-        p_hot_max = Paginator(comments_hot, 10).page(1)
-        p_hot_min = Paginator(comments_hot, 3).page(1)
+        p_hot = Paginator(comments_hot, 3).page(1)
 
 		#NEW
         comments_new = Comment.objects.order_by('-time_added').all()
@@ -265,8 +264,7 @@ class CommentView(TemplateView):
             template_name = 'comments/comment_list_raw.html'
 
         return render(request, template_name, {
-            'p_comment_hot_max': p_hot_max,
-			'p_comment_hot_min': p_hot_min,
+			'p_comment_hot': p_hot,
             'p_comment_new': p_new,
             'index_url': index_url,
             'url_b64': url_b64,
@@ -351,8 +349,7 @@ class CommentShowMsgView(TemplateView):
         comments_hot = sorted(comments_hot,key=lambda o:len(o.up_users),reverse=True)
         #comments_hot = filter(lambda x:urlparse(index_url).netloc in x.comment_board.title,
         #        Comment.objects.order_by('-time_added'))
-        p_hot_max = Paginator(comments_hot, 10).page(1)
-        p_hot_min = Paginator(comments_hot, 3).page(1)
+        p_hot = Paginator(comments_hot, 3).page(1)
 
 		#NEW
         comments_new = Comment.objects.order_by('-time_added').all()
@@ -389,8 +386,7 @@ class CommentShowMsgView(TemplateView):
 
         return render(request, template_name, {
             'p_comment_tag': p_tag,
-            'p_comment_hot_max': p_hot_max,
-			'p_comment_hot_min': p_hot_min,
+            'p_comment_hot': p_hot,
             'p_comment_new': p_new,
             'index_url': index_url,
             'url_b64': url_b64,
@@ -818,24 +814,42 @@ class CommentsDebateView(TemplateView):
         })
 
 
-class CommentShowListView(TemplateView):
+class CommentShowNewListView(TemplateView):
     template_name = 'comments/comments_plugin_new.html'
 
     def get(self, request, *args, **kwargs):
 # need to use time_modified instead of time added
         flag = kwargs['flag']
-        print flag
+        
 		#NEW
         comments_new = Comment.objects.order_by('-time_added').all()
         if flag == 'max':
             p = Paginator(comments_new, 10).page(1)
         else :
             p = Paginator(comments_new, 3).page(1)
+            
 
         return render(request, self.template_name, {
             'p_comment_new': p,
         })
+        
+class CommentShowHotListView(TemplateView):
+    template_name = 'comments/comments_plugin_hot.html'
 
+    def get(self, request, *args, **kwargs):
+# need to use time_modified instead of time added
+        flag = kwargs['flag']
+        
+        comments_hot = Comment.objects.order_by('-time_added').filter(time_added__gte=datetime.datetime.now()-timedelta(days=30))
+        comments_hot = sorted(comments_hot,key=lambda o:len(o.up_users),reverse=True)
+        if flag == 'max':
+            p = Paginator(comments_hot, 10).page(1)
+        else :
+            p = Paginator(comments_hot, 3).page(1)
+        
+        return render(request, self.template_name, {
+            'p_comment_hot': p,
+        })
         
 class CommentDetailView(TemplateView):
     template_name = 'comments/comment_detail_view.html'

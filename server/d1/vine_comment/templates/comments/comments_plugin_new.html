@@ -1,5 +1,29 @@
 {% load humanize %}
 {% load avatar_tags %}
+  <script>
+    function expandReplyNew(id) {
+      if (!$('#replyDivNew'+id).is(':visible')) {
+        $('#replyDivNew'+id).show();
+        $.get("/ajax/reply/comment/"+id, {})
+        .done(function(data) {
+          $('#repliesofNew'+id ).html(data);
+        });
+      } else {
+        $('#replyDivNew'+id).hide();
+      }
+    }
+    function replyNew(id) {
+      var reply_str = $('#replyNew'+id).val();
+      $.post("/ajax/reply/comment/"+id, {'reply_str':reply_str})
+      .done(function(data) {
+        $('#repliesofNew'+id ).html(data);
+        $('#replyNew'+id).val('');
+        var reply_num = $('#reply_comment_new'+id).find('span');
+        var count = parseInt(reply_num.text())+1;
+        reply_num.text(count);
+      });
+    }
+  </script>
 
 <div id="commet_new">  
     <fieldset>
@@ -28,16 +52,31 @@
                         +<span>{{ message.up_users|length }}</span>
                       </a>
                       {# TODO: 添加tips，说明icon功能，不然留言icon字太小。 #}
-                      <a href="javascript:void(0);" id="reply_comment_{{message.id}}" onclick="expandReply('{{message.id}}');return false;">
+                      <a href="javascript:void(0);" id="reply_comment_new{{message.id}}" onclick="expandReplyNew('{{message.id}}');return false;">
                         <i class="fa fa-comments-o"></i>
                         <span>{{ message.replies|length }}</span>
                       </a>
                      </span>
-                     <br/>
+                     <div id="detailDivNew{{message.id}}" style="display:none;margin-top:10px">
+                     </div>
+
+                     <div id="replyDivNew{{message.id}}" style="display:none;margin-top:10px">
+                     <br>
+                       <div id="repliesofNew{{message.id}}">
+                       {% include 'reply.html' %}
+                       </div>
+                       <div name="reply{{message.id}}" class="input-group">
+                         <textarea rows="5" style="width:100%;height:34px;resize:none" id="reply{{message.id}}" name="reply" placeholder="可输入5-140个字"></textarea>
+                         <span class="input-group-btn">
+                           <button class="btn btn-default submitComment" data-loading-text="回复中" onclick="replyNew('{{message.id}}')" type="button">回复</button>
+                         </span>
+                       </div><!-- /input-group -->
+                     </div>
+                     <br>
                   </li>
             {% endfor %}
             </ul>
         </div>
-
+        
     </fieldset>
 </div>
