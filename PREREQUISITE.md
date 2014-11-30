@@ -38,6 +38,7 @@
    * Change PIL to Pillow,  Change x86_64 to i386 if you are installing it to a 32-bit machine
 * pytz
 * pygeoip
+* pydkim
 
 -----
 ###Items should run.
