@@ -18,8 +18,8 @@ parser.add_argument('-gu', '--getu', help='get url tag combination', nargs=1, me
 parser.add_argument('-gt', '--gett', help='get url tag combination', nargs=1, metavar=('tag'))
 parser.add_argument('-m', '--mod', help='mod url tag combination', nargs=2, metavar=('url', 'tag'))
 
-cmds = ['add', 'rem', 'get', 'mod', 'gett']
-short_cmds = ['a', 'r', 'g', 'm', 'gt']
+cmds = ['add', 'rem', 'get', 'mod', 'gett', 'getu', 'addjson']
+short_cmds = ['a', 'r', 'g', 'm', 'gt', 'gu', 'aj']
 
 class TagManager(object):
     @staticmethod
@@ -64,6 +64,10 @@ class TagManager(object):
 
     @staticmethod
     def mod(*args, **kwargs):
+        pass
+
+    @staticmethod
+    def addj(*args, **kwargs):
         pass
 
 def main():
