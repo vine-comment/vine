@@ -174,6 +174,13 @@ LOGIN_REDIRECT_URL = 'index'
 DEFAULT_FROM_EMAIL = 'account@tengmanpinglun.com'
 #EMAIL_FROM = 'webmaster@localhost'
 #COMMENTS_APP = 'threadedcomments'
+EMAIL_BACKEND = 'vine_comment.email_backend.DKIMBackend'
+DKIM_SELECTOR = ''
+DKIM_DOMAIN = 'tengmanpinglun.com'
+DKIM_PRIVATE_KEY = '''
+-----BEGIN RSA PRIVATE KEY-----
+-----END RSA PRIVATE KEY-----
+'''
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
