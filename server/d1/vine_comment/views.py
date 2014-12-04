@@ -248,7 +248,37 @@ class CommentView(TemplateView):
         comments_new = Comment.objects.order_by('-time_added').all()
         p_new = Paginator(comments_new, 3).page(1)
 
+		#RELEVANT 
+        index_url = base64.b64decode(url_b64)
+        url_objects = Url.objects.filter(url=index_url)
+        if len(url_objects) == 0:
+            print "No tag"
+            # return HttpResponse('No tag: '+index_url, mimetype='plain/text')
+            p_tag = p_hot
+        else :
+            tags = filter(lambda x:url_objects[0].id in x.urls, Tags.objects.order_by('-time_added'))
+            if len(tags) == 0:
+                print "No tag"
+                p_tag = p_hot
+            else :
+                tags = sorted(tags,key=lambda x:len(x.comments),reverse=True)[0:10]
+                count = len(tags)
+                if count > 3:
+                    tags = sample(tags, 3)
+                else:
+                    tags = sample(tags, count)
 
+                for tag in tags:
+                    comments = filter(lambda x: x.id in tag.comments, Comment.objects.all())
+                    print "comments:", comments
+                    tag.comments_list = sorted(comments,key=lambda x:len(x.up_users)-len(x.down_users),reverse=True)[0:3]
+
+                index_page = request.GET.get('page', 1)
+                print "index_page:", index_page
+
+                logger.info(str(len(tags)) + ': ' + str(tags))
+                p_tag = Paginator(tags, 3).page(1)
+        
         template_name = kwargs.get('template', self.template_meta)
         form = CaptchaTestForm()
 
@@ -266,6 +296,7 @@ class CommentView(TemplateView):
         return render(request, template_name, {
 			'p_comment_hot': p_hot,
             'p_comment_new': p_new,
+            'p_comment_tag': p_tag,
             'index_url': index_url,
             'url_b64': url_b64,
             'form': form,
@@ -356,31 +387,36 @@ class CommentShowMsgView(TemplateView):
         p_new = Paginator(comments_new, 3).page(1)
 
 
-		#TAGS AND
-        tags = Tag.objects.order_by('-time_added').all()
-        if len(tags) == 0:
+		#RELEVANT 
+        index_url = base64.b64decode(url_b64)
+        url_objects = Url.objects.filter(url=index_url)
+        if len(url_objects) == 0:
             print "No tag"
-            #return HttpResponse('No tag', mimetype='plain/text')
-        tags = sorted(tags,key=lambda x:len(x.comments),reverse=True)[0:10]
-        count = len(tags)
-        if count > 3:
-            tags = sample(tags, 3)
-        else:
-            tags = sample(tags, count)
+            # return HttpResponse('No tag: '+index_url, mimetype='plain/text')
+            p_tag = p_hot
+        else :
+            tags = filter(lambda x:url_objects[0].id in x.urls, Tags.objects.order_by('-time_added'))
+            if len(tags) == 0:
+                print "No tag"
+                p_tag = p_hot
+            else :
+                tags = sorted(tags,key=lambda x:len(x.comments),reverse=True)[0:10]
+                count = len(tags)
+                if count > 3:
+                    tags = sample(tags, 3)
+                else:
+                    tags = sample(tags, count)
 
-        for tag in tags:
-            comments = filter(lambda x: x.id in tag.comments, Comment.objects.all())
-            print "comments:", comments
-            tag.comments_list = sorted(comments,key=lambda x:len(x.up_users)-len(x.down_users),reverse=True)[0:3]
+                for tag in tags:
+                    comments = filter(lambda x: x.id in tag.comments, Comment.objects.all())
+                    print "comments:", comments
+                    tag.comments_list = sorted(comments,key=lambda x:len(x.up_users)-len(x.down_users),reverse=True)[0:3]
 
-        index_page = request.GET.get('page', 1)
-        print "index_page:", index_page
+                index_page = request.GET.get('page', 1)
+                print "index_page:", index_page
 
-
-        #TODO performance optimization for objects order_by('-time_added')
-        logger.info(str(len(tags)) + ': ' + str(tags))
-        p_tag = Paginator(tags, 5).page(1)
-
+                logger.info(str(len(tags)) + ': ' + str(tags))
+                p_tag = Paginator(tags, 3).page(1)
 
         template_name = kwargs.get('template', self.template_list)
 
