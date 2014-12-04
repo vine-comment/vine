@@ -18,6 +18,7 @@ function qp_r() {
     return qp_q[qp_n][qp_o++]
 }
 
+// 游戏开始：入口函数
 function qp_t(a) {
     IS_ANDROID &&
      (createjs.Sound.registMySound("h", 0),
@@ -39,9 +40,11 @@ function qp_t(a) {
     qp_x()
 }
 
+// 背景函数
 function qp_u() {
     qipaStage.stage.background = new createjs.Shape;
     qipaStage.stage.background.graphics.beginFill("white").rect(0, 0, W, H);
+    // qp_p = new createjs.Text("test", "bold 60px Arial", "white"), qp_p.x = a.x + 20, qp_p.y = a.y + 90, this.addChild(qp_p)
     qipaStage.stage.addChild(qipaStage.stage.background);
     qipaStage.stage.background.on("mousedown", function(a) {
         IS_TOUCH && a.nativeEvent instanceof MouseEvent || qp_y(a.localX, a.localY)
@@ -51,7 +54,7 @@ function qp_u() {
 function Qp_w() {
     this.initialize();
     this.background = new createjs.Shape;
-    this.background.graphics.beginFill("black").drawRect(0, 0, W, H);
+    this.background.graphics.beginFill("green").drawRect(0, 0, W, H);
     this.addChild(this.background);
     this.scoreText = new createjs.Text("得分：" + qipaApp.score, "bold 48px Arial", "white");
     this.scoreText.x = 225;
@@ -68,7 +71,7 @@ function Qp_w() {
     this.bt_regame.y = 650;
     var a;
     a = new createjs.Shape;
-    a.graphics.beginFill("black").rect(0, 0, 150, 50);
+    a.graphics.beginFill("green").rect(0, 0, 150, 50);
     this.bt_regame.hitArea = a;
     this.bt_regame.on("click", function(a) {
         IS_TOUCH && a.nativeEvent instanceof MouseEvent || qp_z()
@@ -76,14 +79,14 @@ function Qp_w() {
     this.addChild(this.bt_regame);
 
     ENABLE_SHARE && (this.bt_share = new createjs.Text("分享", "bold 48px Arial", "white"), this.bt_share.x = 440, this.bt_share.y = 650,
-        a = new createjs.Shape, a.graphics.beginFill("black").rect(0, 0, 150, 50), this.bt_share.hitArea = a, this.bt_share.on("click", function(a) {
+        a = new createjs.Shape, a.graphics.beginFill("green").rect(0, 0, 150, 50), this.bt_share.hitArea = a, this.bt_share.on("click", function(a) {
             IS_TOUCH && a.nativeEvent instanceof MouseEvent || qipaStage.showShareTip()
         }), this.addChild(this.bt_share));
 
     ENABLE_LB && (this.bt_top = new createjs.Text("排行榜", "bold 48px Arial", "white"),
                     this.bt_top.x = 240, this.bt_top.y = 650,
                     a = new createjs.Shape,
-                    a.graphics.beginFill("black").rect(0, 0, 150, 50),
+                    a.graphics.beginFill("green").rect(0, 0, 150, 50),
                     this.bt_top.hitArea = a,
                     this.bt_top.on("click", function(a) {
                         IS_TOUCH && a.nativeEvent instanceof
@@ -177,6 +180,7 @@ Qp_v.prototype.genObjects = function() {
         a.x = qp_s(4) * qp_a, a.y = qp_b * (b - 1),
         a.clicked = 4 == b ? !0 : !1,
         this.addChild(a),
+        (qp_p = new createjs.Text("一元", "bold 60px Arial", "white"), qp_p.x = a.x + 20, qp_p.y = a.y + 90, this.addChild(qp_p)),
         3 == b && (qp_p = new createjs.Text("开始", "bold 60px Arial", "white"), qp_p.x = a.x + 20, qp_p.y = a.y + 90, this.addChild(qp_p)),
         qp_f.push(a);
 
@@ -192,8 +196,8 @@ Qp_v.prototype.genObjects = function() {
     qp_i = [];
     for (a = 0; 5 > a; a++) b = new createjs.Shape, b.graphics.beginFill("grey").rect(0, 0, qp_a, qp_b), b.visible = !1, b.inUse = !1, this.addChild(b), qp_i.push(b);
     qp_g = [];
-    for (b = 0; 5 > b; b++) a = new createjs.Shape, a.graphics.setStrokeStyle(1, "round").beginStroke("black").moveTo(b * qp_a, 0).lineTo(b * qp_a, H), this.addChild(a);
-    for (b = 0; 6 > b; b++) a = new createjs.Shape, a.graphics.setStrokeStyle(1.5, "round").beginStroke("black").moveTo(0, (b - 1) * qp_b).lineTo(W, (b - 1) * qp_b), this.addChild(a),
+    for (b = 0; 5 > b; b++) a = new createjs.Shape, a.graphics.setStrokeStyle(1, "round").beginStroke("green").moveTo(b * qp_a, 0).lineTo(b * qp_a, H), this.addChild(a);
+    for (b = 0; 6 > b; b++) a = new createjs.Shape, a.graphics.setStrokeStyle(1.5, "round").beginStroke("green").moveTo(0, (b - 1) * qp_b).lineTo(W, (b - 1) * qp_b), this.addChild(a),
         qp_g.push(a);
     this.scoreText = new createjs.Text("0", "bold 48px Arial", "red");
     this.scoreText.x = W / 2;
