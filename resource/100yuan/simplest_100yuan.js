@@ -1,4 +1,3 @@
-
 H = 1E3;
 var qp_a = W / 4,
     qp_b = H / 4,
@@ -43,16 +42,16 @@ function Qp_w() {
     this.background = new createjs.Shape;
     this.background.graphics.beginFill("black").drawRect(0, 0, W, H);
     this.addChild(this.background);
-    this.scoreText = new createjs.Text("\u5f97\u5206\uff1a" + qipaApp.score, "bold 48px Arial", "white");
+    this.scoreText = new createjs.Text("得分：" + qipaApp.score, "bold 48px Arial", "white");
     this.scoreText.x = 225;
     this.scoreText.y = 230;
     this.addChild(this.scoreText);
-    this.bestText = new createjs.Text("\u6700\u9ad8\u6210\u7ee9: " + qipaApp.best, "bold 48px Arial", "white");
+    this.bestText = new createjs.Text("最高成绩: " + qipaApp.best, "bold 48px Arial", "white");
     this.bestText.x = 150;
     this.bestText.y = 380;
     this.addChild(this.bestText);
     this.bt_regame =
-        new createjs.Text("\u91cd\u73a9", "bold 48px Arial", "white");
+        new createjs.Text("重玩", "bold 48px Arial", "white");
     this.bt_regame.x = 80;
     ENABLE_LB || ENABLE_SHARE || (this.bt_regame.x = 300);
     this.bt_regame.y = 650;
@@ -64,11 +63,11 @@ function Qp_w() {
         IS_TOUCH && a.nativeEvent instanceof MouseEvent || qp_z()
     });
     this.addChild(this.bt_regame);
-    ENABLE_SHARE && (this.bt_share = new createjs.Text("\u5206\u4eab", "bold 48px Arial", "white"), this.bt_share.x = 440, this.bt_share.y = 650,
+    ENABLE_SHARE && (this.bt_share = new createjs.Text("分享", "bold 48px Arial", "white"), this.bt_share.x = 440, this.bt_share.y = 650,
         a = new createjs.Shape, a.graphics.beginFill("black").rect(0, 0, 150, 50), this.bt_share.hitArea = a, this.bt_share.on("click", function(a) {
             IS_TOUCH && a.nativeEvent instanceof MouseEvent || qipaStage.showShareTip()
         }), this.addChild(this.bt_share));
-    ENABLE_LB && (this.bt_top = new createjs.Text("\u6392\u884c\u699c", "bold 48px Arial", "white"), this.bt_top.x = 240, this.bt_top.y = 650, a = new createjs.Shape, a.graphics.beginFill("black").rect(0, 0, 150, 50), this.bt_top.hitArea = a, this.bt_top.on("click", function(a) {
+    ENABLE_LB && (this.bt_top = new createjs.Text("排行榜", "bold 48px Arial", "white"), this.bt_top.x = 240, this.bt_top.y = 650, a = new createjs.Shape, a.graphics.beginFill("black").rect(0, 0, 150, 50), this.bt_top.hitArea = a, this.bt_top.on("click", function(a) {
         IS_TOUCH && a.nativeEvent instanceof
         MouseEvent || window.open("../lb.html?gid=" + GID)
     }), this.addChild(this.bt_top))
@@ -103,8 +102,8 @@ function qp_C() {
     qp_x()
 }
 Qp_w.prototype.pushScore = function() {
-    this.scoreText.text = "\u5f97\u5206: " + qipaApp.score;
-    this.bestText.text = qipaApp.score > qipaApp.best ? "\u6700\u9ad8\u5f97\u5206: " + qipaApp.score : "\u6700\u9ad8\u5f97\u5206: " + qipaApp.best
+    this.scoreText.text = "得分: " + qipaApp.score;
+    this.bestText.text = qipaApp.score > qipaApp.best ? "最高得分: " + qipaApp.score : "最高得分: " + qipaApp.best
 };
 
 function qp_E(a) {
@@ -154,7 +153,7 @@ Qp_v.prototype = new createjs.Container;
 Qp_v.prototype.genObjects = function() {
     var a;
     qp_f = [];
-    for (var b = 0; 5 > b; b++) a = new createjs.Shape, a.graphics.beginFill("black").rect(0, 0, qp_a, qp_b), a.x = qp_s(4) * qp_a, a.y = qp_b * (b - 1), a.clicked = 4 == b ? !0 : !1, this.addChild(a), 3 == b && (qp_p = new createjs.Text("\u5f00\u59cb", "bold 60px Arial", "white"), qp_p.x = a.x + 20, qp_p.y = a.y + 90, this.addChild(qp_p)), qp_f.push(a);
+    for (var b = 0; 5 > b; b++) a = new createjs.Shape, a.graphics.beginFill("black").rect(0, 0, qp_a, qp_b), a.x = qp_s(4) * qp_a, a.y = qp_b * (b - 1), a.clicked = 4 == b ? !0 : !1, this.addChild(a), 3 == b && (qp_p = new createjs.Text("开始", "bold 60px Arial", "white"), qp_p.x = a.x + 20, qp_p.y = a.y + 90, this.addChild(qp_p)), qp_f.push(a);
     qp_m = new createjs.Shape;
     qp_m.graphics.beginFill("red").rect(0, 0, qp_a, qp_b);
     qp_m.visible = !1;
@@ -202,12 +201,12 @@ function qp_D(a) {
 }
 
 function qp_x() {
-    qipaShare.title = "\u522b\u8e29\u767d\u5757\u513f\uff08\u94a2\u7434\u5757\uff09";
+    qipaShare.title = "别踩白块儿（钢琴块）";
     if (0 == qipaApp.score) qipaShare.desc = qipaShare.title;
     else {
         var a = parseInt(Math.sqrt(1E4 * qipaApp.score / 300));
         99 < a && (a = "99.9");
-        qipaShare.desc = "\u522b\u8e29\u767d\u5757\u513f\uff1a\u6211\u5f97\u4e86" + qipaApp.score + "\u5206\uff0c\u6218\u80dc\u4e86" + a + "%\u7684\u73a9\u5bb6\u3002\u4e0d\u670d\u6765\u6218\uff01"
+        qipaShare.desc = "别踩白块儿：我得了" + qipaApp.score + "分，战胜了" + a + "%的玩家。不服来战！"
     }
 }
 var _cfg = {
