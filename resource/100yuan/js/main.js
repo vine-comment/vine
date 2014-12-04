@@ -14,12 +14,12 @@ var qp_a = W / 4,
          "hhllmmlkkjjiihllkkjjillkkjjihhllmmlkkjjiih"];
 
 function qp_r() {
-    qp_o >= qp_q[qp_n].length && (qp_o = 0, qp_n = qp_s(qp_q.length));
+    qp_o >= qp_q[qp_n].length && (qp_o = 0, qp_n = random(qp_q.length));
     return qp_q[qp_n][qp_o++]
 }
 
 // 游戏开始：入口函数
-function qp_t(a) {
+function start(a) {
     IS_ANDROID &&
      (createjs.Sound.registMySound("h", 0),
       createjs.Sound.registMySound("i", 2),
@@ -30,18 +30,18 @@ function qp_t(a) {
       createjs.Sound.registMySound("n", 12), 
       createjs.Sound.registMySound("silenttail", 14));
 
-    qp_u();
-    qipaStage.stage.player = new Qp_v;
+    init_background();
+    qipaStage.stage.player = new main_player;
     qipaStage.stage.addChild(qipaStage.stage.player);
-    qipaStage.stage.gameoverlayer = new Qp_w;
+    qipaStage.stage.gameoverlayer = new gameover_player;
     qipaStage.stage.gameoverlayer.visible = !1;
     qipaStage.stage.addChild(qipaStage.stage.gameoverlayer);
     qipaApp.onGameStarted();
-    qp_x()
+    share()
 }
 
 // 背景函数
-function qp_u() {
+function init_background() {
     qipaStage.stage.background = new createjs.Shape;
     qipaStage.stage.background.graphics.beginFill("white").rect(0, 0, W, H);
     // qp_p = new createjs.Text("test", "bold 60px Arial", "white"), qp_p.x = a.x + 20, qp_p.y = a.y + 90, this.addChild(qp_p)
@@ -51,12 +51,12 @@ function qp_u() {
     })
 }
 
-function Qp_w() {
+function gameover_player() {
     this.initialize();
     this.background = new createjs.Shape;
     this.background.graphics.beginFill("green").drawRect(0, 0, W, H);
     this.addChild(this.background);
-    this.scoreText = new createjs.Text("得分：" + qipaApp.score, "bold 48px Arial", "white");
+    this.scoreText = new createjs.Text("钱数：" + qipaApp.score, "bold 48px Arial", "white");
     this.scoreText.x = 225;
     this.scoreText.y = 230;
     this.addChild(this.scoreText);
@@ -74,7 +74,7 @@ function Qp_w() {
     a.graphics.beginFill("green").rect(0, 0, 150, 50);
     this.bt_regame.hitArea = a;
     this.bt_regame.on("click", function(a) {
-        IS_TOUCH && a.nativeEvent instanceof MouseEvent || qp_z()
+        IS_TOUCH && a.nativeEvent instanceof MouseEvent || regame()
     });
     this.addChild(this.bt_regame);
 
@@ -93,13 +93,13 @@ function Qp_w() {
                         MouseEvent || window.open("../lb.html?gid=" + GID)
     }), this.addChild(this.bt_top))
 }
-Qp_w.prototype = new createjs.Container;
+gameover_player.prototype = new createjs.Container;
 
 function qp_A(a) {
     "*" == a ? createjs.Sound.play("over", !0) : createjs.Sound.play(a, !0)
 }
 
-function qp_z() {
+function regame() {
     qipaStage.stage.player.reset();
     qipaStage.stage.player.visible = !0;
     qipaStage.stage.background.visible = !0;
@@ -107,7 +107,7 @@ function qp_z() {
     qipaApp.onGameStarted()
 }
 
-function qp_B() {
+function gameover() {
     qipaStage.stage.gameoverlayer.pushScore();
     qipaStage.stage.player.visible = !1;
     qipaStage.stage.background.visible = !1;
@@ -115,14 +115,14 @@ function qp_B() {
     qp_m.visible = !1
 }
 
-function qp_C() {
+function gameover_first() {
     createjs.Ticker.removeEventListener("tick", qp_D);
     qipaApp.onNewScore(qipaApp.score);
-    setTimeout("qp_B()", 150);
+    setTimeout("gameover()", 150);
     qipaApp.onGameOver();
-    qp_x()
+    share()
 }
-Qp_w.prototype.pushScore = function() {
+gameover_player.prototype.pushScore = function() {
     this.scoreText.text = "得分: " + qipaApp.score;
     this.bestText.text = qipaApp.score > qipaApp.best ? "最高得分: " + qipaApp.score : "最高得分: " + qipaApp.best
 };
@@ -141,7 +141,7 @@ function qp_E(a) {
 
 function qp_y(a, b) {
     var c = qp_f[qp_c];
-    qp_G(a, b) ? !0 == qp_p.visible ? (qp_p.visible = !1, qp_E(qp_H()), createjs.Ticker.addEventListener("tick", qp_D)) : qp_E(qp_H()) : b > c.y && b < c.y + qp_b && (qp_m.x = parseInt(parseInt(a) / qp_a) * qp_a, qp_m.y = c.y, qp_m.visible = !0, qp_A("*"), qp_C())
+    qp_G(a, b) ? !0 == qp_p.visible ? (qp_p.visible = !1, qp_E(qp_H()), createjs.Ticker.addEventListener("tick", qp_D)) : qp_E(qp_H()) : b > c.y && b < c.y + qp_b && (qp_m.x = parseInt(parseInt(a) / qp_a) * qp_a, qp_m.y = c.y, qp_m.visible = !0, qp_A("*"), gameover_first())
 }
 
 function qp_H() {
@@ -162,23 +162,23 @@ function qp_F() {
     0 > qp_c && (qp_c = 4)
 }
 
-function qp_s(a) {
+function random(a) {
     return parseInt(100 * Math.random()) % a
 }
 
-function Qp_v() {
+function main_player() {
     this.initialize();
     this.genObjects()
 }
-Qp_v.prototype = new createjs.Container;
-Qp_v.prototype.genObjects = function() {
+main_player.prototype = new createjs.Container;
+main_player.prototype.genObjects = function() {
     var a;
     qp_f = [];
     for (var b = 0; 5 > b; b++)
         c = new createjs.Container,
         a = new createjs.Shape,
         a.graphics.beginFill("black").rect(0, 0, qp_a, qp_b),
-        c.x = qp_s(4) * qp_a, c.y = qp_b * (b - 1),
+        c.x = random(4) * qp_a, c.y = qp_b * (b - 1),
         a.clicked = 4 == b ? !0 : !1,
         c.addChild(a),
         this.addChild(c),
@@ -206,12 +206,12 @@ Qp_v.prototype.genObjects = function() {
     this.scoreText.y = 50;
     this.addChild(this.scoreText)
 };
-Qp_v.prototype.reset = function() {
+main_player.prototype.reset = function() {
     qp_o = qipaApp.score = 0;
     qp_c = 3;
-    qp_n = qp_s(qp_q.length);
+    qp_n = random(qp_q.length);
     qp_d = 0;
-    for (var a, b = 0; b < qp_f.length; b++) a = qp_f[b], a.x = qp_s(4) * qp_a, a.y = qp_b * (b - 1), a.clicked = 4 == b ? !0 : !1, 3 == b && (qp_p.x = a.x + 20, qp_p.y = a.y + 90, qp_p.visible = !0);
+    for (var a, b = 0; b < qp_f.length; b++) a = qp_f[b], a.x = random(4) * qp_a, a.y = qp_b * (b - 1), a.clicked = 4 == b ? !0 : !1, 3 == b && (qp_p.x = a.x + 20, qp_p.y = a.y + 90, qp_p.visible = !0);
     for (b = 0; b < qp_i.length; b++) qp_i[b].inUse = !1, qp_i[b].visible = !1;
     qp_h.y = 3 * qp_b;
     qp_h.visible = !0;
@@ -226,23 +226,23 @@ function qp_I() {
 function qp_D(a) {
     var b = qp_I();
     0 == qp_d ? (qp_d = a.timeStamp, qp_e = b) : (qp_e = (a.timeStamp - qp_d) * b / 20, qp_d = a.timeStamp);
-    for (a = 0; a < qp_f.length; a++) b = qp_f[a], b.y + qp_e > H ? !1 == b.clicked ? (qp_C(), b.y = -H / 4 + qp_e + b.y - H, b.x = qp_s(4) * qp_a) : (b.y = -H / 4 + qp_e + b.y - H, b.x = qp_s(4) * qp_a, b.clicked = !1) : b.y += qp_e;
+    for (a = 0; a < qp_f.length; a++) b = qp_f[a], b.y + qp_e > H ? !1 == b.clicked ? (gameover_first(), b.y = -H / 4 + qp_e + b.y - H, b.x = random(4) * qp_a) : (b.y = -H / 4 + qp_e + b.y - H, b.x = random(4) * qp_a, b.clicked = !1) : b.y += qp_e;
     for (a = 0; a < qp_i.length; a++) b = qp_i[a], b.y + qp_e > H ? (b.y = -H / 4 + qp_e + b.y - H, b.inUse = !1, b.visible = !1) : b.y += qp_e;
     for (a = 0; a < qp_g.length; a++) b = qp_g[a], b.y = b.y + qp_e > H ? -H / 2 + qp_e + b.y - H : b.y + qp_e;
     !0 == qp_h.visible && (qp_h.y + qp_e >= H ? qp_h.visible = !1 : qp_h.y += qp_e)
 }
 
-function qp_x() {
-    qipaShare.title = "别踩白块儿（钢琴块）";
+function share() {
+    qipaShare.title = "满足百元哥";
     if (0 == qipaApp.score) qipaShare.desc = qipaShare.title;
     else {
         var a = parseInt(Math.sqrt(1E4 * qipaApp.score / 300));
         99 < a && (a = "99.9");
-        qipaShare.desc = "别踩白块儿：我得了" + qipaApp.score + "分，战胜了" + a + "%的玩家。不服来战！"
+        qipaShare.desc = "满足百元哥：我给了" + qipaApp.score + "元，战胜了" + a + "%的玩家，快来挑战我吧，一起解救百元哥！"
     }
 }
 var _cfg = {
-    startFunc: qp_t,
+    startFunc: start,
     audio: {
         path: "audio/",
         manifest: [{
