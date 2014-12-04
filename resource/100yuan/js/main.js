@@ -226,9 +226,12 @@ function qp_I() {
 function qp_D(a) {
     var b = qp_I();
     0 == qp_d ? (qp_d = a.timeStamp, qp_e = b) : (qp_e = (a.timeStamp - qp_d) * b / 20, qp_d = a.timeStamp);
-    for (a = 0; a < qp_f.length; a++) b = qp_f[a], b.y + qp_e > H ? !1 == b.clicked ? (gameover_first(), b.y = -H / 4 + qp_e + b.y - H, b.x = random(4) * qp_a) : (b.y = -H / 4 + qp_e + b.y - H, b.x = random(4) * qp_a, b.clicked = !1) : b.y += qp_e;
-    for (a = 0; a < qp_i.length; a++) b = qp_i[a], b.y + qp_e > H ? (b.y = -H / 4 + qp_e + b.y - H, b.inUse = !1, b.visible = !1) : b.y += qp_e;
-    for (a = 0; a < qp_g.length; a++) b = qp_g[a], b.y = b.y + qp_e > H ? -H / 2 + qp_e + b.y - H : b.y + qp_e;
+    for (a = 0; a < qp_f.length; a++) // TODO
+        b = qp_f[a], b.y + qp_e > H ? !1 == b.clicked ? (gameover_first(), b.y = -H / 4 + qp_e + b.y - H, b.x = random(4) * qp_a) : (b.y = -H / 4 + qp_e + b.y - H, b.x = random(4) * qp_a, b.clicked = !1) : b.y += qp_e;
+    for (a = 0; a < qp_i.length; a++)
+        b = qp_i[a], b.y + qp_e > H ? (b.y = -H / 4 + qp_e + b.y - H, b.inUse = !1, b.visible = !1) : b.y += qp_e;
+    for (a = 0; a < qp_g.length; a++)
+        b = qp_g[a], b.y = b.y + qp_e > H ? -H / 2 + qp_e + b.y - H : b.y + qp_e;
     !0 == qp_h.visible && (qp_h.y + qp_e >= H ? qp_h.visible = !1 : qp_h.y += qp_e)
 }
 
