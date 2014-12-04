@@ -9,7 +9,9 @@ var qp_a = W / 4,
     qp_l = 150,
     qp_m, qp_n = 0,
     qp_o = 0,
-    qp_p, qp_q = ["jihijjjiiijlljihijjjjiijihjihijjjiiijlljihijjjjiijih", "jjkllkjihhijjiijjkllkjihhijihhiijhijkjhijkjhhiljjkllkjihhijihh", "hhllmmlkkjjiihllkkjjillkkjjihhllmmlkkjjiih"];
+    qp_p, qp_q = ["jihijjjiiijlljihijjjjiijihjihijjjiiijlljihijjjjiijih",
+         "jjkllkjihhijjiijjkllkjihhijihhiijhijkjhijkjhhiljjkllkjihhijihh",
+         "hhllmmlkkjjiihllkkjjillkkjjihhllmmlkkjjiih"];
 
 function qp_r() {
     qp_o >= qp_q[qp_n].length && (qp_o = 0, qp_n = qp_s(qp_q.length));
@@ -17,7 +19,16 @@ function qp_r() {
 }
 
 function qp_t(a) {
-    IS_ANDROID && (createjs.Sound.registMySound("h", 0), createjs.Sound.registMySound("i", 2), createjs.Sound.registMySound("j", 4), createjs.Sound.registMySound("k", 6), createjs.Sound.registMySound("l", 8), createjs.Sound.registMySound("m", 10), createjs.Sound.registMySound("n", 12), createjs.Sound.registMySound("silenttail", 14));
+    IS_ANDROID &&
+     (createjs.Sound.registMySound("h", 0),
+      createjs.Sound.registMySound("i", 2),
+      createjs.Sound.registMySound("j", 4), 
+      createjs.Sound.registMySound("k", 6), 
+      createjs.Sound.registMySound("l", 8), 
+      createjs.Sound.registMySound("m", 10), 
+      createjs.Sound.registMySound("n", 12), 
+      createjs.Sound.registMySound("silenttail", 14));
+
     qp_u();
     qipaStage.stage.player = new Qp_v;
     qipaStage.stage.addChild(qipaStage.stage.player);
@@ -63,13 +74,20 @@ function Qp_w() {
         IS_TOUCH && a.nativeEvent instanceof MouseEvent || qp_z()
     });
     this.addChild(this.bt_regame);
+
     ENABLE_SHARE && (this.bt_share = new createjs.Text("分享", "bold 48px Arial", "white"), this.bt_share.x = 440, this.bt_share.y = 650,
         a = new createjs.Shape, a.graphics.beginFill("black").rect(0, 0, 150, 50), this.bt_share.hitArea = a, this.bt_share.on("click", function(a) {
             IS_TOUCH && a.nativeEvent instanceof MouseEvent || qipaStage.showShareTip()
         }), this.addChild(this.bt_share));
-    ENABLE_LB && (this.bt_top = new createjs.Text("排行榜", "bold 48px Arial", "white"), this.bt_top.x = 240, this.bt_top.y = 650, a = new createjs.Shape, a.graphics.beginFill("black").rect(0, 0, 150, 50), this.bt_top.hitArea = a, this.bt_top.on("click", function(a) {
-        IS_TOUCH && a.nativeEvent instanceof
-        MouseEvent || window.open("../lb.html?gid=" + GID)
+
+    ENABLE_LB && (this.bt_top = new createjs.Text("排行榜", "bold 48px Arial", "white"),
+                    this.bt_top.x = 240, this.bt_top.y = 650,
+                    a = new createjs.Shape,
+                    a.graphics.beginFill("black").rect(0, 0, 150, 50),
+                    this.bt_top.hitArea = a,
+                    this.bt_top.on("click", function(a) {
+                        IS_TOUCH && a.nativeEvent instanceof
+                        MouseEvent || window.open("../lb.html?gid=" + GID)
     }), this.addChild(this.bt_top))
 }
 Qp_w.prototype = new createjs.Container;
