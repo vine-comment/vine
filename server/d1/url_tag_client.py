@@ -67,8 +67,17 @@ class TagManager(object):
         pass
 
     @staticmethod
-    def addj(*args, **kwargs):
-        pass
+    def addjson(*args, **kwargs):
+        fname = 'data/cn.json'
+        alexa_items = []
+        with open(fname) as f:
+            import json
+            for line in f:
+                # print line, type(line)
+                alexa_item = json.loads(line)
+                # print alexa_item, type(alexa_item)
+                alexa_items.append(alexa_item)
+        print len(alexa_items)
 
 def main():
     exist_arg = False
