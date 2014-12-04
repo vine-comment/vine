@@ -178,13 +178,13 @@ Qp_v.prototype.genObjects = function() {
         c = new createjs.Container,
         a = new createjs.Shape,
         a.graphics.beginFill("black").rect(0, 0, qp_a, qp_b),
-        a.x = qp_s(4) * qp_a, a.y = qp_b * (b - 1),
+        c.x = qp_s(4) * qp_a, c.y = qp_b * (b - 1),
         a.clicked = 4 == b ? !0 : !1,
         c.addChild(a),
         this.addChild(c),
-        (qp_p = new createjs.Text("一元", "bold 60px Arial", "white"), qp_p.x = a.x + 20, qp_p.y = a.y + 90, this.addChild(qp_p)),
+        (qp_p = new createjs.Text("一元", "bold 60px Arial", "white"), qp_p.x = a.x + 20, qp_p.y = a.y + 90, c.addChild(qp_p)),
         // 3 == b && (qp_p = new createjs.Text("开始", "bold 60px Arial", "white"), qp_p.x = a.x + 20, qp_p.y = a.y + 90, this.addChild(qp_p)),
-        qp_f.push(a);
+        qp_f.push(c);
 
     qp_m = new createjs.Shape;
     qp_m.graphics.beginFill("red").rect(0, 0, qp_a, qp_b);
