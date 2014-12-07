@@ -14,7 +14,6 @@ from registration.views import RegistrationView as BaseRegistrationView
 class ActivationCompleteView(TemplateView):
     template_name='registration/activation_complete.html'
 
-
 class RegistrationView(BaseRegistrationView):
     """
     A registration backend which follows a simple workflow:
@@ -113,6 +112,26 @@ class RegistrationView(BaseRegistrationView):
         """
         return ('registration_complete', (), {})
 
+class RegistrationSimpleView(BaseRegistrationView):
+
+    def register(self, request, **cleaned_data):
+        username, email, password = cleaned_data['username'], cleaned_data['email'], cleaned_data['password1']
+        if Site._meta.installed:
+            site = Site.objects.get_current()
+        else:
+            site = RequestSite(request)
+        new_user = RegistrationProfile.objects.create_inactive_user(username, email,
+                                                                    password, site)
+        signals.user_registered.send(sender=self.__class__,
+                                     user=new_user,
+                                     request=request)
+        return new_user
+
+    def registration_allowed(self, request):
+        return getattr(settings, 'REGISTRATION_OPEN', True)
+
+    def get_success_url(self, request, user):
+        return ('registration_complete_simple', (), {})
 
 class ActivationView(BaseActivationView):
     def activate(self, request, activation_key):

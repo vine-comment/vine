@@ -14,6 +14,7 @@ from django.contrib.auth.decorators import login_required
 
 from registration.forms import RegistrationFormTermsOfService
 from registration.backends.simple.views import RegistrationView
+from registration.backends.default.views import RegistrationSimpleView
 
 
 # NOT USE NOW.
@@ -83,6 +84,9 @@ urlpatterns += patterns('',
     url(r'^accounts/register/$',
           RegistrationView.as_view(form_class=VineRegistrationForm),
           name='registration_register'),
+    url(r'^accounts/register/simple/$',
+          RegistrationSimpleView.as_view(form_class=VineRegistrationForm),
+          name='registration_register_simple'),
     url(r'^index$', TemplateView.as_view(template_name='index.html'), name='index'),
     url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT}),
 )

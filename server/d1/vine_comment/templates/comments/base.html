@@ -103,7 +103,7 @@
 					  <h4 class="modal-title" id="myModalLabel">注册</h4>
 					</div>
 					<div class="modal-body">
-					  <form class="form" method="post" action="{% url 'registration_register' %}">
+					  <form class="form" method="post" action="{% url 'registration_register_simple' %}">
 						{% csrf_token %}
 						{{ registration_form|crispy }}
 						<div class="control-group">
