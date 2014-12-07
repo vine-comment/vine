@@ -76,9 +76,14 @@ class TagManager(object):
                 # print line, type(line)
                 alexa_item = json.loads(line)
                 print index, json.dumps(alexa_item, encoding='utf-8', ensure_ascii=False)
-                #Url.objects.get_or_create(url=url, content=url)
+                # Url.objects.get_or_create(url=url, content=url)
                 # print alexa_item, type(alexa_item)
                 alexa_items.append(alexa_item)
+
+                url, _ = Url.objects.get_or_create(url=alexa_item['url'], content=alexa_item['url'])
+                url_tag, _ = Tag.objects.get_or_create(name=alexa_item['category'])
+                url_tag.urls.append(url.id)
+                url_tag.save()
         print len(alexa_items)
 
 def main():
