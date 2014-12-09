@@ -60,8 +60,8 @@ class Author(TimeMixin, models.Model):
     is_not_human = models.BooleanField(default=False) #trust at first time
     title = models.CharField(max_length=64, null=True)
     points = models.IntegerField(default=0)
-    continuous_login = models.IntegerField(default=0)
-    history_c_login = models.IntegerField(default=0)
+    continuous_login = models.IntegerField(default=1)
+    history_c_login = models.IntegerField(default=1)
     last_login = models.DateTimeField(blank=True, null=True)
     comments_sum = models.IntegerField(default=0)
 
