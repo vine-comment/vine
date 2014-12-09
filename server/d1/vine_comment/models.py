@@ -4,6 +4,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from djangotoolbox.fields import EmbeddedModelField, ListField
 from django.utils.timezone import utc
+from django.contrib.auth.signals import user_logged_in
 import datetime
 
 class TimeMixin(models.Model):
@@ -61,10 +62,30 @@ class Author(TimeMixin, models.Model):
     points = models.IntegerField(default=0)
     continuous_login = models.IntegerField(default=0)
     history_c_login = models.IntegerField(default=0)
+    last_login = models.DateTimeField(blank=True, null=True)
     comments_sum = models.IntegerField(default=0)
 
     def __unicode__(self):
         return self.user.name
+
+    def login_stat(sender, user, request, **kwargs):
+        authors = Author.objects.filter(user=user)
+        if len(authors) > 0:
+            author = authors[0]
+        else:
+            return
+        now = datetime.datetime.now()
+        days = (now - user.last_login).days
+        if days == 1:
+            author.continuous_login += 1
+            if author.continous_login > author.history_c_login:
+                author.history_c_login = author.continuous_login
+        elif days > 1:
+            author.continuous_login = 0
+        author.save()
+        print "=======xxxxxxxxxxxxx=====",days, "xxx", user.last_login
+
+    user_logged_in.connect(login_stat)
 
 class Url(models.Model):
     url = models.URLField(max_length=2048)
