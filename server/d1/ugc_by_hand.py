@@ -1,20 +1,20 @@
 #!/usr/bin/env python
 #coding:utf8
 
+import argparse
 import os
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "d1.settings")
 
-from vine_comment.models import Url, Tag, Comment
-import argparse
+from vine_comment.models import Url, Comment
 
 parser = argparse.ArgumentParser(description='UGC CRUD Client.')
-parser.add_argument('-a', '--add', help='add comment', nargs=2, metavar=('url', 'tag'))
-parser.add_argument('-r', '--rem', help='rem comment', nargs=2, metavar=('url', 'tag'))
-parser.add_argument('-g', '--get', help='get comment', nargs=2, metavar=('url', 'tag'))
-parser.add_argument('-m', '--mod', help='mod comment', nargs=2, metavar=('url', 'tag'))
+parser.add_argument('-a', '--add', help='add comment', nargs=2, metavar=('url', 'comment'))
+parser.add_argument('-r', '--rem', help='rem comment', nargs=2, metavar=('url', 'comment'))
+parser.add_argument('-g', '--get', help='get comment', nargs=2, metavar=('url', 'comment'))
+parser.add_argument('-m', '--mod', help='mod comment', nargs=2, metavar=('url', 'comment'))
 
-cmds = ['add', 'rem', 'get', 'mod', 'gett', 'getu', 'addjson']
-short_cmds = ['a', 'r', 'g', 'm', 'gt', 'gu', 'aj']
+cmds = ['add', 'rem', 'get', 'mod']
+short_cmds = ['a', 'r', 'g', 'm']
 
 class TagManager(object):
     @staticmethod
