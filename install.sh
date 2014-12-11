@@ -10,12 +10,13 @@ install_pypackages()
 {
     # NOTE: If you're using windows, please use Pillow installer from here: http://www.lfd.uci.edu/~gohlke/pythonlibs/
     # (Pillow is a better maintained PIL lib.)
-    items_pip="django-registration django-crispy-forms django-admin-bootstrapped django-haystack jieba Whoosh Pillow python-social-auth python-memcached django_akismet_comments elasticsearch pyelasticsearch django-avatar pytz pygeoip dnspython pydkim"
+    items_pip="django-registration django-crispy-forms django-admin-bootstrapped django-haystack jieba Whoosh Pillow python-social-auth python-memcached django_akismet_comments elasticsearch pyelasticsearch django-avatar pytz pygeoip dnspython"
 
     for i in $items_pip; do
         pip install -i http://pypi.douban.com/simple $i
     done
 
+    pip install --allow-external pydkim --allow-unverified pydkim pydkim
 
     #########################
     # django-nonrel section #
