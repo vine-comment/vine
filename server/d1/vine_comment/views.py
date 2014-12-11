@@ -93,9 +93,9 @@ class CommentView(TemplateView):
         else:
             return False
 
-
+    @staticmethod
     @csrf_exempt
-    def _post_comment(self, index_url, comment_str, author_ip, user):
+    def _post_comment(index_url, comment_str, author_ip, user):
         title = urlparse(index_url).netloc
 
         # print comment_str, user
@@ -248,7 +248,7 @@ class CommentView(TemplateView):
         comments_new = Comment.objects.order_by('-time_added').all()
         p_new = Paginator(comments_new, 3).page(1)
 
-		#RELEVANT 
+		#RELEVANT
         index_url = base64.b64decode(url_b64)
         url_objects = Url.objects.filter(url=index_url)
         if len(url_objects) == 0:
@@ -278,7 +278,7 @@ class CommentView(TemplateView):
 
                 logger.info(str(len(tags)) + ': ' + str(tags))
                 p_tag = Paginator(tags, 3).page(1)
-        
+
         template_name = kwargs.get('template', self.template_meta)
         form = CaptchaTestForm()
 
@@ -387,7 +387,7 @@ class CommentShowMsgView(TemplateView):
         p_new = Paginator(comments_new, 3).page(1)
 
 
-		#RELEVANT 
+		#RELEVANT
         index_url = base64.b64decode(url_b64)
         url_objects = Url.objects.filter(url=index_url)
         if len(url_objects) == 0:
@@ -856,37 +856,37 @@ class CommentShowNewListView(TemplateView):
     def get(self, request, *args, **kwargs):
 # need to use time_modified instead of time added
         flag = kwargs['flag']
-        
+
 		#NEW
         comments_new = Comment.objects.order_by('-time_added').all()
         if flag == 'max':
             p = Paginator(comments_new, 10).page(1)
         else :
             p = Paginator(comments_new, 3).page(1)
-            
+
 
         return render(request, self.template_name, {
             'p_comment_new': p,
         })
-        
+
 class CommentShowHotListView(TemplateView):
     template_name = 'comments/comments_plugin_hot.html'
 
     def get(self, request, *args, **kwargs):
 # need to use time_modified instead of time added
         flag = kwargs['flag']
-        
+
         comments_hot = Comment.objects.order_by('-time_added').filter(time_added__gte=datetime.datetime.now()-timedelta(days=30))
         comments_hot = sorted(comments_hot,key=lambda o:len(o.up_users),reverse=True)
         if flag == 'max':
             p = Paginator(comments_hot, 10).page(1)
         else :
             p = Paginator(comments_hot, 3).page(1)
-        
+
         return render(request, self.template_name, {
             'p_comment_hot': p,
         })
-        
+
 class CommentDetailView(TemplateView):
     template_name = 'comments/comment_detail_view.html'
 
