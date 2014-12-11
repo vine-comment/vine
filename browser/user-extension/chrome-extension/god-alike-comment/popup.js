@@ -13,5 +13,5 @@ chrome.tabs.getSelected(null,function(tab) {
 	if (!window.btoa) window.btoa = base64.encode;
 	//$('body').append('<div id="vine_comment_iframe">Loading...</div>');
 	$.support.cors = true;
-	$('body iframe').attr('src', "http://tengmanpinglun.com/comment/" + btoa(tablink));
+	$('body iframe').attr('src', "http://www.tengmanpinglun.com/comment/" + btoa(tablink));
 });
