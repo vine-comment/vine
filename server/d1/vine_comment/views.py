@@ -111,7 +111,7 @@ class CommentView(TemplateView):
                                     url=index_url,
                                     title=title)
         comment_board.save() if created else None
-        if user.is_authenticated():
+        if user and user.is_authenticated():
             author = get_author(user)
             comment = Comment(
                     time_added=datetime.datetime.utcnow().replace(

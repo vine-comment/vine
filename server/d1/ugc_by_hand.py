@@ -6,6 +6,7 @@ import os
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "d1.settings")
 
 from vine_comment.models import Url, Comment
+from vine_comment.views import CommentView
 
 parser = argparse.ArgumentParser(description='UGC CRUD Client.')
 parser.add_argument('-a', '--add', help='add comment', nargs=2, metavar=('url', 'comment'))
@@ -16,21 +17,21 @@ parser.add_argument('-m', '--mod', help='mod comment', nargs=2, metavar=('url', 
 cmds = ['add', 'rem', 'get', 'mod']
 short_cmds = ['a', 'r', 'g', 'm']
 
-class TagManager(object):
+class UGCManager(object):
     @staticmethod
-    def add(url, tag):
+    def add(url='http://www.default-test.com/', comment='default-test-comment'):
+        CommentView._post_comment(url, comment, author_ip="1.2.3.4", user=None)
+
+    @staticmethod
+    def rem(url, comment):
         pass
 
     @staticmethod
-    def rem(url, tag):
+    def get(url, comment):
         pass
 
     @staticmethod
-    def get(url, tag):
-        pass
-
-    @staticmethod
-    def mod(url):
+    def mod(url, comment):
         pass
 
 def main():
@@ -51,7 +52,7 @@ def main():
         if args[key] is None:
             continue
         print(key+' '+str(args[key]))
-        func = getattr(TagManager, key)
+        func = getattr(UGCManager, key)
         if len(args[key]) == 1:
             func(args[key][0])
         elif len(args[key]) == 2:
