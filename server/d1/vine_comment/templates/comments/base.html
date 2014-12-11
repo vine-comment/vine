@@ -36,7 +36,7 @@
 		  </li>
 		  <li>
 			{% if user.is_authenticated %}
-			  <li class="dropdown" style="float:right">
+			  <li class="dropdown" style="float:left">
 				<a class="dropdown-toggle" data-toggle="dropdown" href="#">
 				  {{ user.username }}<span class="caret"></span>
 				</a>
@@ -46,8 +46,8 @@
 				  <a href="/logout/">{{ assoc.provider }} logout</a>
 				</li>
 			  {% endfor %}
-				<li><a href="/logout/">normal logout</a></li>
-				<li><a href="/home/simple">Home Page</a></li>
+				<li><a href="/home/simple">主页</a></li>
+				<li><a href="/logout/">退出</a></li>
 				</ul>
 			  </li>
 			{% else %}

@@ -6,7 +6,7 @@
 
   <div class="row">
 
-    <div id="user-info-view" class="col-md-2 pull-left">
+    <div id="user-info-view" class="col-md-2 col-xs-3 pull-left">
       <div class="avatar-wrapper">
         <!--a onclick="showForm(this, 'picForm')" title="更换头像" href='#'-->
         <a href="{% url 'avatar_change' %}" title="更换头像">
@@ -28,7 +28,7 @@
       </div>
     </div>
 
-    <div id="user-info-view" class="col-md-2 pull-left">
+    <div id="user-info-view" class="col-md-2 col-xs-3 pull-left">
       <div class="user-details">
         <div class="user-details-show">
           <div class="user-identifier user-details-editable">
@@ -48,7 +48,7 @@
 持续时间    <span class="stat-count"> XXX </span> 天
 <div class="last-coded">上次编码<span class="last-coded-time"> XXX 天前</span></div>
 -->
-    <div class="login-stats col-md-2">
+    <div class="login-stats col-md-2 col-xs-3 pull-left">
       <div class="user-points-bar-container">
         <div class="points-labels">
           <span class="clogin">连续登录<strong>{{ author.continuous_login }}天</strong></span>
@@ -62,7 +62,7 @@
       </div>
     </div>
 
-    <div class="user-stats col-md-2">
+    <div class="user-stats col-md-2 col-xs-3 pull-left">
       <div class="user-points-bar-container">
         <div class="points-labels">
           <span class="comments_sum">发表评论<strong>{{ author.comments_sum }}条</strong></span>
