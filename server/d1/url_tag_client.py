@@ -1,13 +1,11 @@
 #!/usr/bin/env python
 #coding:utf8
 
-
 import os
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "d1.settings")
 
 from vine_comment.models import Url, Tag
 import argparse
-
 
 parser = argparse.ArgumentParser(description='Url Tag Combination Client.')
 parser.add_argument('-a', '--add', help='add url tag combination', nargs=2, metavar=('url', 'tag'))
