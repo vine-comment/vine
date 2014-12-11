@@ -120,7 +120,7 @@ class Comment(TimeMixin, models.Model):
     tags = ListField(EmbeddedModelField('Tag'))
 
     def __unicode__(self):
-        return self.time_added.strftime("%Y-%m-%d %H:%M:%S") + self.title + ' ' + self.comment_str
+        return self.time_added.strftime("%Y-%m-%d %H:%M:%S") + ' ' + self.title + ' ' + self.comment_str
 
     @models.permalink
     def get_absolute_url(self):
