@@ -64,7 +64,7 @@ class Author(TimeMixin, models.Model):
     history_c_login = models.IntegerField(default=1)
     last_login = models.DateTimeField(blank=True, null=True)
     last_logout = models.DateTimeField(blank=True,
-        default=datetime.datetime.now())
+        default=datetime.datetime.utcnow().replace(tzinfo=utc))
     comments_sum = models.IntegerField(default=0)
 
     def __unicode__(self):
@@ -83,7 +83,7 @@ class Author(TimeMixin, models.Model):
             author = authors[0]
         else:
             return
-        author.last_logout = datetime.datetime.now()
+        author.last_logout = datetime.datetime.utcnow().replace(tzinfo=utc)
 
     #user_logged_in.connect(login_stat)
     user_logged_out.connect(logout_stat)
