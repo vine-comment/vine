@@ -33,6 +33,42 @@ from captcha.models import CaptchaStore
 logger = logging.getLogger( __name__ )
 
 ########################################################################
+# helpers
+########################################################################
+def update_session(request):
+    # get now time just at a request arrived
+    now = datetime.datetime.utcnow().replace(tzinfo=utc)
+    if not request.user or not request.user.is_authenticated():
+        return
+    authors = Author.objects.filter(user=request.user)
+    if len(authors) > 0:
+        author = authors[0]
+    else:
+        return
+
+    last_request = request.session['last_request']
+# logout will clean the session cookie, 
+# so we use the last logout time as the last_request
+    if last_request == None:
+        last_request = author.last_logout
+
+    diff = (now - last_request).days
+    print "11111111111111111111:",diff
+    days = now.day - last_request.day
+    print "22222222222222222222:",days
+    if days == 1:
+        author.continuous_login += 1
+        if author.continous_login > author.history_c_login:
+            author.history_c_login = author.continuous_login
+    elif days > 1:
+        author.continuous_login = 0 
+    author.save()
+    print "=======xxxxxxxxxxxxx=====",days, "xxx", user.last_login
+    request.session['last_request'] = now 
+        
+
+
+########################################################################
 # 核心代码释义
 #
 # Client代码(tamper monkey)：
@@ -54,6 +90,7 @@ class CommentIframeView(TemplateView):
 
     # 此view是server第一入口，回应iframe信息
     def get(self, request, *args, **kwargs):
+        update_session(request)
         url_b64 = kwargs.get('url_b64', self.index_default_str)
         print "................."
         print request.path
@@ -175,6 +212,7 @@ class CommentView(TemplateView):
 
     @csrf_exempt
     def post(self, request, *args, **kwargs):
+        update_session(request)
         comment_str = request.POST.get('comment', 'Empty Comment')
         author_ip = request.META.get('REMOTE_ADDR', '0.0.0.0')
         # For Nginx
@@ -231,6 +269,7 @@ class CommentView(TemplateView):
     # 注：get方法除了正常request中调用，也会在post之后被调用，但template由post给出
     # TODO: https://github.com/frankban/django-endless-pagination
     def get(self, request, *args, **kwargs):
+        update_session(request)
         #print request
         index_page = request.GET.get('page', 1)
         index_url = kwargs.get('index_url', self.index_default_str)
@@ -314,6 +353,7 @@ class CommentView(TemplateView):
 class CommentDeleteView(TemplateView):
 
     def get(self, request, id):
+        update_session(request)
         comments = Comment.objects.filter(id=id)
         if len(comments) == 0:
             return HttpResponse(status=404)
@@ -327,6 +367,7 @@ class CommentDeleteView(TemplateView):
 class CommentModifyView(TemplateView):
 
     def post(self, request, id):
+        update_session(request)
         comment_str = request.POST.get('comment_str',None)
         comment_tags = request.POST.get('comment_tags',None)
         comments = Comment.objects.filter(id=id)
@@ -370,6 +411,7 @@ class CommentShowMsgView(TemplateView):
     template_list = 'comments/comment_list.html'
 
     def get(self, request, *args, **kwargs):
+        update_session(request)
         #print request
         index_page = request.GET.get('page', 1)
         index_url = kwargs.get('index_url', self.index_default_str)
@@ -447,6 +489,7 @@ class CommentRawView(TemplateView):
     template_meta = 'comments/comment_view_meta.html'
 
     def get(self, request, *args, **kwargs):
+        update_session(request)
         #print request
         index_page = request.GET.get('page', 1)
         index_url = kwargs.get('index_url', self.index_default_str)
@@ -479,40 +522,47 @@ class AccountView(TemplateView):
     template_name = 'comments/account_view.html'
 
     def get(self, request, *args, **kwargs):
+        update_session(request)
         return render(request, self.template_name)
 
 class LetterView(TemplateView):
     template_name = 'comments/letter_view.html'
 
     def get(self, request, *args, **kwargs):
+        update_session(request)
         return render(request, self.template_name)
 
 class SettingView(TemplateView):
     template_name = 'comments/setting_view.html'
 
     def get(self, request, *args, **kwargs):
+        update_session(request)
         return render(request, self.template_name)
 
 class AccountRawView(TemplateView):
     template_name = 'comments/account_raw.html'
 
     def get(self, request, *args, **kwargs):
+        update_session(request)
         return render(request, self.template_name)
 
 class LetterRawView(TemplateView):
     template_name = 'comments/letter_raw.html'
 
     def get(self, request, *args, **kwargs):
+        update_session(request)
         return render(request, self.template_name)
 
 class SettingRawView(TemplateView):
     template_name = 'comments/setting_raw.html'
 
     def get(self, request, *args, **kwargs):
+        update_session(request)
         return render(request, self.template_name)
 
 class CommentUpView(TemplateView):
     def get(self, request, id):
+        update_session(request)
         if not request.user.is_authenticated():
             return HttpResponse('non-user', mimetype='plain/text')
         comments = Comment.objects.filter(id=id)
@@ -536,6 +586,7 @@ class CommentUpView(TemplateView):
 
 class CommentDownView(TemplateView):
     def get(self, request, id):
+        update_session(request)
         if not request.user.is_authenticated():
             return HttpResponse('non-user', mimetype='plain/text')
         comments = Comment.objects.filter(id=id)
@@ -562,6 +613,7 @@ class CommentReplyView(TemplateView):
     template_name = 'reply.html'
 
     def get(self, request, id):
+        update_session(request)
         comments = Comment.objects.filter(id=id)
         if not comments:
             return HttpResponse(status=404)
@@ -572,6 +624,7 @@ class CommentReplyView(TemplateView):
         })
 
     def post(self, request, id):
+        update_session(request)
         comments = Comment.objects.filter(id=id)
         reply_str = request.POST.get('reply_str')
         if not comments:
@@ -615,12 +668,14 @@ def expected_rating(o):
 class CommentsView(TemplateView):
 
     def get(self, request, *args, **kwargs):
+        update_session(request)
         return HttpResponseRedirect('/comments/best')
 
 class CommentsTagView(TemplateView):
     template_name = 'comments_tag.html'
 
     def get(self, request, *args, **kwargs):
+        update_session(request)
         flag = kwargs['flag']
         if flag == 'simple':
             self.template_name = 'comments_tag_simple.html'
@@ -668,6 +723,7 @@ class CommentsRelatedView(TemplateView):
     template_name = 'comments_list_tag.html'
 
     def get(self, request, url_b64):
+        update_session(request)
         index_url = base64.b64decode(url_b64)
         url_objects = Url.objects.filter(url=index_url)
         if len(url_objects) == 0:
@@ -712,6 +768,7 @@ class CommentsBestView(TemplateView):
     template_name = 'comments_best.html'
 
     def get(self, request, *args, **kwargs):
+        update_session(request)
         comments = Comment.objects.order_by('-time_added').all()
         comments = sorted(comments,key=lambda x:len(x.up_users)-len(x.down_users),reverse=True)
         comments = sorted(comments,key=lambda x:expected_rating(x),reverse=True)
@@ -738,6 +795,7 @@ class CommentsNewestView(TemplateView):
     template_name = 'comments_newest.html'
 
     def get(self, request, *args, **kwargs):
+        update_session(request)
         comments = Comment.objects.order_by('-time_added').all()
         comments = sys.modules['__builtin__'].list(comments)
         index_page = request.GET.get('page', 1)
@@ -763,6 +821,7 @@ class CommentsHotView(TemplateView):
     template_name = 'comments_hot.html'
 
     def get(self, request, days):
+        update_session(request)
 # need to use time_modified instead of time added
         comments = Comment.objects.order_by('-time_added').filter(time_added__gte=datetime.datetime.now()-timedelta(days=eval(days)))
         comments = sorted(comments,key=lambda o:len(o.replies),reverse=True)
@@ -790,6 +849,7 @@ class CommentsUpView(TemplateView):
     template_name = 'comments_up.html'
 
     def get(self, request, days):
+        update_session(request)
 # need to use time_modified instead of time added
         comments = Comment.objects.order_by('-time_added').filter(time_added__gte=datetime.datetime.now()-timedelta(days=eval(days)))
         comments = sorted(comments,key=lambda o:len(o.up_users),reverse=True)
@@ -826,6 +886,7 @@ class CommentsDebateView(TemplateView):
     template_name = 'comments_debate.html'
 
     def get(self, request, days):
+        update_session(request)
 # need to use time_modified instead of time added
         comments = Comment.objects.order_by('-time_added').filter(time_added__gte=datetime.datetime.now()-timedelta(days=eval(days)))
         comments = sorted(comments,key=lambda o:debate_index(o))
@@ -854,6 +915,7 @@ class CommentShowNewListView(TemplateView):
     template_name = 'comments/comments_plugin_new.html'
 
     def get(self, request, *args, **kwargs):
+        update_session(request)
 # need to use time_modified instead of time added
         flag = kwargs['flag']
 
@@ -873,6 +935,7 @@ class CommentShowHotListView(TemplateView):
     template_name = 'comments/comments_plugin_hot.html'
 
     def get(self, request, *args, **kwargs):
+        update_session(request)
 # need to use time_modified instead of time added
         flag = kwargs['flag']
 
@@ -891,6 +954,7 @@ class CommentDetailView(TemplateView):
     template_name = 'comments/comment_detail_view.html'
 
     def get(self, request, id, *args, **kwargs):
+        update_session(request)
         comment = Comment.objects.filter(id=id)[0]
         return render(request, self.template_name, {'comment': comment})
 
@@ -912,6 +976,7 @@ class HomeView(TemplateView):
     template_name = 'home.html'
 
     def get(self, request, *args, **kwargs):
+        update_session(request)
         flag = kwargs['flag']
         if flag == 'simple':
             self.template_name = 'home_simple.html'
@@ -941,9 +1006,11 @@ class HomeView(TemplateView):
 class UserHeadSculptureView(TemplateView):
 
     def get(self, request, *args, **kwargs):
+        update_session(request)
         return HttpResponseForbidden('allowed only via POST')
 
     def post(self, request, *args, **kwargs):
+        update_session(request)
         form = UploadHeadSculptureForm(request.POST, request.FILES)
         if form.is_valid():
             author = get_author(request.user)
