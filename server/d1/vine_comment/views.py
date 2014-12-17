@@ -9,6 +9,8 @@ import base64
 import logging
 import math
 import sys
+from bson import json_util
+import json
 
 # django modules
 from django.http import *
@@ -46,11 +48,14 @@ def update_session(request):
     else:
         return
 
-    last_request = request.session['last_request']
 # logout will clean the session cookie, 
 # so we use the last logout time as the last_request
-    if last_request == None:
-        last_request = author.last_logout
+    if 'last_request' not in request.session:
+        request.session['last_request'] = json.dumps(
+                author.last_logout, default=json_util.default)
+
+    last_request = json.loads(request.session['last_request'],
+            object_hook=json_util.object_hook).replace(tzinfo=utc)
 
     diff = (now - last_request).days
     print "11111111111111111111:",diff
@@ -63,8 +68,8 @@ def update_session(request):
     elif days > 1:
         author.continuous_login = 0 
     author.save()
-    print "=======xxxxxxxxxxxxx=====",days, "xxx", user.last_login
-    request.session['last_request'] = now 
+    request.session['last_request'] = json.dumps(
+                                        now, default=json_util.default)
         
 
 

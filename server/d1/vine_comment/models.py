@@ -63,7 +63,8 @@ class Author(TimeMixin, models.Model):
     continuous_login = models.IntegerField(default=1)
     history_c_login = models.IntegerField(default=1)
     last_login = models.DateTimeField(blank=True, null=True)
-    last_logout = models.DateTimeField(blank=True, null=True)
+    last_logout = models.DateTimeField(blank=True,
+        default=datetime.datetime.now())
     comments_sum = models.IntegerField(default=0)
 
     def __unicode__(self):
