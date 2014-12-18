@@ -63,7 +63,7 @@ def update_session(request):
     print "22222222222222222222:",days
     if days == 1:
         author.continuous_login += 1
-        if author.continous_login > author.history_c_login:
+        if author.continuous_login > author.history_c_login:
             author.history_c_login = author.continuous_login
     elif days > 1:
         author.continuous_login = 0 
