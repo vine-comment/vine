@@ -57,10 +57,8 @@ def update_session(request):
     last_request = json.loads(request.session['last_request'],
             object_hook=json_util.object_hook).replace(tzinfo=utc)
 
-    diff = (now - last_request).days
-    print "11111111111111111111:",diff
     days = now.day - last_request.day
-    print "22222222222222222222:",days
+    print "22222222222222222222:",days,now,last_request
     if days == 1:
         author.continuous_login += 1
         if author.continuous_login > author.history_c_login:

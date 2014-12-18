@@ -84,6 +84,7 @@ class Author(TimeMixin, models.Model):
         else:
             return
         author.last_logout = datetime.datetime.utcnow().replace(tzinfo=utc)
+        author.save()
 
     #user_logged_in.connect(login_stat)
     user_logged_out.connect(logout_stat)
