@@ -19,6 +19,8 @@ from django.views.generic import *
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.utils.timezone import utc
 from django.views.decorators.csrf import csrf_exempt
+from django.contrib.auth.signals import user_logged_out
+from django.dispatch import receiver
 
 from django_akismet_comments import AkismetModerator
 from akismet import *
@@ -37,6 +39,27 @@ logger = logging.getLogger( __name__ )
 ########################################################################
 # helpers
 ########################################################################
+def login_stat(sender, user, request, **kwargs):
+    authors = Author.objects.filter(user=user)
+    if len(authors) > 0:
+        author = authors[0]
+    else:
+        return
+
+@receiver(user_logged_out)
+def logout_stat(sender, user, request, **kwargs):
+    update_session(request)
+    authors = Author.objects.filter(user=user)
+    if len(authors) > 0:
+        author = authors[0]
+    else:
+        return
+    author.last_logout = datetime.datetime.utcnow().replace(tzinfo=utc)
+    author.save()
+
+#user_logged_in.connect(login_stat)
+#user_logged_out.connect(logout_stat)
+
 def update_session(request):
     # get now time just at a request arrived
     now = datetime.datetime.utcnow().replace(tzinfo=utc)
