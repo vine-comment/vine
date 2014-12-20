@@ -7,7 +7,7 @@
 
 <head>
   <meta charset="utf-8">
-  <title>藤蔓评论 - 最前沿的社会化评论社区</title>
+  <title>藤蔓评论 - 发现更大的世界</title>
   <link href="{% static 'favicon/favicon.ico' %}" type="image/x-icon" rel="shortcut icon">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="">
@@ -78,9 +78,11 @@
   		</div>
   	</div>
   </div>
+  {% comment %}
     <div class="panel panel-default">
       <div class="panel-body"> 每日推荐  预留 </div>
     </div>
+  {% endcomment %}
     
     <div id="showMsg">
     {% block content %}
@@ -88,8 +90,12 @@
     </div> <!-- /#showMsg -->
   </div> <!-- /#col-lg-9 -->
 
-  <div class="col-lg-3 panel panel-default" style="height:800px">
-      <br/> 占位符
+  <div class="col-lg-3">
+    <div class="panel panel-default" style="height:200px; padding:10px;">
+		TODO-UI</br></br>
+		<strong>Annoymous</strong></br></br>
+		发帖数：2</br>回帖数：39</br>浏览数：1024</br>点赞数：67
+    </div>
   </div>
 </div>
 
