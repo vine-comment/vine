@@ -5,15 +5,6 @@
   "description": "Ultimate 3rd party comment system",
   "version": "0.1",
    
-  "comment": {
-   "content_scripts": [ {
-      "all_frames": true,
-      "js": [ "jquery.min.js","shentucao.js" ],
-      "matches": [ "http://*/*" ],
-	  "exclude_matches": [ "https://*/*", "http://www.tengmanpinglun.com/*" ]
-   } ]
-   },
-
    "browser_action": {
       "default_icon": "icons/browser_action_disabled.png",
       "default_popup": "popup.html"
