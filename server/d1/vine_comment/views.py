@@ -131,27 +131,27 @@ class CommentView(TemplateView):
         #ak = Akismet(key=settings.AKISMET_API_KEY,blog_url='http://www.abfeucd')
         ak = Akismet(key='d56b9a5394bf',blog_url='http://www.abfeucd')
 
-		try:
-			if ak.verify_key():
-				data = {
-				'user_ip': '',
-				'user_agent': '',
-				'referrer': '',
-				'comment_type': 'comment',
-				'comment_author': '',
-				}
-				if ak.comment_check(comment=comment_str.encode('utf-8'), data=data, build_data=False):
-				   #this is a spam
-				   return True
-				else :
-				   return False
-			else:
-				return False
-		except Exception as e:
-			print e
+        try:
+            if ak.verify_key():
+                data = {
+                'user_ip': '',
+                'user_agent': '',
+                'referrer': '',
+                'comment_type': 'comment',
+                'comment_author': '',
+                }
+                if ak.comment_check(comment=comment_str.encode('utf-8'), data=data, build_data=False):
+                   #this is a spam
+                   return True
+                else :
+                   return False
+            else:
+                return False
+        except Exception as e:
+            print e
 
-		# Offline exception FIXME
-		return False
+        # Offline exception FIXME
+        return False
 
     @staticmethod
     @csrf_exempt
@@ -306,11 +306,11 @@ class CommentView(TemplateView):
         #        Comment.objects.order_by('-time_added'))
         p_hot = Paginator(comments_hot, 3).page(1)
 
-		#NEW
+        #NEW
         comments_new = Comment.objects.order_by('-time_added').all()
         p_new = Paginator(comments_new, 3).page(1)
 
-		#RELEVANT
+        #RELEVANT
         index_url = base64.b64decode(url_b64)
         url_objects = Url.objects.filter(url=index_url)
         if len(url_objects) == 0:
@@ -356,7 +356,7 @@ class CommentView(TemplateView):
             template_name = 'comments/comment_list_raw.html'
 
         return render(request, template_name, {
-			'p_comment_hot': p_hot,
+            'p_comment_hot': p_hot,
             'p_comment_new': p_new,
             'p_comment_tag': p_tag,
             'index_url': index_url,
@@ -425,7 +425,7 @@ class CommentModifyView(TemplateView):
         comment.save()
         return HttpResponse(status=200)
 
-		# This view is used for ajax load, see commentBoard.js for more details.
+        # This view is used for ajax load, see commentBoard.js for more details.
 class CommentShowMsgView(TemplateView):
     template_name = ''
     base64_default_str = '' #aHR0cDovL3d3dy5udWxsLmNvbS8=
@@ -447,12 +447,12 @@ class CommentShowMsgView(TemplateView):
         #        Comment.objects.order_by('-time_added'))
         p_hot = Paginator(comments_hot, 3).page(1)
 
-		#NEW
+        #NEW
         comments_new = Comment.objects.order_by('-time_added').all()
         p_new = Paginator(comments_new, 3).page(1)
 
 
-		#RELEVANT
+        #RELEVANT
         index_url = base64.b64decode(url_b64)
         url_objects = Url.objects.filter(url=index_url)
         if len(url_objects) == 0:
@@ -942,7 +942,7 @@ class CommentShowNewListView(TemplateView):
 # need to use time_modified instead of time added
         flag = kwargs['flag']
 
-		#NEW
+        #NEW
         comments_new = Comment.objects.order_by('-time_added').all()
         if flag == 'max':
             p = Paginator(comments_new, 10).page(1)
