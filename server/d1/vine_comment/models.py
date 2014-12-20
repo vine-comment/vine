@@ -63,31 +63,12 @@ class Author(TimeMixin, models.Model):
     continuous_login = models.IntegerField(default=1)
     history_c_login = models.IntegerField(default=1)
     last_login = models.DateTimeField(blank=True, null=True)
-    last_logout = models.DateTimeField(blank=True,
+    last_request = models.DateTimeField(blank=True,
         default=datetime.datetime.utcnow().replace(tzinfo=utc))
     comments_sum = models.IntegerField(default=0)
 
     def __unicode__(self):
         return self.user.name
-
-    def login_stat(sender, user, request, **kwargs):
-        authors = Author.objects.filter(user=user)
-        if len(authors) > 0:
-            author = authors[0]
-        else:
-            return
-
-    def logout_stat(sender, user, request, **kwargs):
-        authors = Author.objects.filter(user=user)
-        if len(authors) > 0:
-            author = authors[0]
-        else:
-            return
-        author.last_logout = datetime.datetime.utcnow().replace(tzinfo=utc)
-        author.save()
-
-    #user_logged_in.connect(login_stat)
-    user_logged_out.connect(logout_stat)
 
 class Url(models.Model):
     url = models.URLField(max_length=2048)
