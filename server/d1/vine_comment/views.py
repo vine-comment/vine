@@ -131,21 +131,27 @@ class CommentView(TemplateView):
         #ak = Akismet(key=settings.AKISMET_API_KEY,blog_url='http://www.abfeucd')
         ak = Akismet(key='d56b9a5394bf',blog_url='http://www.abfeucd')
 
-        if ak.verify_key():
-            data = {
-            'user_ip': '',
-            'user_agent': '',
-            'referrer': '',
-            'comment_type': 'comment',
-            'comment_author': '',
-            }
-            if ak.comment_check(comment=comment_str.encode('utf-8'), data=data, build_data=False):
-               #this is a spam
-               return True
-            else :
-               return False
-        else:
-            return False
+		try:
+			if ak.verify_key():
+				data = {
+				'user_ip': '',
+				'user_agent': '',
+				'referrer': '',
+				'comment_type': 'comment',
+				'comment_author': '',
+				}
+				if ak.comment_check(comment=comment_str.encode('utf-8'), data=data, build_data=False):
+				   #this is a spam
+				   return True
+				else :
+				   return False
+			else:
+				return False
+		except Exception as e:
+			print e
+
+		# Offline exception FIXME
+		return False
 
     @staticmethod
     @csrf_exempt
@@ -247,7 +253,7 @@ class CommentView(TemplateView):
             # CAPTCHA-FIXME: forbid annoymous user to comment.
             is_not_human = False
 
-        if(self._check_spam(index_url, comment_str, author_ip, user)):
+        if self._check_spam(index_url, comment_str, author_ip, user):
              logger.info(comment_str + ' this is a spam')
              if author is not None:
                  author.is_not_human = True
