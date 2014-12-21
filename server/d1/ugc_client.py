@@ -5,9 +5,13 @@ import argparse
 import os
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "d1.settings")
 
+from django.contrib.auth.models import User
+from django.contrib.auth import authenticate
+
 from vine_comment.models import Url, Comment
 from vine_comment.views import CommentView
 from registration.backends.simple.views import RegistrationView
+
 
 parser = argparse.ArgumentParser(description='UGC CRUD Client.')
 parser.add_argument('-a', '--add', help='add comment', nargs=2, metavar=('url', 'comment'))
@@ -15,6 +19,7 @@ parser.add_argument('-af', '--addfile', help='add comment batch from file', narg
 
 cmds = ['add', 'addfile', 'rem', 'get', 'mod']
 short_cmds = ['a', 'aj', 'r', 'g', 'm']
+
 
 class CommentManager(object):
     @staticmethod
@@ -39,6 +44,11 @@ class CommentManager(object):
     def mod(url, comment):
         pass
 
+# User.objects.create_user(username, email, password)
+# registration/backends/simple/views
+#     def register(self, request, **cleaned_data):
+#        username, email, password = cleaned_data['username'], cleaned_data['email'], cleaned_data['password1']
+
 def get_author(user):
     if not user.is_authenticated():
         return None
@@ -53,13 +63,12 @@ def get_author(user):
         author.save()
     return author
 
-# registration/backends/simple/views
-#     def register(self, request, **cleaned_data):
-#        username, email, password = cleaned_data['username'], cleaned_data['email'], cleaned_data['password1']
 class AccountManager(object):
     @staticmethod
-    def add():
-        pass
+    def add(username, email, password):
+        User.objects.create_user(username, email, password)
+        new_user = authenticate(username=username, password=password)
+        author = get_author(user)
 
     @staticmethod
     def rem():
