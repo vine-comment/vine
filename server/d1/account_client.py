@@ -14,8 +14,8 @@ from registration.backends.simple.views import RegistrationView
 
 
 parser = argparse.ArgumentParser(description='Author test client.')
-parser.add_argument('-a', '--add', help='add author', nargs=2, metavar=('url', 'comment'))
-parser.add_argument('-af', '--addfile', help='add author batch from file', nargs=2, metavar=('url', 'fname'))
+parser.add_argument('-a', '--add', help='add author', nargs=3, metavar=('username', 'email', 'password'))
+parser.add_argument('-af', '--addfile', help='add author batch from file', nargs=1, metavar=('fname'))
 
 cmds = ['add', 'addfile', 'rem', 'get', 'mod']
 short_cmds = ['a', 'af', 'r', 'g', 'm']
@@ -64,7 +64,7 @@ def main():
         if args[key] is None:
             continue
         print(key+' '+str(args[key]))
-        func = getattr(CommentManager, key)
+        func = getattr(AccountManager, key)
         if len(args[key]) == 1:
             func(args[key][0])
         elif len(args[key]) == 2:
