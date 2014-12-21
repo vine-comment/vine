@@ -53,6 +53,13 @@ class AuthorManager(object):
         print author
 
     @staticmethod
+    def addfile(fname):
+        with open(fname) as f:
+            for line in f:
+                username, email, password = line.split()
+                AuthorManager.add(username, email, password)
+
+    @staticmethod
     def rem():
         pass
 
