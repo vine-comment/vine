@@ -13,41 +13,13 @@ from vine_comment.views import CommentView
 from registration.backends.simple.views import RegistrationView
 
 
-parser = argparse.ArgumentParser(description='UGC CRUD Client.')
+parser = argparse.ArgumentParser(description='Author test client.')
 parser.add_argument('-a', '--add', help='add comment', nargs=2, metavar=('url', 'comment'))
 parser.add_argument('-af', '--addfile', help='add comment batch from file', nargs=2, metavar=('url', 'fname'))
 
 cmds = ['add', 'addfile', 'rem', 'get', 'mod']
-short_cmds = ['a', 'aj', 'r', 'g', 'm']
+short_cmds = ['a', 'af', 'r', 'g', 'm']
 
-
-class CommentManager(object):
-    @staticmethod
-    def add(url='http://www.default-test.com/', comment='default-test-comment'):
-        CommentView._post_comment(url, comment, author_ip="1.2.3.4", user=None)
-
-    @staticmethod
-    def addfile(url, fname):
-        with open(fname) as f:
-            for line in f:
-                CommentView._post_comment(url, line, author_ip="1.2.3.4", user=None)
-
-    @staticmethod
-    def rem(url, comment):
-        pass
-
-    @staticmethod
-    def get(url, comment):
-        pass
-
-    @staticmethod
-    def mod(url, comment):
-        pass
-
-# User.objects.create_user(username, email, password)
-# registration/backends/simple/views
-#     def register(self, request, **cleaned_data):
-#        username, email, password = cleaned_data['username'], cleaned_data['email'], cleaned_data['password1']
 
 def get_author(user):
     if not user.is_authenticated():
