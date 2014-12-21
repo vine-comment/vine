@@ -12,14 +12,14 @@
   {
     document.getElementById("commetList").style.display="";
     document.getElementById("iTinkYouLike").style.display="none";
-    $('#you_like_bn').html("猜你喜欢");
+    $('#you_like_text').html("猜你喜欢");
   }
   function show_you_like()
   {
     $('#iTinkYouLike').load('/comments/tag/raw');
 		document.getElementById("commetList").style.display="none";
 		document.getElementById("iTinkYouLike").style.display="";
-    $('#you_like_bn').html("再猜猜看");
+    $('#you_like_text').html("再猜猜看");
   }
   
 </script>
@@ -31,10 +31,16 @@
 </style>
 
 <div class='left'>
-    <button id="show_comment_bn" type="button" class='btn btn-default btn-block right-angle' onclick="show_comment();">评论</button>
+    <button id="show_comment_bn" type="button" class='btn btn-default btn-block right-angle' onclick="show_comment();">
+    <img src="//{{ request.META.HTTP_HOST }}{% static 'icons/fire.jpg' %}" />
+    <b>评论</b>
+    </button>
 </div>
 <div class='right'>
-    <button id="you_like_bn" type="button" class = 'btn btn-default btn-block right-angle'   onclick="show_you_like();">猜你喜欢</button>
+    <button id="you_like_bn" type="button" class = 'btn btn-default btn-block right-angle'   onclick="show_you_like();">
+    <img src="//{{ request.META.HTTP_HOST }}{% static 'icons/love.jpg' %}" />
+    <b id="you_like_text">猜你喜欢</b>
+    </button>
 </div>
 
 <div id="commetList" style="display:'';">
