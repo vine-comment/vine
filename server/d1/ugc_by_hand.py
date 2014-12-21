@@ -15,7 +15,7 @@ parser.add_argument('-af', '--addfile', help='add comment batch from file', narg
 cmds = ['add', 'addfile', 'rem', 'get', 'mod']
 short_cmds = ['a', 'aj', 'r', 'g', 'm']
 
-class UGCManager(object):
+class CommentManager(object):
     @staticmethod
     def add(url='http://www.default-test.com/', comment='default-test-comment'):
         CommentView._post_comment(url, comment, author_ip="1.2.3.4", user=None)
@@ -56,7 +56,7 @@ def main():
         if args[key] is None:
             continue
         print(key+' '+str(args[key]))
-        func = getattr(UGCManager, key)
+        func = getattr(CommentManager, key)
         if len(args[key]) == 1:
             func(args[key][0])
         elif len(args[key]) == 2:
