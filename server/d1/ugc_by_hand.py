@@ -10,17 +10,21 @@ from vine_comment.views import CommentView
 
 parser = argparse.ArgumentParser(description='UGC CRUD Client.')
 parser.add_argument('-a', '--add', help='add comment', nargs=2, metavar=('url', 'comment'))
-parser.add_argument('-r', '--rem', help='rem comment', nargs=2, metavar=('url', 'comment'))
-parser.add_argument('-g', '--get', help='get comment', nargs=2, metavar=('url', 'comment'))
-parser.add_argument('-m', '--mod', help='mod comment', nargs=2, metavar=('url', 'comment'))
+parser.add_argument('-af', '--addfile', help='add comment batch from file', nargs=2, metavar=('url', 'fname'))
 
-cmds = ['add', 'rem', 'get', 'mod']
-short_cmds = ['a', 'r', 'g', 'm']
+cmds = ['add', 'addfile', 'rem', 'get', 'mod']
+short_cmds = ['a', 'aj', 'r', 'g', 'm']
 
 class UGCManager(object):
     @staticmethod
     def add(url='http://www.default-test.com/', comment='default-test-comment'):
         CommentView._post_comment(url, comment, author_ip="1.2.3.4", user=None)
+
+    @staticmethod
+    def addfile(url, fname):
+        with open(fname) as f:
+            for line in f:
+                CommentView._post_comment(url, line, author_ip="1.2.3.4", user=None)
 
     @staticmethod
     def rem(url, comment):
