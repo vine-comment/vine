@@ -39,7 +39,23 @@ class CommentManager(object):
     def mod(url, comment):
         pass
 
+def get_author(user):
+    if not user.is_authenticated():
+        return None
+    authors = Author.objects.filter(user=user)
+    if authors:
+        author = authors[0]
+    else:
+        author = Author.objects.create(
+            user=user,
+            time_added=datetime.datetime.utcnow().replace(tzinfo=utc)
+            )
+        author.save()
+    return author
+
 # registration/backends/simple/views
+#     def register(self, request, **cleaned_data):
+#        username, email, password = cleaned_data['username'], cleaned_data['email'], cleaned_data['password1']
 class AccountManager(object):
     @staticmethod
     def add():
