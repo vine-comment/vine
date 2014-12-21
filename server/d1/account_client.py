@@ -14,8 +14,8 @@ from registration.backends.simple.views import RegistrationView
 
 
 parser = argparse.ArgumentParser(description='Author test client.')
-parser.add_argument('-a', '--add', help='add comment', nargs=2, metavar=('url', 'comment'))
-parser.add_argument('-af', '--addfile', help='add comment batch from file', nargs=2, metavar=('url', 'fname'))
+parser.add_argument('-a', '--add', help='add author', nargs=2, metavar=('url', 'comment'))
+parser.add_argument('-af', '--addfile', help='add author batch from file', nargs=2, metavar=('url', 'fname'))
 
 cmds = ['add', 'addfile', 'rem', 'get', 'mod']
 short_cmds = ['a', 'af', 'r', 'g', 'm']
@@ -44,15 +44,6 @@ class AccountManager(object):
 
     @staticmethod
     def rem():
-        pass
-
-class CommentUpManager(object):
-    @staticmethod
-    def add():
-        pass
-
-    @staticmethod
-    def mod():
         pass
 
 def main():
