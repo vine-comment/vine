@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 #coding:utf8
 
+import sys
+sys.path.append('../')
 import os
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "d1.settings")
 

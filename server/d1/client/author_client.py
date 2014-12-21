@@ -3,6 +3,8 @@
 
 import datetime
 import argparse
+import sys
+sys.path.append('../')
 import os
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "d1.settings")
 
