@@ -29,6 +29,7 @@ def get_author(user):
     authors = Author.objects.filter(user=user)
     if authors:
         author = authors[0]
+        print "Author exists!"
     else:
         author = Author.objects.create(
             user=user,
@@ -43,6 +44,8 @@ class AuthorManager(object):
         user = User.objects.filter(username=username)
         if not user:
             User.objects.create_user(username, email, password)
+        else:
+            print "User exists!"
         user = authenticate(username=username, password=password)
         author = get_author(user)
         print author
