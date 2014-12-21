@@ -1,14 +1,16 @@
 #!/usr/bin/env python
 #coding:utf8
 
+import datetime
 import argparse
 import os
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "d1.settings")
 
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
+from django.utils.timezone import utc
 
-from vine_comment.models import Url, Comment
+from vine_comment.models import Url, Comment, Author
 from vine_comment.views import CommentView
 from registration.backends.simple.views import RegistrationView
 
@@ -35,12 +37,15 @@ def get_author(user):
         author.save()
     return author
 
-class AccountManager(object):
+class AuthorManager(object):
     @staticmethod
     def add(username, email, password):
-        User.objects.create_user(username, email, password)
-        new_user = authenticate(username=username, password=password)
+        user = User.objects.filter(username=username)
+        if not user:
+            User.objects.create_user(username, email, password)
+        user = authenticate(username=username, password=password)
         author = get_author(user)
+        print author
 
     @staticmethod
     def rem():
@@ -64,11 +69,13 @@ def main():
         if args[key] is None:
             continue
         print(key+' '+str(args[key]))
-        func = getattr(AccountManager, key)
+        func = getattr(AuthorManager, key)
         if len(args[key]) == 1:
             func(args[key][0])
         elif len(args[key]) == 2:
             func(args[key][0], args[key][1])
+        elif len(args[key]) == 3:
+            func(args[key][0], args[key][1], args[key][2])
 
 if __name__ == '__main__':
     main()

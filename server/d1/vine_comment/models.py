@@ -68,7 +68,7 @@ class Author(TimeMixin, models.Model):
     comments_sum = models.IntegerField(default=0)
 
     def __unicode__(self):
-        return self.user.name
+        return str(self.user)
 
 class Url(models.Model):
     url = models.URLField(max_length=2048)
