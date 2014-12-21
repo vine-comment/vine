@@ -7,6 +7,7 @@ os.environ.setdefault("DJANGO_SETTINGS_MODULE", "d1.settings")
 
 from vine_comment.models import Url, Comment
 from vine_comment.views import CommentView
+from registration.backends.simple.views import RegistrationView
 
 parser = argparse.ArgumentParser(description='UGC CRUD Client.')
 parser.add_argument('-a', '--add', help='add comment', nargs=2, metavar=('url', 'comment'))
@@ -36,6 +37,25 @@ class CommentManager(object):
 
     @staticmethod
     def mod(url, comment):
+        pass
+
+# registration/backends/simple/views
+class AccountManager(object):
+    @staticmethod
+    def add():
+        pass
+
+    @staticmethod
+    def rem():
+        pass
+
+class CommentUpManager(object):
+    @staticmethod
+    def add():
+        pass
+
+    @staticmethod
+    def mod():
         pass
 
 def main():
