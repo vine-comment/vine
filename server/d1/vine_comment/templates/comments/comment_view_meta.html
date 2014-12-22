@@ -1,5 +1,114 @@
 {% extends "comments/base.html" %}
 {% block content %}
+{% load staticfiles %}
+
+<!-- TODO Move to the CSS folder -->
+<style type="text/css">
+.vc-replybox {
+    width: auto;
+    font-size: 12px;
+    z-index: 3;
+    margin: 8px 0;
+    padding: 0 0 0 10px;
+    position: relative;
+    _zoom: 1
+}
+.vc-textarea-wrapper {
+    width: auto;
+    position: relative;
+    border: 1px solid #ccc;
+    border-bottom: none;
+    padding-right: 20px;
+    background: #fff url(../../../static/icons/bg_sprites.png) 0 -90px repeat-x;
+    overflow: hidden
+}
+
+.vc-rounded-top {
+    width: 100%;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    -webkit-border-top-left-radius: 0;
+    -webkit-border-top-right-radius: 0
+}
+.vc-post-toolbar {
+    position: relative;
+    width: 100%;
+    box-shadow: 0 1px 0 rgba(255,255,255,0.6)
+}
+.vc-post-button {
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 32px;
+    width: 100px;
+    text-align: center;
+    text-shadow: 0 1px 0 #fff;
+    color: #555;
+    font-size: 14px;
+    font-weight: bold;
+    border: 1px solid #ccc;
+    border-bottom-color: #aaa;
+    border-bottom-right-radius: 0;
+    -webkit-border-bottom-right-radius: 0;
+    background-color: #e6e6e6;
+    background-repeat: no-repeat;
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#fcfcfc), color-stop(25%, #fcfcfc), to(#e6e6e6));
+    background-image: -webkit-linear-gradient(#fcfcfc, #fcfcfc 25%, #e6e6e6);
+    background-image: -moz-linear-gradient(top, #fcfcfc, #fcfcfc 25%, #e6e6e6);
+    background-image: -ms-linear-gradient(#fcfcfc, #fcfcfc 25%, #e6e6e6);
+    background-image: linear-gradient(#fcfcfc, #fcfcfc 25%, #e6e6e6);
+    -webkit-transition: all .15s linear;
+    -moz-transition: all .15s linear;
+    transition: all .15s linear;
+    box-shadow: inset 0 0 1px #fff
+}
+.vc-toolbar-buttons {
+    position: absolute;
+    top: 5px;
+    left: 6px
+}
+
+.vc-add-emote {
+    background-position: 0 -12px
+}
+
+.vc-add-image {
+    background-position: 0 -48px
+}
+
+.vs-hidden-text {
+    top: 0;
+    left: 10px;
+    right: 10px;
+    position: absolute;
+    visibility: hidden;
+    word-wrap: break-word
+}
+
+.vc-sync {
+    font-size: 12px;
+    color: #999;
+    line-height: 35px;
+    position: absolute;
+    right: 5px
+}
+
+.vc-post-options {
+position: relative;
+margin-right: 100px;
+height: 32px;
+border: 1px solid #ccc;
+border-right: none;
+border-bottom-color: #aaa;
+border-bottom-left-radius: 0;
+-webkit-border-bottom-left-radius: 0;
+}
+
+.vc-gradient-bg {
+background: url(../../../static/icons/bg_sprites.png) 0 -60px repeat-x;
+}
+</style>
 		<div class="alert-messages" id="message-drawer" style="opacity: 0; top: 60px; display: none;">
 		  <div class="message ">
 		    <div class="message-inside">
@@ -8,22 +117,35 @@
 		    </div>
 		  </div>
 		</div>
-		<div class="row">
-		  <div class="col-lg-6">
-			<div class="input-group">
-			  <textarea rows="1" class="form-control" style="resize:none" id="commentTop" name="commentTop" placeholder="可输入5-140个字"></textarea>
-			  <span class="input-group-btn">
-			   {% if is_not_human %}
-			  {% csrf_token %}
-		      {{ form.captcha }}
-			  {% endif %}
-          <button class="btn btn-default submitComment" data-loading-text="评论中" id="submitCommentTop" type="button">
+        
+       <div class="vc-replybox">
+       <form method="post">
+        <div class="vc-textarea-wrapper vc-rounded-top ">
+         <textarea id="commentTop" name="commentTop" placeholder="可输入5-140个字" style=  "width:105%; overflow:hidden; resize:none;background:transparent;border-style:none;  "></textarea>
+         
+        </div>
+        <div class="vc-post-toolbar">
+         <div class="vc-post-options vc-gradient-bg">
+          <span class="vc-sync"></span>
+         </div>
+         {% if is_not_human %}
+         {% csrf_token %}
+         {{ form.captcha }}
+         {% endif %}
+          <button class="vc-post-button"  data-loading-text="评论中" id="submitCommentTop" type="button">
             评论
           </button>
-			  </span>
-			</div><!-- /input-group -->
-		  </div><!-- /.col-lg-6 -->
-		</div><!-- /.row -->
+         <div class="vc-toolbar-buttons">
+         <!-- TODO 增加表情插件 -->
+          <a class="vc-toolbar-button" title="插入表情">
+          <img src="//{{ request.META.HTTP_HOST }}{% static 'icons/expression.jpg' %}" />
+          </a>
+         </div>
+        </div>
+       </form>
+       
+      </div>
+        
 		<br>
 		<div id="showMsg">
 			{% include "comments/comment_list.html" %}
