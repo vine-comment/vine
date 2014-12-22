@@ -36,6 +36,9 @@
 * django-avatar
    * if can't work, see https://github.com/jezdez/django-avatar/issues/53
    * Change PIL to Pillow,  Change x86_64 to i386 if you are installing it to a 32-bit machine
+   * if enccounter this error: _imaging.c:76:20: fatal error: Python.h: No such file or directory
+     * "sudo apt-get build-dep python-imaging"
+     * then you can upgrade Pillow
 * pytz
 * pygeoip
 * dnspython
