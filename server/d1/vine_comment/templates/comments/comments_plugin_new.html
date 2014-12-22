@@ -66,7 +66,7 @@
                        {% include 'reply.html' %}
                        </div>
                        <div name="reply{{message.id}}" class="input-group">
-                         <textarea rows="5" style="width:100%;height:34px;resize:none" id="reply{{message.id}}" name="reply" placeholder="可输入5-140个字"></textarea>
+                         <textarea rows="5" style="width:100%;height:34px;resize:none" id="replyNew{{message.id}}" name="reply" placeholder="可输入5-140个字"></textarea>
                          <span class="input-group-btn">
                            <button class="btn btn-default submitComment" data-loading-text="回复中" onclick="replyNew('{{message.id}}')" type="button">回复</button>
                          </span>
