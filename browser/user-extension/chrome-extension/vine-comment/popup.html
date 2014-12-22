@@ -1,0 +1,41 @@
+<!doctype html>
+<html>
+  <head>
+    <title>藤蔓评论(popup)</title>
+    <style>
+      body {
+        min-width: 500px;
+		    height: 1000px;
+        overflow-x: hidden;
+      }
+	  
+	  iframe {
+	    min-height: 770px;
+	  }
+
+
+      img {
+        margin: 5px;
+        border: 2px solid black;
+        vertical-align: middle;
+        width: 75px;
+        height: 75px;
+      }
+    </style>
+
+    <!--
+      - JavaScript and HTML must be in separate files: see our Content Security
+      - Policy documentation[1] for details and explanation.
+      -
+      - [1]: http://developer.chrome.com/extensions/contentSecurityPolicy.html
+     -->
+	<script src="jquery.min.js"></script>
+	<script src="btoa.js"></script>
+  <script src="popup.js"></script>
+  </head>
+  <body>
+    <iframe src="#" width="100%" height="100%" frameborder="0">
+	</iframe>
+  </body>
+</html>
+
