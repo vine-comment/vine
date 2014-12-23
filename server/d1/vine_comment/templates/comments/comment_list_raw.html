@@ -76,6 +76,24 @@
             });
 		}
   }  
+  
+  
+  function change_relevant_comment_num_new()
+  {
+		 if (document.getElementById("relevant_button").innerHTML  == "展开"){
+			document.getElementById("relevant_button").innerHTML =  "收起";
+            $.get("/ajax/showmsg/relevant/comment/max",{})
+            .done(function(data) {
+              $('#commet_relevant').html(data);
+            });
+			} else {
+			document.getElementById("relevant_button").innerHTML =  "展开";
+            $.get("/ajax/showmsg/relevant/comment/min", {})
+            .done(function(data) {
+              $('#commet_relevant').html(data);
+            });
+		}
+  }    
 </script>
 
 
@@ -84,14 +102,6 @@
 .ha_bor{border:none;}
 </style>
 
-
-{% include 'comments/comments_plugin_hot.html' %}
-<!--
-<button id="hot_button" style="float:right" type="button"  class = 'btn btn-sm btn-link ha_bor'  onclick="change_hot_comment_num();" value="收起"><img id = "hot_img" src="//{{ request.META.HTTP_HOST }}{% static 'icons/zhankai.jpg' %}" /></button>
--->
-<button id="hot_button" style="float:right" type="button"  class = 'btn btn-sm btn-link '  onclick="change_hot_comment_num_new();">展开</button>
-<br>
-<br>
 {% include 'comments/comments_plugin_new.html' %}
 <!--
 <button id="new_button" style="float:right" type="button"  class = 'btn btn-sm btn-default ha_bor'  onclick="change_new_comment_num();"  value="收起"><img id = "new_img" src="//{{ request.META.HTTP_HOST }}{% static 'icons/zhankai.jpg' %}" /></button>
@@ -99,4 +109,13 @@
 <button id="new_button" style="float:right" type="button"  class = 'btn btn-sm btn-link '  onclick="change_new_comment_num_new();"  >展开</button>
 <br>
 <br>
+{% include 'comments/comments_plugin_hot.html' %}
+<!--
+<button id="hot_button" style="float:right" type="button"  class = 'btn btn-sm btn-link ha_bor'  onclick="change_hot_comment_num();" value="收起"><img id = "hot_img" src="//{{ request.META.HTTP_HOST }}{% static 'icons/zhankai.jpg' %}" /></button>
+-->
+<button id="hot_button" style="float:right" type="button"  class = 'btn btn-sm btn-link '  onclick="change_hot_comment_num_new();">展开</button>
+<br>
+<br>
+
 {% include 'comments/comments_plugin_relevant.html' %}
+<button id="relevant_button" style="float:right" type="button"  class = 'btn btn-sm btn-link '  onclick="change_relevant_comment_num_new();">展开</button>

@@ -973,6 +973,28 @@ class CommentShowHotListView(TemplateView):
             'p_comment_hot': p,
         })
 
+        
+class CommentShowRelevantListView(TemplateView):
+    template_name = 'comments/comments_plugin_relevant.html'
+    
+    #TODO find Relevant msg
+    def get(self, request, *args, **kwargs):
+        update_last_request(request)
+        # need to use time_modified instead of time added
+        flag = kwargs['flag']
+
+        #NEW
+        comments_new = Comment.objects.order_by('-time_added').all()
+        if flag == 'max':
+            p = Paginator(comments_new, 10).page(1)
+        else :
+            p = Paginator(comments_new, 3).page(1)
+
+
+        return render(request, self.template_name, {
+            'p_comment_tag': p,
+        })
+
 class CommentDetailView(TemplateView):
     template_name = 'comments/comment_detail_view.html'
 

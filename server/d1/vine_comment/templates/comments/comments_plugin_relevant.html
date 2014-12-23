@@ -1,99 +1,83 @@
 {% load humanize %}
 {% load avatar_tags %}
+<!-- TODO -->
+  <script>
+    function expandReplyRelevant(id) {
+      if (!$('#replyDivRelevant'+id).is(':visible')) {
+        $('#replyDivRelevant'+id).show();
+        $.get("/ajax/reply/comment/"+id, {})
+        .done(function(data) {
+          $('#repliesofRelevant'+id ).html(data);
+        });
+      } else {
+        $('#replyDivRelevant'+id).hide();
+      }
+    }
+    function replyRelevant(id) {
+      var reply_str = $('#replyRelevant'+id).val();
+      $.post("/ajax/reply/comment/"+id, {'reply_str':reply_str})
+      .done(function(data) {
+        $('#repliesofRelevant'+id ).html(data);
+        $('#replyRelevant'+id).val('');
+        var reply_num = $('#reply_comment_relevant'+id).find('span');
+        var count = parseInt(reply_num.text())+1;
+        reply_num.text(count);
+      });
+    }
+  </script>
 
-<script language="JavaScript">
-<!--
-  function change_relevant_comment_num()
-  {
-		
-		if(document.getElementById("commetList_relevant_min").style.display == ""){
-			document.getElementById("relevant_button").innerHTML  = "收起";
-			document.getElementById("commetList_relevant_max").style.display="";
-			document.getElementById("commetList_relevant_min").style.display="none";
-			} else {
-			document.getElementById("relevant_button").innerHTML  = "展开";
-			document.getElementById("commetList_relevant_max").style.display="none";
-			document.getElementById("commetList_relevant_min").style.display="";
-		}
-		
-		//刷新
-  }
--->
-</script>
+<div id="commet_relevant">  
+    <fieldset>
+      <legend>相关评论</legend>
+        
+        <div id="commetList_relevant">
+            <ul class="list-group">
+            {% for message in p_comment_tag.object_list %}
+                 <li class="list-group-item">
+                    <strong>{% if message.author %}{{ message.author.user }}{% else %}{{ message.author_ip }}{% endif %}</strong>
+                     
+                     <span style="float:right">
+                       <span class='comment-time'>提交于 {{ message.time_added|naturaltime }}</span>
+                     </span>
+                     <a href="{{message.comment_board.url}}" target="_blank">
+                       <span class="comment-text" id="comment_str_{{message.id}}">{{message.comment_str}}</span>
+                     </a>
+                     <br/>
+                     <span style="float:right">
+                      <a href="javascript:void(0);" id="up_comment_{{message.id}}" onclick="up('{{message.id}}');return false;">
+                        {% if user.id in message.up_users %}
+                        <i class="fa fa-thumbs-up"></i>
+                        {% else %}
+                        <i class="fa fa-thumbs-o-up"></i>
+                        {% endif %}
+                        +<span>{{ message.up_users|length }}</span>
+                      </a>
+                      {# TODO: 添加tips，说明icon功能，不然留言icon字太小。 #}
+                      <a href="javascript:void(0);" id="reply_comment_relevant{{message.id}}" onclick="expandReplyRelevant('{{message.id}}');return false;">
+                        <i class="fa fa-comments-o"></i>
+                        <span>{{ message.replies|length }}</span>
+                      </a>
+                     </span>
+                     <div id="detailDivNew{{message.id}}" style="display:none;margin-top:10px">
+                     </div>
 
-
-  
-<fieldset>
-  <legend>相关评论</legend>
-	
-	<div id="commetList_relevant_max" style="display: none;">
-		<ul class="list-group">
-		{% for message in p_comment_new_max.object_list %}
-			 <li class="list-group-item">
-				<strong>{% if message.author %}{{ message.author.user }}{% else %}{{ message.author_ip }}{% endif %}</strong>
-				 
-				 <span style="float:right">
-				   <span class='comment-time'>提交于 {{ message.time_added|naturaltime }}</span>
-				 </span>
-				 <a href="{{message.comment_board.url}}" target="_blank">
-				   <span class="comment-text" id="comment_str_{{message.id}}">{{message.comment_str}}</span>
-				 </a>
-				 <br/>
-				 <span style="float:right">
-				  <a href="javascript:void(0);" id="up_comment_{{message.id}}" onclick="up('{{message.id}}');return false;">
-					{% if user.id in message.up_users %}
-					<i class="fa fa-thumbs-up"></i>
-					{% else %}
-					<i class="fa fa-thumbs-o-up"></i>
-					{% endif %}
-					+<span>{{ message.up_users|length }}</span>
-				  </a>
-				  {# TODO: 添加tips，说明icon功能，不然留言icon字太小。 #}
-				  <a href="javascript:void(0);" id="reply_comment_{{message.id}}" onclick="expandReply('{{message.id}}');return false;">
-					<i class="fa fa-comments-o"></i>
-					<span>{{ message.replies|length }}</span>
-				  </a>
-				 </span>
-				 <br/>
-			  </li>
-		{% endfor %}
-		</ul>
-	</div>
-	
-	
-	<div id="commetList_relevant_min" style="display:"";">
-		<ul class="list-group">
-		{% for message in p_comment_new_min.object_list %}
-			  <li class="list-group-item">
-				 <strong>{% if message.author %}{{ message.author.user }}{% else %}{{ message.author_ip }}{% endif %}</strong>
-				 
-				 <span style="float:right">
-				   <span class='comment-time'>提交于 {{ message.time_added|naturaltime }}</span>
-				 </span>
-				 <a href="{{message.comment_board.url}}" target="_blank">
-				   <span class="comment-text" id="comment_str_{{message.id}}">{{message.comment_str}}</span>
-				 </a>
-				 <br/>
-				 <span style="float:right">
-				  <a href="javascript:void(0);" id="up_comment_{{message.id}}" onclick="up('{{message.id}}');return false;">
-					{% if user.id in message.up_users %}
-					<i class="fa fa-thumbs-up"></i>
-					{% else %}
-					<i class="fa fa-thumbs-o-up"></i>
-					{% endif %}
-					+<span>{{ message.up_users|length }}</span>
-				  </a>
-				  {# TODO: 添加tips，说明icon功能，不然留言icon字太小。 #}
-				  <a href="javascript:void(0);" id="reply_comment_{{message.id}}" onclick="expandReply('{{message.id}}');return false;">
-					<i class="fa fa-comments-o"></i>
-					<span>{{ message.replies|length }}</span>
-				  </a>
-				 </span>
-				 <br/>
-			  </li>
-		{% endfor %}
-		</ul>
-	</div>	
-	
-	<button id="relevant_button" style="float:right" type="button"  class = 'btn btn-sm btn-success'  onclick="change_relevant_comment_num();">展开</button>
-</fieldset>
+                     <div id="replyDivRelevant{{message.id}}" style="display:none;margin-top:10px">
+                     <br>
+                       <div id="repliesofRelevant{{message.id}}">
+                       {% include 'reply.html' %}
+                       </div>
+                       <div name="reply{{message.id}}" class="input-group">
+                         <textarea rows="5" style="width:100%;height:34px;resize:none" id="reply{{message.id}}" name="reply" placeholder="可输入5-140个字"></textarea>
+                         <span class="input-group-btn">
+                           <button class="btn btn-default submitComment" data-loading-text="回复中" onclick="replyRelevant('{{message.id}}')" type="button">回复</button>
+                         </span>
+                       </div><!-- /input-group -->
+                     </div>
+                     <br>
+                  </li>
+            {% endfor %}
+            </ul>
+        </div>
+        
+    </fieldset>
+</div>
