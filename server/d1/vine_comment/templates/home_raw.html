@@ -75,7 +75,9 @@
 </div>
 </header>
 
-<a href="/comment/{{url_b64}}/simple"><<回到藤蔓评论</a>
+{% if flag %}
+<a href="/comment/{{url_b64}}/"><<回到藤蔓评论</a>
+{% endif %}
 {% include 'comments_list.html' %}
 
 <ul class='pagination'>
