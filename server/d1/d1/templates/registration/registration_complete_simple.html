@@ -1,6 +1,6 @@
 {% extends "registration/base.html" %}
 
-{% block title %}Registration complete{% endblock %}
+{% block title %}注册成功了...一半{% endblock %}
 
 {% block content %}
 {% load staticfiles %}
@@ -13,7 +13,7 @@ $(document).ready(function(){
 	$('a').prop("href", "/comment/" + btoa(document.location));
 });
 </script>
-<h1>Check your email</h1>
-<p>An activation link has been sent to the email address you supplied, along with instructions for activating your account.</p>
-<a href="/">Back to vine comments<a>
+<h1>请到您的注册邮箱查收邮件</h1>
+<p>一封激活邮件已经发到您邮箱里，亲只需轻轻一戳就大功告成！</p>
+<a href="/">回到藤蔓评论<a>
 {% endblock %}
