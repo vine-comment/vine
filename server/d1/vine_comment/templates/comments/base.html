@@ -56,80 +56,81 @@
                 {% else %}
                   <li style="float:right">
                   <div class='btn-group' class="spanright">
-                    <a href="#" data-toggle="modal" data-target="#loginModal" class = 'btn btn-default'>登录</a>
-                    <a href="#" data-toggle="modal" data-target="#registerModal" class = 'btn btn-default'>注册</a>
+                    <a href="#" data-toggle="modal" data-target="#loginModal" class = 'btn btn-link'>登录</a>
+                    <a href="#" data-toggle="modal" data-target="#registerModal" class = 'btn btn-link'>注册</a>
                   </div>
                   </li>
-                  <!-- 登录：Modal 弹出框 -->
-                  <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                          <h2 class="modal-title" id="myModalLabel">登录</h4>
-                        </div>
-                        <div class="modal-body">
-                          <form id="login-form" class="form-inline" action="{% url "django.contrib.auth.views.login" %}" method="post">
-                            {% csrf_token %}
-                            <style type="text/css">
-                              .modal-body .input-group {
-                                margin-bottom: 10px;
-                              }
-                            </style>
-                            <div class="input-group margin-bottom-sm">
-                              <span class="input-group-addon"><i class="fa fa-envelope-o fa-fw"></i></span>
-                              <input id="id_username" name="username" class="form-control" type="text" placeholder="邮箱 或 用户名">
-                            </div>
-
-                      <!-- XXX 这个form的实现简单暴力，应该考虑参考registration/login.html的form field调用方法，调用auth里的form，避免升级时出问题 -->
-                            <div class="input-group">
-                              <span class="input-group-addon"><i class="fa fa-key fa-fw"></i></span>
-                              <input id="id_password" name="password" class="form-control" type="password" placeholder="密码"/>
-                            </div>
-
-                            <label class="checkbox">
-                              <input type="checkbox" value="remember-me">记住我
-                            </label>
-                           <button class="btn btn-large btn-primary" type="submit" value="Log in">登录</button>
-                          </form>
-                      <p><a href="{% url 'django.contrib.auth.views.password_reset' %}">{% trans '重设密码' %}</a></p>
-                        </div>
-                      </div><!-- /.modal-content -->
-                    </div><!-- /.modal-dialog -->
-                  </div><!-- /.modal -->
-
-                  <!-- 注册：Modal 弹出框 -->
-                  <div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                          <h4 class="modal-title" id="myModalLabel">注册</h4>
-                        </div>
-                        <div class="modal-body">
-                          <form class="form" method="post" action="{% url 'registration_register_simple' %}">
-                            {% csrf_token %}
-                            {{ registration_form|crispy }}
-                            <div class="control-group">
-                              <div class="controls">
-                                <button type="submit" class="btn">注册</button>
-                              </div>
-                            </div>
-                          </form>
-                        </div>
-                        <!-- <div class="modal-footer">
-                          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                          <button type="button" class="btn btn-primary">Save changes</button>
-                        </div> -->
-                      </div><!-- /.modal-content -->
-                    </div><!-- /.modal-dialog -->
-                  </div><!-- /.modal -->
                 {% endif %}
                 </td>
                 </tr></tbody>   
             </table>
             </div>
         </div>
+        
+      <!-- 登录：Modal 弹出框 -->
+      <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+              <h2 class="modal-title" id="myModalLabel">登录</h4>
+            </div>
+            <div class="modal-body">
+              <form id="login-form" class="form-inline" action="{% url "django.contrib.auth.views.login" %}" method="post">
+                {% csrf_token %}
+                <style type="text/css">
+                  .modal-body .input-group {
+                    margin-bottom: 10px;
+                  }
+                </style>
+                <div class="input-group margin-bottom-sm">
+                  <span class="input-group-addon"><i class="fa fa-envelope-o fa-fw"></i></span>
+                  <input id="id_username" name="username" class="form-control" type="text" placeholder="邮箱 或 用户名">
+                </div>
+
+          <!-- XXX 这个form的实现简单暴力，应该考虑参考registration/login.html的form field调用方法，调用auth里的form，避免升级时出问题 -->
+                <div class="input-group">
+                  <span class="input-group-addon"><i class="fa fa-key fa-fw"></i></span>
+                  <input id="id_password" name="password" class="form-control" type="password" placeholder="密码"/>
+                </div>
+
+                <label class="checkbox">
+                  <input type="checkbox" value="remember-me">记住我
+                </label>
+               <button class="btn btn-large btn-primary" type="submit" value="Log in">登录</button>
+              </form>
+          <p><a href="{% url 'django.contrib.auth.views.password_reset' %}">{% trans '重设密码' %}</a></p>
+            </div>
+          </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+      </div><!-- /.modal -->
+
+      <!-- 注册：Modal 弹出框 -->
+      <div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+              <h4 class="modal-title" id="myModalLabel">注册</h4>
+            </div>
+            <div class="modal-body">
+              <form class="form" method="post" action="{% url 'registration_register_simple' %}">
+                {% csrf_token %}
+                {{ registration_form|crispy }}
+                <div class="control-group">
+                  <div class="controls">
+                    <button type="submit" class="btn">注册</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+            <!-- <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary">Save changes</button>
+            </div> -->
+          </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+      </div><!-- /.modal -->    
 <br/>
 <br/>
     {% block content%}
