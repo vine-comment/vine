@@ -14,7 +14,8 @@ from django.utils.timezone import utc
 
 from vine_comment.models import Url, Comment, Author
 from vine_comment.views import CommentView
-from registration.backends.simple.views import RegistrationView
+from registration.backends.views import RegistrationView
+from registration.backends.views import RegistrationSimpleView
 
 
 parser = argparse.ArgumentParser(description='Author test client.')

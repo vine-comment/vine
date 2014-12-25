@@ -22,9 +22,9 @@ from django.conf.urls import include
 from django.conf.urls import url
 from django.views.generic.base import TemplateView
 
-from registration.backends.default.views import ActivationView
-from registration.backends.default.views import RegistrationView
-from registration.backends.default.views import ActivationCompleteView
+from registration.backends.views import ActivationView
+from registration.backends.views import RegistrationView
+from registration.backends.views import ActivationCompleteView
 
 
 urlpatterns = patterns('',

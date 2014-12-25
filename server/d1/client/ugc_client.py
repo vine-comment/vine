@@ -12,7 +12,7 @@ from django.contrib.auth import authenticate
 
 from vine_comment.models import Url, Comment
 from vine_comment.views import CommentView
-from registration.backends.simple.views import RegistrationView
+from registration.backends.views import RegistrationView
 
 
 parser = argparse.ArgumentParser(description='UGC CRUD Client.')
@@ -47,7 +47,7 @@ class CommentManager(object):
         pass
 
 # User.objects.create_user(username, email, password)
-# registration/backends/simple/views
+# registration/backends/views
 #     def register(self, request, **cleaned_data):
 #        username, email, password = cleaned_data['username'], cleaned_data['email'], cleaned_data['password1']
 

@@ -13,13 +13,13 @@ from django.contrib.auth.decorators import login_required
 
 
 from registration.forms import RegistrationFormTermsOfService
-from registration.backends.simple.views import RegistrationView
-from registration.backends.default.views import RegistrationSimpleView
+from registration.backends.views import RegistrationView
+from registration.backends.views import RegistrationSimpleView
 
 
 # NOT USE NOW.
 urlpatterns = patterns('',
-    (r'^accounts/', include('registration.backends.default.urls')),
+    (r'^accounts/', include('registration.backends.urls')),
     url(r'^matrix/?$', TemplateView.as_view(template_name='matrix/matrix.html'), name='matrix'),
     url(r'^admin/', include(admin.site.urls)),
     #url(r'^$', TemplateView.as_view(template_name='index.html'), name='index'),
@@ -51,7 +51,7 @@ urlpatterns += patterns('',
     url(r'^home/(?P<flag>.*?)/?$', login_required(HomeView.as_view()), name='home'),
     url(r'^user/head-sculpture/?$', login_required(UserHeadSculptureView.as_view()), name='user_head_sculpture'),
     # TODO social auth registration
-    url(r'^accounts/', include('registration.backends.default.urls')),
+    url(r'^accounts/', include('registration.backends.urls')),
     url(r'^comment/delete/(?P<id>.*?)/?$', CommentDeleteView.as_view(), name='comment_delete'),
     url(r'^comment/modify/(?P<id>.*?)/?$', CommentModifyView.as_view(), name='comment_modify'),
     url(r'^comment/(?P<url_b64>.*?)/(?P<flag>.*?)/?$', CommentView.as_view(), name='comment'),
