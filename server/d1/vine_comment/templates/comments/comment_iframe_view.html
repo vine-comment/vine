@@ -11,7 +11,7 @@
 <div id="special_div_for_tengmanpinglun_comment_board">
   <div id="loadImg"><div><img src="//{{ request.META.HTTP_HOST }}{% static 'icons/loading1.gif' %}" /></div></div>
   <iframe id="__vine_comment" src="//{{ request.META.HTTP_HOST }}/comment/{{ url_b64 }}" width="100%" height="100%" frameborder="0" onload="document.getElementById('loadImg').style.display='none';"></iframe>
-  <div id="boardLeft" >
+  <div id="boardLeft" style = "background-color: #f8f8f8;" >
     <a href="javascript:void(0);">
       <div id="boardDesc"><p>神 吐 槽 —</p></div>
       <div id="boardButton"><strong><</strong></div>
