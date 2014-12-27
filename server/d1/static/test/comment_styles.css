@@ -17,6 +17,11 @@ box-shadow: rgba(0, 0, 0, 0.0980392) -10px 0px 10px 0px;-webkit-box-shadow: rgba
 color: #C0C0C0;
 }
 
+.comment-legend {
+margin: 15px;
+text-align: center;
+}
+
 #boardLeft{
 position:absolute;top:40%;left:-40px;width:35px;border:2px solid #aaaaaa;
 font-size:20px;text-align:center; background:#ffffff;

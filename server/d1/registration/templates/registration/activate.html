@@ -1,0 +1,14 @@
+{% extends "registration/base.html" %}
+
+{% block title %}账户激活{% endblock %}
+
+{% block content %}
+  <h1>你的账户已成功激活。</h1>
+  {% load humanize %}
+  {% if account %}
+    <p>感谢你的注册，现在你可以<a href="/accounts/login/">登陆了</a>。</p>
+  {% else %}
+    <p>对不起，你的激活没有成功。可能是激活链接错误，或者你的激活链接已过期。
+    激活链接在{{ expiration_days|apnumber }}天内有效</p>
+  {% endif %}
+{% endblock %}

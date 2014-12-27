@@ -1,0 +1,26 @@
+{% extends "comments/base.html" %}
+
+{% block title %}登陆{% endblock %}
+
+{% block content %}
+
+<h1>登陆</h1>
+
+{% if form.errors %}
+<p class="error">用户名或密码错误</p>
+{% endif %}
+
+<form method="post" action="?next={{ next|default:"/" }}">{% csrf_token %}
+<dl>
+<dt><label for="id_username">用户名:</label>{% if form.username.errors %} <span class="error">{{ form.username.errors|join:", " }}</span>{% endif %}</dt>
+<dd>{{ form.username }}</dd>
+<dt><label for="id_password">密码:</label>{% if form.password.errors %} <span class="error">{{ form.password.errors|join:", " }}</span>{% endif %}</dt>
+<dd>{{ form.password }}</dd>
+<dt><input type="submit" value="登陆" /> <a href="/accounts/register/">注册</a></dt>
+</dl>
+</form>
+{% endblock %}
+
+{% block content-related %}
+<p>如果你没有账号，请点击<a href="/accounts/register/">这里</a>注册</p>
+{% endblock %}

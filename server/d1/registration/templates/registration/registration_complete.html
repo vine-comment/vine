@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block title %}注册成功{% endblock %}
+
+{% block content %}
+{% load staticfiles %}
+<div class="panel panel-default">
+<div class="panel-body">
+<script src="{% static 'jquery/2.0.3/jquery.min.js' %}"></script>
+<h1 style='margin-top:0'>注册成功！</h1>
+<p>激活邮件已发送到你的邮箱中，请根据邮件中的提示激活账号。</p>
+<a href="/">回到首页<a>
+</div>
+</div>
+{% endblock %}

@@ -1,0 +1,52 @@
+{% extends "registration/base.html" %}
+
+{% block title %}注册{% endblock %}
+
+{% block content %}
+
+  {% if form.errors %}
+  <p class="errors">请修正以下错误 {{ form.non_field_errors }}</p>
+  {% endif %}
+
+  <h1>创建新账号</h1>
+  
+  <form method="post" action="" class="wide">
+	{% csrf_token %}
+    <p>
+      <label for="id_username">用户名：</label>
+      {% if form.username.errors %}
+        <p class="errors">{{ form.username.errors.as_text }}</p>
+      {% endif %}
+      {{ form.username }}
+    </p>
+    <p>
+      <label for="id_email">邮箱：</label>
+      {% if form.email.errors %}
+        <p class="errors">{{ form.email.errors.as_text }}</p>
+      {% endif %}
+      {{ form.email }}
+    </p>
+    <p>
+      <label for="id_password1">密码：</label>
+      {% if form.password1.errors %}
+        <p class="errors">{{ form.password1.errors.as_text }}</p>
+      {% endif %}
+      {{ form.password1 }}
+    </p>
+    <p>
+      <label for="id_password2">密码（再次输入）：</label>
+      {% if form.password2.errors %}
+        <p class="errors">{{ form.password2.errors.as_text }}</p>
+      {% endif %}
+      {{ form.password2 }}
+    </p>
+    <p class="submit"><input type="submit" value="注册"></p>
+  </form>
+  
+{% endblock %}
+
+{% block content-related %}
+
+<p>填写以上表单（皆为必须）以创建你的账号，一封激活邮件将会发送到你的邮箱中，请根据其中提示对账号进行激活。</p>
+
+{% endblock %}
