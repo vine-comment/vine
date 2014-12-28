@@ -76,7 +76,7 @@
               <h2 class="modal-title" id="myModalLabel">登录</h4>
             </div>
             <div class="modal-body">
-              <form id="login-form" class="form-inline" action="{% url "django.contrib.auth.views.login" %}simple" method="post">
+              <form id="login-form" class="form-inline" action="{% url "django.contrib.auth.views.login" %}" method="post">
                 {% csrf_token %}
                 <style type="text/css">
                   .modal-body .input-group {
