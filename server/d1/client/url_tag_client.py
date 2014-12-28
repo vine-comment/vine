@@ -67,7 +67,7 @@ class TagManager(object):
         pass
 
     @staticmethod
-    def addjson(fname='../data/cn.json'):
+    def addjson(fname='data/cn.json'):
         alexa_items = []
         with open(fname) as f:
             import json
