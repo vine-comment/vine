@@ -701,7 +701,7 @@ class CommentsTagView(TemplateView):
         update_last_request(request)
         flag = kwargs['flag']
         if flag == 'simple':
-            self.template_name = 'site/comments_tag_simple.html'
+            self.template_name = 'site/plugin/comments_tag_simple.html'
         if flag == 'raw':
             self.template_name = 'site/comments_tag_raw.html'
         if flag == 'plug':
@@ -1024,7 +1024,7 @@ class HomeView(TemplateView):
         update_last_request(request)
         flag = kwargs['flag']
         if flag == 'simple':
-            self.template_name = 'home_simple.html'
+            self.template_name = 'plugin/home_simple.html'
         author = get_author(request.user)
         index_page = request.GET.get('page', 1)
 
