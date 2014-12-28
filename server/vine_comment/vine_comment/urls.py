@@ -5,7 +5,7 @@ from django.conf import settings
 from django.contrib import admin
 admin.autodiscover()
 
-from d1.views import *
+from vine_comment.views import *
 from vine_comment.views import *
 from vine_comment.forms import *
 

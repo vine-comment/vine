@@ -1,5 +1,5 @@
 #coding:utf8
-# Django settings for d1 project.
+# Django settings for vine_comment project.
 import os
 
 DEBUG = True
@@ -110,20 +110,20 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     # python-social-auth
     'social.apps.django_app.middleware.SocialAuthExceptionMiddleware',
-    'd1.middleware.AutoTimezoneMiddleware',
+    'vine_comment.middleware.AutoTimezoneMiddleware',
     # ACAO
-    'd1.acao.ACAO',
-    # 'd1.middleware.TimezoneMiddleware',
-    #'d1.middleware.SpacelessMiddleware',
+    'vine_comment.acao.ACAO',
+    # 'vine_comment.middleware.TimezoneMiddleware',
+    #'vine_comment.middleware.SpacelessMiddleware',
     #'django.middleware.cache.FetchFromCacheMiddleware',
     # Uncomment the next line for simple clickjacking protection:
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
-ROOT_URLCONF = 'd1.urls'
+ROOT_URLCONF = 'vine_comment.urls'
 
 # Python dotted path to the WSGI application used by Django's runserver.
-WSGI_APPLICATION = 'd1.wsgi.application'
+WSGI_APPLICATION = 'vine_comment.wsgi.application'
 
 TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
@@ -157,7 +157,7 @@ INSTALLED_APPS = (
     'djangotoolbox',
 
     # my apps
-    'd1',
+    'vine_comment',
     'vine_comment',
     'social_auth_app',
 )
@@ -338,4 +338,4 @@ CACHES = {
 }
 
 # IP for timezone
-GEOIP_DATABASE = PROJECT_DIR + '/d1/GeoLiteCity.dat'
+GEOIP_DATABASE = PROJECT_DIR + '/vine_comment/GeoLiteCity.dat'

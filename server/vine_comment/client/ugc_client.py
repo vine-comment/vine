@@ -5,7 +5,7 @@ import argparse
 import sys
 sys.path.append('../')
 import os
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "d1.settings")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "vine_comment.settings")
 
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate

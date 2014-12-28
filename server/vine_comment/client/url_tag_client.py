@@ -4,7 +4,7 @@
 import sys
 sys.path.append('../')
 import os
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "d1.settings")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "vine_comment.settings")
 
 from vine_comment.models import Url, Tag
 import argparse

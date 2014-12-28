@@ -5,7 +5,7 @@ import jieba
 from django.core.management import execute_from_command_line
 
 if __name__ == "__main__":
-    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "d1.settings")
+    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "vine_comment.settings")
 
     # Autoreloader will take a reload, so check it or it will run twice:
     # https://code.djangoproject.com/ticket/8085
