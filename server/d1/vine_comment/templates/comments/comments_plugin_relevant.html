@@ -34,15 +34,15 @@
             <ul class="list-group">
             {% for message in p_comment_tag.object_list %}
                  <li class="list-group-item">
-                    <strong>{% if message.author %}{{ message.author.user }}{% else %}{{ message.author_ip }}{% endif %}</strong>
-                     
-                     <span style="float:right">
-                       <span class='comment-time'>提交于 {{ message.time_added|naturaltime }}</span>
-                     </span>
                      <a href="{{message.comment_board.url}}" target="_blank">
                        <span class="comment-text" id="comment_str_{{message.id}}">{{message.comment_str}}</span>
                      </a>
                      <br/>
+                    <strong>{% if message.author %}{{ message.author.user }}{% else %}{{ message.author_ip }}{% endif %}</strong>
+                     
+                     <span>
+                       <span class='comment-time'>于 {{ message.time_added|naturaltime }}</span>
+                     </span>
                      <span style="float:right">
                       <a href="javascript:void(0);" id="up_comment_{{message.id}}" onclick="up('{{message.id}}');return false;">
                         {% if user.id in message.up_users %}
