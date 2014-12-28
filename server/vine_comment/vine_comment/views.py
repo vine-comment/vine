@@ -633,7 +633,7 @@ class CommentDownView(TemplateView):
 
 
 class CommentReplyView(TemplateView):
-    template_name = 'reply.html'
+    template_name = 'common/reply.html'
 
     def get(self, request, id):
         update_last_request(request)
