@@ -385,7 +385,7 @@ class CommentDeleteView(TemplateView):
             tag.comments.remove(comment.id)
             tag.save()
         comment.delete()
-        return HttpResponseRedirect('/comments/')
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
 
 class CommentModifyView(TemplateView):
 
