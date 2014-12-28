@@ -1018,7 +1018,7 @@ def get_author(user):
     return author
 
 class HomeView(TemplateView):
-    template_name = 'home.html'
+    template_name = 'site/home.html'
 
     def get(self, request, *args, **kwargs):
         update_last_request(request)

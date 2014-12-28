@@ -1,6 +1,2 @@
-site/comments_hot
-site/comments_list
-site/comments_newest
-site/comments_tag
-site/site/comments_tag_raw
-site/comments_up
+site/home_raw.html
+site/home.html
