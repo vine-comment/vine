@@ -695,15 +695,15 @@ class CommentsView(TemplateView):
         return HttpResponseRedirect('/comments/best')
 
 class CommentsTagView(TemplateView):
-    template_name = 'comments_tag.html'
+    template_name = 'site/comments_tag.html'
 
     def get(self, request, *args, **kwargs):
         update_last_request(request)
         flag = kwargs['flag']
         if flag == 'simple':
-            self.template_name = 'comments_tag_simple.html'
+            self.template_name = 'site/comments_tag_simple.html'
         if flag == 'raw':
-            self.template_name = 'comments_tag_raw.html'
+            self.template_name = 'site/comments_tag_raw.html'
         if flag == 'plug':
             self.template_name = 'comments/comments_you_like.html'
         tags = Tag.objects.order_by('-time_added').all()
@@ -743,7 +743,7 @@ class CommentsTagView(TemplateView):
         })
 
 class CommentsRelatedView(TemplateView):
-    template_name = 'comments_list_tag.html'
+    template_name = 'site/comments_list_tag.html'
 
     def get(self, request, url_b64):
         update_last_request(request)
@@ -788,7 +788,7 @@ class CommentsRelatedView(TemplateView):
         })
 
 class CommentsBestView(TemplateView):
-    template_name = 'comments_best.html'
+    template_name = 'site/comments_best.html'
 
     def get(self, request, *args, **kwargs):
         update_last_request(request)
@@ -815,7 +815,7 @@ class CommentsBestView(TemplateView):
         })
 
 class CommentsNewestView(TemplateView):
-    template_name = 'comments_newest.html'
+    template_name = 'site/comments_newest.html'
 
     def get(self, request, *args, **kwargs):
         update_last_request(request)
@@ -841,7 +841,7 @@ class CommentsNewestView(TemplateView):
         })
 
 class CommentsHotView(TemplateView):
-    template_name = 'comments_hot.html'
+    template_name = 'site/comments_hot.html'
 
     def get(self, request, days):
         update_last_request(request)
@@ -869,7 +869,7 @@ class CommentsHotView(TemplateView):
         })
 
 class CommentsUpView(TemplateView):
-    template_name = 'comments_up.html'
+    template_name = 'site/comments_up.html'
 
     def get(self, request, days):
         update_last_request(request)
@@ -906,7 +906,7 @@ def debate_index(o):
     return diff/summ
 
 class CommentsDebateView(TemplateView):
-    template_name = 'comments_debate.html'
+    template_name = 'site/comments_debate.html'
 
     def get(self, request, days):
         update_last_request(request)

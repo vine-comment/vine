@@ -338,4 +338,4 @@ CACHES = {
 }
 
 # IP for timezone
-GEOIP_DATABASE = PROJECT_DIR + '/vine_comment/GeoLiteCity.dat'
+GEOIP_DATABASE = PROJECT_DIR + '/vine_comment/data/GeoLiteCity.dat'

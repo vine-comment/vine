@@ -33,7 +33,7 @@
   {% endif %}
 </ol>
 
-{% include 'comments_list.html' %}
+{% include 'site/comments_list.html' %}
 		<ul class='pagination'>
 		{% if p_comment.has_previous %}
 		<li id='pagination_arrow_{{ p_comment.previous_page_number }}'><a href='/comments/up/{{days}}?page={{ p_comment.previous_page_number }}'>«</a></li>
