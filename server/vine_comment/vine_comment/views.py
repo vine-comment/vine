@@ -102,7 +102,7 @@ def update_last_request(request):
 ########################################################################
 
 class CommentIframeView(TemplateView):
-    template_name = 'comments/comment_iframe_view.html'
+    template_name = 'plugin/comments/comment_iframe_view.html'
     index_default_str = 'http://www.null.com/'
 
     # 此view是server第一入口，回应iframe信息
@@ -121,10 +121,10 @@ class CommentView(TemplateView):
     base64_default_str = '' #aHR0cDovL3d3dy5udWxsLmNvbS8=
     index_default_str = '' #http://www.null.com/
 
-    template_inside_cb = 'comments/comment_view_inside_comment_board.html'
-    template_raw = 'comments/comment_view_raw.html'
-    template_meta = 'comments/comment_view_meta.html'
-    template_list = 'comments/comment_list.html'
+    template_inside_cb = 'plugin/comments/comment_view_inside_comment_board.html'
+    template_raw = 'plugin/comments/comment_view_raw.html'
+    template_meta = 'plugin/comments/comment_view_meta.html'
+    template_list = 'plugin/comments/comment_list.html'
 
     @csrf_exempt
     def _check_spam(self, index_url, comment_str, author_ip, user):
@@ -353,7 +353,7 @@ class CommentView(TemplateView):
             is_not_human = False
 
         if flag == 'raw':
-            template_name = 'comments/comment_list_raw.html'
+            template_name = 'plugin/comments/comment_list_raw.html'
 
         return render(request, template_name, {
             'p_comment_hot': p_hot,
@@ -431,7 +431,7 @@ class CommentShowMsgView(TemplateView):
     base64_default_str = '' #aHR0cDovL3d3dy5udWxsLmNvbS8=
     index_default_str = '' #http://www.null.com/
 
-    template_list = 'comments/comment_list.html'
+    template_list = 'plugin/comments/comment_list.html'
 
     def get(self, request, *args, **kwargs):
         update_last_request(request)
@@ -507,9 +507,9 @@ class CommentRawView(TemplateView):
     base64_default_str = '' #aHR0cDovL3d3dy5udWxsLmNvbS8=
     index_default_str = '' #http://www.null.com/
 
-    template_inside_cb = 'comments/comment_view_inside_comment_board.html'
-    template_raw = 'comments/comment_view_raw.html'
-    template_meta = 'comments/comment_view_meta.html'
+    template_inside_cb = 'plugin/comments/comment_view_inside_comment_board.html'
+    template_raw = 'plugin/comments/comment_view_raw.html'
+    template_meta = 'plugin/comments/comment_view_meta.html'
 
     def get(self, request, *args, **kwargs):
         update_last_request(request)
@@ -542,42 +542,42 @@ class UserView(TemplateView):
     pass
 
 class AccountView(TemplateView):
-    template_name = 'comments/account_view.html'
+    template_name = 'plugin/comments/account_view.html'
 
     def get(self, request, *args, **kwargs):
         update_last_request(request)
         return render(request, self.template_name)
 
 class LetterView(TemplateView):
-    template_name = 'comments/letter_view.html'
+    template_name = 'plugin/comments/letter_view.html'
 
     def get(self, request, *args, **kwargs):
         update_last_request(request)
         return render(request, self.template_name)
 
 class SettingView(TemplateView):
-    template_name = 'comments/setting_view.html'
+    template_name = 'plugin/comments/setting_view.html'
 
     def get(self, request, *args, **kwargs):
         update_last_request(request)
         return render(request, self.template_name)
 
 class AccountRawView(TemplateView):
-    template_name = 'comments/account_raw.html'
+    template_name = 'plugin/comments/account_raw.html'
 
     def get(self, request, *args, **kwargs):
         update_last_request(request)
         return render(request, self.template_name)
 
 class LetterRawView(TemplateView):
-    template_name = 'comments/letter_raw.html'
+    template_name = 'plugin/comments/letter_raw.html'
 
     def get(self, request, *args, **kwargs):
         update_last_request(request)
         return render(request, self.template_name)
 
 class SettingRawView(TemplateView):
-    template_name = 'comments/setting_raw.html'
+    template_name = 'plugin/comments/setting_raw.html'
 
     def get(self, request, *args, **kwargs):
         update_last_request(request)
@@ -705,7 +705,7 @@ class CommentsTagView(TemplateView):
         if flag == 'raw':
             self.template_name = 'site/comments_tag_raw.html'
         if flag == 'plug':
-            self.template_name = 'comments/comments_you_like.html'
+            self.template_name = 'plugin/comments/comments_you_like.html'
         tags = Tag.objects.order_by('-time_added').all()
         if len(tags) == 0:
             print "No tag"
@@ -935,7 +935,7 @@ class CommentsDebateView(TemplateView):
 
 
 class CommentShowNewListView(TemplateView):
-    template_name = 'comments/comments_plugin_new.html'
+    template_name = 'plugin/comments/comments_plugin_new.html'
 
     def get(self, request, *args, **kwargs):
         update_last_request(request)
@@ -955,7 +955,7 @@ class CommentShowNewListView(TemplateView):
         })
 
 class CommentShowHotListView(TemplateView):
-    template_name = 'comments/comments_plugin_hot.html'
+    template_name = 'plugin/comments/comments_plugin_hot.html'
 
     def get(self, request, *args, **kwargs):
         update_last_request(request)
@@ -975,7 +975,7 @@ class CommentShowHotListView(TemplateView):
 
         
 class CommentShowRelevantListView(TemplateView):
-    template_name = 'comments/comments_plugin_relevant.html'
+    template_name = 'plugin/comments/comments_plugin_relevant.html'
     
     #TODO find Relevant msg
     def get(self, request, *args, **kwargs):
@@ -996,7 +996,7 @@ class CommentShowRelevantListView(TemplateView):
         })
 
 class CommentDetailView(TemplateView):
-    template_name = 'comments/comment_detail_view.html'
+    template_name = 'plugin/comments/comment_detail_view.html'
 
     def get(self, request, id, *args, **kwargs):
         update_last_request(request)
