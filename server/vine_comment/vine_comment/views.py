@@ -380,7 +380,7 @@ class CommentView(TemplateView):
     @csrf_exempt
     def dispatch(self, request, *args, **kwargs):
         url_b64 = kwargs.get('url_b64', self.base64_default_str)
-        kwargs['index_url'] = base64.b64decode(url_b64, '+-')
+        kwargs['index_url'] = base64.b64decode(url_b64.encode('ascii', 'ignore'), '+-')
 
         #self.debug(request, *args, **kwargs)
         return super(CommentView, self).dispatch(request, *args, **kwargs)
