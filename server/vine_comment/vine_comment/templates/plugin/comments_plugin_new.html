@@ -26,9 +26,6 @@
   </script>
 
 <div id="commet_new">  
-    <fieldset>
-        <div class="comment-legend">---------- 最新评论 ----------</div>
-
         <div id="commetList_new">
             <ul class="list-group">
             {% for message in p_comment_new.object_list %}
@@ -75,6 +72,5 @@
             {% endfor %}
             </ul>
         </div>
-        
-    </fieldset>
+
 </div>

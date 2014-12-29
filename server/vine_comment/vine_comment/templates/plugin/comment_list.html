@@ -8,12 +8,39 @@
  
   
 <script language="JavaScript">
-  function show_comment()
+  function show_relevant_msg_list()
   {
     document.getElementById("commetList").style.display="";
     document.getElementById("iTinkYouLike").style.display="none";
+    document.getElementById("new_msg_list").style.display="none";
+    document.getElementById("hot_msg_list").style.display="none";
+    document.getElementById("relevant_msg_list").style.display="";
+    document.getElementById("msg_list_type").innerHTML="相关评论";
     $('#you_like_text').html("猜你喜欢");
   }
+  
+  function show_hot_msg_list()
+  {
+    document.getElementById("commetList").style.display="";
+    document.getElementById("iTinkYouLike").style.display="none";
+    document.getElementById("new_msg_list").style.display="none";
+    document.getElementById("hot_msg_list").style.display="";
+    document.getElementById("relevant_msg_list").style.display="none";
+    document.getElementById("msg_list_type").innerHTML="最热评论";
+    $('#you_like_text').html("猜你喜欢");
+  }
+  
+  function show_new_msg_list()
+  {
+    document.getElementById("commetList").style.display="";
+    document.getElementById("iTinkYouLike").style.display="none";
+    document.getElementById("new_msg_list").style.display="";
+    document.getElementById("hot_msg_list").style.display="none";
+    document.getElementById("relevant_msg_list").style.display="none";
+    document.getElementById("msg_list_type").innerHTML="最新评论";
+    $('#you_like_text').html("猜你喜欢");
+  }
+  
   function show_you_like()
   {
     $('#iTinkYouLike').load('/comments/tag/raw');
@@ -28,20 +55,46 @@
   .left{width:50%;float:left; padding-left: 10px;}
   .right{margin-left:50%; padding-right: 10px;}
   .right-angle{border-Radius:0px;}
+  
+  
 </style>
 
-<div class='left'>
-    <button id="show_comment_bn" type="button" class='btn btn-default btn-block right-angle' onclick="show_comment();">
-    <img src="//{{ request.META.HTTP_HOST }}{% static 'icons/fire.jpg' %}" />
-    <b>评论</b>
-    </button>
+
+<div>
+
+    <ul style="list-style-type:none; padding:10px;margin:0; ">
+        <li data-role="post-sort" class="dropdown sorting" style="text-align:left;float:left; margin-right: 20px;">
+            <a href="#" class="dropdown-toggle" data-nav="conversation" data-toggle="dropdown">
+            <b id="msg_list_type">最新评论</b>
+            <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+                <li class="selected">
+                <!--TODO class="icon-checkmark" -->
+                <a href="#" data-action="sort" data-sort="popular" onclick="show_new_msg_list();">最新评论<i aria-hidden="true" class="icon-checkmark"></i></a>
+                </li>
+
+                <li>
+                <a href="#" data-action="sort" data-sort="desc" onclick="show_hot_msg_list();">最火评论<i aria-hidden="true" class="icon-checkmark"></i></a>
+                </li>
+
+                <li>
+                <a href="#" data-action="sort" data-sort="asc" onclick="show_relevant_msg_list();">相关评论<i aria-hidden="true" class="icon-checkmark"></i></a>
+                </li>
+            </ul>
+        </li>
+        <li style="text-align:left;float:left; ">
+            <a href="#" onclick="show_you_like();"><b>猜你喜欢</b></a>
+        </li>
+        
+        <li style="float:right">
+            <a href="#" ><b>分享</b></a>             
+        </li>
+    </ul>
+
 </div>
-<div class='right'>
-    <button id="you_like_bn" type="button" class = 'btn btn-default btn-block right-angle'   onclick="show_you_like();">
-    <img src="//{{ request.META.HTTP_HOST }}{% static 'icons/love.jpg' %}" />
-    <b id="you_like_text">猜你喜欢</b>
-    </button>
-</div>
+<br>
+
 
 <div id="commetList" style="display:''; padding-left: 10px; padding-right: 10px;">
 		{% include 'plugin/comment_list_raw.html' %}

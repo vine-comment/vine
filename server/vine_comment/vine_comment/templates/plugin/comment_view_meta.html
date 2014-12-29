@@ -19,7 +19,7 @@
     border: 1px solid #ccc;
     border-bottom: none;
     padding-right: 20px;
-    background: #fff url(../../../static/icons/bg_sprites.png) 0 -90px repeat-x;
+    background-color:white;
     overflow: hidden
 }
 
@@ -106,7 +106,7 @@ border-bottom-left-radius: 0;
 }
 
 .vc-gradient-bg {
-background: url(../../../static/icons/bg_sprites.png) 0 -60px repeat-x;
+background-color:white;
 }
 
 .vc-content {
@@ -126,33 +126,45 @@ background: url(../../../static/icons/bg_sprites.png) 0 -60px repeat-x;
  
     <div class="vc-content"> 
        <div class="vc-replybox" width = "100%">
-       <form method="post">
-        <div class="vc-textarea-wrapper vc-rounded-top ">
-         <textarea id="commentTop" name="commentTop" placeholder="可输入5-140个字" style=  "width:105%; overflow:hidden; resize:none;background:transparent;border-style:none;  "></textarea>
-         
-        </div>
-        <div class="vc-post-toolbar">
-         <div class="vc-post-options vc-gradient-bg">
-          <span class="vc-sync"></span>
-         </div>
-         {% if is_not_human %}
-         {% csrf_token %}
-         {{ form.captcha }}
-         {% endif %}
-          <button class="vc-post-button"  data-loading-text="评论中" id="submitCommentTop" type="button">
-            评论
-          </button>
-         <div class="vc-toolbar-buttons">
-         <!-- TODO 增加表情插件 -->
-          <a class="vc-toolbar-button" title="插入表情">
-          <img src="//{{ request.META.HTTP_HOST }}{% static 'icons/expression.jpg' %}" />
-          </a>
-         </div>
-        </div>
-       </form>
-       
+            <table cellpadding="0" cellspacing="0" border="0" width="100%" sy>
+                 <tr><tbody>   
+                    <td  width="50" height="50" background="//{{ request.META.HTTP_HOST }}{% static 'icons/test.jpg' %}" style="background-size:50px 50px; background-repeat: no-repeat;">
+
+                    </td>
+                    <td>
+                        <b></b>
+                    </td>
+                    <td style="float:left; ">
+                       <form method="post" >
+                        <div class="vc-textarea-wrapper vc-rounded-top" style="height:10%">
+                         <textarea id="commentTop" name="commentTop" placeholder="可输入5-140个字" style=  "width:105%; overflow:hidden; resize:none;background:transparent;border-style:none;  "></textarea>
+                         
+                        </div>
+                        <div class="vc-post-toolbar">
+                         <div class="vc-post-options vc-gradient-bg">
+                          <span class="vc-sync"></span>
+                         </div>
+                         {% if is_not_human %}
+                         {% csrf_token %}
+                         {{ form.captcha }}
+                         {% endif %}
+                          <button class="vc-post-button"  data-loading-text="评论中" id="submitCommentTop" type="button">
+                            评论
+                          </button>
+                         <div class="vc-toolbar-buttons">
+                         <!-- TODO 增加表情插件 -->
+                          <a class="vc-toolbar-button" title="插入表情">
+                          <img src="//{{ request.META.HTTP_HOST }}{% static 'icons/expression.jpg' %}" />
+                          </a>
+                         </div>
+                        </div>
+                       </form>
+                    </td>
+                 </tr></tbody>   
+            </table>
       </div>
         
+		<br>
 
 		<div id="showMsg">
 			{% include "plugin/comment_list.html" %}
