@@ -323,7 +323,7 @@ class CommentView(TemplateView):
         p_new = Paginator(comments_new, 3).page(1)
 
         #RELEVANT
-        index_url = base64.b64decode(url_b64, '+-')
+        index_url = base64.b64decode(url_b64.encode('ascii', 'ignore'), '+-')
         url_objects = Url.objects.filter(url=index_url)
         if len(url_objects) == 0:
             print "No tag"
@@ -465,7 +465,7 @@ class CommentShowMsgView(TemplateView):
 
 
         #RELEVANT
-        index_url = base64.b64decode(url_b64, '+-')
+        index_url = base64.b64decode(url_b64.encode('ascii', 'ignore'), '+-')
         url_objects = Url.objects.filter(url=index_url)
         if len(url_objects) == 0:
             print "No tag"
@@ -508,7 +508,7 @@ class CommentShowMsgView(TemplateView):
     @csrf_exempt
     def dispatch(self, request, *args, **kwargs):
         url_b64 = kwargs.get('url_b64', self.base64_default_str)
-        kwargs['index_url'] = base64.b64decode(url_b64, '+-')
+        kwargs['index_url'] = base64.b64decode(url_b64.encode('ascii', 'ignore'), '+-')
 
         #self.debug(request, *args, **kwargs)
         return super(CommentShowMsgView, self).dispatch(request, *args, **kwargs)
@@ -545,7 +545,7 @@ class CommentRawView(TemplateView):
     @csrf_exempt
     def dispatch(self, request, *args, **kwargs):
         url_b64 = kwargs.get('url_b64', self.base64_default_str)
-        kwargs['index_url'] = base64.b64decode(url_b64, '+-')
+        kwargs['index_url'] = base64.b64decode(url_b64.encode('ascii', 'ignore'), '+-')
 
         #self.debug(request, *args, **kwargs)
         return super(CommentRawView, self).dispatch(request, *args, **kwargs)
@@ -759,7 +759,7 @@ class CommentsRelatedView(TemplateView):
 
     def get(self, request, url_b64):
         update_last_request(request)
-        index_url = base64.b64decode(url_b64, '+-')
+        index_url = base64.b64decode(url_b64.encode('ascii', 'ignore'), '+-')
         url_objects = Url.objects.filter(url=index_url)
         if len(url_objects) == 0:
             print "No tag"
