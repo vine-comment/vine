@@ -164,7 +164,11 @@ class CommentView(TemplateView):
     @staticmethod
     @csrf_exempt
     def _post_comment(index_url, comment_str, author_ip, user):
-        title = urlparse(index_url).netloc
+        try:
+            title = urlparse(index_url).netloc
+        except Exception as e:
+            print index_url, e
+            return None
 
         # print comment_str, user
         logger.info(u'评论:' + comment_str
@@ -319,7 +323,7 @@ class CommentView(TemplateView):
         p_new = Paginator(comments_new, 3).page(1)
 
         #RELEVANT
-        index_url = s_base64decode(url_b64)
+        index_url = base64.b64decode(url_b64)
         url_objects = Url.objects.filter(url=index_url)
         if len(url_objects) == 0:
             print "No tag"
@@ -376,7 +380,7 @@ class CommentView(TemplateView):
     @csrf_exempt
     def dispatch(self, request, *args, **kwargs):
         url_b64 = kwargs.get('url_b64', self.base64_default_str)
-        kwargs['index_url'] = s_base64decode(url_b64)
+        kwargs['index_url'] = base64.b64decode(url_b64)
 
         #self.debug(request, *args, **kwargs)
         return super(CommentView, self).dispatch(request, *args, **kwargs)
@@ -461,7 +465,7 @@ class CommentShowMsgView(TemplateView):
 
 
         #RELEVANT
-        index_url = s_base64decode(url_b64)
+        index_url = base64.b64decode(url_b64)
         url_objects = Url.objects.filter(url=index_url)
         if len(url_objects) == 0:
             print "No tag"
@@ -504,7 +508,7 @@ class CommentShowMsgView(TemplateView):
     @csrf_exempt
     def dispatch(self, request, *args, **kwargs):
         url_b64 = kwargs.get('url_b64', self.base64_default_str)
-        kwargs['index_url'] = s_base64decode(url_b64)
+        kwargs['index_url'] = base64.b64decode(url_b64)
 
         #self.debug(request, *args, **kwargs)
         return super(CommentShowMsgView, self).dispatch(request, *args, **kwargs)
@@ -541,7 +545,7 @@ class CommentRawView(TemplateView):
     @csrf_exempt
     def dispatch(self, request, *args, **kwargs):
         url_b64 = kwargs.get('url_b64', self.base64_default_str)
-        kwargs['index_url'] = s_base64decode(url_b64)
+        kwargs['index_url'] = base64.b64decode(url_b64)
 
         #self.debug(request, *args, **kwargs)
         return super(CommentRawView, self).dispatch(request, *args, **kwargs)
@@ -755,7 +759,7 @@ class CommentsRelatedView(TemplateView):
 
     def get(self, request, url_b64):
         update_last_request(request)
-        index_url = s_base64decode(url_b64)
+        index_url = base64.b64decode(url_b64)
         url_objects = Url.objects.filter(url=index_url)
         if len(url_objects) == 0:
             print "No tag"
