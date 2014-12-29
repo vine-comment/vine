@@ -1024,7 +1024,7 @@ class HomeView(TemplateView):
         update_last_request(request)
         flag = kwargs['flag']
         if flag == 'simple':
-            self.template_name = 'plugin/home_simple.html'
+            self.template_name = 'plugin/home/home_simple.html'
         author = get_author(request.user)
         index_page = request.GET.get('page', 1)
 
