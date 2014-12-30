@@ -1,4 +1,5 @@
 
+{% load staticfiles %}
 {% load avatar_tags %}
 
 <header class="user-author-header header-gray">
@@ -99,7 +100,12 @@
 <div id="overlay"></div>
 <div id="popup"></div>
 
+<script src="{% static 'jquery/2.0.3/jquery.min.js' %}"></script>
+<script src="{% static 'twitter-bootstrap/3.0.3/js/bootstrap.min.js' %}"></script>
 <script src="http://cdn.jsdelivr.net/jquery.knob/1.2.2/jquery.knob.min.js"></script>
+<link href="{% static 'bootstrap-dialog/css/bootstrap-dialog.min.css' %}" rel="stylesheet" type="text/css" />
+<script src="{% static 'bootstrap-dialog/js/bootstrap-dialog.min.js' %}"></script>
+
 
 <script>
 $(function() {
@@ -125,7 +131,7 @@ function showForm(me, id) {
 
 function changeAvatar(e) {
    //TODO on edge of the page
-   var x = e.clientX;
+   /*var x = e.clientX;
    var y = e.clientY;
    $('#overlay').show()
    $('#popup').html('<a herf="#"><i class="fa fa-times-circle" style="float:right;cursor:pointer" onclick="cancelPopup()"></i></a>'+
@@ -135,6 +141,12 @@ function changeAvatar(e) {
      $('#loading').remove();
      $('#popup').append('<div style="margin-left:10px">'+data+'</div>');
    });
+   */
+   BootstrapDialog.show({
+       title: "Change your avatar",
+       message: $('<div></div>').load("{% url 'avatar_change' %}")
+   });
+
  };
 
  function cancelPopup() {
