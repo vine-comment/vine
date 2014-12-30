@@ -1,6 +1,7 @@
 {% extends "plugin/base.html" %}
 {% block content %}
 {% load staticfiles %}
+{% load avatar_tags %}
 
 <!-- TODO Move to the CSS folder -->
 <style type="text/css">
@@ -128,7 +129,10 @@ background-color:white;
        <div class="vc-replybox" width = "100%">
             <table cellpadding="0" cellspacing="0" border="0" width="100%" sy>
                  <tr><tbody>   
-                    <td  width="50" height="50" background="//{{ request.META.HTTP_HOST }}{% static 'icons/test.jpg' %}" style="background-size:50px 50px; background-repeat: no-repeat;">
+                    <td  width="50" height="50" style="background-size:50px 50px; background-repeat: no-repeat;">
+                      <div class="avatar-image-container">
+                        {% avatar user %}
+                      </div>
 
                     </td>
                     <td>
