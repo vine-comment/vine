@@ -5,37 +5,168 @@
 
 <!-- TODO Move to the CSS folder -->
 <style type="text/css">
-.vc-replybox {
-    width: auto;
-    font-size: 12px;
-    z-index: 3;
-    margin: 8px 0;
-    padding: 0 0 0 10px;
-    position: relative;
-    _zoom: 1
-}
-.vc-textarea-wrapper {
-    width: auto;
-    position: relative;
-    border: 1px solid #ccc;
-    border-bottom: none;
-    padding-right: 20px;
-    background-color:white;
-    overflow: hidden
+.textarea-wrapper {
+position: relative;
+margin: 0 0 0 60px;
+-webkit-appearance: none;
+background: #fff;
+border: 2px solid #cbd2d6;
+border: 2px solid rgba(0,39,59,.2);
+border-radius: 4px;
 }
 
-.vc-rounded-top {
-    width: 100%;
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
-    -webkit-border-top-left-radius: 0;
-    -webkit-border-top-right-radius: 0
+.textarea-wrapper .placeholder {
+color: #a5b2b9;
+color: rgba(0,39,59,.35);
+line-height: 30px;
+font-size: 18px;
+position: absolute;
+top: 7px;
+left: 10px;
+right: 9px;
+white-space: nowrap;
+text-overflow: ellipsis;
+overflow: hidden;
+cursor: text;
 }
-.vc-post-toolbar {
-    position: relative;
-    width: 100%;
-    box-shadow: 0 1px 0 rgba(255,255,255,0.6)
+
+.textarea-wrapper .textarea {
+color: #3f4549;
+cursor: text;
+resize: none;
+border: 0;
+display: block;
+padding: 6px 10px 8px;
+margin: 0;
+width: 100%;
+min-height: 100px;
+height: auto;
+line-height: 1.4;
+font-size: 14px;
+font-family: "Helvetica Neue",arial,sans-serif;
+overflow-y: scroll;
+-webkit-transition: all .15s ease-in-out;
+transition: all .15s ease-in-out;
 }
+
+
+.post-actions {
+visibility: hidden;
+opacity: 0;
+filter: alpha(opacity=0);
+background: #f6f8f9;
+border-radius: 0 0 2px 2px;
+border-top: solid 2px;
+border-color: #cbd2d6;
+border-color: rgba(0,39,59,.2);
+position: absolute;
+bottom: 0;
+left: 0;
+right: 0;
+height: 36px;
+}
+
+.suggestions {
+position: absolute;
+left: 0;
+top: 99%;
+z-index: 1002;
+width: 100%;
+box-sizing: content-box;
+margin: 0 -2px -2px;
+padding: 0;
+list-style-type: none;
+line-height: 1;
+zoom: 1;
+-webkit-appearance: none;
+background: #fff;
+border: 2px solid;
+border-color: #cbd2d6;
+border-color: rgba(0,39,59,.2);
+border-radius: 0 0 3px 3px;
+cursor: pointer;
+}
+
+.postbox .media-drag-hover {
+position: absolute;
+overflow: hidden;
+top: 0;
+left: 0;
+right: 0;
+bottom: 0;
+border-radius: 3px;
+background-color: rgba(0,0,0,.4);
+text-align: center;
+font-weight: 700;
+z-index: 2000;
+color: #fff;
+}
+
+.postbox .media-drag-hover .drag-text {
+border: 3px dashed #fff;
+padding: 12px;
+position: absolute;
+top: 50%;
+left: 0;
+right: 0;
+margin: -22px 30px 0;
+text-align: center;
+border-radius: 6px;
+height: 45px;
+}
+
+drag-text {
+display: block;
+}
+
+.postbox .post-actions {
+visibility: visible;
+opacity: 1;
+filter: alpha(opacity=100);
+}
+
+.vc-form{
+margin: 0;
+padding: 0;
+border: 0;
+font-weight: 400;
+font-style: normal;
+font-size: 100%;
+line-height: 1;
+font-family: inherit;
+}
+
+.avatar {
+float: left;
+}
+
+.vc-toolbar-buttons {
+    position: absolute;
+    top: 5px;
+    left: 6px
+}
+
+.wysiwyg{
+margin: 5;
+padding: 0;
+border: 0;
+font-weight: 400;
+font-style: normal;
+font-size: 100%;
+line-height: 1;
+font-family: inherit;
+list-style-type:none;
+float:left;
+}
+
+.logged-in {
+display: block;
+}
+
+.temp-post{
+
+}
+
 .vc-post-button {
     font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
     position: absolute;
@@ -48,9 +179,7 @@
     color: #555;
     font-size: 14px;
     font-weight: bold;
-    border: 1px solid #ccc;
-    border-bottom-color: #aaa;
-    border-bottom-right-radius: 0;
+    border-radius: 0 0 3px;
     -webkit-border-bottom-right-radius: 0;
     background-color: #e6e6e6;
     background-repeat: no-repeat;
@@ -64,58 +193,27 @@
     transition: all .15s linear;
     box-shadow: inset 0 0 1px #fff
 }
-.vc-toolbar-buttons {
-    position: absolute;
-    top: 5px;
-    left: 6px
+
+.vc-btn{
+border: none;
+background: #778289;
+background: rgba(29,47,58,.6);
+display: inline-block;
+padding: 10px 16px;
+color: #fff;
+line-height: 1.1;
+border-radius: 3px;
+font-weight: 500;
+-webkit-transition: background .2s;
+transition: background .2s;
+text-shadow: none;
 }
 
-.vc-add-emote {
-    background-position: 0 -12px
+.vc-image{
+border-radius: 5px; 
 }
+</style>  
 
-.vc-add-image {
-    background-position: 0 -48px
-}
-
-.vs-hidden-text {
-    top: 0;
-    left: 10px;
-    right: 10px;
-    position: absolute;
-    visibility: hidden;
-    word-wrap: break-word
-}
-
-.vc-sync {
-    font-size: 12px;
-    color: #999;
-    line-height: 35px;
-    position: absolute;
-    right: 5px
-}
-
-.vc-post-options {
-position: relative;
-margin-right: 100px;
-height: 32px;
-border: 1px solid #ccc;
-border-right: none;
-border-bottom-color: #aaa;
-border-bottom-left-radius: 0;
--webkit-border-bottom-left-radius: 0;
-}
-
-.vc-gradient-bg {
-background-color:white;
-}
-
-.vc-content {
-
-
-
-}
-</style>
 		<div class="alert-messages" id="message-drawer" style="opacity: 0; top: 60px; display: none;">
 		  <div class="message ">
 		    <div class="message-inside">
@@ -125,50 +223,63 @@ background-color:white;
 		  </div>
 		</div>
  
-    <div class="vc-content"> 
-       <div class="vc-replybox" width = "100%">
-            <table cellpadding="0" cellspacing="0" border="0" width="100%" sy>
-                 <tr><tbody>   
-                    <td  width="50" height="50" style="background-size:50px 50px; background-repeat: no-repeat;">
-                      <div class="avatar-image-container">
-                        {% avatar user %}
-                      </div>
 
-                    </td>
-                    <td>
-                        <b></b>
-                    </td>
-                    <td style="float:left; ">
-                       <form method="post" >
-                        <div class="vc-textarea-wrapper vc-rounded-top" style="height:10%">
-                         <textarea id="commentTop" name="commentTop" placeholder="可输入5-140个字" style=  "width:105%; overflow:hidden; resize:none;background:transparent;border-style:none;  "></textarea>
-                         
-                        </div>
-                        <div class="vc-post-toolbar">
-                         <div class="vc-post-options vc-gradient-bg">
-                          <span class="vc-sync"></span>
-                         </div>
-                         {% if is_not_human %}
-                         {% csrf_token %}
-                         {{ form.captcha }}
-                         {% endif %}
-                          <button class="vc-post-button"  data-loading-text="评论中" id="submitCommentTop" type="button">
+      
+    <form class="vc-form">
+        <div class="postbox">
+                <div class="avatar">
+                    <span class="user">
+                        <img class="vc-image" width=50 height=50  data-role="user-avatar" src="//{{ request.META.HTTP_HOST }}{% static 'icons/test.jpg' %}" alt="Avatar">
+                    </span>
+                </div>
+
+            <div class="textarea-wrapper" data-role="textarea" dir="auto">
+                <div>
+                    <div class="vc-textarea-wrapper vc-rounded-top" style="height:13%">
+                            <textarea id="commentTop" name="commentTop" placeholder="可输入5-140个字" style="width:100%;height:100%; overflow:hidden; resize:none;background:transparent;border-style:none;  "></textarea>
+                    </div>
+                    <div style="display: none;">
+                        <ul class="suggestions">
+                            <li class="header">
+                                <h5>in this conversation</h5>
+                            </li>
+                        </ul>
+                   </div>
+                </div>
+                <div data-role="drag-drop-placeholder" class="media-drag-hover" style="display: none">
+                    <div class="drag-text">
+                    ⬇ Drag and drop your images here to upload them.
+                    </div>
+                </div>
+            <div class="edit-alert" role="postbox-alert"></div>
+            <div class="post-actions">
+                <ul class="wysiwyg">
+                    <li style="float:left; margin-right: 5px;">
+                        <a class="vc-toolbar-button" title="插入表情">
+                            <img src="//{{ request.META.HTTP_HOST }}{% static 'icons/expression.jpg' %}" />
+                        </a>
+                    </li>
+                    <li style="float:left; margin-right: 5px;">
+                        <a class="vc-toolbar-button" title="插入图片">
+                            <img src="//{{ request.META.HTTP_HOST }}{% static 'icons/expression.jpg' %}" />
+                        </a>
+                    </li>
+                </ul>
+                <div class="logged-in">
+                    <section>
+                    <div class="temp-post" style="text-align: right;">
+                          <button class="vc-btn"  data-loading-text="评论中" id="submitCommentTop" type="button">
                             评论
                           </button>
-                         <div class="vc-toolbar-buttons">
-                         <!-- TODO 增加表情插件 -->
-                          <a class="vc-toolbar-button" title="插入表情">
-                          <img src="//{{ request.META.HTTP_HOST }}{% static 'icons/expression.jpg' %}" />
-                          </a>
-                         </div>
-                        </div>
-                       </form>
-                    </td>
-                 </tr></tbody>   
-            </table>
-      </div>
-        
-		<br>
+                    </div>
+                    </section>
+                </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    
+    </br>
 
 		<div id="showMsg">
 			{% include "plugin/comment_list.html" %}
