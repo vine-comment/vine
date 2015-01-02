@@ -9,7 +9,7 @@ from django.contrib.auth import get_user_model
 from django.utils import timezone
 
 from .signals import detected_timezone
-from .utils import get_ip_address_from_request
+from utils.utils import get_ip_address_from_request
 
 
 class SpacelessMiddleware(object):
