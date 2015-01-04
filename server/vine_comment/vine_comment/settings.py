@@ -112,7 +112,7 @@ MIDDLEWARE_CLASSES = (
     'social.apps.django_app.middleware.SocialAuthExceptionMiddleware',
     'vine_comment.middleware.AutoTimezoneMiddleware',
     # ACAO
-    'vine_comment.acao.ACAO',
+    'vine_comment.utils.acao.ACAO',
     # 'vine_comment.middleware.TimezoneMiddleware',
     #'vine_comment.middleware.SpacelessMiddleware',
     #'django.middleware.cache.FetchFromCacheMiddleware',
