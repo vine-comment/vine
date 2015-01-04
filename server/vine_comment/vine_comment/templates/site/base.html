@@ -59,7 +59,7 @@
       </div>
       <ul class="nav navbar-nav navbar-right">
         {% include 'auth/auth_all__li.html' %}
-        <li><a href="/comments/urlpost" id="comments_url_post">POST</a></li>
+        <li><a href="#" onclick="url_post_comment()" id="comments_url_post">我要发帖</a></li>
       </ul>
     </div> <!-- .navbar-collapse -->
   </div> <!-- .container -->
@@ -109,6 +109,8 @@
 <script type="text/javascript">$('a').tooltip();</script>
 <!-- XXX: use popup_message in commentBoard.js -->
 <script type="text/javascript" src="{% static "plugin/commentBoard.js" %}"></script>
+  <link href="{% static 'bootstrap-dialog/css/bootstrap-dialog.min.css' %}" rel="stylesheet" type="text/css" />
+  <script src="{% static 'bootstrap-dialog/js/bootstrap-dialog.min.js' %}"></script>
 
 <!--[if lt IE 9]>
   <script src="//cdnjs.cloudflare.com/ajax/libs/wysihtml5/0.3.0/wysihtml5.min.js"></script>
@@ -183,6 +185,14 @@ $(document).ready(function() {
   $.support.cors = true;
   $('#vine_comment_iframe').load("/iframe/" + btoa(document.location));
 });
+
+    function url_post_comment() {
+       BootstrapDialog.show({
+           title: "Add your url and comment",
+           message: $("<form method='post' action='/comments/urlpost/' enctype='multipart/form-data' id='urlpostForm'>{% csrf_token %}{{ url_post_form|crispy }} <div class='control-group'> <div class='controls'><button type='submit' class='btn btn-primary'>上传</button></div></div></form>")
+       });
+    }
+
 </script>
 
 {% block footer %}

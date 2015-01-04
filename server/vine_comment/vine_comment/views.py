@@ -761,6 +761,7 @@ class CommentsTagView(TemplateView):
         return render(request, self.template_name, {
             'p_comment': p,
             'flag': flag,
+            'url_post_form': UrlpostForm,
         })
 
 class CommentsRelatedView(TemplateView):
@@ -806,6 +807,7 @@ class CommentsRelatedView(TemplateView):
 
         return render(request, self.template_name, {
             'p_comment': p,
+            'url_post_form': UrlpostForm,
         })
 
 class CommentsBestView(TemplateView):
@@ -833,6 +835,7 @@ class CommentsBestView(TemplateView):
 
         return render(request, self.template_name, {
             'p_comment': p,
+            'url_post_form': UrlpostForm,
         })
 
 class CommentsNewestView(TemplateView):
@@ -859,6 +862,7 @@ class CommentsNewestView(TemplateView):
 
         return render(request, self.template_name, {
             'p_comment': p,
+            'url_post_form': UrlpostForm,
         })
 
 class CommentsHotView(TemplateView):
@@ -887,6 +891,7 @@ class CommentsHotView(TemplateView):
         return render(request, self.template_name, {
             'p_comment': p,
             'days': days,
+            'url_post_form': UrlpostForm,
         })
 
 class CommentsUpView(TemplateView):
@@ -915,6 +920,7 @@ class CommentsUpView(TemplateView):
         return render(request, self.template_name, {
             'p_comment': p,
             'days': days,
+            'url_post_form': UrlpostForm,
         })
 
 def debate_index(o):
@@ -1067,6 +1073,7 @@ class HomeView(TemplateView):
             'header_form': UploadHeadSculptureForm,
             'p_comment': p,
             'flag': flag,
+            'url_post_form': UrlpostForm,
         })
 
 class UserHeadSculptureView(TemplateView):
