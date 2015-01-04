@@ -12,7 +12,7 @@ from vine_comment.forms import *
 from django.contrib.auth.decorators import login_required
 
 
-from registration.forms import RegistrationFormTermsOfService, RegistrationFormUniqueEmail
+from registration.forms import RegistrationFormTermsOfService
 from registration.backends.views import RegistrationView
 from registration.backends.views import RegistrationSimpleView
 
@@ -84,10 +84,10 @@ urlpatterns += patterns('',
     url(r'^comments/$', CommentsView.as_view(), name='comments'),
     url(r'^comments/urlpost/$', UrlpostView.as_view(), name='url_post'),
     url(r'^accounts/register/$',
-          RegistrationView.as_view(form_class=RegistrationFormUniqueEmail),
+          RegistrationView.as_view(form_class=VineRegistrationForm),
           name='registration_register'),
     url(r'^accounts/register/simple/$',
-          RegistrationSimpleView.as_view(form_class=RegistrationFormUniqueEmail),
+          RegistrationSimpleView.as_view(form_class=VineRegistrationForm),
           name='registration_register_simple'),
     url(r'^index$', TemplateView.as_view(template_name='index.html'), name='index'),
     url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT}),
