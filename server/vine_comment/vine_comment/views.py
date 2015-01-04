@@ -109,6 +109,15 @@ def update_last_request(request):
 # 2. 浏览器自动根据iframe的信息访问CommentView，获得详细信息。
 ########################################################################
 
+class UrlpostView(TemplateView):
+    template_name = 'site/comment_url_post.html'
+    
+    def get(self, request, *args, **kwargs):
+        pass
+
+    def post(self, request, *args, **kwargs):
+        pass
+
 class CommentIframeView(TemplateView):
     template_name = 'plugin/comment_iframe_view.html'
     index_default_str = 'http://www.null.com/'

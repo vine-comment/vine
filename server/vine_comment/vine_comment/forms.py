@@ -7,6 +7,11 @@ from models import *
 
 from captcha.fields import CaptchaField
 
+class UrlpostForm(forms.Form):
+    #TODO: url integrity checking
+    url  = forms.CharField(widget=forms.Textarea)
+    comment_str  = forms.CharField(widget=forms.Textarea, label="comment")
+
 class CaptchaTestForm(forms.Form):
 #    myfield = AnyOtherField()
     captcha = CaptchaField()
