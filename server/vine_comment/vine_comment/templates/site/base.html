@@ -99,6 +99,15 @@
     </div>
   </div>
 </div>
+<form method='post' action='/comments/urlpost/' enctype='multipart/form-data' id='urlpostForm' style="display: none;">
+    {% csrf_token %}
+    {{ url_post_form|crispy }}
+    <div class='control-group'>
+        <div class='controls'>
+            <button type='submit' class='btn btn-primary'>上传</button>
+        </div>
+    </div>
+</form>
 
 <script src="{% static 'jquery/2.0.3/jquery.min.js' %}"></script>
 <script src="{% static 'twitter-bootstrap/3.0.3/js/bootstrap.min.js' %}"></script>
@@ -189,7 +198,7 @@ $(document).ready(function() {
     function url_post_comment() {
        BootstrapDialog.show({
            title: "Add your url and comment",
-           message: $("<form method='post' action='/comments/urlpost/' enctype='multipart/form-data' id='urlpostForm'>{% csrf_token %}{{ url_post_form|crispy }} <div class='control-group'> <div class='controls'><button type='submit' class='btn btn-primary'>上传</button></div></div></form>")
+           message: $('#urlpostForm').attr("style",'')
        });
     }
 
