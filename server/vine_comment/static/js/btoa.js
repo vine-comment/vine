@@ -23,7 +23,7 @@
  */
 var base64 = {};
 base64.PADCHAR = '=';
-base64.ALPHA = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
+base64.ALPHA = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+-';
 
 base64.makeDOMException = function() {
     // sadly in FF,Safari,Chrome you can't make a DOMException
