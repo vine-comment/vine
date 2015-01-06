@@ -99,12 +99,12 @@
     </div>
   </div>
 </div>
-<form method='post' action='/comments/urlpost/' enctype='multipart/form-data' id='urlpostForm' style="display: none;">
+<form method='post' action='/comments/' enctype='multipart/form-data' id='urlpostForm' style="display: none;">
     {% csrf_token %}
     {{ url_post_form|crispy }}
     <div class='control-group'>
         <div class='controls'>
-            <button type='submit' class='btn btn-primary'>上传</button>
+            <button type='submit' onclick="prepost();" class='btn btn-primary'>上传</button>
         </div>
     </div>
 </form>
@@ -195,12 +195,28 @@ $(document).ready(function() {
   $('#vine_comment_iframe').load("/iframe/" + btoa(document.location));
 });
 
-    function url_post_comment() {
-       BootstrapDialog.show({
-           title: "Add your url and comment",
-           message: $('#urlpostForm').attr("style",'')
-       });
-    }
+function url_post_comment() {
+    /*
+    var urlpostform = "<form method='post' action='/comments/' enctype='multipart/form-data' id='urlpostForm' style='display: none;'>"+
+    "{% csrf_token %}"+
+    "{{ url_post_form|crispy }}"+
+    "<div class='control-group'> "+
+       "<div class='controls'> "+
+            "<button type='submit' onclick='prepost();' class='btn btn-primary'>上传</button>"+
+        "</div>"+
+    "</div>"+
+"</form>";
+*/
+   BootstrapDialog.show({
+       title: "Add your url and comment",
+       message: $('#urlpostForm').show()
+   });
+}
+
+function prepost() {
+    //TODO: btoa(url);$.post(...)
+;
+}
 
 </script>
 
