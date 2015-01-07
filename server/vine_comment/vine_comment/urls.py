@@ -14,7 +14,7 @@ from django.contrib.auth.decorators import login_required
 
 from registration.forms import RegistrationFormTermsOfService
 from registration.backends.views import RegistrationView
-from registration.backends.views.simple import RegistrationView as RegistrationSimpleView
+from registration.backends.simple.views import RegistrationView as RegistrationSimpleView
 
 
 # NOT USE NOW.
