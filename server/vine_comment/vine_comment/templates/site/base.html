@@ -198,7 +198,7 @@ $(document).ready(function() {
 });
 
 function url_post_comment() {
-    var urlpostform = '<form method="post" action="/comment/xxx" enctype="multipart/form-data" id="urlpostForm"> '+
+    var urlpostform = '<form method="post" action="/comment/xxx" enctype="multipart/form-data" id="urlpostForm" onsubmit="return prepost(event);"> '+
                         '<input type="hidden" name="csrfmiddlewaretoken" value="3y7OqhlDip0Gvwkr6uqXDFagDw5kC7JR" />'+
                           '<div id="div_id_url" class="form-group"><label for="id_url" class="control-label  requiredField">'+
                             'Url<span class="asteriskField">*</span></label><div class="controls "><textarea class="textarea form-control" cols="40" id="id_url" name="url" rows="10"></textarea></div></div><div id="div_id_comment_str" class="form-group"><label for="id_comment_str" class="control-label  requiredField">'+
@@ -206,7 +206,7 @@ function url_post_comment() {
 
                         '<div class="control-group">'+
                             '<div class="controls">'+
-                                '<button onclick="prepost()" class="btn btn-primary">上传</button>'+
+                                '<button id="submit_bn" type="submit" class="btn btn-primary">上传</button>'+
                             '</div>'+
                         '</div>'+
                     '</form>';
@@ -216,11 +216,18 @@ function url_post_comment() {
    });
 }
 
-function prepost() {
+function prepost(e) {
     var url_b64 = btoa($('#id_url').val());
     //alert(url_b64);
-    $('#urlpostForm').attr('action','/comment/'+url_b64+'/');
-    $('#urlpostForm').submit();
+    //$('#urlpostForm').attr('action','/comment/'+url_b64+'/');
+    //$('#urlpostForm').submit();
+    $('#submit_bn').attr('disabled','true');
+    //e.preventDefault();
+    $.post("/comment/"+url_b64+"/",{comment:$('#id_comment_str').val()}, 
+            function() {
+              location.reload();
+            });
+    return false;
 }
 
 </script>
