@@ -99,6 +99,7 @@
     </div>
   </div>
 </div>
+{% comment %}
 <form method='post' action='/comments/' enctype='multipart/form-data' id='urlpostForm' style="display: none;">
     {% csrf_token %}
     {{ url_post_form|crispy }}
@@ -108,6 +109,7 @@
         </div>
     </div>
 </form>
+{% endcomment %}
 
 <script src="{% static 'jquery/2.0.3/jquery.min.js' %}"></script>
 <script src="{% static 'twitter-bootstrap/3.0.3/js/bootstrap.min.js' %}"></script>
@@ -196,26 +198,29 @@ $(document).ready(function() {
 });
 
 function url_post_comment() {
-    /*
-    var urlpostform = "<form method='post' action='/comments/' enctype='multipart/form-data' id='urlpostForm' style='display: none;'>"+
-    "{% csrf_token %}"+
-    "{{ url_post_form|crispy }}"+
-    "<div class='control-group'> "+
-       "<div class='controls'> "+
-            "<button type='submit' onclick='prepost();' class='btn btn-primary'>上传</button>"+
-        "</div>"+
-    "</div>"+
-"</form>";
-*/
+    var urlpostform = '<form method="post" action="/comment/xxx" enctype="multipart/form-data" id="urlpostForm"> '+
+                        '<input type="hidden" name="csrfmiddlewaretoken" value="3y7OqhlDip0Gvwkr6uqXDFagDw5kC7JR" />'+
+                          '<div id="div_id_url" class="form-group"><label for="id_url" class="control-label  requiredField">'+
+                            'Url<span class="asteriskField">*</span></label><div class="controls "><textarea class="textarea form-control" cols="40" id="id_url" name="url" rows="10"></textarea></div></div><div id="div_id_comment_str" class="form-group"><label for="id_comment_str" class="control-label  requiredField">'+
+                            'comment<span class="asteriskField">*</span></label><div class="controls "><textarea class="textarea form-control" cols="40" id="id_comment_str" name="comment" rows="10"></textarea></div></div>'+
+
+                        '<div class="control-group">'+
+                            '<div class="controls">'+
+                                '<button onclick="prepost()" class="btn btn-primary">上传</button>'+
+                            '</div>'+
+                        '</div>'+
+                    '</form>';
    BootstrapDialog.show({
        title: "Add your url and comment",
-       message: $('#urlpostForm').show()
+       message: urlpostform
    });
 }
 
 function prepost() {
-    //TODO: btoa(url);$.post(...)
-;
+    var url_b64 = btoa($('#id_url').val());
+    //alert(url_b64);
+    $('#urlpostForm').attr('action','/comment/'+url_b64+'/');
+    $('#urlpostForm').submit();
 }
 
 </script>
