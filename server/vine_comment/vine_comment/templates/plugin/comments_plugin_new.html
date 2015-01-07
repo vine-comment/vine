@@ -41,8 +41,8 @@
                             <td>
                                 <span class="user">
                                     <a href="/home/{{flag}}">
-                                        {% if message.author.user|has_avatar %}
-                                            {% avatar message.author.user 30 %}
+                                       {% if message.author.user|has_avatar %}
+                                            {% avatar 50 %}
                                        {% else %} <!-- no head sculpture -->
                                             <img class="vc-image" width=50 height=50  data-role="user-avatar" src="//{{ request.META.HTTP_HOST }}{% static 'icons/test.jpg' %}" alt="Avatar">
                                        {% endif %}

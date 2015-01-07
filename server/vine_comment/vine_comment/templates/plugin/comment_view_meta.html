@@ -230,7 +230,7 @@ border-radius: 5px;
                 <div class="avatar">
                     <span class="user">
                     {% if user.is_authenticated %}
-                        {% avatar user %}
+                        {% avatar 50 %}
                     {% else %}
                         <img class="vc-image" width=50 height=50  data-role="user-avatar" src="//{{ request.META.HTTP_HOST }}{% static 'icons/test.jpg' %}" alt="Avatar">
                     {% endif %}
