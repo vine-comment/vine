@@ -36,7 +36,7 @@
             {% for message in p_comment_new.object_list %}
                  <li>
                  <div>
-                      <table cellpadding="0" cellspacing="0" border="0" width="100%" sy>
+                      <table cellpadding="0" cellspacing="0" border="0" width="100%">
                         <tr><tbody>  
                             <td>
                                 <span class="user">
@@ -46,17 +46,20 @@
                             <td>
                                 <b></b>
                             </td>
-                            <td style="float:left; ">
-                                <strong>{% if message.author %}{{ message.author.user }}{% else %}{{ message.author_ip }}{% endif %}</strong>
-                                <span>
-                                    <span class='comment-time'>于 {{ message.time_added|naturaltime }}</span>
-                                </span>
-                                </br>
+                            <td style="float:left; " width=85%>
+                                <header>
+                                    <span>
+                                        <strong>{% if message.author %}{{ message.author.user }}{% else %}{{ message.author_ip }}{% endif %}</strong>
+                                    </span>
+                                    <span>
+                                        <span class='comment-time' style="float:right">于 {{ message.time_added|naturaltime }}</span>
+                                    </span>
+                                </header>
                                <a href="{{message.comment_board.url}}" target="_blank">
                                <span class="comment-text" id="comment_str_{{message.id}}">{{message.comment_str}}</span>
-                                </a>
+                               </a>
                                 <br>
-                                 <span style="float:left">
+                                 <span style="float:right">
                                   <a href="javascript:void(0);" id="up_comment_{{message.id}}" onclick="up('{{message.id}}');return false;">
                                     {% if user.id in message.up_users %}
                                     <i class="fa fa-thumbs-up"></i>
