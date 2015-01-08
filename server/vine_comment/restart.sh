@@ -1,3 +1,6 @@
+
+source ~/vine/bin/activate
+
 # NOTE: This script will kill all django processes.
 # For MAC
 pkill -f 'Python manage.py runserver 0.0.0.0:8000'
