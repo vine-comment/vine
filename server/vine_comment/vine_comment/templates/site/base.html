@@ -218,6 +218,7 @@ function url_post_comment() {
 
 function prepost(e) {
     var url_b64 = btoa($('#id_url').val());
+    //TODO: integrity check, try to get the url?
     //alert(url_b64);
     //$('#urlpostForm').attr('action','/comment/'+url_b64+'/');
     //$('#urlpostForm').submit();
