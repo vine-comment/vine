@@ -51,6 +51,10 @@ background-color: #3F3F3F;
 	color: #272222;
 }
 
+.dropdown-menu {
+    min-width: 105% !important;
+}
+
 @media (max-width: 767px) {
 	.navbar-default .navbar-nav .open .dropdown-menu > li > a {
 		color: #ffffff;
