@@ -19,16 +19,16 @@ color: #FFFFFF;
 background-color: #3F3F3F;
 }
 .navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus {
-	color: #23D338;
+	color: #272222;
 	background-color: #f9f9f9;
 	font-weight: bold;
 }
 .navbar-default .navbar-nav > .active > a:hover {
-	color: #23D338;
+	color: #272222;
 	background-color: #ffffff;
 }
 .navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:hover, .navbar-default .navbar-nav > .open > a:focus {
-	color: #23D338;
+	color: #272222;
 	background-color: #ffffff;
 }
 .navbar-default .navbar-toggle {
@@ -48,7 +48,7 @@ background-color: #3F3F3F;
 	color: #ffffff;
 }
 .navbar-default .navbar-link:hover {
-	color: #23D338;
+	color: #272222;
 }
 
 @media (max-width: 767px) {
