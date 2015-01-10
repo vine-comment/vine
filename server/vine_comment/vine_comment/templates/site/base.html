@@ -222,17 +222,34 @@ function url_post_comment() {
 }
 
 function prepost(e) {
-    var url_b64 = btoa($('#id_url').val());
-    //TODO: integrity check, try to get the url?
-    //alert(url_b64);
-    //$('#urlpostForm').attr('action','/comment/'+url_b64+'/');
-    //$('#urlpostForm').submit();
+    var o_url = $('#id_url').val();
+    //alert(o_url);
+    var url_b64 = btoa(o_url);
     $('#submit_bn').attr('disabled','true');
     //e.preventDefault();
     $.post("/comment/"+url_b64+"/",{comment:$('#id_comment_str').val()}, 
             function() {
               location.reload();
             });
+    //TODO: url integrity check
+/*
+    $.get(o_url, {})
+        .done(function(){
+               var url_b64 = btoa(o_url);
+               $('#submit_bn').attr('disabled','true');
+               //e.preventDefault();
+               $.post("/comment/"+url_b64+"/",{comment:$('#id_comment_str').val()}, 
+                       function() {
+                         location.reload();
+                       });
+               })
+        .fail(function() {
+               BootstrapDialog.show({
+                   title: "ERROR!",
+                   message: "请检查URL是否正确"
+               });
+            })
+            */
     return false;
 }
 
