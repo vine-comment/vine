@@ -9,35 +9,33 @@ from subprocess import Popen, PIPE
 abspath = lambda *p: os.path.abspath(os.path.join(*p))
 ROOT = abspath(os.path.dirname(__file__))
 
-class Screenshot(QMainWindow):
+class Screenshot(QWebView):
     def __init__(self):
         self.app = QApplication(sys.argv)
-        QMainWindow.__init__(self)
-        #self.resize(1024, 768)
-        self.web_view = QWebView()
-        self.setCentralWidget(self.web_view)
+        QWebView.__init__(self)
+        #self.setCentralWidget(self.
         self._loaded = False
-        self.web_view.loadFinished.connect(self._loadFinished)
+        self.loadFinished.connect(self._loadFinished)
 
-    def capture(self, url, output_file):
-        self.web_view.load(QUrl(url))
+    def capture(self, url, output_file, width, height):
+        self.load(QUrl(url))
         self.wait_load()
         # set to webpage size
-        page = self.web_view.page()
+        page = self.page()
         frame = page.mainFrame()
-        #self.web_view.page().setViewportSize(frame.contentsSize())
-        page.setViewportSize(QSize(1024, 768))
+        #self.page().setViewportSize(frame.contentsSize())
+        page.setViewportSize(QSize(width, height))
         page.mainFrame().setScrollBarPolicy(Qt.Vertical, Qt.ScrollBarAlwaysOff)
         page.mainFrame().setScrollBarPolicy(Qt.Horizontal, Qt.ScrollBarAlwaysOff)
         # render image
-        image = QImage(self.web_view.page().viewportSize(), QImage.Format_ARGB32)
+        image = QImage(self.page().viewportSize(), QImage.Format_ARGB32)
         painter = QPainter(image)
         frame.render(painter)
         painter.end()
         print 'saving', output_file
         image.save(output_file)
 
-    def wait_load(self, delay=0):
+    def wait_load(self, delay=5):
         # process app events until page loaded
         while not self._loaded:
             self.app.processEvents()
@@ -101,7 +99,8 @@ def get_screen_shot(**kwargs):
     if thumbnail and not crop:
         raise Exception, 'Thumnail generation requires crop image, set crop=True'
 
-    do_screen_capturing(url, screen_path, width, height)
+    s = Screenshot()
+    s.capture(url, screen_path, width, height)
 
     if crop:
         if not crop_replace:
@@ -122,9 +121,15 @@ def get_screen_shot(**kwargs):
 
 if __name__ == '__main__':
     '''
+    s = Screenshot()
+    s.capture('http://www.tengmanpinglun.com', 'website.png', 1024,768)
+    '''
+
+    '''
         Requirements:
         install imageMagick
 
+    '''
     url = 'http://tengmanpinglun.com'
     screen_path, crop_path, thumbnail_path = get_screen_shot(
         url=url, filename='sof.png',
@@ -132,7 +137,4 @@ if __name__ == '__main__':
         thumbnail=True, thumbnail_replace=False,
         thumbnail_width=200, thumbnail_height=150,
     )
-    '''
-    s = Screenshot()
-    s.capture('http://www.baidu.com', 'website.png')
 

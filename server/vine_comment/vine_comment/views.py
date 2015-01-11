@@ -252,7 +252,7 @@ class CommentView(TemplateView):
         pageshots_dir = MEDIA_ROOT+'/pageshots/'
         if not os.path.exists(pageshots_dir):
             os.makedirs(pageshots_dir)
-        s.capture(index_url, pageshots_dir+url_b64+'.png')
+        s.capture(index_url, pageshots_dir+url_b64+'.png', 1024, 768)
 
         comment.save()#need to save here to create the ID
 
