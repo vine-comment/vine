@@ -1,0 +1,20 @@
+
+{% load staticfiles %}
+<link rel="stylesheet" href="//{{ request.META.HTTP_HOST }}{% static 'css/comment_styles.css' %}" type="text/css" media="all" />
+<script type="text/javascript" src="//{{ request.META.HTTP_HOST }}{% static 'plugin/floatCommentBoard.js' %}"></script>
+
+<style>
+#loadImg{position:absolute;}
+#loadImg div{display:table-cell;text-align:center;vertical-align:middle;}
+</style>
+
+<div id="special_div_for_tengmanpinglun_comment_board">
+  <div id="loadImg"><div><img src="//{{ request.META.HTTP_HOST }}{% static 'icons/loading1.gif' %}" /></div></div>
+  <iframe id="__vine_comment" src="//{{ request.META.HTTP_HOST }}/iframe_sa/{{ url_b64 }}" width="100%" height="100%" frameborder="0" onload="document.getElementById('loadImg').style.display='none';"></iframe>
+  <div id="boardLeft" style = "background-color: white" >
+    <a href="javascript:void(0);">
+      <div id="boardDesc"><p>神 吐 槽 —</p></div>
+      <div id="boardButton"><strong><</strong></div>
+    </a>
+  </div>
+</div>

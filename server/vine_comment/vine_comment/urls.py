@@ -145,6 +145,7 @@ if settings.DEBUG:
 
     urlpatterns += patterns('',
         url(r'iframe/(?P<url_b64>.*?)/?$', custom_headers(CommentIframeView.as_view()), name='comment_iframe'),
+        url(r'iframe_sa/(?P<url_b64>.*?)/?$', custom_headers(CommentIframeSAView.as_view()), name='comment_iframe_sa'),
         url(r'^static/(?P<path>.*)$', custom_headers(serve_static)),
     )
     

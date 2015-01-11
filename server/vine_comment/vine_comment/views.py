@@ -133,6 +133,24 @@ class CommentIframeView(TemplateView):
             'url_b64': url_b64,
         })
 
+
+class CommentIframeSAView(TemplateView):
+    tempalte_name = 'iframe/sa.html'
+
+    index_default_str = 'http://www.null.com/'
+
+    # 此view是server第一入口，回应iframe信息
+    def get(self, request, *args, **kwargs):
+        update_last_request(request)
+        url_b64 = kwargs.get('url_b64', self.index_default_str)
+        print "................."
+        print request.path
+        print "................."
+        return render(request, self.template_name, {
+            'url_b64': url_b64,
+        })
+
+
 class CommentView(TemplateView):
     template_name = ''
     base64_default_str = '' #aHR0cDovL3d3dy5udWxsLmNvbS8=
