@@ -143,11 +143,13 @@ class CommentIframeSAView(TemplateView):
     def get(self, request, *args, **kwargs):
         update_last_request(request)
         url_b64 = kwargs.get('url_b64', self.index_default_str)
+        url = base64.b64decode(url_b64)
         print "................."
         print request.path
         print "................."
         return render(request, self.template_name, {
             'url_b64': url_b64,
+            'url': url,
         })
 
 
