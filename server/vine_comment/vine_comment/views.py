@@ -9,8 +9,10 @@ import base64
 import logging
 import math
 import sys
+import os
 from bson import json_util
 import json
+from vine_comment.settings import MEDIA_ROOT,STATIC_ROOT
 
 # django modules
 from django.http import *
@@ -33,6 +35,7 @@ import jieba.analyse
 from vine_comment.models import Comment, CommentBoard, Reply, Author, Tag
 from vine_comment.forms import *
 from captcha.models import CaptchaStore
+from qt_pageshot import *
 
 logger = logging.getLogger( __name__ )
 
@@ -241,7 +244,18 @@ class CommentView(TemplateView):
                     title=title,
                     author_ip=author_ip)
 
+
+        # get the page's screenshot and save url_b64 to comment
+        s = Screenshot()
+        url_b64 = base64.b64encode(index_url, '+-')
+        comment.url_b64 = url_b64
+        pageshots_dir = MEDIA_ROOT+'/pageshots/'
+        if not os.path.exists(pageshots_dir):
+            os.makedirs(pageshots_dir)
+        s.capture(index_url, pageshots_dir+url_b64+'.png')
+
         comment.save()#need to save here to create the ID
+
         # Generate top 5 tags for comment.
         stags= jieba.analyse.extract_tags(comment_str, topK=3)
         for stag in stags:

@@ -70,6 +70,9 @@
          <a href="/iframe_sa/{% b64encode message.comment_board.url %}" target="_blank">
            <span class="comment-text" id="comment_str_{{message.id}}">{{message.comment_str}}</span>
          </a>
+         {% if message.url_b64 %}
+         <img class="pageshot" style="height:50px; weight:80px;" src="/media/pageshots/{{message.url_b64}}.png" alt="pageshot">
+         {% endif %}
          <span>
              <!-- TODO: 跳转到某个站点子类/首页 -->
            (<a href="/iframe_sa/{% b64encode message.comment_board.url %}" target="_blank">{{message.comment_board.title}}</a>)

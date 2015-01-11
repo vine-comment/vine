@@ -92,6 +92,8 @@ class Tag(TimeMixin, models.Model):
 class Comment(TimeMixin, models.Model):
     title = models.CharField(max_length=64)
     comment_str = models.CharField(max_length=128)
+    #comment_img = models.ImageField(upload_to='comment_img/%Y/%m/%d', blank=True, null=True)
+    url_b64 = models.CharField(max_length=100)#this is the name of this page's screenshot image
     desc = models.CharField(max_length=64, blank=True, null=True)
     comment_board = models.ForeignKey(CommentBoard)
     author_ip = models.IPAddressField(blank=True, null=True)
