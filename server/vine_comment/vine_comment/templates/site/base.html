@@ -86,7 +86,11 @@
   {% endcomment %}
     
     <div id="showMsg">
+    {% block content_start %}
+    {% endblock %}
     {% block content %}
+    {% endblock %}
+    {% block content_end %}
     {% endblock %}
     </div> <!-- /#showMsg -->
   </div> <!-- /#col-lg-9 -->
