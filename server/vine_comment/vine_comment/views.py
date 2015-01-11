@@ -1131,3 +1131,10 @@ class UserHeadSculptureView(TemplateView):
             return redirect(request.META.get('HTTP_REFERER', '/'))
         return redirect(request.META.get('HTTP_REFERER', '/'))
 
+class AuthorCommentsView(TemplateView):
+
+    def get(self, request, *args, **kwargs):
+        pass
+
+    def post(self, request, *args, **kwargs):
+        pass
