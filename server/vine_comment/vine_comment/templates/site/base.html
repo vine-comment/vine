@@ -95,7 +95,10 @@
     <div class="panel panel-default" style="padding:10px;">
     {% if user %}
     <strong>{{user}}</strong></br></br>
-    发帖数：{{author.comments_sum}}</br>回帖数：</br>浏览数：</br>点赞数：
+    发帖数：{{ author.get_comments_sum }}</br>
+    回帖数：{{ author.get_reply_to_comment_count }}</br>
+    浏览数：{{ author.get_view_count }}</br>
+    点赞数：{{ author.get_star_count }}
     {% else %}
 		<strong>Annoymous</strong></br></br>
 		发帖数：</br>回帖数：39</br>浏览数：1024</br>点赞数：67
