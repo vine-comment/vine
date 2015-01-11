@@ -40,7 +40,7 @@
                 <td id = "quickMenu" style="padding-right: 10px;">
                     {% if user.is_authenticated %}
                     <li class="dropdown" style="float:left">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href=javascript:void(0);>
                       {{ user.username }}<span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu">
@@ -56,8 +56,8 @@
                 {% else %}
                   <li style="float:right">
                   <div class='btn-group' class="spanright">
-                    <a href="#" data-toggle="modal" data-target="#loginModal" class = 'btn btn-link  btn-sm' ><font face="黑体" color="white" ><b>登录</b></font></a>
-                    <a href="#" data-toggle="modal" data-target="#registerModal" class = 'btn btn-link btn-sm'><font face="黑体" color="white" ><b>注册</b></font></a>
+                    <a href=javascript:void(0); data-toggle="modal" data-target="#loginModal" class = 'btn btn-link  btn-sm' ><font face="黑体" color="white" ><b>登录</b></font></a>
+                    <a href=javascript:void(0); data-toggle="modal" data-target="#registerModal" class = 'btn btn-link btn-sm'><font face="黑体" color="white" ><b>注册</b></font></a>
                   </div>
                   </li>
                 {% endif %}

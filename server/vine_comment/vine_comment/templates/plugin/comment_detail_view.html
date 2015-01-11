@@ -61,7 +61,7 @@ tags: <p>{%for tag in comment.tags%}{{ tag.name }},{%endfor%}</p>
          if(el != '' && $.inArray(el, uniqueTags) === -1) {
            uniqueTags.push(el); 
            raw_tags += el+',';
-           $('<span><a href="#" onclick="SearchText('+el+');return false;"><span class="label label-default">'+el+'</span></a> </span>')
+           $('<span><a href=javascript:void(0); onclick="SearchText('+el+');return false;"><span class="label label-default">'+el+'</span></a> </span>')
            .appendTo('#comment_tags_{{comment.id}}');
          }
        });
