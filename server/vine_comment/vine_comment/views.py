@@ -35,7 +35,7 @@ import jieba.analyse
 from vine_comment.models import Comment, CommentBoard, Reply, Author, Tag
 from vine_comment.forms import *
 from captcha.models import CaptchaStore
-from qt_pageshot import *
+# from qt_pageshot import *
 
 logger = logging.getLogger( __name__ )
 
