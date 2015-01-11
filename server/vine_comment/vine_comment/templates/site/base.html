@@ -226,6 +226,16 @@ function prepost(e) {
     var url_b64 = btoa(o_url);
     $('#submit_bn').attr('disabled','true');
     //e.preventDefault();
+    /* todo: cross domain get the url document
+    var imgdata = null;
+    html2canvas(document.body, {
+      onrendered: function(canvas) {
+        document.body.appendChild(canvas);
+      },
+      width: 1024,
+      height: 768
+    });
+    */
     $.post("/comment/"+url_b64+"/",{comment:$('#id_comment_str').val()}, 
             function() {
               location.reload();
