@@ -70,6 +70,18 @@ class Author(TimeMixin, models.Model):
     def __unicode__(self):
         return str(self.user)
 
+    def get_comments_sum(self):
+        return self.comments_sum
+
+    def get_reply_to_comment_count(self):
+        return 0
+
+    def get_view_count(self):
+        return 0
+
+    def get_star_count(self):
+        return 0
+
 class Url(models.Model):
     url = models.URLField(max_length=2048)
     content = models.CharField(max_length=64)
