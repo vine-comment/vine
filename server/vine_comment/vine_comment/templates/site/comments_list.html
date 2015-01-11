@@ -1,5 +1,6 @@
 {% load humanize %}
 {% load avatar_tags %}
+{% load tags %}
 
 
   <script>
@@ -66,12 +67,12 @@
             <span>{{ message.replies|length }}</span>
           </a>
          </span>
-         <a href="{{message.comment_board.url}}" target="_blank">
+         <a href="/iframe_sa/{% b64encode message.comment_board.url %}" target="_blank">
            <span class="comment-text" id="comment_str_{{message.id}}">{{message.comment_str}}</span>
          </a>
          <span>
              <!-- TODO: 跳转到某个站点子类/首页 -->
-           (<a href="{{message.comment_board.url}}" target="_blank">{{message.comment_board.title}}</a>)
+           (<a href="/iframe_sa/{% b64encode message.comment_board.url %}" target="_blank">{{message.comment_board.title}}</a>)
            <a href="javascript:void(0);" onclick="expandDetail('{{message.id}}');return false;"><i class="fa fa-info-circle"></i></a>
          </span>
          <br>

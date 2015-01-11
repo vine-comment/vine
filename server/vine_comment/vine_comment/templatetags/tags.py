@@ -1,5 +1,6 @@
 from django import template
 import logging
+import base64
 
 register = template.Library()
 
@@ -12,3 +13,7 @@ def active(request, pattern):
         logger.debug(pattern + request.path)
         return 'active'
     return ''
+
+@register.simple_tag
+def b64encode(url):
+    return base64.b64encode(url, '+-')
