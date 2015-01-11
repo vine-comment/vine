@@ -6,7 +6,7 @@
 
  {% if user.is_authenticated %}
 	 <li class="dropdown">
-		 <a class="dropdown-toggle" data-toggle="dropdown" href=javascript:void(0);>
+		 <a class="dropdown-toggle" data-toggle="dropdown" href="#">
 			 {{ user.username }}<span class="caret"></span>
 		 </a>
 		 <ul class="dropdown-menu">
@@ -23,6 +23,6 @@
 	   <i class="fa fa-sign-out" style="margin:2px;"></i>
 	 </a></li>
  {% else %}
-	 <li><a href=javascript:void(0); data-toggle="modal" data-target="#loginModal">登录</a></li>
-	 <li><a href=javascript:void(0); data-toggle="modal" data-target="#registerModal">注册</a></li>
+	 <li><a href="#" data-toggle="modal" data-target="#loginModal">登录</a></li>
+	 <li><a href="#" data-toggle="modal" data-target="#registerModal">注册</a></li>
  {% endif %}
