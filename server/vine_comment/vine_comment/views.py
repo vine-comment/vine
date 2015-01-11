@@ -246,6 +246,7 @@ class CommentView(TemplateView):
 
 
         # get the page's screenshot and save url_b64 to comment
+        '''
         s = Screenshot()
         url_b64 = base64.b64encode(index_url, '+-')
         comment.url_b64 = url_b64
@@ -253,6 +254,7 @@ class CommentView(TemplateView):
         if not os.path.exists(pageshots_dir):
             os.makedirs(pageshots_dir)
         s.capture(index_url, pageshots_dir+url_b64+'.png', 1024, 768)
+        '''
 
         comment.save()#need to save here to create the ID
 
