@@ -95,10 +95,12 @@
     <div class="panel panel-default" style="padding:10px;">
     {% if user %}
     <strong>{{user}}</strong></br></br>
-    发帖数：{{ author.get_comments_sum }}</br>
-    回帖数：{{ author.get_reply_to_comment_count }}</br>
-    浏览数：{{ author.get_view_count }}</br>
-    点赞数：{{ author.get_star_count }}
+<table cellpadding="0" cellspacing="0" border="0" width="100%"><tbody><tr>
+<td width="50%" align="center"><a href="#" class="dark" style="display: block;"><span class="bigger">{{author.get_comments_sum}}</span><div class="sep3"></div><span class="card_fade">发帖数</span></a></td>
+<td width="50%" align="center"><a href="#" class="dark" style="display: block;"><span class="bigger">{{ author.get_star_count }}</span><div class="sep3"></div><span class="card_fade">点赞数</span></a></td>
+    {% comment %}回帖数：{{ author.get_reply_to_comment_count }}</br>
+    浏览数：{{ author.get_view_count }}</br>{% endcomment %}
+</tr></tbody></table>
     {% else %}
 		<strong>Annoymous</strong></br></br>
 		发帖数：</br>回帖数：39</br>浏览数：1024</br>点赞数：67

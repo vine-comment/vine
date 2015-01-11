@@ -71,7 +71,8 @@ class Author(TimeMixin, models.Model):
         return str(self.user)
 
     def get_comments_sum(self):
-        return self.comments_sum
+        # XXX tuning to O(1) or auto refresh
+        return Comment.objects.filter(author=self).count()
 
     def get_reply_to_comment_count(self):
         return 0
@@ -80,7 +81,15 @@ class Author(TimeMixin, models.Model):
         return 0
 
     def get_star_count(self):
-        return 0
+        comments = Comment.objects.all()
+        count = 0
+        for c in comments:
+            if c.up_users:
+                pass
+                # import pdb; pdb.set_trace()
+            if self.user.id in c.up_users:
+                count += 1
+        return count
 
 class Url(models.Model):
     url = models.URLField(max_length=2048)
