@@ -1,5 +1,6 @@
 {% load humanize %}
 {% load avatar_tags %}
+{% load tags %}
   <script>
     function expandReplyNew(id) {
       if (!$('#replyDivNew'+id).is(':visible')) {
@@ -59,7 +60,7 @@
                                         <span class='comment-time' style="float:right">于 {{ message.time_added|naturaltime }}</span>
                                     </span>
                                 </header>
-                               <a href="{{message.comment_board.url}}" target="_blank">
+                               <a href="/iframe_sa/{% b64encode message.comment_board.url %}" target="_blank">
                                <span class="comment-text" id="comment_str_{{message.id}}">{{message.comment_str}}</span>
                                </a>
                                 <br>

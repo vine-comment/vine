@@ -1,5 +1,6 @@
 {% load humanize %}
 {% load avatar_tags %}
+{% load tags %}
   <script>
     function expandReplyHot(id) {
       if (!$('#replyDivHot'+id).is(':visible')) {
@@ -30,7 +31,7 @@
             <ul class="list-group">
             {% for message in p_comment_hot.object_list %}
                   <li class="list-group-item">
-                     <a href="{{message.comment_board.url}}" target="_blank">
+                     <a href="/iframe_sa/{% b64encode message.comment_board.url %}" target="_blank">
                        <span class="comment-text" id="comment_str_{{message.id}}">{{message.comment_str}}</span>
                      </a>
                      <br/>
