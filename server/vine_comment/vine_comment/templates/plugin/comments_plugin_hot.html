@@ -25,54 +25,79 @@
       });
     }
   </script>
-
-<div id="commet_hot">
+{% load staticfiles %}                    
+        
+<div id="commet_hot">  
         <div id="commetList_hot">
-            <ul class="list-group">
+            <ul style="list-style-type:none; padding:10px;margin:10px; ">
             {% for message in p_comment_hot.object_list %}
-                  <li class="list-group-item">
-                     <a href="/iframe_sa/{% b64encode message.comment_board.url %}" target="_blank">
-                       <span class="comment-text" id="comment_str_{{message.id}}">{{message.comment_str}}</span>
-                     </a>
-                     <br/>
-                     <strong>{% if message.author %}{{ message.author.user }}{% else %}{{ message.author_ip }}{% endif %}</strong>
-                     
-                     <span>
-                       <span class='comment-time'>于 {{ message.time_added|naturaltime }}</span>
-                     </span>
-                     <span style="float:right">
-                      <a href="javascript:void(0);" id="up_comment_{{message.id}}" onclick="up('{{message.id}}');return false;">
-                        {% if user.id in message.up_users %}
-                        <i class="fa fa-thumbs-up"></i>
-                        {% else %}
-                        <i class="fa fa-thumbs-o-up"></i>
-                        {% endif %}
-                        +<span>{{ message.up_users|length }}</span>
-                      </a>
-                      {# TODO: 添加tips，说明icon功能，不然留言icon字太小。 #}
-                      <a href="javascript:void(0);" id="reply_comment_hot{{message.id}}" onclick="expandReplyHot('{{message.id}}');return false;">
-                        <i class="fa fa-comments-o"></i>
-                        <span>{{ message.replies|length }}</span>
-                      </a>
-                     </span>
-                     <div id="detailDivHot{{message.id}}" style="display:none;margin-top:10px">
-                     </div>
+                 <li>
+                 <div>
+                      <table cellpadding="0" cellspacing="0" border="0" width="100%">
+                        <tr><tbody>  
+                            <td>
+                                <span class="user">
+                                       {% if message.author.user|has_avatar %}
+                                             {% avatar message.author.user 50 %}
+                                       {% else %} <!-- no head sculpture -->
+                                            <img class="vc-image" width=50 height=50  data-role="user-avatar" src="//{{ request.META.HTTP_HOST }}{% static 'icons/test.jpg' %}" alt="Avatar">
+                                       {% endif %} 
+                                </span>
+                            </td>
+                            <td>
+                                <b></b>
+                            </td>
+                            <td style="float:left; " width=85%>
+                                <header>
+                                    <span>
+                                        <strong>{% if message.author %}{{ message.author.user }}{% else %}{{ message.author_ip }}{% endif %}</strong>
+                                    </span>
+                                    <span>
+                                        <span class='comment-time' style="float:right">于 {{ message.time_added|naturaltime }}</span>
+                                    </span>
+                                </header>
+                               <a href="/iframe_sa/{% b64encode message.comment_board.url %}" target="_blank">
+                               <span class="comment-text" id="comment_str_{{message.id}}">{{message.comment_str}}</span>
+                               </a>
+                                <br>
+                                 <span style="float:right">
+                                  <a href="javascript:void(0);" id="up_comment_{{message.id}}" onclick="up('{{message.id}}');return false;">
+                                    {% if user.id in message.up_users %}
+                                    <i class="fa fa-thumbs-up"></i>
+                                    {% else %}
+                                    <i class="fa fa-thumbs-o-up"></i>
+                                    {% endif %}
+                                    +<span>{{ message.up_users|length }}</span>
+                                  </a>
+                                  {# TODO: 添加tips，说明icon功能，不然留言icon字太小。 #}
+                                  <a href="javascript:void(0);" id="reply_comment_hot{{message.id}}" onclick="expandReplyHot('{{message.id}}');return false;">
+                                    <i class="fa fa-comments-o"></i>
+                                    <span>{{ message.replies|length }}</span>
+                                  </a>
+                                 </span>
+                                 <div id="detailDivHot{{message.id}}" style="display:none;margin-top:10px">
+                                 </div>
 
-                     <div id="replyDivHot{{message.id}}" style="display:none;margin-top:10px">
-                     <br>
-                       <div id="repliesofHot{{message.id}}">
-                       {% include 'common/reply.html' %}
-                       </div>
-                       <div name="reply{{message.id}}" class="input-group">
-                         <textarea rows="5" style="width:100%;height:34px;resize:none" id="reply{{message.id}}" name="reply" placeholder="可输入5-140个字"></textarea>
-                         <span class="input-group-btn">
-                           <button class="btn btn-default submitComment" data-loading-text="回复中" onclick="replyHot('{{message.id}}')" type="button">回复</button>
-                         </span>
-                       </div><!-- /input-group -->
-                     </div>
-                     <br>
+                                 <div id="replyDivHot{{message.id}}" style="display:none;margin-top:10px">
+                                 <br>
+                                   <div id="repliesofHot{{message.id}}">
+                                   {% include 'common/reply.html' %}
+                                   </div>
+                                   <div name="reply{{message.id}}" class="input-group">
+                                     <textarea rows="5" style="width:100%;height:34px;resize:none" id="replyHot{{message.id}}" name="reply" placeholder="可输入5-140个字"></textarea>
+                                     <span class="input-group-btn">
+                                       <button class="btn btn-default submitComment" data-loading-text="回复中" onclick="replyHot('{{message.id}}')" type="button">回复</button>
+                                     </span>
+                                   </div><!-- /input-group -->
+                                 </div>
+                            </td>
+                        </tr></tbody>  
+                     </table>                            
+                 </div>
                   </li>
+                  <br>
             {% endfor %}
             </ul>
         </div>
+
 </div>
