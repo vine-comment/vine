@@ -135,7 +135,7 @@ class CommentIframeView(TemplateView):
 
 
 class CommentIframeSAView(TemplateView):
-    tempalte_name = 'iframe/sa.html'
+    template_name = 'iframe/sa.html'
 
     index_default_str = 'http://www.null.com/'
 
