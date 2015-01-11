@@ -84,7 +84,7 @@
                {% endif %}
              {% if message.author %}{{ message.author.user }}{% else %}{{ message.author_ip }}{% endif %}
            </a>
-           <span class='comment-time'>提交于 {{ message.time_added|naturaltime }}</span>
+           <span class='comment-time'>{{ message.time_added|naturaltime }}</span>
          </span>
          <span id="comment_tags_{{message.id}}">
            {%for tag in message.tags%}

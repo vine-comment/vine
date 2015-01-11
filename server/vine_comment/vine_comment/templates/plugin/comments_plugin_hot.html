@@ -53,7 +53,7 @@
                                         <strong>{% if message.author %}{{ message.author.user }}{% else %}{{ message.author_ip }}{% endif %}</strong>
                                     </span>
                                     <span>
-                                        <span class='comment-time' style="float:right">于 {{ message.time_added|naturaltime }}</span>
+                                        <span class='comment-time' style="float:right">{{ message.time_added|naturaltime }}</span>
                                     </span>
                                 </header>
                                <a href="/iframe_sa/{% b64encode message.comment_board.url %}" target="_blank">
