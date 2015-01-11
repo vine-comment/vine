@@ -42,6 +42,11 @@
     <ul class="list-group">
     {% for message in p_comment.object_list %}
       <li class="list-group-item">
+         {% if message.url_b64 %}
+         <span style="margin-right:10px">
+         <img class="pageshot" style="height:80px; width:100px; " src="/media/pageshots/{{message.url_b64}}.png" alt="pageshot">
+         </span>
+         {% endif %}
          <span style="float:right">
           <a href="javascript:void(0);" id="up_comment_{{message.id}}" onclick="up('{{message.id}}');return false;">
             {% if user.id in message.up_users %}
@@ -67,17 +72,16 @@
             <span>{{ message.replies|length }}</span>
           </a>
          </span>
+         <span>
          <a href="/iframe_sa/{% b64encode message.comment_board.url %}" target="_blank">
            <span class="comment-text" id="comment_str_{{message.id}}">{{message.comment_str}}</span>
          </a>
+         </span>
          <span>
              <!-- TODO: 跳转到某个站点子类/首页 -->
            (<a href="/iframe_sa/{% b64encode message.comment_board.url %}" target="_blank">{{message.comment_board.title}}</a>)
            <a href="javascript:void(0);" onclick="expandDetail('{{message.id}}');return false;"><i class="fa fa-info-circle"></i></a>
          </span>
-         {% if message.url_b64 %}
-         <img class="pageshot" style="height:50px; weight:80px;" src="/media/pageshots/{{message.url_b64}}.png" alt="pageshot">
-         {% endif %}
          <br>
          <span>
            <a href="/home/{{flag}}">
