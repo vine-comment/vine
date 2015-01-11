@@ -216,16 +216,16 @@ function url_post_comment() {
                         '<input type="hidden" name="csrfmiddlewaretoken" value="3y7OqhlDip0Gvwkr6uqXDFagDw5kC7JR" />'+
                           '<div id="div_id_url" class="form-group"><label for="id_url" class="control-label  requiredField">'+
                             'Url<span class="asteriskField">*</span></label><div class="controls "><textarea class="textarea form-control" cols="40" id="id_url" name="url" rows="10" style="resize:none"></textarea></div></div><div id="div_id_comment_str" class="form-group"><label for="id_comment_str" class="control-label  requiredField">'+
-                            'comment<span class="asteriskField">*</span></label><div class="controls "><textarea class="textarea form-control" cols="40" id="id_comment_str" name="comment" rows="10" style="resize:none"></textarea></div></div>'+
+                            '评论<span class="asteriskField">*</span></label><div class="controls "><textarea class="textarea form-control" cols="40" id="id_comment_str" name="comment" rows="10" style="resize:none"></textarea></div></div>'+
 
                         '<div class="control-group">'+
                             '<div class="controls">'+
-                                '<button id="submit_bn" type="submit" class="btn btn-primary">上传</button>'+
+                                '<button id="submit_bn" type="submit" class="btn btn-primary">发帖</button>'+
                             '</div>'+
                         '</div>'+
                     '</form>';
    BootstrapDialog.show({
-       title: "Add your url and comment",
+       title: "我要发帖",
        message: urlpostform
    });
 }
