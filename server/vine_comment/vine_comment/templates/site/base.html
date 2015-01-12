@@ -230,11 +230,52 @@ function url_post_comment() {
    });
 }
 
+// Create the XHR object.
+function createCORSRequest(method, url) {
+  var xhr = new XMLHttpRequest();
+  if ("withCredentials" in xhr) {
+    // XHR for Chrome/Firefox/Opera/Safari.
+    xhr.open(method, url, true);
+  } else if (typeof XDomainRequest != "undefined") {
+    // XDomainRequest for IE.
+    xhr = new XDomainRequest();
+    xhr.open(method, url);
+  } else {
+    // CORS not supported.
+    xhr = null;
+  }
+  return xhr;
+}
+
+// Make the actual CORS request.
+function makeCorsRequest(method, url) {
+  var xhr = createCORSRequest(method, url);
+  if (!xhr) {
+    alert('CORS not supported');
+    return;
+  }
+
+  xhr.withCredentials = true;
+
+  // Response handlers.
+  xhr.onload = function() {
+    var text = xhr.responseText;
+    var title = getTitle(text);
+    alert('Response from CORS request to ' + url + ': ' + title);
+  };
+
+  xhr.onerror = function() {
+    alert('Woops, there was an error making the request.');
+  };
+
+  xhr.send();
+}
+
 function prepost(e) {
     var o_url = $('#id_url').val();
-    //alert(o_url);
     var url_b64 = btoa(o_url);
     $('#submit_bn').attr('disabled','true');
+    //makeCorsRequest('GET', o_url);
     //e.preventDefault();
     /* todo: cross domain get the url document
     var imgdata = null;
