@@ -79,24 +79,25 @@
                                     <span>{{ message.replies|length }}</span>
                                   </a>
                                  </span>
-                                 <div id="detailDivNew{{message.id}}" style="display:none;margin-top:10px">
-                                 </div>
-
-                                 <div id="replyDivNew{{message.id}}" style="display:none;margin-top:10px">
-                                 <br>
-                                   <div id="repliesofNew{{message.id}}">
-                                   {% include 'common/reply.html' %}
-                                   </div>
-                                   <div name="reply{{message.id}}" class="input-group">
-                                     <textarea rows="5" style="width:100%;height:34px;resize:none" id="replyNew{{message.id}}" name="reply" placeholder="可输入5-140个字"></textarea>
-                                     <span class="input-group-btn">
-                                       <button class="btn btn-default submitComment" data-loading-text="回复中" onclick="replyNew('{{message.id}}')" type="button">回复</button>
-                                     </span>
-                                   </div><!-- /input-group -->
-                                 </div>
                             </td>
                         </tr></tbody>  
-                     </table>                            
+                     </table>  
+
+                     <div id="detailDivNew{{message.id}}" style="display:none;margin-top:10px">
+                     </div>
+
+                     <div id="replyDivNew{{message.id}}" style="display:none;margin-top:10px">
+                     <br>
+                       <div id="repliesofNew{{message.id}}">
+                       {% include 'common/reply.html' %}
+                       </div>
+                       <div name="reply{{message.id}}" class="input-group">
+                         <textarea rows="5" style="width:100%;height:34px;resize:none" id="replyNew{{message.id}}" name="reply" placeholder="可输入5-140个字"></textarea>
+                         <span class="input-group-btn">
+                           <button class="btn btn-default submitComment" data-loading-text="回复中" onclick="replyNew('{{message.id}}')" type="button">回复</button>
+                         </span>
+                       </div><!-- /input-group -->
+                     </div>                     
                  </div>
                   </li>
                   <br>
