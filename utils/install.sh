@@ -3,11 +3,28 @@
 # Distribute Script for Vine #
 ##############################
 
+# USE THIS BY: "source install.sh"
 # WARNING: the script is not mature.
 # Read https://github.com/vine-comment/vine/blob/master/PREREQUISITE.md for more details.
 
 install_pypackages()
 {
+    #######################
+    # install pip section #
+    #######################
+    sudo pip install -U pip -i http://pypi.douban.com/simple
+
+    if [ $? -ne 0 ]; then
+        sudo apt-get install python-pip
+    fi
+
+    ######################
+    # virtualenv section #
+    ######################
+    sudo pip install virtualenv
+    virtualenv ~/vine
+    source ~/vine/bin/activate
+
     # NOTE: If you're using windows, please use Pillow installer from here: http://www.lfd.uci.edu/~gohlke/pythonlibs/
     # (Pillow is a better maintained PIL lib.)
     items_pip="django-registration django-crispy-forms django-haystack jieba Whoosh Pillow python-social-auth python-memcached django_akismet_comments elasticsearch pyelasticsearch django-avatar pytz pygeoip dnspython pyvirtualdisplay"
@@ -49,10 +66,13 @@ install_mac ()
 
 install_ubuntu ()
 {
-    # TODO install mongodb etc.
+    ###########################
+    # install mongodb section #
+    ###########################
+    sudo apt-get install mongodb
+
     # TODO install elasticsearch: https://gist.github.com/aaronshaf/1190526
     echo "You should install elasticsearch by yourself."
-    # sudo apt-get install mongodb
     # For IP database
     sudo apt-get install libgeoip-dev
     sudo apt-get install xvfb xserver-xephyr
