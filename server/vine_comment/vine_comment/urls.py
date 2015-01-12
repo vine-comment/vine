@@ -146,13 +146,12 @@ if settings.DEBUG:
 
     urlpatterns += patterns('',
         url(r'^iframe/(?P<url_b64>.*?)/?$', custom_headers(CommentIframeView.as_view()), name='comment_iframe'),
-        url(r'^iframe_uri/(?P<url_encoded>.*?)/?$', custom_headers(CommentIframeUriView.as_view()), name='comment_iframe_uri'),
+        url(r'^o/iframe/(?P<url>.*?)/?$', custom_headers(CommentIframeView.as_view()), name='o/comment_iframe'),
 
         # Standalone iframe, encoded with base64 or encodeURICompoent
         url(r'^iframe_sa/(?P<url_b64>.*?)/?$', custom_headers(CommentIframeSAView.as_view()), name='comment_iframe_sa'),
-        url(r'^uriencode_iframe_sa/(?P<url_encoded>.*?)/?$', custom_headers(CommentUriencodeIframeSAView.as_view()), name='comment_uriencode_iframe_sa'),
+        url(r'^o/iframe_sa/(?P<url>.*?)/?$', custom_headers(CommentIframeSAView.as_view()), name='o/comment_iframe_sa'),
         # Also standalone iframe, short links, for testing, not use directly(for later maintain purpose).
-        url(r'^uri/(?P<url_encoded>.*?)/?$', custom_headers(CommentUriencodeIframeSAView.as_view()), name='uri'),
         url(r'^sa/(?P<url_b64>.*?)/?$', custom_headers(CommentIframeSAView.as_view()), name='sa'),
 
         url(r'^static/(?P<path>.*)$', custom_headers(serve_static)),
