@@ -121,6 +121,22 @@ class UrlpostView(TemplateView):
     def post(self, request, *args, **kwargs):
         pass
 
+class CommentIframeUriView(TemplateView):
+    template_name = 'plugin/comment_iframe_view.html'
+    index_default_str = 'http://www.null.com/'
+
+    # 此view是server第一入口，回应iframe信息
+    def get(self, request, *args, **kwargs):
+        update_last_request(request)
+        url = kwargs.get('url_encoded', self.index_default_str)
+        url_b64 = base64.b64encode(url, '+-')
+        print "................."
+        print request.path
+        print "................."
+        return render(request, self.template_name, {
+            'url_b64': url_b64,
+        })
+
 class CommentIframeView(TemplateView):
     template_name = 'plugin/comment_iframe_view.html'
     index_default_str = 'http://www.null.com/'

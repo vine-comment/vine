@@ -146,10 +146,12 @@ if settings.DEBUG:
 
     urlpatterns += patterns('',
         url(r'^iframe/(?P<url_b64>.*?)/?$', custom_headers(CommentIframeView.as_view()), name='comment_iframe'),
+        url(r'^iframe_uri/(?P<url_encoded>.*?)/?$', custom_headers(CommentIframeUriView.as_view()), name='comment_iframe_uri'),
+
+        # Standalone iframe, encoded with base64 or encodeURICompoent
         url(r'^iframe_sa/(?P<url_b64>.*?)/?$', custom_headers(CommentIframeSAView.as_view()), name='comment_iframe_sa'),
         url(r'^uriencode_iframe_sa/(?P<url_encoded>.*?)/?$', custom_headers(CommentUriencodeIframeSAView.as_view()), name='comment_uriencode_iframe_sa'),
-
-        # short links, for testing, not use directly.
+        # Also standalone iframe, short links, for testing, not use directly(for later maintain purpose).
         url(r'^uri/(?P<url_encoded>.*?)/?$', custom_headers(CommentUriencodeIframeSAView.as_view()), name='uri'),
         url(r'^sa/(?P<url_b64>.*?)/?$', custom_headers(CommentIframeSAView.as_view()), name='sa'),
 
