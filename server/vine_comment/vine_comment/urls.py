@@ -145,9 +145,14 @@ if settings.DEBUG:
         return wrapper
 
     urlpatterns += patterns('',
-        url(r'iframe/(?P<url_b64>.*?)/?$', custom_headers(CommentIframeView.as_view()), name='comment_iframe'),
-        url(r'iframe_sa/(?P<url_b64>.*?)/?$', custom_headers(CommentIframeSAView.as_view()), name='comment_iframe_sa'),
-        url(r'sa/(?P<url_b64>.*?)/?$', custom_headers(CommentIframeSAView.as_view()), name='sa'),
+        url(r'^iframe/(?P<url_b64>.*?)/?$', custom_headers(CommentIframeView.as_view()), name='comment_iframe'),
+        url(r'^iframe_sa/(?P<url_b64>.*?)/?$', custom_headers(CommentIframeSAView.as_view()), name='comment_iframe_sa'),
+        url(r'^uriencode_iframe_sa/(?P<url_encoded>.*?)/?$', custom_headers(CommentUriencodeIframeSAView.as_view()), name='comment_uriencode_iframe_sa'),
+
+        # short links, for testing, not use directly.
+        url(r'^uri/(?P<url_encoded>.*?)/?$', custom_headers(CommentUriencodeIframeSAView.as_view()), name='uri'),
+        url(r'^sa/(?P<url_b64>.*?)/?$', custom_headers(CommentIframeSAView.as_view()), name='sa'),
+
         url(r'^static/(?P<path>.*)$', custom_headers(serve_static)),
     )
     
