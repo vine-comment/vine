@@ -1,3 +1,29 @@
+.ranklist {
+  padding: 4px;
+  margin: 4px;
+  background: #465D84;
+  color: #fff;
+}
+#footer {
+    width: auto;
+    /*background: #363b48;*/
+    background: #384B6B;
+    color: #9b9ca1;
+    min-width: 1200px;
+    margin: auto;
+    padding: 10px 0;
+    height: 60px;
+    text-align: center;
+    font-size: 12px;
+}
+#footer .footer-inner {
+    margin: 0 auto;
+    width: 1200px;
+}
+#footer .footer-about {
+    margin-top: 10px;
+}
+
 body {
   background-image: url(/static/imgs/backgrounds/gray.jpg);
   background-color: #e2e2e2;
