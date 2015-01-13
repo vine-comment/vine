@@ -11,6 +11,8 @@
      > Check: **https://github.com/geekben/deployment/blob/master/java_on_ubuntu.md**
      
 *   libgeoip-dev
+*   xvfb
+*   xserver-xephyr
 
 ###django-nonrel
   > Check **http://django-mongodb-engine.readthedocs.org/en/latest/topics/setup.html** to install.
@@ -43,6 +45,7 @@
 * pygeoip
 * dnspython
 * pydkim
+* pyvirtualdisplay
 
 -----
 ###Items should run.
