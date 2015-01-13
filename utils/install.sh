@@ -42,6 +42,7 @@ install_mac ()
     ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
     brew install mongodb
     brew install elasticsearch
+    brew install pyqt
     # consider mac section of installing openstack
     install_pypackages
 }

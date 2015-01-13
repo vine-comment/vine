@@ -13,6 +13,8 @@
 *   libgeoip-dev
 *   xvfb
 *   xserver-xephyr
+*   pyqt4
+    * install in virtualenv [guide](http://stackoverflow.com/questions/20528731/install-pyqt-and-other-python-modules-for-multiple-versions-in-mac-os-x-maverick)
 
 ###django-nonrel
   > Check **http://django-mongodb-engine.readthedocs.org/en/latest/topics/setup.html** to install.
