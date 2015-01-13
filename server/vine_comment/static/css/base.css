@@ -1,5 +1,6 @@
 body {
-  background: #e2e2e2;
+  background-image: url(/static/imgs/backgrounds/gray.jpg);
+  background-color: #e2e2e2;
 }
 h1, h2, h3, h4, h5, p, div, form {
   font-family:microsoft yahei;

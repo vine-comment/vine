@@ -1,0 +1,84 @@
+.navbar-default {
+	background-color: #384B6B; /* 24BE37 */
+	border-color: #ffffff;
+}
+.navbar-default .navbar-brand {
+	color: #ffffff;
+}
+.navbar-default .navbar-brand:hover, .navbar-default .navbar-brand:focus {
+	color: #ffffff;
+}
+.navbar-default .navbar-text {
+	color: #ffffff;
+}
+.navbar-default .navbar-nav > li > a {
+	color: #ffffff;
+}
+.navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
+color: #FFFFFF;
+background-color: #2C3C57;
+}
+.navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus {
+	color: #272222;
+	background-color: #f9f9f9;
+	font-weight: bold;
+}
+.navbar-default .navbar-nav > .active > a:hover {
+	color: #272222;
+	background-color: #ffffff;
+}
+.navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:hover, .navbar-default .navbar-nav > .open > a:focus {
+	color: #272222;
+	background-color: #ffffff;
+}
+.navbar-default .navbar-toggle {
+	border-color: #ffffff;
+}
+.navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus {
+	background-color: #ffffff;
+}
+.navbar-default .navbar-toggle .icon-bar {
+	background-color: #ffffff;
+}
+.navbar-default .navbar-collapse,
+.navbar-default .navbar-form {
+	border-color: #ffffff;
+}
+.navbar-default .navbar-link {
+	color: #ffffff;
+}
+.navbar-default .navbar-link:hover {
+	color: #272222;
+}
+
+.dropdown-menu {
+    min-width: 105% !important;
+}
+
+@media (max-width: 767px) {
+	.navbar-default .navbar-nav .open .dropdown-menu > li > a {
+		color: #ffffff;
+	}
+	.navbar-default .navbar-nav .open .dropdown-menu > li > a:hover, .navbar-default .navbar-nav .open .dropdown-menu > li > a:focus {
+		color: #7db4f0;
+	}
+	.navbar-default .navbar-nav .open .dropdown-menu > .active > a, .navbar-default .navbar-nav .open .dropdown-menu > .active > a:hover, .navbar-default .navbar-nav .open .dropdown-menu > .active > a:focus {
+		color: #7db4f0;
+		background-color: #ffffff;
+	}
+}
+
+/*
+body { padding-top: 50px; }
+@media screen and (max-width: 768px) {
+    body { padding-top: 50px; }
+}
+*/
+
+.navbar-form .form-group {
+	padding: 2px 0 2px 0;
+}
+
+.form-control {
+	max-height: 28px;
+}
