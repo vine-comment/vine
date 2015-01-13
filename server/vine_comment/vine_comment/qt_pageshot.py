@@ -5,12 +5,15 @@ from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 from PyQt4.QtWebKit import *
 from subprocess import Popen, PIPE
+from pyvirtualdisplay import Display
 
 abspath = lambda *p: os.path.abspath(os.path.join(*p))
 ROOT = abspath(os.path.dirname(__file__))
 
 class Screenshot(QWebView):
     def __init__(self):
+        self.display = Display(visible=0, size=(1024, 768))
+        self.display.start()
         self.app = QApplication(sys.argv)
         QWebView.__init__(self)
         #self.setCentralWidget(self.
@@ -32,10 +35,11 @@ class Screenshot(QWebView):
         painter = QPainter(image)
         frame.render(painter)
         painter.end()
+        self.display.stop()
         print 'saving', output_file
         image.save(output_file)
 
-    def wait_load(self, delay=5):
+    def wait_load(self, delay=3):
         # process app events until page loaded
         while not self._loaded:
             self.app.processEvents()
