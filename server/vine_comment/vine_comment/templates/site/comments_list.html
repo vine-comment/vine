@@ -83,16 +83,16 @@
            <a href="javascript:void(0);" onclick="expandDetail('{{message.id}}');return false;"><i class="fa fa-info-circle"></i></a>
          </span>
          <br>
-         <span>
+         <span style="float:right">
+           <span class='comment-time'>{{ message.time_added|naturaltime }}</span>
            <a href="/home/{{flag}}">
+             {% if message.author %}{{ message.author.user }}{% else %}{{ message.author_ip }}{% endif %}
              {% if message.author.user|has_avatar %}
                {% avatar message.author.user 30 %}
              {% else %} <!-- no head sculpture -->
                <img class="avatar large border" style="height:30px; weight:30px;" src="/static/portrait/default-user-portrait.png" alt="头像">
                {% endif %}
-             {% if message.author %}{{ message.author.user }}{% else %}{{ message.author_ip }}{% endif %}
            </a>
-           <span class='comment-time'>{{ message.time_added|naturaltime }}</span>
          </span>
          <span id="comment_tags_{{message.id}}">
            {% comment %}
