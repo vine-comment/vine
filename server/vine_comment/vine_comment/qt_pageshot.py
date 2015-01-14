@@ -39,7 +39,7 @@ class Screenshot(QWebView):
         print 'saving', output_file
         image.save(output_file)
 
-    def wait_load(self, delay=3):
+    def wait_load(self, delay=0):
         # process app events until page loaded
         while not self._loaded:
             self.app.processEvents()

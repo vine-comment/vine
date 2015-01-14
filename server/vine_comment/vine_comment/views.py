@@ -12,6 +12,8 @@ import sys
 import os
 from bson import json_util
 import json
+import time
+from multiprocessing import Process
 from vine_comment.settings import MEDIA_ROOT,STATIC_ROOT
 
 # django modules
@@ -42,6 +44,15 @@ logger = logging.getLogger( __name__ )
 ########################################################################
 # helpers
 ########################################################################
+def save_pageshot(index_url, url_b64):
+    print "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+    #time.sleep(2)
+    pageshots_dir = MEDIA_ROOT+'/pageshots/'
+    if not os.path.exists(pageshots_dir):
+        os.makedirs(pageshots_dir)
+    s = Screenshot()
+    s.capture(index_url, pageshots_dir+url_b64+'.png', 1024, 768)
+
 def s_base64decode(strg):
     lens = len(strg)
     lenx = lens - (lens % 4 if lens % 4 else 4)
@@ -249,15 +260,11 @@ class CommentView(TemplateView):
                     title=title,
                     author_ip=author_ip)
 
-
         # get the page's screenshot and save url_b64 to comment
-        s = Screenshot()
         url_b64 = base64.b64encode(index_url, '+-')
+        shot_process = Process(target=save_pageshot, args=(index_url, url_b64))
+        shot_process.start()
         comment.url_b64 = url_b64
-        pageshots_dir = MEDIA_ROOT+'/pageshots/'
-        if not os.path.exists(pageshots_dir):
-            os.makedirs(pageshots_dir)
-        s.capture(index_url, pageshots_dir+url_b64+'.png', 1024, 768)
 
         comment.save()#need to save here to create the ID
 
