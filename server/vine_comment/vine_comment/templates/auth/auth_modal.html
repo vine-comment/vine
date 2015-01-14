@@ -38,7 +38,7 @@
            <a style="float:right;" href="{% url 'django.contrib.auth.views.password_reset' %}">{% trans ' 忘记密码？' %}</a>
        </div>
            <div class="modal-footer">
-             <button class="btn btn-large btn-default" type="button" value="close">关闭</button>
+             <button class="btn btn-large btn-default" data-dismiss="modal" type="button" value="close">关闭</button>
              <button class="btn btn-large btn-primary" type="submit" value="Log in">登录</button>
            </div>
        </form>
@@ -60,7 +60,7 @@
              {{ registration_form|crispy }}
          </div>
          <div class="modal-footer">
-           <button type="button" class="btn btn-default">关闭</button>
+           <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
            <button type="submit" class="btn btn-primary">注册</button>
          </div>
        </form>
