@@ -399,7 +399,7 @@ class CommentView(TemplateView):
 
                 for tag in tags:
                     comments = filter(lambda x: x.id in tag.comments, Comment.objects.all())
-                    print "comments:", comments
+                    #print "comments:", comments
                     tag.comments_list = sorted(comments,key=lambda x:len(x.up_users)-len(x.down_users),reverse=True)[0:3]
 
                 index_page = request.GET.get('page', 1)
@@ -541,7 +541,7 @@ class CommentShowMsgView(TemplateView):
 
                 for tag in tags:
                     comments = filter(lambda x: x.id in tag.comments, Comment.objects.all())
-                    print "comments:", comments
+                    #print "comments:", comments
                     tag.comments_list = sorted(comments,key=lambda x:len(x.up_users)-len(x.down_users),reverse=True)[0:3]
 
                 index_page = request.GET.get('page', 1)
@@ -786,7 +786,7 @@ class CommentsTagView(TemplateView):
 
         for tag in tags:
             comments = filter(lambda x: x.id in tag.comments, Comment.objects.all())
-            print "comments:", comments
+            #print "comments:", comments
             tag.comments_list = sorted(comments,key=lambda x:len(x.up_users)-len(x.down_users),reverse=True)[0:3]
 
         index_page = request.GET.get('page', 1)
@@ -833,7 +833,7 @@ class CommentsRelatedView(TemplateView):
 
         for tag in tags:
             comments = filter(lambda x: x.id in tag.comments, Comment.objects.all())
-            print "comments:", comments
+            #print "comments:", comments
             tag.comments_list = sorted(comments,key=lambda x:len(x.up_users)-len(x.down_users),reverse=True)[0:3]
 
         index_page = request.GET.get('page', 1)
