@@ -37,6 +37,13 @@
         $('#detailDiv'+id).hide();
       }
     }
+    function showImg(url) {
+       BootstrapDialog.show({
+           title: "预览",
+           message: '<img class="pageshot" style="height:400px; width:550px; " src="/media/pageshots/'+url+'.png" alt="pageshot">',
+           //animate: false,
+       });
+    }
   </script>
 
     <ul class="list-group">
@@ -44,7 +51,9 @@
       <li class="list-group-item">
          {% if message.url_b64 %}
          <span style="margin-right:10px">
-         <img class="pageshot" style="height:80px; width:100px; " src="/media/pageshots/{{message.url_b64}}.png" alt="pageshot">
+             <a href='javascript:void(0);' onclick="showImg('{{message.url_b64}}')">
+               <img class="pageshot" style="height:80px; width:100px; " src="/media/pageshots/{{message.url_b64}}.png" alt="pageshot">
+             </a>
          </span>
          {% endif %}
          <span style="float:right">
