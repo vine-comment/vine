@@ -17,6 +17,8 @@ class Screenshot(QWebView):
         self.app = QApplication(sys.argv)
         QWebView.__init__(self)
         #self.setCentralWidget(self.
+        self.coding=self.settings()
+        self.coding.setDefaultTextEncoding("utf-8")
         self._loaded = False
         self.loadFinished.connect(self._loadFinished)
 
