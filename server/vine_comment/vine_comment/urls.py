@@ -50,6 +50,7 @@ urlpatterns = patterns('',
 urlpatterns += patterns('',
     url(r'^home/(?P<flag>.*?)/?$', login_required(HomeView.as_view()), name='home'),
     url(r'^user/head-sculpture/?$', login_required(UserHeadSculptureView.as_view()), name='user_head_sculpture'),
+    url(r'^profile/(?P<id>.*?)/?$', ProfileView.as_view(), name='profile'),
     # TODO social auth registration
     url(r'^comment/delete/(?P<id>.*?)/?$', CommentDeleteView.as_view(), name='comment_delete'),
     url(r'^comment/modify/(?P<id>.*?)/?$', CommentModifyView.as_view(), name='comment_modify'),

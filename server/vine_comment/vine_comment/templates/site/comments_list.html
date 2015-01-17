@@ -94,7 +94,11 @@
          <br>
          <span style="float:right">
            <span class='comment-time'>{{ message.time_added|naturaltime }}</span>
+           {% if user.id == message.author.user.id %}
            <a href="/home/{{flag}}">
+           {% else %}
+           <a href="/profile/{{message.author.user.id}}">
+           {% endif %}
              {% if message.author %}{{ message.author.user }}{% else %}{{ message.author_ip }}{% endif %}
              {% if message.author.user|has_avatar %}
                {% avatar message.author.user 30 %}

@@ -45,7 +45,6 @@ logger = logging.getLogger( __name__ )
 # helpers
 ########################################################################
 def save_pageshot(index_url, url_b64):
-    print "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
     #time.sleep(2)
     pageshots_dir = MEDIA_ROOT+'/pageshots/'
     if not os.path.exists(pageshots_dir):
@@ -1099,6 +1098,10 @@ def get_author(user):
             )
         author.save()
     return author
+
+class ProfileView(TemplateView):
+    def get(self, request, *args, **kwargs):
+        return HttpResponse(status=200)
 
 class HomeView(TemplateView):
     template_name = 'site/home.html'
