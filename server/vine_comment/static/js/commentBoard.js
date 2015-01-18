@@ -66,10 +66,11 @@ function main() {
             //pageshot
             $.getScript("/static/js/html2canvas.js", function(){
                 var htmlcontent = null;
-                if(window.location.protocol != "http")
-                    htmlcontent = document.body;
-                else
+                try{
                     htmlcontent = (window.location != window.parent.location) ?window.parent.document.body:document.body;
+                }catch(e){
+                    htmlcontent = document.body;
+                }
                 html2canvas(htmlcontent, {
                   onrendered: function(canvas) {
                       //pageshot = canvas;
