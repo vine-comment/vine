@@ -211,7 +211,7 @@ class CommentView(TemplateView):
 
     @staticmethod
     @csrf_exempt
-    def _post_comment(index_url, comment_str, author_ip, user):
+    def _post_comment(index_url, comment_str, author_ip, user, pageshot):
         try:
             title = urlparse(index_url).netloc
         except Exception as e:
@@ -261,11 +261,19 @@ class CommentView(TemplateView):
                     author_ip=author_ip)
 
         # get the page's screenshot and save url_b64 to comment
-        url_b64 = base64.b64encode(index_url, '+-')
+        '''
         shot_process = Process(target=save_pageshot, args=(index_url, url_b64))
         shot_process.start()
-        comment.url_b64 = url_b64
-
+        '''
+        if pageshot:
+            url_b64 = base64.b64encode(index_url, '+-')
+            #imgdata = base64.b64decode(pageshot)
+            pageshots_dir = MEDIA_ROOT+'/pageshots/'
+            _,imgdata = pageshot.split(',')
+            filename = pageshots_dir+url_b64+'.png'  # I assume you have a way of picking unique filenames
+            with open(filename, 'wb') as f:
+                f.write(imgdata.decode('base64'))
+            comment.url_b64 = url_b64
         comment.save()#need to save here to create the ID
 
         # Generate top 5 tags for comment.
@@ -294,7 +302,8 @@ class CommentView(TemplateView):
         author_ip = request.META.get('REMOTE_ADDR', '0.0.0.0')
         user = request.user
         comment_str = index_url
-        self._post_comment(index_url, comment_str, author_ip, user)
+        pageshot = request.FILES.get('pageshot', None)
+        self._post_comment(index_url, comment_str, author_ip, user, pageshot)
 
     @csrf_exempt
     def debug(self, request, *args, **kwargs):
@@ -304,6 +313,7 @@ class CommentView(TemplateView):
     def post(self, request, *args, **kwargs):
         update_last_request(request)
         comment_str = request.POST.get('comment', 'Empty Comment')
+        pageshot = request.POST.get('pageshot', None)
         author_ip = request.META.get('REMOTE_ADDR', '0.0.0.0')
         # For Nginx
         if not author_ip:
@@ -350,7 +360,7 @@ class CommentView(TemplateView):
                 print 'captcha error'
         else:
             """
-        self._post_comment(index_url, comment_str, author_ip, user)
+        self._post_comment(index_url, comment_str, author_ip, user, pageshot)
 
         #TODO in order to Refresh the captcha , it must be change commentBoard.js urls.py and template
         kwargs['template'] = self.template_list
