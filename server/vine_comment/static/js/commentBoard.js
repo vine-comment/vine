@@ -65,10 +65,9 @@ function main() {
             var pageshot = null;
             //pageshot
             $.getScript("/static/js/html2canvas.js", function(){
-                html2canvas(document.body, {
+                html2canvas(window.parent.document.body, {
                   onrendered: function(canvas) {
                       //pageshot = canvas;
-                      console.log("iiiiiiiiiiiiiiii");
                       pageshot = canvas.toDataURL("image/png");
                         //$.post(last_url, {'comment': comment_input.val(), 'pageshot': pageshot, 'target_url': target_url, 'captcha_key':$('#id_captcha_0').val(),'captcha_value':$('#id_captcha_1').val() })
                         var fdata = new FormData();
@@ -97,8 +96,8 @@ function main() {
                             popup_message("吐槽成功");
                         });
                   },
-                  width: 1024,
-                  height: 768
+                  //width: 1024,
+                  //height: 768
                 });
             });
    
