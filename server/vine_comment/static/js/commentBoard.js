@@ -65,7 +65,8 @@ function main() {
             var pageshot = null;
             //pageshot
             $.getScript("/static/js/html2canvas.js", function(){
-                html2canvas(window.parent.document.body, {
+                var htmlcontent = (window.location != window.parent.location) ?window.parent.document.body:document.body;
+                html2canvas(htmlcontent, {
                   onrendered: function(canvas) {
                       //pageshot = canvas;
                       pageshot = canvas.toDataURL("image/png");
