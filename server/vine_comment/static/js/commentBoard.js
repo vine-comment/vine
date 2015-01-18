@@ -35,7 +35,7 @@ function popup_message(text)
 }
 
 function main() {
-    var parent_url = (window.location != window.parent.location) ? document.referrer: document.location;
+    //var parent_url = (window.location != window.parent.location) ? document.referrer: document.location;
     //var target_url = 'http://www.tengmanpinglun.com:8000/comment/' + btoa(parent_url);
     var l = document.location
     var target_url = l.protocol + l.origin + l.pathname
@@ -65,7 +65,11 @@ function main() {
             var pageshot = null;
             //pageshot
             $.getScript("/static/js/html2canvas.js", function(){
-                var htmlcontent = (window.location != window.parent.location) ?window.parent.document.body:document.body;
+                var htmlcontent = null;
+                if(window.location.protocol != "http")
+                    htmlcontent = document.body;
+                else
+                    htmlcontent = (window.location != window.parent.location) ?window.parent.document.body:document.body;
                 html2canvas(htmlcontent, {
                   onrendered: function(canvas) {
                       //pageshot = canvas;
