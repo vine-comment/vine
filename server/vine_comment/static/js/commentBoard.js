@@ -67,8 +67,16 @@ function main() {
             $.getScript("/static/js/html2canvas.js", function(){
                 var htmlcontent = null;
                 try{
-                    htmlcontent = (window.location != window.parent.location) ?window.parent.document.body:document.body;
+                    var iframe = $('.vine-iframe');
+                    if(iframe){
+                        htmlcontent = iframe.contents().find("body");
+                        console.log(htmlcontent);
+                    }
+                    else{
+                        htmlcontent = (window.location != window.parent.location) ?window.parent.document.body:document.body;
+                    }
                 }catch(e){
+                    console.log(e);
                     htmlcontent = document.body;
                 }
                 html2canvas(htmlcontent, {
