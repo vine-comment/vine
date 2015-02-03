@@ -75,7 +75,7 @@ install_ubuntu ()
     echo "You should install elasticsearch by yourself."
     # For IP database
     sudo apt-get install libgeoip-dev
-    sudo apt-get install xvfb xserver-xephyr
+    #sudo apt-get install xvfb xserver-xephyr
 
     HOME=~
     install_pypackages
@@ -118,7 +118,6 @@ EOF
         rm /etc/nginx/sites-enabled/vine
     fi
     ln -s /etc/nginx/sites-available/vine /etc/nginx/sites-enabled/vine
-    cp -r server/d1/static $HOME/vine/static
     sudo service nginx start
 }
 

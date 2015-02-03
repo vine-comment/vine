@@ -8,7 +8,7 @@ upstream vine_django_server {
 
 server {
 
-    listen   80;
+    listen   8000;
     server_name example.com;
 
     client_max_body_size 4G;
@@ -17,11 +17,11 @@ server {
     error_log /root/vine/logs/nginx-error.log;
  
     location /static/ {
-        alias   /git/vine/server/d1/static/;
+        alias   /root/git/vine/server/vine_comment/static/;
     }
     
     location /media/ {
-        alias   /root/vine/media/;
+        alias   /root/git/vine/server/vine_comment/media/;
     }
 
     location / {
@@ -59,6 +59,6 @@ server {
     # Error pages
     error_page 500 502 503 504 /500.html;
     location = /500.html {
-        root /git/vine/server/d1/static/;
+        root /root/git/vine/server/vine_comment/static/;
     }
 }

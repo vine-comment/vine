@@ -1,15 +1,15 @@
 #!/bin/bash
 
 NAME="vine"                                                       # Name of the application
-DJANGODIR=/git/vine/server/d1                                     # Django project directory
+DJANGODIR=/root/git/vine/server/vine_comment                                     # Django project directory
 HOME=/root
 VEDIR=$HOME/vine/                                                     # Virtual Env directory
 SOCKFILE=$VEDIR/run/gunicorn.sock                                 # we will communicte using this unix socket
 USER=root                                                         # the user to run as
 GROUP=root                                                        # the group to run as
 NUM_WORKERS=3                                                     # how many worker processes should Gunicorn spawn
-DJANGO_SETTINGS_MODULE=d1.settings                                # which settings file should Django use
-DJANGO_WSGI_MODULE=d1.wsgi                                        # WSGI module name
+DJANGO_SETTINGS_MODULE=vine_comment.settings                                # which settings file should Django use
+DJANGO_WSGI_MODULE=vine_comment.wsgi                                        # WSGI module name
 
 echo "Starting $NAME as `whoami`"
 
