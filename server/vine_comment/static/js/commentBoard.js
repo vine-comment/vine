@@ -62,19 +62,31 @@ function main() {
                 return;
             }
 
+	    var iframe = $('.vine-iframe');
+	    if(iframe){
+		//htmlcontent = iframe.contents().find("body");
+		//console.log(htmlcontent);
+		$.post(last_url, {'comment': comment_input.val(), 'target_url': target_url, 'captcha_key':$('#id_captcha_0').val(),'captcha_value':$('#id_captcha_1').val() })
+		.fail(function(data){if ( data.responseCode ) console.log( data.responseCode );})
+		.done(function(data) {
+		    var badge = $('#comments_count');
+		    var count = parseInt(badge.html())+1;
+		    badge.html(count);
+
+		    $('#showMsg').html(data);
+		    comment_input.val('');
+		    btn.button('reset');
+		    popup_message("吐槽成功");
+		});
+		return true;
+	    }
+
             var pageshot = null;
             //pageshot
             $.getScript("/static/js/html2canvas.js", function(){
                 var htmlcontent = null;
                 try{
-                    var iframe = $('.vine-iframe');
-                    if(iframe){
-                        htmlcontent = iframe.contents().find("body");
-                        console.log(htmlcontent);
-                    }
-                    else{
-                        htmlcontent = (window.location != window.parent.location) ?window.parent.document.body:document.body;
-                    }
+                    htmlcontent = (window.location != window.parent.location) ?window.parent.document.body:document.body;
                 }catch(e){
                     console.log(e);
                     htmlcontent = document.body;
@@ -83,7 +95,6 @@ function main() {
                   onrendered: function(canvas) {
                       //pageshot = canvas;
                       pageshot = canvas.toDataURL("image/png");
-                        //$.post(last_url, {'comment': comment_input.val(), 'pageshot': pageshot, 'target_url': target_url, 'captcha_key':$('#id_captcha_0').val(),'captcha_value':$('#id_captcha_1').val() })
                         var fdata = new FormData();
                         fdata.append('comment', comment_input.val());
                         fdata.append('pageshot', pageshot);
