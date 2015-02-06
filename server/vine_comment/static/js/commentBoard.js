@@ -81,8 +81,52 @@ function main() {
 		return true;
 	    }
 
-            var pageshot = null;
             //pageshot
+            try {
+		    chrome.tabs.captureVisibleTab(null, {}, function (pageshot) {
+			// You can add that image HTML5 canvas, or Element.
+			var fdata = new FormData();
+			fdata.append('comment', comment_input.val());
+			fdata.append('pageshot', pageshot);
+			fdata.append('target_url', target_url);
+			fdata.append('captcha_key', $('#id_captcha_0').val());
+			fdata.append('captcha_value', $('#id_captcha_1').val());
+			$.ajax({
+			    url: last_url,
+			    data: fdata,
+			    cache: false,
+			    contentType: false,
+			    processData: false,
+			    type: 'POST',
+			})
+			.fail(function(data){if ( data.responseCode ) console.log( data.responseCode );})
+			.done(function(data) {
+			    var badge = $('#comments_count');
+			    var count = parseInt(badge.html())+1;
+			    badge.html(count);
+
+			    $('#showMsg').html(data);
+			    comment_input.val('');
+			    btn.button('reset');
+			    popup_message("吐槽成功");
+			});
+		    });
+            } catch(e){
+		$.post(last_url, {'comment': comment_input.val(), 'target_url': target_url, 'captcha_key':$('#id_captcha_0').val(),'captcha_value':$('#id_captcha_1').val() })
+		.fail(function(data){if ( data.responseCode ) console.log( data.responseCode );})
+		.done(function(data) {
+		    var badge = $('#comments_count');
+		    var count = parseInt(badge.html())+1;
+		    badge.html(count);
+
+		    $('#showMsg').html(data);
+		    comment_input.val('');
+		    btn.button('reset');
+		    popup_message("吐槽成功");
+		});
+                    
+            }
+            /*
             $.getScript("/static/js/html2canvas.js", function(){
                 var htmlcontent = null;
                 try{
@@ -125,6 +169,7 @@ function main() {
                   //height: 768
                 });
             });
+            */
    
         });
     }
