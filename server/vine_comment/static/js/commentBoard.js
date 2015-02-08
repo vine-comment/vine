@@ -34,6 +34,16 @@ function popup_message(text)
     });
 }
 
+var htmlcontent = null;
+var parentwin = window.parent;
+function displayMessage(e){
+    //document.getElementById("target_page").innerHTML = e.data;
+    htmlcontent = e.data;
+    console.log(e.data);
+    console.log("xxxxxxxxxxxxxxxxxxxxxxxxxxxx");
+    //parentwin.postMessage('HI!你给我发了"<span>'+e.data+'"</span>。',"*");
+};
+
 function main() {
     //var parent_url = (window.location != window.parent.location) ? document.referrer: document.location;
     //var target_url = 'http://www.tengmanpinglun.com:8000/comment/' + btoa(parent_url);
@@ -46,6 +56,16 @@ function main() {
     // 老方法：先load一次target。新方法：直接通过iframeview来load。
     // $('#showMsg').load(target_url);
     var buttonCommentRelations = {"submitCommentTop":"commentTop","submitCommentBottom":"commentBottom"};
+
+    if (window.addEventListener) {
+        // For standards-compliant web browsers
+        window.addEventListener("message", displayMessage, false);
+    console.log("yyyyyyyyyyyyyxxxxxxxxxxxxxxxxxxxxxxxx");
+    }
+    else {
+        console.log("xxxxxxxxxxxxxxxxxxxxxxxxxxxx");
+        window.attachEvent("onmessage", displayMessage);
+    }
 
     //这里target_url暂未使用，仅用comment
     for (buttonSubmitComment in buttonCommentRelations) {
@@ -62,79 +82,67 @@ function main() {
                 return;
             }
 
-	    var iframe = $('.vine-iframe');
-	    if(iframe){
-		//htmlcontent = iframe.contents().find("body");
-		//console.log(htmlcontent);
-		$.post(last_url, {'comment': comment_input.val(), 'target_url': target_url, 'captcha_key':$('#id_captcha_0').val(),'captcha_value':$('#id_captcha_1').val() })
-		.fail(function(data){if ( data.responseCode ) console.log( data.responseCode );})
-		.done(function(data) {
-		    var badge = $('#comments_count');
-		    var count = parseInt(badge.html())+1;
-		    badge.html(count);
-
-		    $('#showMsg').html(data);
-		    comment_input.val('');
-		    btn.button('reset');
-		    popup_message("吐槽成功");
-		});
-		return true;
-	    }
-
-            //pageshot
-            try {
+        //pageshot
+        /*
+        try {
 		    chrome.tabs.captureVisibleTab(null, {}, function (pageshot) {
-			// You can add that image HTML5 canvas, or Element.
-			var fdata = new FormData();
-			fdata.append('comment', comment_input.val());
-			fdata.append('pageshot', pageshot);
-			fdata.append('target_url', target_url);
-			fdata.append('captcha_key', $('#id_captcha_0').val());
-			fdata.append('captcha_value', $('#id_captcha_1').val());
-			$.ajax({
-			    url: last_url,
-			    data: fdata,
-			    cache: false,
-			    contentType: false,
-			    processData: false,
-			    type: 'POST',
-			})
-			.fail(function(data){if ( data.responseCode ) console.log( data.responseCode );})
-			.done(function(data) {
-			    var badge = $('#comments_count');
-			    var count = parseInt(badge.html())+1;
-			    badge.html(count);
+                // You can add that image HTML5 canvas, or Element.
+                var fdata = new FormData();
+                fdata.append('comment', comment_input.val());
+                fdata.append('pageshot', pageshot);
+                fdata.append('target_url', target_url);
+                fdata.append('captcha_key', $('#id_captcha_0').val());
+                fdata.append('captcha_value', $('#id_captcha_1').val());
+                $.ajax({
+                    url: last_url,
+                    data: fdata,
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    type: 'POST',
+                })
+                .fail(function(data){if ( data.responseCode ) console.log( data.responseCode );})
+                .done(function(data) {
+                    var badge = $('#comments_count');
+                    var count = parseInt(badge.html())+1;
+                    badge.html(count);
 
-			    $('#showMsg').html(data);
-			    comment_input.val('');
-			    btn.button('reset');
-			    popup_message("吐槽成功");
-			});
+                    $('#showMsg').html(data);
+                    comment_input.val('');
+                    btn.button('reset');
+                    popup_message("吐槽成功");
+                });
 		    });
-            } catch(e){
-		$.post(last_url, {'comment': comment_input.val(), 'target_url': target_url, 'captcha_key':$('#id_captcha_0').val(),'captcha_value':$('#id_captcha_1').val() })
-		.fail(function(data){if ( data.responseCode ) console.log( data.responseCode );})
-		.done(function(data) {
-		    var badge = $('#comments_count');
-		    var count = parseInt(badge.html())+1;
-		    badge.html(count);
+        } catch(e){
+            $.post(last_url, {'comment': comment_input.val(), 'target_url': target_url, 'captcha_key':$('#id_captcha_0').val(),'captcha_value':$('#id_captcha_1').val() })
+            .fail(function(data){if ( data.responseCode ) console.log( data.responseCode );})
+            .done(function(data) {
+                var badge = $('#comments_count');
+                var count = parseInt(badge.html())+1;
+                badge.html(count);
 
-		    $('#showMsg').html(data);
-		    comment_input.val('');
-		    btn.button('reset');
-		    popup_message("吐槽成功");
-		});
+                $('#showMsg').html(data);
+                comment_input.val('');
+                btn.button('reset');
+                popup_message("吐槽成功");
+            });
+
+            return true;
                     
-            }
-            /*
+        }
+        */
+        //var htmlcontent = document.getElementById("target_page").innerHTML;
+        if(htmlcontent) 
+        {
             $.getScript("/static/js/html2canvas.js", function(){
-                var htmlcontent = null;
+                /*
                 try{
                     htmlcontent = (window.location != window.parent.location) ?window.parent.document.body:document.body;
                 }catch(e){
                     console.log(e);
                     htmlcontent = document.body;
                 }
+                */
                 html2canvas(htmlcontent, {
                   onrendered: function(canvas) {
                       //pageshot = canvas;
@@ -169,9 +177,27 @@ function main() {
                   //height: 768
                 });
             });
-            */
-   
-        });
+        }
+
+        else{
+            //htmlcontent = iframe.contents().find("body");
+            //console.log(htmlcontent);
+            $.post(last_url, {'comment': comment_input.val(), 'target_url': target_url, 'captcha_key':$('#id_captcha_0').val(),'captcha_value':$('#id_captcha_1').val() })
+            .fail(function(data){if ( data.responseCode ) console.log( data.responseCode );})
+            .done(function(data) {
+                var badge = $('#comments_count');
+                var count = parseInt(badge.html())+1;
+                badge.html(count);
+
+                $('#showMsg').html(data);
+                comment_input.val('');
+                btn.button('reset');
+                popup_message("吐槽成功");
+            });
+            
+            return true;
+        }
+      });
     }
 
     var nav_buttons = {"nav_comment":"comment_raw", "nav_account":"account_raw", "nav_letter":"letter_raw", "nav_setting":"setting_raw"};
