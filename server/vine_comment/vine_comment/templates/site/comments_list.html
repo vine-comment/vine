@@ -44,6 +44,12 @@
            //animate: false,
        });
     }
+    function imgError(image) {
+        image.onerror = "";
+        image.src = "//{{ request.META.HTTP_HOST }}/static/icons/test.jpg";
+        $(image).parent().onclick="";
+        return true;
+    }
   </script>
 
     <ul class="list-group">
@@ -52,7 +58,7 @@
          {% if message.url_b64 %}
          <span style="margin-right:10px">
              <a href='javascript:void(0);' onclick="showImg('{{message.url_b64}}')">
-               <img class="pageshot" style="height:80px; width:100px; " src="/media/pageshots/{{message.url_b64}}.png" alt="pageshot">
+               <img class="pageshot" style="height:80px; width:100px; " src="/media/pageshots/{{message.url_b64}}.png" onerror="imgError(this)" alt="pageshot">
              </a>
          </span>
          {% endif %}
