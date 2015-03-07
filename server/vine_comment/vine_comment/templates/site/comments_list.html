@@ -2,6 +2,19 @@
 {% load avatar_tags %}
 {% load tags %}
 
+<style type="text/css">
+
+.imgdiv {
+    width: 102px;
+    float:right;
+    border: 1px solid #000000;
+}
+.restdiv {
+    margin-right: 10px;
+    overflow: hidden;white-space: nowrap;text-overflow: ellipsis;
+}
+
+</style>
 
   <script>
     function expandReply(id) {
@@ -56,13 +69,16 @@
     {% for message in p_comment.object_list %}
       <li class="list-group-item">
          {% if message.url_b64 %}
+         <div class="imgdiv">
          <span style="margin-right:10px">
              <a href='javascript:void(0);' onclick="showImg('{{message.url_b64}}')">
                <img class="pageshot" style="height:80px; width:100px; " src="/media/pageshots/{{message.url_b64}}.png" onerror="imgError(this)" alt="pageshot">
              </a>
          </span>
+         </div>
          {% endif %}
-         <span style="float:right">
+         <div class="restdiv">
+         <span style="font-size:120%">
           <a href="javascript:void(0);" id="up_comment_{{message.id}}" onclick="up('{{message.id}}');return false;">
             {% if user.id in message.up_users %}
             <i class="fa fa-thumbs-up"></i>
@@ -87,27 +103,28 @@
             <span>{{ message.replies|length }}</span>
           </a>
          </span>
-         <span>
-         <a href="/iframe_sa/{% b64encode message.comment_board.url %}" target="_blank">
-           <span class="comment-text" id="comment_str_{{message.id}}">{{message.comment_str}}</span>
-         </a>
-         </span>
-         <span>
+         <span style="margin-left:5px">
+           <a href="javascript:void(0);" onclick="expandDetail('{{message.id}}');return false;"><i class="fa fa-info-circle"></i></a>
              <!-- TODO: 跳转到某个站点子类/首页 -->
            (<a href="/iframe_sa/{% b64encode message.comment_board.url %}" target="_blank">{{message.comment_board.title}}</a>)
-           <a href="javascript:void(0);" onclick="expandDetail('{{message.id}}');return false;"><i class="fa fa-info-circle"></i></a>
          </span>
-         <br>
-         <span style="float:right">
-           <span class='comment-time'>{{ message.time_added|naturaltime }}</span>
+         </br>
+         <span>
+         <a href="/iframe_sa/{% b64encode message.comment_board.url %}" target="_blank">
+             <span class="comment-text" id="comment_str_{{message.id}}"><strong>{{message.comment_str}}</strong></span>
+         </a>
+         </span>
+         </br>
+         <span>
            <a href="/home/{{flag}}">
-             {% if message.author %}{{ message.author.user }}{% else %}{{ message.author_ip }}{% endif %}
              {% if message.author.user|has_avatar %}
                {% avatar message.author.user 30 %}
              {% else %} <!-- no head sculpture -->
                <img class="avatar large border" style="height:30px; weight:30px;" src="/static/portrait/default-user-portrait.png" alt="头像">
-               {% endif %}
+             {% endif %}
+             {% if message.author %}{{ message.author.user }}{% else %}{{ message.author_ip }}{% endif %}
            </a>
+           <span class='comment-time'>{{ message.time_added|naturaltime }}</span>
          </span>
          <span id="comment_tags_{{message.id}}">
            {% comment %}
@@ -116,7 +133,7 @@
            {%endfor%}
            {% endcomment %}
          </span>
-         <br/>
+         </div>
          <div id="detailDiv{{message.id}}" style="display:none;margin-top:10px">
          </div>
 
