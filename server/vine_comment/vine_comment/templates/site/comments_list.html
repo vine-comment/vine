@@ -94,15 +94,9 @@
            评论了 
            <!-- TODO: 跳转到某个站点子类/首页 -->
            <a href="/iframe_sa/{% b64encode message.comment_board.url %}" target="_blank">{{message.comment_board.title}}</a>
+           {% if user == message.author.user %}
            <a href="javascript:void(0);" onclick="expandDetail('{{message.id}}');return false;"><i class="fa fa-info-circle"></i></a>
-         </span>
-
-         <span id="comment_tags_{{message.id}}">
-           {% comment %}
-           {%for tag in message.tags%}
-             <a href="/faceted_search/?q={{tag.name}}"><span class="label label-default">{{tag.name}}</span></a>
-           {%endfor%}
-           {% endcomment %}
+           {% endif %}
          </span>
          </br>
 
@@ -137,6 +131,13 @@
             <i class="fa fa-comments-o"></i>
             <span>{{ message.replies|length }}</span>
           </a>
+         </span>
+         <span id="comment_tags_{{message.id}}">
+           {% comment %}
+           {%for tag in message.tags%}
+             <a href="/faceted_search/?q={{tag.name}}"><span class="label label-default">{{tag.name}}</span></a>
+           {%endfor%}
+           {% endcomment %}
          </span>
          </div>
 
