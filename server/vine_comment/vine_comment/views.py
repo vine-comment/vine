@@ -1069,7 +1069,7 @@ class CommentShowRelevantListView(TemplateView):
         })
 
 class CommentDetailView(TemplateView):
-    template_name = 'plugin/comment_detail_view.html'
+    template_name = 'common/comment_detail_view.html'
 
     def get(self, request, id, *args, **kwargs):
         update_last_request(request)
