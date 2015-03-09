@@ -162,7 +162,7 @@ class CommentIframeSAView(TemplateView):
         if url is not self.index_default_str:
             url_b64 = base64.b64encode(url, '+-')
         else:
-            url = base64.b64decode(url_b64)
+            url = base64.b64decode(url_b64.encode('ascii', 'ignore'), '+-')
         print "................."
         print request.path
         print "................."
