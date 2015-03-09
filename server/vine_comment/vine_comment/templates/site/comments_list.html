@@ -78,6 +78,41 @@
          </div>
          {% endif %}
          <div class="restdiv">
+         
+         <span>
+           <a href="/home/{{flag}}">
+             {% if message.author.user|has_avatar %}
+               {% avatar message.author.user 30 %}
+             {% else %} <!-- no head sculpture -->
+               <img class="avatar large border" style="height:30px; weight:30px;" src="/static/portrait/default-user-portrait.png" alt="头像">
+             {% endif %}
+             {% if message.author %}{{ message.author.user }}{% else %}{{ message.author_ip }}{% endif %}
+           </a>
+           <span class='comment-time'>{{ message.time_added|naturaltime }}</span>
+         </span>
+         <span style="margin-left:5px">
+           评论了 
+           <!-- TODO: 跳转到某个站点子类/首页 -->
+           <a href="/iframe_sa/{% b64encode message.comment_board.url %}" target="_blank">{{message.comment_board.title}}</a>
+           <a href="javascript:void(0);" onclick="expandDetail('{{message.id}}');return false;"><i class="fa fa-info-circle"></i></a>
+         </span>
+
+         <span id="comment_tags_{{message.id}}">
+           {% comment %}
+           {%for tag in message.tags%}
+             <a href="/faceted_search/?q={{tag.name}}"><span class="label label-default">{{tag.name}}</span></a>
+           {%endfor%}
+           {% endcomment %}
+         </span>
+         </br>
+
+         <span>
+         <a href="/iframe_sa/{% b64encode message.comment_board.url %}" target="_blank">
+             <span class="comment-text" id="comment_str_{{message.id}}"><strong>{{message.comment_str}}</strong></span>
+         </a>
+         </span>
+         </br>
+
          <span style="font-size:120%">
           <a href="javascript:void(0);" id="up_comment_{{message.id}}" onclick="up('{{message.id}}');return false;">
             {% if user.id in message.up_users %}
@@ -103,37 +138,8 @@
             <span>{{ message.replies|length }}</span>
           </a>
          </span>
-         <span style="margin-left:5px">
-           <a href="javascript:void(0);" onclick="expandDetail('{{message.id}}');return false;"><i class="fa fa-info-circle"></i></a>
-             <!-- TODO: 跳转到某个站点子类/首页 -->
-           (<a href="/iframe_sa/{% b64encode message.comment_board.url %}" target="_blank">{{message.comment_board.title}}</a>)
-         </span>
-         </br>
-         <span>
-         <a href="/iframe_sa/{% b64encode message.comment_board.url %}" target="_blank">
-             <span class="comment-text" id="comment_str_{{message.id}}"><strong>{{message.comment_str}}</strong></span>
-         </a>
-         </span>
-         </br>
-         <span>
-           <a href="/home/{{flag}}">
-             {% if message.author.user|has_avatar %}
-               {% avatar message.author.user 30 %}
-             {% else %} <!-- no head sculpture -->
-               <img class="avatar large border" style="height:30px; weight:30px;" src="/static/portrait/default-user-portrait.png" alt="头像">
-             {% endif %}
-             {% if message.author %}{{ message.author.user }}{% else %}{{ message.author_ip }}{% endif %}
-           </a>
-           <span class='comment-time'>{{ message.time_added|naturaltime }}</span>
-         </span>
-         <span id="comment_tags_{{message.id}}">
-           {% comment %}
-           {%for tag in message.tags%}
-             <a href="/faceted_search/?q={{tag.name}}"><span class="label label-default">{{tag.name}}</span></a>
-           {%endfor%}
-           {% endcomment %}
-         </span>
          </div>
+
          <div id="detailDiv{{message.id}}" style="display:none;margin-top:10px">
          </div>
 
