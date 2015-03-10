@@ -92,10 +92,17 @@
            {% include 'common/reply.html' %}
            </div>
            <div name="reply{{message.id}}" class="input-group">
+             {% if user.is_authenticated %}
              <textarea rows="5" style="width:100%;height:34px;resize:none" id="reply{{message.id}}" name="reply" placeholder="可输入5-140个字"></textarea>
              <span class="input-group-btn">
                <button class="btn btn-default submitComment" data-loading-text="回复中" onclick="reply('{{message.id}}')" type="button">回复</button>
              </span>
+             {% else %}
+             <textarea rows="5" style="width:100%;height:34px;resize:none" placeholder="想吐槽吗，注册个用户吧~" disabled></textarea>
+             <span class="input-group-btn">
+               <button class="btn btn-default submitComment" type="button" disabled>回复</button>
+             </span>
+             {% endif %}
            </div><!-- /input-group -->
          </div>
       </li>
