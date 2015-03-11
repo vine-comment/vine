@@ -728,6 +728,10 @@ class CommentReplyView(TemplateView):
                         time_added=datetime.datetime.utcnow().replace(
                                         tzinfo=utc),
                         reply_str=reply_str)
+#TODO replies_sum
+            author = get_author(request.user)
+            author.points += 2
+            author.save()
         else:
             '''
             Annoymous User access the site.
@@ -1153,7 +1157,8 @@ class MostActiveUsersView(TemplateView):
     template_name = 'common/most_active_users.html'
 
     def get(self, request, *args, **kwargs):
-        authors = Author.objects.order_by('comments_sum')
+#TODO algorithm need optimization? we only need top 5
+        authors = Author.objects.order_by('points')
         return render(request, self.template_name, {
             'authors': authors[:5],
         })
