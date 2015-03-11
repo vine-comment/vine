@@ -1158,7 +1158,7 @@ class MostActiveUsersView(TemplateView):
 
     def get(self, request, *args, **kwargs):
 #TODO algorithm need optimization? we only need top 5
-        authors = Author.objects.order_by('points')
+        authors = Author.objects.order_by('-points')
         return render(request, self.template_name, {
             'authors': authors[:5],
         })
