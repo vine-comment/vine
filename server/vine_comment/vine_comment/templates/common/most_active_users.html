@@ -1,0 +1,5 @@
+    <div style="padding:9px"><center><strong>活跃用户</strong></center></div>
+    {% for author in authors %} 
+    <div style="padding:3px"><span class="ranklist">{{forloop.counter}}</span> {{author.user}}</br></div>
+    {% endfor %}
+

@@ -1148,3 +1148,15 @@ class AuthorCommentsView(TemplateView):
 
     def post(self, request, *args, **kwargs):
         pass
+
+class MostActiveUsersView(TemplateView):
+    template_name = 'common/most_active_users.html'
+
+    def get(self, request, *args, **kwargs):
+        authors = Author.objects.order_by('comments_sum')
+        return render(request, self.template_name, {
+            'authors': authors[:5],
+        })
+
+    def post(self, request, *args, **kwargs):
+        pass

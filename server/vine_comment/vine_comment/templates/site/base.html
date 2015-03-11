@@ -111,14 +111,15 @@
     </br>
     {% endif %}
     </div>
-    <div class="panel panel-default" style="padding:10px;">
-        {# TODO #}
-        <div style="padding:9px"><center><strong>活跃用户</strong></center></div>
-        <div style="padding:3px"><span class="ranklist">1</span> optiplex9000</br></div>
-        <div style="padding:3px"><span class="ranklist">2</span> I_LIKE_CHEESE108</br></div>
-        <div style="padding:3px"><span class="ranklist">3</span> monsieur-chat</br></div>
-        <div style="padding:3px"><span class="ranklist">4</span> sircam22</br></div>
-        <div style="padding:3px"><span class="ranklist">5</span> photoh</br></div>
+    <script>
+        $(document).ready(function(){
+            $.get("/ajax/most_active_users/", {})
+            .done(function(data) {
+              $('#most_active_users' ).html(data);
+            });
+        });
+    </script>
+    <div class="panel panel-default" id="most_active_users" style="padding:10px;">
     </div>
     {% comment %}
     <div class="panel panel-default" style="padding:10px;"></div>
