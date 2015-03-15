@@ -28,16 +28,16 @@
 
 <div id="commentBoard" >
   <div id="boardRight" >
-        <div id="top" class="navbar-top navbar navbar-default navbar-fixed-top" style="background-color:black" >
+        <div id="top" class="navbar-top navbar navbar-default navbar-fixed-top" style="background-color:#384B6B" >
             <div style="padding-top: 6px;">
             <table cellpadding="0" cellspacing="0" border="0" width="100%">
                 <tbody><tr>
-                 <td id="logo" style="padding-left: 10px;" align="left">
-                    <img src="//{{ request.META.HTTP_HOST }}{% static 'icons/logo.jpg' %}" />
+                 <td id="logo" width="15%" style="padding-left: 3%;" align="left">
+                     <a><font face="黑体" color="white" size="6"><i class="fa fa-refresh"></i></font></a>
                 </td>
-                <td id="webTag"  width="auto" align="center"><font face="黑体" color="white" size="6"><b>藤蔓评论</b></font></td>
+                <td id="webTag"  width="70%" align="center"><font face="黑体" color="white" size="6"><b>藤蔓评论</b></font></td>
                 
-                <td id = "quickMenu" style="padding-right: 10px;">
+                <td id = "quickMenu" width="15%" style="padding-right: 3%;">
                     {% if user.is_authenticated %}
                     <li class="dropdown" style="float:left">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
