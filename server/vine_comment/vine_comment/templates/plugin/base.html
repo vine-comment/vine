@@ -32,14 +32,14 @@
             <div style="padding-top: 6px;">
             <table cellpadding="0" cellspacing="0" border="0" width="100%">
                 <tbody><tr>
-                 <td id="logo" width="15%" style="padding-left: 3%;" align="left">
-                     <a><font face="黑体" color="white" size="6"><i class="fa fa-refresh"></i></font></a>
+                 <td id="logo" width="30%" style="padding-left: 3%;" align="left">
+                     <a href="/comment/{{url_b64}}/"><font face="黑体" color="white" size="6"><i class="fa fa-refresh"></i></font></a>
                 </td>
-                <td id="webTag"  width="70%" align="center"><font face="黑体" color="white" size="6"><b>藤蔓评论</b></font></td>
+                <td id="webTag"  width="40%" align="center"><font face="黑体" color="white" size="6"><b>藤蔓评论</b></font></td>
                 
-                <td id = "quickMenu" width="15%" style="padding-right: 3%;">
+                <td id = "quickMenu" width="30%" style="padding-right: 3%;">
                     {% if user.is_authenticated %}
-                    <li class="dropdown" style="float:left">
+                    <div class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                       {{ user.username }}<span class="caret"></span>
                     </a>
@@ -52,14 +52,14 @@
                     <li><a href="/home/simple">主页</a></li>
                     <li><a href="/logout/">退出</a></li>
                     </ul>
-                  </li>
+                  </div>
                 {% else %}
-                  <li style="float:right">
+                  <div style="float:right">
                   <div class='btn-group' class="spanright">
                     <a href="#" data-toggle="modal" data-target="#loginModal" class = 'btn btn-link  btn-sm' ><font face="黑体" color="white" ><b>登录</b></font></a>
                     <a href="#" data-toggle="modal" data-target="#registerModal" class = 'btn btn-link btn-sm'><font face="黑体" color="white" ><b>注册</b></font></a>
                   </div>
-                  </li>
+                  </div>
                 {% endif %}
                 </td>
                 </tr></tbody>   
