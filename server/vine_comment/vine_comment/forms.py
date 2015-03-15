@@ -7,6 +7,13 @@ from models import *
 
 from captcha.fields import CaptchaField
 
+# For image uploading too.
+class DocumentForm(forms.Form):
+    docfile = forms.FileField(
+        label='Select a file',
+        help_text='max. 42 megabytes'
+    )
+
 class UrlpostForm(forms.Form):
     #TODO: url integrity checking
     url  = forms.CharField(widget=forms.Textarea)

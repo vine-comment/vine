@@ -7,6 +7,9 @@ from django.utils.timezone import utc
 from django.contrib.auth.signals import user_logged_out
 import datetime
 
+class Document(models.Model):
+    docfile = models.FileField(upload_to='documents/%Y/%m/%d')
+
 class TimeMixin(models.Model):
     time_modified = models.DateTimeField(blank=True, null=True)
     time_added = models.DateTimeField(

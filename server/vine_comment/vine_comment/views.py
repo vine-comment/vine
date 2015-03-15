@@ -1165,3 +1165,11 @@ class MostActiveUsersView(TemplateView):
 
     def post(self, request, *args, **kwargs):
         pass
+
+class DocumentUploadView(TemplateView):
+
+    def get(self, request, *args, **kwargs):
+        pass
+
+    def post(self, request, *args, **kwargs):
+        pass
