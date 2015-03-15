@@ -1022,9 +1022,9 @@ class CommentShowNewListView(TemplateView):
         #NEW
         comments_new = Comment.objects.order_by('-time_added').all()
         if flag == 'max':
-            p = Paginator(comments_new, 10).page(1)
+            p = Paginator(comments_new, 20).page(1)
         else :
-            p = Paginator(comments_new, 3).page(1)
+            p = Paginator(comments_new, 10).page(1)
 
 
         return render(request, self.template_name, {
@@ -1042,9 +1042,9 @@ class CommentShowHotListView(TemplateView):
         comments_hot = Comment.objects.order_by('-time_added').filter(time_added__gte=datetime.datetime.now()-timedelta(days=30))
         comments_hot = sorted(comments_hot,key=lambda o:len(o.up_users),reverse=True)
         if flag == 'max':
-            p = Paginator(comments_hot, 10).page(1)
+            p = Paginator(comments_hot, 20).page(1)
         else :
-            p = Paginator(comments_hot, 3).page(1)
+            p = Paginator(comments_hot, 10).page(1)
 
         return render(request, self.template_name, {
             'p_comment_hot': p,
@@ -1063,9 +1063,9 @@ class CommentShowRelevantListView(TemplateView):
         #NEW
         comments_new = Comment.objects.order_by('-time_added').all()
         if flag == 'max':
-            p = Paginator(comments_new, 10).page(1)
+            p = Paginator(comments_new, 20).page(1)
         else :
-            p = Paginator(comments_new, 3).page(1)
+            p = Paginator(comments_new, 10).page(1)
 
 
         return render(request, self.template_name, {
