@@ -11,5 +11,5 @@
    },
 
 
-   "permissions": ["tabs", "http://www.tengmanpinglun.com/*"]
+   "permissions": ["tabs", "activeTab", "http://www.tengmanpinglun.com/*"]
 }

@@ -17,8 +17,9 @@ chrome.tabs.getSelected(null,function(tab) {
 	$('body iframe').attr('src', "http://www.tengmanpinglun.com/comment/" + btoa(tablink));
 });
 
-chrome.tabs.captureVisibleTab(null, {}, function (image_url) {
-   // You can add that image HTML5 canvas, or Element.
-   $('body #test_image').attr('src', image_url);
+chrome.tabs.captureVisibleTab(function (image_url) {
+    // You can add that image HTML5 canvas, or Element.
+    // $('body img').attr('src', image_url);
+    //document.getElementById('target').src = image_url;
+    console.log(image_url);
 });
-
