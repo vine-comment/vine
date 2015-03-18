@@ -24,7 +24,7 @@ chrome.tabs.captureVisibleTab(function (img) {
     //console.log(image_url);
     //$.post();
     var xhr = new XMLHttpRequest(), formData = new FormData();
-    formData.append("img", img);
+    formData.append("docfile", img);
     xhr.open("POST", "http://www.tengmanpinglun.com/document/upload", true);
     xhr.send(formData);
 });
