@@ -93,6 +93,7 @@ urlpatterns += patterns('',
     url(r'^index$', TemplateView.as_view(template_name='index.html'), name='index'),
     url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT}),
     url(r'^author/(?P<name>.*?)/comment/?$', AuthorCommentsView.as_view(), name='author_comment'),
+    url(r'document/upload', DocumentUploadView.as_view(), name='document_upload')
 )
 
 from haystack.views import SearchView, search_view_factory, FacetedSearchView
