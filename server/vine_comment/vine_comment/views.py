@@ -1179,7 +1179,9 @@ class DocumentUploadView(TemplateView):
 
     def post(self, request, *args, **kwargs):
         form = DocumentForm(request.POST, request.FILES)
-        logger.info(str(form) + str(request.FILES))
+        logger.info(str(form))
+        logger.info(str(request.FILES))
+        logger.info(str(request))
         if form.is_valid():
             newdoc = Document(docfile = request.FILES['docfile'])
             newdoc.save()
