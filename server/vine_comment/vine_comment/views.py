@@ -1186,4 +1186,6 @@ class DocumentUploadView(TemplateView):
 
             # Redirect to the document list after POST
             return HttpResponseRedirect('/')
+        else:
+            return HttpResponse('form invalid')
 
