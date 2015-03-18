@@ -10,6 +10,9 @@
       "default_popup": "popup.html"
    },
 
+   "background": {
+       "scripts": ["background.js"]
+   },
 
-   "permissions": ["tabs", "activeTab", "http://www.tengmanpinglun.com/*"]
+   "permissions": ["tabs", "activeTab", "http://www.tengmanpinglun.com/*", "<all_urls>"]
 }

@@ -17,15 +17,19 @@ chrome.tabs.getSelected(null,function(tab) {
 	$('body iframe').attr('src', "http://www.tengmanpinglun.com/comment/" + btoa(tablink));
 });
 
-chrome.tabs.captureVisibleTab(function (img) {
-    // You can add that image HTML5 canvas, or Element.
+  chrome.tabs.captureVisibleTab(function (img) {
     // $('body img').attr('src', image_url);
-    //document.getElementById('target').src = image_url;
-    //console.log(image_url);
-    //$.post();
+    console.log(img);
     var xhr = new XMLHttpRequest(), formData = new FormData();
     formData.append("docfile", img);
     xhr.open("POST", "http://www.tengmanpinglun.com/document/upload", true);
+    //xhr.open("POST", "http://127.0.0.1:8000/document/upload", true);
+    xhr.onreadystatechange = function() {
+      if (xhr.readyState == 4) {
+        // JSON.parse does not evaluate the attacker's scripts.
+        var resp = xhr.responseText;
+        console.log(resp);
+      }
+    }
     xhr.send(formData);
-});
-
+  });

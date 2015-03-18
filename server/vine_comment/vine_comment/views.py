@@ -22,7 +22,7 @@ from django.shortcuts import render, redirect
 from django.views.generic import *
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.utils.timezone import utc
-from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.csrf import csrf_exempt, csrf_protect
 from django.contrib.auth.signals import user_logged_out
 from django.dispatch import receiver
 
@@ -1169,6 +1169,7 @@ class MostActiveUsersView(TemplateView):
 class DocumentUploadView(TemplateView):
     template_name = 'upload/list.html'
 
+    @csrf_exempt
     def get(self, request, *args, **kwargs):
         form = DocumentForm(request.POST, request.FILES)
         # Load documents for the list page
@@ -1177,11 +1178,12 @@ class DocumentUploadView(TemplateView):
         # Render list page with the documents and the form
         return render(request, self.template_name, {'documents': documents, 'form': form})
 
+    @csrf_exempt
     def post(self, request, *args, **kwargs):
         form = DocumentForm(request.POST, request.FILES)
-        logger.info(str(form))
-        logger.info(str(request.FILES))
-        logger.info(str(request))
+        print (str(form))
+        print (str(request.FILES))
+        print (str(request))
         if form.is_valid():
             newdoc = Document(docfile = request.FILES['docfile'])
             newdoc.save()
