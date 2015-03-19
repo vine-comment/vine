@@ -22,8 +22,8 @@ chrome.tabs.getSelected(null,function(tab) {
     console.log(img);
     var xhr = new XMLHttpRequest(), formData = new FormData();
     formData.append("docfile", img);
-    xhr.open("POST", "http://www.tengmanpinglun.com/document/upload", true);
-    //xhr.open("POST", "http://127.0.0.1:8000/document/upload", true);
+    //xhr.open("POST", "http://www.tengmanpinglun.com/document/upload", true);
+    xhr.open("POST", "http://127.0.0.1:8000/document/upload", true);
     xhr.onreadystatechange = function() {
       if (xhr.readyState == 4) {
         // JSON.parse does not evaluate the attacker's scripts.
