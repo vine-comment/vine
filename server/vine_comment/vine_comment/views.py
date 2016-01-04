@@ -384,12 +384,12 @@ class CommentView(TemplateView):
             print "No tag"
             # return HttpResponse('No tag: '+index_url, mimetype='plain/text')
             p_tag = p_hot
-        else :
+        else:
             tags = filter(lambda x:url_objects[0].id in x.urls, Tags.objects.order_by('-time_added'))
             if len(tags) == 0:
                 print "No tag"
                 p_tag = p_hot
-            else :
+            else:
                 tags = sorted(tags,key=lambda x:len(x.comments),reverse=True)[0:10]
                 count = len(tags)
                 if count > 3:
@@ -1192,4 +1192,11 @@ class DocumentUploadView(TemplateView):
             return HttpResponseRedirect('/')
         else:
             return HttpResponse('form invalid')
+
+class DanmuView(TemplateView):
+    template_name = 'danmu/danmu.html'
+
+    @csrf_exempt
+    def get(self, request, *args, **kwargs):
+        pass
 
