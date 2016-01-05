@@ -1,3 +1,4 @@
+{% load staticfiles %}
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <style type="text/css">
@@ -10,13 +11,21 @@
     .barrage .send .s_text{width:600px;height:40px;line-height:10px;font-size:20px;font-family:"微软雅黑";}
     .barrage .send .s_btn{width:105px;height:40px;background:#22B14C;color:#fff;}
     </style>
-    <script src="jquery-1.11.1.js"></script>
+    <script src="{% static 'jquery/2.0.3/jquery.min.js' %}"></script>
     <script>
+        function init_animated(){
+            $(".current li").each(function(){
+                var text = $(this).text();
+                var _lable = $("<div style='right:20px;top:0px;opacity:1;color:"+getRandomColor()+";'>"+text+"</div>");
+                $(".mask").append(_lable.show());
+            });
+            init_barrage();
+        }
         $(function(){
             $(".showBarrage,.s_close").click(function(){
                 $(".barrage,.s_close").toggle("slow");
             });
-            //init_animated();
+            init_animated();
         })
         //提交评论
         function shoot(){
@@ -38,12 +47,9 @@
                 if(_top >= (_height -130)){
                     _top = 0;
                 }
-                $(this).css({left:_left,top:_top,color:getRandomColor()});
+                $(this).css({left:_left,top:_top});
                 //定时弹出文字
-                var time = 10000;
-                if($(this).index() % 2 == 0){
-                    time = 15000;
-                }
+                var time = 100000 + Math.random() * 100000;
                 $(this).animate({left:"-"+_left+"px"},time,function(){
                     $(this).remove();
                 });
@@ -69,6 +75,12 @@
             <div class="mask">
                 <!--内容在这里显示-->
             </div>
+        </div>
+        <!--TODO a static list of all comments-->
+        <div class="current" style="display:none">
+            {% for c in comments %}
+            <li>{{c.comment_str}}</li>
+            {% endfor %}
         </div>
         <!--Send Begin-->
         <div class="send">
