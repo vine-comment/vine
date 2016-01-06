@@ -1198,7 +1198,7 @@ class DanmuView(TemplateView):
     base64_default_str = '' #aHR0cDovL3d3dy5udWxsLmNvbS8=
 
     @csrf_exempt
-    def _check_spam(self, index_url, comment_str, author_ip, user):
+    def _check_spam(self, comment_str, author_ip, user):
         #ak = Akismet(key=settings.AKISMET_API_KEY,blog_url='http://www.abfeucd')
         ak = Akismet(key='d56b9a5394bf',blog_url='http://www.abfeucd')
 
@@ -1226,60 +1226,26 @@ class DanmuView(TemplateView):
 
     @staticmethod
     @csrf_exempt
-    def _post_comment(index_url, comment_str, author_ip, user):
+    def _post_comment(url_b64, comment_str, author_ip, user):
+
+        index_url = base64.b64decode(url_b64.encode('ascii', 'ignore'), '+-')
         try:
             title = urlparse(index_url).netloc
         except Exception as e:
             print index_url, e
             return None
 
-        # print comment_str, user
-        logger.info(u'评论:' + comment_str
-                     + u'IP:' + author_ip
-                     + u' 用户:' + str(user)
-                     + u' TITLE:' + title
-                     + u' INDEX:' + index_url
-                     + u' UTC:' + str(datetime.datetime.utcnow().replace(tzinfo=utc))
-                     + u' Time:' + str(datetime.datetime.now()))
+        comment = Comment(
+                time_added=datetime.datetime.utcnow().replace(
+                                tzinfo=utc),
+                time_modified=datetime.datetime.utcnow().replace(
+                                tzinfo=utc),
+                comment_str=comment_str,
+                url_b64 = url_b64,
+                author_ip = author_ip,
+                title = title,
+                )
 
-        comment_board, created = CommentBoard.objects.get_or_create(
-                                    url=index_url,
-                                    title=title)
-        comment_board.save() if created else None
-        if user and user.is_authenticated():
-            author = get_author(user)
-            comment = Comment(
-                    time_added=datetime.datetime.utcnow().replace(
-                                    tzinfo=utc),
-                    time_modified=datetime.datetime.utcnow().replace(
-                                    tzinfo=utc),
-                    comment_str=comment_str,
-                    comment_board=comment_board,
-                    author_ip=author_ip,
-                    title=title,
-                    author=author)
-            author.comments_sum += 1
-            author.points += 5
-            author.save()
-        else:
-            '''
-            Annoymous User access the site.
-            '''
-            comment = Comment(
-                    time_added=datetime.datetime.utcnow().replace(
-                                    tzinfo=utc),
-                    time_modified=datetime.datetime.utcnow().replace(
-                                    tzinfo=utc),
-                    comment_str=comment_str,
-                    comment_board=comment_board,
-                    title=title,
-                    author_ip=author_ip)
-
-        # get the page's screenshot and save url_b64 to comment
-        url_b64 = base64.b64encode(index_url, '+-')
-        shot_process = Process(target=save_pageshot, args=(index_url, url_b64))
-        shot_process.start()
-        comment.url_b64 = url_b64
 
         comment.save()#need to save here to create the ID
 
@@ -1306,12 +1272,12 @@ class DanmuView(TemplateView):
     @csrf_exempt
     def post(self, request, *args, **kwargs):
         update_last_request(request)
-        comment_str = request.POST.get('comment', 'Empty Comment')
+        comment_str = request.POST.get('comment', '')
+        url_b64 = request.POST.get('url_b64', self.base64_default_str)
         author_ip = request.META.get('REMOTE_ADDR', '0.0.0.0')
         # For Nginx
         if not author_ip:
             author_ip = request.META.get('HTTP_X_FORWARDED_FOR', '0.0.0.0')
-        index_url = kwargs.get('index_url', self.index_default_str)
         user = request.user
         logger.info(request.META)
 
@@ -1323,7 +1289,7 @@ class DanmuView(TemplateView):
             # CAPTCHA-FIXME: forbid annoymous user to comment.
             is_not_human = False
 
-        if self._check_spam(index_url, comment_str, author_ip, user):
+        if self._check_spam(comment_str, author_ip, user):
              logger.info(comment_str + ' this is a spam')
              if author is not None:
                  author.is_not_human = True
@@ -1334,11 +1300,12 @@ class DanmuView(TemplateView):
                  author.is_not_human = False
                  author.save()
 
-        self._post_comment(index_url, comment_str, author_ip, user)
+        self._post_comment(url_b64, comment_str, author_ip, user)
 
         #TODO in order to Refresh the captcha , it must be change commentBoard.js urls.py and template
-        kwargs['template'] = self.template_list
+        #kwargs['template'] = self.template_name
         return self.get(request, *args, **kwargs)
+        #return HttpResponse(status=200)
 
     # 注：get方法除了正常request中调用，也会在post之后被调用，但template由post给出
     # TODO: https://github.com/frankban/django-endless-pagination
@@ -1346,7 +1313,6 @@ class DanmuView(TemplateView):
         update_last_request(request)
         #print request
         #index_page = request.GET.get('page', 1)
-        #index_url = kwargs.get('index_url', self.index_default_str)
         url_b64 = kwargs.get('url_b64', self.base64_default_str)
 
         if url_b64 == self.base64_default_str:
@@ -1354,7 +1320,9 @@ class DanmuView(TemplateView):
         else:
             comments = Comment.objects.filter(url_b64=url_b64)
 
+        #print comments
         return render(request, self.template_name, {
             'comments': comments,
+            'url_b64': url_b64,
         })
 

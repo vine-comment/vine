@@ -69,6 +69,11 @@
     <h1>
         <a href="#" class="showBarrage">打开弹幕</a>
     </h1>
+    <div class="current">
+        {% for c in comments %}
+        <li>{{c.comment_str}}</li>
+        {% endfor %}
+    </div>
     <div class="barrage">
         <div class="screen">
             <a href="#" class="s_close">X</a>
@@ -77,15 +82,14 @@
             </div>
         </div>
         <!--TODO a static list of all comments-->
-        <div class="current" style="display:none">
-            {% for c in comments %}
-            <li>{{c.comment_str}}</li>
-            {% endfor %}
-        </div>
         <!--Send Begin-->
         <div class="send">
-            <input type="text" class="s_text"/>
-            <input type="button" class="s_btn" onclick="shoot()" value="说两句"/>
+            <form method="post" action="/danmu/">
+                {% csrf_token %}
+                <input type="text" class="s_text" name="comment"/>
+                <input type="submit" class="s_btn" onclick="shoot()" value="说两句"/>
+                <input type="text" class="s_text_hidden" style="display:none" name="url_b64" value="{{url_b64}}"/>
+            </form>
         </div>
         <!--Send End-->
         <span class="s_close">X</span>

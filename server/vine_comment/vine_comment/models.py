@@ -119,7 +119,7 @@ class Comment(TimeMixin, models.Model):
     #comment_img = models.ImageField(upload_to='comment_img/%Y/%m/%d', blank=True, null=True)
     url_b64 = models.CharField(max_length=100)#this is the name of this page's screenshot image
     desc = models.CharField(max_length=64, blank=True, null=True)
-    comment_board = models.ForeignKey(CommentBoard)
+    comment_board = models.ForeignKey(CommentBoard, null=True)
     author_ip = models.IPAddressField(blank=True, null=True)
     # 在后面加入author的详细信息，分为匿名和实名
     author = models.ForeignKey(Author, blank=True, null=True)
