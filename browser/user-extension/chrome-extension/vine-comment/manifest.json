@@ -14,5 +14,14 @@
        "scripts": ["background.js"]
    },
 
+   "content_scripts": {
+      "matches": ["*"],
+      "js": ["jquery.min.js","contentscript.js"]
+    },
+
+    "web_accessible_resources": {
+        "frame.html"
+    }
+
    "permissions": ["tabs", "activeTab", "http://www.tengmanpinglun.com/*", "<all_urls>"]
 }
