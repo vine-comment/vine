@@ -12,6 +12,7 @@
     .barrage .send .s_btn{width:105px;height:40px;background:#22B14C;color:#fff;}
     </style>
     <script src="{% static 'jquery/2.0.3/jquery.min.js' %}"></script>
+    <script src="{% static 'js/csrf.js' %}"></script>
     <script>
         function init_animated(){
             $(".current li").each(function(){
@@ -36,6 +37,10 @@
             var _lable = $("<div style='right:20px;top:0px;opacity:1;color:"+getRandomColor()+";'>"+text+"</div>");
             $(".mask").append(_lable.show());
             init_barrage();
+
+            var _li = $("<li>"+text+"</li>");
+            $(".current").append(_li);
+            $.post("/danmu/",{comment:$('.s_text').val(), url_b64:$('.s_text_hidden').val()});
         }
         //初始化弹幕技术
         function init_barrage(){
@@ -84,12 +89,9 @@
         <!--TODO a static list of all comments-->
         <!--Send Begin-->
         <div class="send">
-            <form method="post" action="/danmu/">
-                {% csrf_token %}
-                <input type="text" class="s_text" name="comment"/>
-                <input type="submit" class="s_btn" onclick="shoot()" value="说两句"/>
-                <input type="text" class="s_text_hidden" style="display:none" name="url_b64" value="{{url_b64}}"/>
-            </form>
+           <input type="text" class="s_text" name="comment"/>
+           <input type="submit" class="s_btn" onclick="shoot()" value="说两句"/>
+           <input type="text" class="s_text_hidden" style="display:none" name="url_b64" value="{{url_b64}}"/>
         </div>
         <!--Send End-->
         <span class="s_close">X</span>

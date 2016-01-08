@@ -1304,8 +1304,8 @@ class DanmuView(TemplateView):
 
         #TODO in order to Refresh the captcha , it must be change commentBoard.js urls.py and template
         #kwargs['template'] = self.template_name
-        return self.get(request, *args, **kwargs)
-        #return HttpResponse(status=200)
+        #return self.get(request, *args, **kwargs)
+        return HttpResponse(status=200)
 
     # 注：get方法除了正常request中调用，也会在post之后被调用，但template由post给出
     # TODO: https://github.com/frankban/django-endless-pagination
