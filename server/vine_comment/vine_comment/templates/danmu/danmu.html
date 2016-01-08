@@ -2,13 +2,14 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <style type="text/css">
+    body{height:400px}
     .barrage .screen{width:100%;height:100%;position:absolute;top:0px;right:0px;}
-    .barrage .screen .s_close{z-index:2;top:20px;right:20px;position:absolute;text-decoration:none;width:40px;height:40px;border-radius:20px;text-align:center;color:#fff;background:#000;line-height:40px;display:none;}
+    .barrage .screen .s_close{z-index:2;top:20px;right:20px;position:absolute;text-decoration:none;width:40px;height:40px;border-radius:20px;text-align:center;color:#fff;background:#000;line-height:40px;}
     .barrage .screen .mask{position:relative;width:100%;height:100%;background:#000;opacity:0.5;filter:alpha(opacity:1);z-index:1;}
-    .barrage{display:none;width:100%;height:100%;}
+    .barrage{width:100%;height:80%;}
     .barrage .screen .mask div{position:absolute;font-size:20px;font-weight:bold;white-space:nowrap;line-height:40px;z-index:40;}
-    .barrage .send{z-index:1;width:100%;height:55px;background:#000;position:absolute;bottom:0px;text-align:center;}
-    .barrage .send .s_text{width:600px;height:40px;line-height:10px;font-size:20px;font-family:"微软雅黑";}
+    .barrage .send{z-index:1;width:95%;height:50px;background:#000;position:absolute;bottom:0px;text-align:center;}
+    .barrage .send .s_text{width:300px;height:40px;line-height:10px;font-size:20px;font-family:"微软雅黑";}
     .barrage .send .s_btn{width:105px;height:40px;background:#22B14C;color:#fff;}
     </style>
     <script src="{% static 'jquery/2.0.3/jquery.min.js' %}"></script>
@@ -74,7 +75,7 @@
     <h1>
         <a href="#" class="showBarrage">打开弹幕</a>
     </h1>
-    <div class="current">
+    <div class="current" style="display:none">
         {% for c in comments %}
         <li>{{c.comment_str}}</li>
         {% endfor %}
@@ -94,6 +95,5 @@
            <input type="text" class="s_text_hidden" style="display:none" name="url_b64" value="{{url_b64}}"/>
         </div>
         <!--Send End-->
-        <span class="s_close">X</span>
     </div>
 </body>
