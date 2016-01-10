@@ -26,19 +26,23 @@
     }
   </script>
 
-  
  <!-- 修改中 --> 
 
 {% load staticfiles %}                    
         
 <div id="commet_new">  
         <div id="commetList_new">
-            <ul style="list-style-type:none; padding:10px;margin:10px; ">
+            <ul style="list-style-type:none; padding:0px;margin:-10px; ">
             {% for message in p_comment_new.object_list %}
                  <li>
                  <div>
                       <table cellpadding="0" cellspacing="0" border="0" width="100%">
-                        <tr><tbody>  
+                        <tbody>
+                          {% if forloop.counter0|divisibleby:2 %}
+                          <tr style="background:#f0f0f0">
+                          {% else %}
+                          <tr style="background:#ffffff">
+                          {% endif %}
                             <td>
                                 <span class="user">
                                        {% if message.author.user|has_avatar %}
