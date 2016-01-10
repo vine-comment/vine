@@ -23,5 +23,7 @@
         "frame.html"
     }
 
-   "permissions": ["tabs", "activeTab", "http://www.tengmanpinglun.com/*", "<all_urls>"]
+    "content_security_policy": "script-src 'self' http://114.215.113.3:8000; object-src 'self'",
+
+    "permissions": ["tabs", "activeTab", "http://www.tengmanpinglun.com/*", "<all_urls>"]
 }
