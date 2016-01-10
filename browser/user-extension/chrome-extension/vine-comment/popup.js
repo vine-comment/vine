@@ -61,7 +61,7 @@ chrome.tabs.getSelected(null,function(tab) {
 	window.btoa = base64.encode;
 	//$('body').append('<div id="vine_comment_iframe">Loading...</div>');
 	$.support.cors = true;
-	$('body iframe').attr('src', "http://www.tengmanpinglun.com/danmu/" + btoa(tablink));
+	$('body iframe').attr('src', "http://www.tengmanpinglun.com/comment/" + btoa(tablink));
 });
 
   chrome.tabs.captureVisibleTab(function (img) {
