@@ -134,6 +134,7 @@ font-style: normal;
 font-size: 100%;
 line-height: 1;
 font-family: inherit;
+display:none;
 }
 
 .avatar {
@@ -212,7 +213,24 @@ text-shadow: none;
 .vc-image{
 border-radius: 5px; 
 }
+
+.vc-form-show{
+-webkit-appearance: none;
+background: #fff;
+border: 2px solid #cbd2d6;
+border: 2px solid rgba(0,39,59,.2);
+border-radius: 4px;
+width:100%;height:30px;
+resize:none
+}
 </style>  
+<script>
+$(function(){
+    $(".vc-form-show,.vc-form #vc-form-close").click(function(){
+        $(".vc-form,.vc-form-show").toggle("slow");
+    });
+})
+</script>
 
 		<div class="alert-messages" id="message-drawer" style="opacity: 0; top: 60px; display: none;">
 		  <div class="message ">
@@ -225,6 +243,7 @@ border-radius: 5px;
  
 
       
+    <textarea class="vc-form-show" placeholder="我来说两句"></textarea>
     <form class="vc-form">
         <div class="postbox">
                 <div class="avatar">
@@ -240,7 +259,7 @@ border-radius: 5px;
             <div class="textarea-wrapper" data-role="textarea" dir="auto">
                 <div>
                     <div class="vc-textarea-wrapper vc-rounded-top" style="height:13%">
-                            <textarea id="commentTop" name="commentTop" placeholder="可输入5-140个字" style="width:100%;height:100%; overflow:hidden; resize:none;background:transparent;border-style:none;  "></textarea>
+                            <textarea autofocus id="commentTop" name="commentTop" placeholder="可输入5-140个字" style="width:100%;height:100%; overflow:hidden; resize:none;background:transparent;border-style:none;  "></textarea>
                     </div>
                     <div style="display: none;">
                         <ul class="suggestions">
@@ -275,6 +294,9 @@ border-radius: 5px;
                           <button class="vc-btn"  data-loading-text="评论中" id="submitCommentTop" type="button">
                             评论
                           </button>
+                          <button class="vc-btn" id="vc-form-close" type="button">
+                            取消
+                          </button>
                     </div>
                     </section>
                 </div>
@@ -282,12 +304,8 @@ border-radius: 5px;
             </div>
         </div>
     </form>
-    
-    </br>
 
-		<div id="showMsg">
-			{% include "plugin/comment_list.html" %}
-		</div> <!-- /#showMsg -->
-		<br>
-    </div>
+<div id="showMsg">
+	{% include "plugin/comment_list.html" %}
+</div> <!-- /#showMsg -->
 {% endblock %}
