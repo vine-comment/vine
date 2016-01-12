@@ -14,9 +14,7 @@
        "scripts": ["background.js"]
    },
 
-   "web_accessible_resources": {
-        "frame.html"
-   }
+   "web_accessible_resources": ["frame.html"],
 
    "permissions": ["tabs", "activeTab", "http://www.tengmanpinglun.com/*", "<all_urls>"]
 }
