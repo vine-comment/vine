@@ -22,13 +22,23 @@
 <link href="{% static 'twitter-bootstrap/3.0.3/css/bootstrap.min.css' %}" rel="stylesheet">
 
 <link rel="stylesheet" href="{% static 'css/comment_styles.css' %}" type="text/css" media="all" />
+
+<style>
+    #top{
+        background: #384B6B; /* For browsers that do not support gradients */
+        background: -webkit-linear-gradient(-90deg, red, yellow); /* For Safari 5.1 to 6.0 */
+        background: -o-linear-gradient(-90deg, red, yellow); /* For Opera 11.1 to 12.0 */
+        background: -moz-linear-gradient(-90deg, red, yellow); /* For Firefox 3.6 to 15 */
+        background: linear-gradient(-90deg, #0099ff, #384b6b); /* Standard syntax */
+    }
+</style>
 </head>
 
 <body style = "background-color: white;">
 
 <div id="commentBoard" >
   <div id="boardRight" >
-        <div id="top" class="navbar-top navbar navbar-default navbar-fixed-top" style="background-color:#384B6B" >
+        <div id="top" class="navbar-top navbar navbar-default navbar-fixed-top">
             <div style="padding-top: 6px;">
             <table cellpadding="0" cellspacing="0" border="0" width="100%">
                 <tbody><tr>
@@ -38,7 +48,7 @@
                 <td id="webTag"  width="40%" align="center"><font face="黑体" color="white" size="6"><b>藤蔓评论</b></font></td>
                 
                 <td id = "quickMenu" width="30%" style="padding-right: 3%;">
-                    {% if user.is_authenticated %}
+                {% if user.is_authenticated %}
                     <div class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                       {{ user.username }}<span class="caret"></span>
