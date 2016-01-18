@@ -374,7 +374,34 @@ class CommentView(TemplateView):
         p_hot = Paginator(comments_hot, 3).page(1)
 
         #NEW
-        comments_new = Comment.objects.order_by('-time_added').all()
+        #comments_new = Comment.objects.order_by('-time_added').all()
+        if url_b64 == self.base64_default_str:
+            comments_new = Comment.objects.all()[0:10]
+        else:
+            comments_new = Comment.objects.filter(url_b64=url_b64)
+
+        if len(comments_new) == 0:
+            try:
+                title = urlparse(index_url).netloc
+            except Exception as e:
+                print index_url, e
+                return None
+
+            comment_board, created = CommentBoard.objects.get_or_create(
+                                        url=index_url,
+                                        title=title)
+            comment_board.save() if created else None
+            comment = Comment(
+                    time_added=datetime.datetime.utcnow().replace(
+                                    tzinfo=utc),
+                    time_modified=datetime.datetime.utcnow().replace(
+                                    tzinfo=utc),
+                    comment_str="快来抢沙发啊~~",
+                    comment_board=comment_board,
+                    title=title,
+                    author_ip='藤蔓评论')
+            comments_new._result_cache.append(comment)
+
         p_new = Paginator(comments_new, 3).page(1)
 
         #RELEVANT
