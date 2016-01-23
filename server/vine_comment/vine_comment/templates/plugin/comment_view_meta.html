@@ -13,6 +13,7 @@ background: #fff;
 border: 2px solid #cbd2d6;
 border: 2px solid rgba(0,39,59,.2);
 border-radius: 4px;
+height: 80px;
 }
 
 .textarea-wrapper .placeholder {
@@ -59,10 +60,12 @@ border-radius: 0 0 2px 2px;
 border-top: solid 2px;
 border-color: #cbd2d6;
 border-color: rgba(0,39,59,.2);
+/*
 position: absolute;
 bottom: 0;
 left: 0;
 right: 0;
+*/
 height: 36px;
 }
 
@@ -243,22 +246,22 @@ $(function(){
 		</div>
  
     <textarea class="navbar-fixed-top vc-form-show" placeholder="我来说两句"></textarea>
-    <form class="vc-form" >
+    <form class="vc-form">
         <div class="postbox">
-                <div class="avatar">
-                    <span class="user">
-                    {% if user.is_authenticated %}
-                        {% avatar user 50 %}
-                    {% else %}
-                        <img class="vc-image" width=50 height=50  data-role="user-avatar" src="//{{ request.META.HTTP_HOST }}{% static 'icons/test.jpg' %}" alt="Avatar">
-                    {% endif %}
-                    </span>
-                </div>
+            <div class="avatar">
+                <span class="user">
+                {% if user.is_authenticated %}
+                    {% avatar user 50 %}
+                {% else %}
+                    <img class="vc-image" width=50 height=50  data-role="user-avatar" src="//{{ request.META.HTTP_HOST }}{% static 'icons/test.jpg' %}" alt="Avatar">
+                {% endif %}
+                </span>
+            </div>
 
             <div class="textarea-wrapper" data-role="textarea" dir="auto">
                 <div>
-                    <div class="vc-textarea-wrapper vc-rounded-top" style="height:13%">
-                            <textarea autofocus id="commentTop" name="commentTop" placeholder="可输入5-140个字" style="width:100%;height:100%; overflow:hidden; resize:none;background:transparent;border-style:none;  "></textarea>
+                    <div class="vc-textarea-wrapper vc-rounded-top" style="height:40px">
+                        <textarea autofocus id="commentTop" name="commentTop" placeholder="可输入5-140个字" style="width:100%;height:100%; overflow:hidden; resize:none;background:transparent;border-style:none;  "></textarea>
                     </div>
                     <div style="display: none;">
                         <ul class="suggestions">
@@ -273,33 +276,31 @@ $(function(){
                     ⬇ Drag and drop your images here to upload them.
                     </div>
                 </div>
-            <div class="edit-alert" role="postbox-alert"></div>
-            <div class="post-actions">
-                <ul class="wysiwyg">
-                    <li style="float:left; margin-right: 5px;">
-                        <a class="vc-toolbar-button" title="插入表情">
-                            <!--img src="//{{ request.META.HTTP_HOST }}{% static 'icons/expression.jpg' %}" /-->
-                            <i style="font-size:150%" class="fa fa-smile-o"></i>
-                        </a>
-                    </li>
-                    <li style="float:left; margin-right: 5px;">
-                        <a class="vc-toolbar-button" title="插入图片">
-                            <i style="font-size:150%" class="fa fa-paperclip"></i>
-                        </a>
-                    </li>
-                </ul>
-                <div class="logged-in">
-                    <section>
-                    <div class="temp-post" style="text-align: right;">
-                          <button class="vc-btn"  data-loading-text="评论中" id="submitCommentTop" type="button">
-                            评论
-                          </button>
-                          <button class="vc-btn" id="vc-form-close" type="button">
-                            取消
-                          </button>
+                <div class="edit-alert" role="postbox-alert"></div>
+                <div class="post-actions">
+                    <ul class="wysiwyg">
+                        <li style="float:left; margin-right: 5px;">
+                            <a class="vc-toolbar-button" title="插入表情">
+                                <!--img src="//{{ request.META.HTTP_HOST }}{% static 'icons/expression.jpg' %}" /-->
+                                <i style="font-size:150%" class="fa fa-smile-o"></i>
+                            </a>
+                        </li>
+                        <li style="float:left; margin-right: 5px;">
+                            <a class="vc-toolbar-button" title="插入图片">
+                                <i style="font-size:150%" class="fa fa-paperclip"></i>
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="logged-in">
+                        <div class="temp-post" style="text-align: right;">
+                              <button class="vc-btn"  data-loading-text="评论中" id="submitCommentTop" type="button">
+                                评论
+                              </button>
+                              <button class="vc-btn" id="vc-form-close" type="button">
+                                取消
+                              </button>
+                        </div>
                     </div>
-                    </section>
-                </div>
                 </div>
             </div>
         </div>
