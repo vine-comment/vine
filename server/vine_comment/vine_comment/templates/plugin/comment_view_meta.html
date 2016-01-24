@@ -218,6 +218,11 @@ border-radius: 5px;
 }
 
 .vc-form-show{
+width:100%;height:50px;
+top:60px;
+}
+
+.vc-form-show textarea{
 -webkit-appearance: none;
 background: #fff;
 border: 2px solid #cbd2d6;
@@ -225,8 +230,8 @@ border: 2px solid rgba(0,39,59,.2);
 border-radius: 4px;
 width:100%;height:30px;
 resize:none;
-top:55px;
 }
+
 </style>  
 <script>
 $(function(){
@@ -245,7 +250,9 @@ $(function(){
 		  </div>
 		</div>
  
-    <textarea class="navbar-fixed-top vc-form-show" placeholder="我来说两句"></textarea>
+    <div class="navbar-fixed-top vc-form-show">
+        <textarea placeholder="我来说两句"></textarea>
+    </div>
     <form class="vc-form">
         <div class="postbox">
             <div class="avatar">
